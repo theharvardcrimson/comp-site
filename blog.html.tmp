@@ -14,7 +14,7 @@
 					<strong><a href="http://www.thecrimson.com/section/flyby/">Flyby</a></strong> is the flagship blog of the Crimson and covers student life&mdash;we follow all things happening on campus, from the <a href="http://www.thecrimson.com/flyby/article/2016/11/20/what-you-missed-at-harvard-yale/">Game</a> to <a href="http://www.thecrimson.com/flyby/article/2016/12/8/tiffany-trump-hls/">celebrity</a> <a href="http://www.thecrimson.com/flyby/article/2016/12/7/major-key-alert-khaled/">sightings</a>, and allow you to write about what most interests you.
 				</p>
 				<p>
-					Whatever your interests (journalism, satire, or more, etc.), Blog will give you the space, training, and support to develop your own creative passions at 14p&mdash;just so long as it doesn&#39;t involve actual paper. But don&#39;t worry: we&#39;ll have gifs.
+					Whatever your interests (journalism, humor, or more), Blog will give you the space, training, and support to develop your own creative passions at 14p&mdash;just so long as it doesn&#39;t involve actual paper. But don&#39;t worry: we&#39;ll have gifs.
 				</p>
 				<p>
 					Any questions? Want more information? Don&rsquo;t hesitate to contact our Blog Comp Director, {{ comp.blog.dir1|comp_director }} with any and all questions and concerns.
