@@ -24,111 +24,108 @@ nav:
   - text: Tech
     url: /tech/
 
-season: Fall
-year: 2020
-subtitle: Fall Comp 2020
+season: Spring
+year: 2021
+subtitle: Spring Comp 2021
 
-num_years_crimson_existed: 147
+num_years_crimson_existed: 148
 
 monthly_page_views_millions: 1.5
 yearly_page_views_millions: 14.6
 yearly_page_time_spent_years: 58
 
-google_doc_signup: https://forms.gle/ACpPwsi8RcgXPQWd9
+google_doc_signup: https://docs.google.com/forms/d/e/1FAIpQLSc7MZyRyR4mLZ8kpRuXF1ycTgDQnezLPrWm-vtODmRxIZWDYg/viewform?usp=sf_link
 facebook_rsvp_link: https://www.facebook.com/events/515215159346903/
 
-president: Aidan F. Ryan
-managing_editor: Angela N. Fu
-business_manager: Charlie B. Zhu
+president: Amanda Y. Su
+managing_editor: James S. Bikales
+business_manager: Melissa Du
 
 arts:
   dir1:
-    name: Kalos K. Chu
-    email: kalos.chu@thecrimson.com
+    name: Sofia Andrade
+    email: sofia.andrade@thecrimson.com
   dir2:
-    name: Joy C. Ashford
-    email: joy.ashford@thecrimson.com
+    name: Joseph P. Kelly
+    email: joseph.kelly@thecrimson.com
 
 blog:
   dir1:
-    name: Peyton A. Jones
-    email: peyton.jones@thecrimson.com
+    name: Ellen S. Deng
+    email: ellen.deng@thecrimson.com
   dir2:
-    name: Rachel L. Reynolds
-    email: rachel.reynolds@thecrimson.com
+    name: Janani Sekar
+    email: janani.sekar@thecrimson.com
 
 business:
   dir1:
-    name: Owen F. Searle
-    email: owen.searle@thecrimson.com
+    name: Juliette B. Low Fluery
+    email: juliette.lowfleury@thecrimson.com
   dir2:
-    name: Mark L. Xu
-    email: mark.xu@thecrimson.com
+    name: Samuel H. Carter
+    email: samuel.carter@thecrimson.com
 
 design:
   web:
     dir1:
-      name: Caitlin Lam
-      email: caitlin.lam@thecrimson.com
-    dir2:
-      name: Jason Oh
-      email: jason.oh@thecrimson.com
+      name: Victoria Ono
+      email: victoria.ono@thecrimson.com
   illustration:
     dir1:
-      name: Isabella C. Aslarus
-      email: isabella.aslarus@thecrimson.com
+      name: Helen H. Wang
+      email: helen.wang@thecrimson.com
   print:
     dir1:
-      name: James S. Bikales
-      email: james.bikales@thecrimson.com
+      name: Meera S. Nair
+      email: meera.nair@thecrimson.com
     dir2:
-      name: Cat D. Hyeon
-      email: cat.hyeon@thecrimson.com
+      name: Yuen Ting Chow
+      email: yuenting.chow@thecrimson.com
 
 editorial:
   dir1:
-    name: Guillermo S. Hava
-    email: guillermo.hava@thecrimson.com
+    name: Marissa J. Joseph
+    email: marissa.joseph@thecrimson.com
   dir2:
-    name: Woojin Lim
-    email: woojin.lim@thecrimson.com
+    name: Eleanor V. Wikstrom
+    email: eleanor.wikstrom@thecrimson.com
 
 magazine:
   dir1:
-    name: Maya H. McDougall
-    email: maya.mcdougall@thecrimson.com
+    name: Maliya V. Ellis
+    email: maliya.ellis@thecrimson.com
   dir2:
-    name: Olivia G. Oldham
-    email: olivia.oldham@thecrimson.com
+    name: Garrett W. O'Brien
+    email: garrett.obrien@thecrimson.com
 
 news:
   dir1:
-    name: Ruth A. Hailu
-    email: ruth.hailu@thecrimson.com
+    name: Juliet E. Isselbacher
+    email: juliet.isselbacher@thecrimson.com
   dir2:
-    name: Sanjana L. Narayanan
-    email: sanjana.narayanan@thecrimson.com
+    name: Michelle G. Kurilla
+    email: michelle.kurilla@thecrimson.com
 
 multimedia:
   dir1:
-    name: Naomi S. Castellon-Perez
-    email: naomi.castellon-perez@thecrimson.com
+    name: Jenny Lu
+    email: jenny.lu@thecrimson.com
   dir2:
-    name: Amanda Y. Su
-    email: amanda.su@thecrimson.com
+    name: Jason Lam
+    email: jason.lam@thecrimson.com
 
 sports:
   dir1:
-    name: Lev Cohen
-    email: lev.cohen@thecrimson.com
+    name: Jasper G. Goodman
+    email: jasper.goodman@thecrimson.com
   dir2:
-    name: James Joyce
-    email: james.joyce@thecrimson.com
+    name: Noah Jun
+    email: noah.jun@thecrimson.com
 
 technology:
   dir1:
-    name: Richard A. Xu
-    email: richard.xu@thecrimson.com
+    name: Max Bobby
+    email: max.bobby@thecrimson.com
   dir2:
-    name: Zuzanna Skoczylas
-    email: zuzanna.skoczylas@thecrimson.com
+    name: Chao Cheng
+    email: chao.cheng@thecrimson.com
