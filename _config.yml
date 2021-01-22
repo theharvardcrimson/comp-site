@@ -24,11 +24,11 @@ nav:
   - text: Tech
     url: /tech/
 
-season: Fall
-year: 2020
-subtitle: Fall Comp 2020
+season: Spring
+year: 2021
+subtitle: Spring Comp 2021
 
-num_years_crimson_existed: 147
+num_years_crimson_existed: 148
 
 monthly_page_views_millions: 1.5
 yearly_page_views_millions: 14.6
@@ -37,9 +37,9 @@ yearly_page_time_spent_years: 58
 google_doc_signup: https://docs.google.com/forms/d/e/1FAIpQLSc7MZyRyR4mLZ8kpRuXF1ycTgDQnezLPrWm-vtODmRxIZWDYg/viewform?usp=sf_link
 facebook_rsvp_link: https://www.facebook.com/events/515215159346903/
 
-president: Aidan F. Ryan
-managing_editor: Angela N. Fu
-business_manager: Charlie B. Zhu
+president: Amanda Y. Su
+managing_editor: James S. Bikales
+business_manager: Melissa Du
 
 arts:
   dir1:
@@ -103,11 +103,11 @@ magazine:
 
 news:
   dir1:
-    name: Ruth A. Hailu
-    email: ruth.hailu@thecrimson.com
+    name: Juliet E. Isselbacher
+    email: juliet.isselbacher@thecrimson.com
   dir2:
-    name: Sanjana L. Narayanan
-    email: sanjana.narayanan@thecrimson.com
+    name: Michelle G. Kurilla
+    email: michelle.kurilla@thecrimson.com
 
 multimedia:
   dir1:
@@ -119,16 +119,16 @@ multimedia:
 
 sports:
   dir1:
-    name: Lev Cohen
-    email: lev.cohen@thecrimson.com
+    name: Jasper G. Goodman
+    email: jasper.goodman@thecrimson.com
   dir2:
-    name: James Joyce
-    email: james.joyce@thecrimson.com
+    name: Noah Jun
+    email: noah.jun@thecrimson.com
 
 technology:
   dir1:
-    name: Richard A. Xu
-    email: richard.xu@thecrimson.com
+    name: Max Bobby
+    email: max.bobby@thecrimson.com
   dir2:
-    name: Zuzanna Skoczylas
-    email: zuzanna.skoczylas@thecrimson.com
+    name: Chao Cheng
+    email: chao.cheng@thecrimson.com
