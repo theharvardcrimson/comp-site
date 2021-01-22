@@ -43,27 +43,27 @@ business_manager: Melissa Du
 
 arts:
   dir1:
-    name: Kalos K. Chu
-    email: kalos.chu@thecrimson.com
+    name: Sofia Andrade
+    email: sofia.andrade@thecrimson.com
   dir2:
-    name: Joy C. Ashford
-    email: joy.ashford@thecrimson.com
+    name: Joseph P. Kelly
+    email: joseph.kelly@thecrimson.com
 
 blog:
   dir1:
-    name: Peyton A. Jones
-    email: peyton.jones@thecrimson.com
+    name: Ellen S. Deng
+    email: ellen.deng@thecrimson.com
   dir2:
-    name: Rachel L. Reynolds
-    email: rachel.reynolds@thecrimson.com
+    name: Janani Sekar
+    email: janani.sekar@thecrimson.com
 
 business:
   dir1:
-    name: Owen F. Searle
-    email: owen.searle@thecrimson.com
+    name: Juliette B. Low Fluery
+    email: juliette.lowfleury@thecrimson.com
   dir2:
-    name: Mark L. Xu
-    email: mark.xu@thecrimson.com
+    name: Samuel H. Carter
+    email: samuel.carter@thecrimson.com
 
 design:
   web:
@@ -92,11 +92,11 @@ editorial:
 
 magazine:
   dir1:
-    name: Maya H. McDougall
-    email: maya.mcdougall@thecrimson.com
+    name: Maliya V. Ellis
+    email: maliya.ellis@thecrimson.com
   dir2:
-    name: Olivia G. Oldham
-    email: olivia.oldham@thecrimson.com
+    name: Garrett W. O'Brien
+    email: garrett.obrien@thecrimson.com
 
 news:
   dir1:
