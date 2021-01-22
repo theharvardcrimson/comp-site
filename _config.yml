@@ -68,30 +68,27 @@ business:
 design:
   web:
     dir1:
-      name: Caitlin Lam
-      email: caitlin.lam@thecrimson.com
-    dir2:
-      name: Jason Oh
-      email: jason.oh@thecrimson.com
+      name: Victoria Ono
+      email: victoria.ono@thecrimson.com
   illustration:
     dir1:
-      name: Isabella C. Aslarus
-      email: isabella.aslarus@thecrimson.com
+      name: Helen H. Wang
+      email: helen.wang@thecrimson.com
   print:
     dir1:
-      name: James S. Bikales
-      email: james.bikales@thecrimson.com
+      name: Meera S. Nair
+      email: meera.nair@thecrimson.com
     dir2:
-      name: Cat D. Hyeon
-      email: cat.hyeon@thecrimson.com
+      name: Yuen Ting Chow
+      email: yuenting.chow@thecrimson.com
 
 editorial:
   dir1:
-    name: Guillermo S. Hava
-    email: guillermo.hava@thecrimson.com
+    name: Marissa J. Joseph
+    email: marissa.joseph@thecrimson.com
   dir2:
-    name: Woojin Lim
-    email: woojin.lim@thecrimson.com
+    name: Eleanor V. Wikstrom
+    email: eleanor.wikstrom@thecrimson.com
 
 magazine:
   dir1:
@@ -111,11 +108,11 @@ news:
 
 multimedia:
   dir1:
-    name: Naomi S. Castellon-Perez
-    email: naomi.castellon-perez@thecrimson.com
+    name: Jenny Lu
+    email: jenny.lu@thecrimson.com
   dir2:
-    name: Amanda Y. Su
-    email: amanda.su@thecrimson.com
+    name: Jason Lam
+    email: jason.lam@thecrimson.com
 
 sports:
   dir1:
