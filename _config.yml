@@ -24,9 +24,9 @@ nav:
   - text: Tech
     url: /tech/
 
-season: Fall
-year: 2022
-subtitle: Fall Comp 2022
+season: Spring
+year: 2023
+subtitle: Spring Comp 2023
 
 num_years_crimson_existed: 149
 
@@ -34,89 +34,89 @@ monthly_page_views_millions: 1.5
 yearly_page_views_millions: 16.1
 yearly_page_time_spent_years: 58
 
-google_doc_signup: https://docs.google.com/forms/d/e/1FAIpQLSd2lXFoh-5Xo7FIuOM2yT8y05GST95UZ3U5pc_E2G7kyMrUoQ/viewform 
+google_doc_signup: https://docs.google.com/forms/d/e/1FAIpQLSd8Mzy0GMllJg-uxhhrKd7EjmwNNCI5ka33ORZNxZ1by5xZ2Q/viewform 
 facebook_rsvp_link: https://www.facebook.com/events/515215159346903/
 
-president: Raquel Coronell Uribe
-managing_editor: Jasper G. Goodman
-business_manager: Amy Zhou
+president: Cara J. Chang
+managing_editor: Brandon L. Kingdollar
+business_manager: Cynthia V. Lu
 
 arts:
+  dir1:
+    name: Anna Moiseieva
+    email: anna.moiseieva@thecrimson.com
+  dir2:
+    name: Monique I. Vobecky
+    email: monique.vobecky@thecrimson.com
+
+blog:
+  dir1:
+    name: Elizabeth K. Roosevelt
+    email: elizabeth.roosevelt@thecrimson.com
+  dir2:
+    name: Anjali Z. Mehta
+    email: anjali.mehta@thecrimson.com
+
+business:
+  dir1:
+    name: Penelope M. Alegria
+    email: penelope.alegria@thecrimson.com
+  dir2:
+    name: Yab G. Demisie 
+    email: yab.demisie@thecrimson.com
+
+design:
+  dir1:
+    name:  Isabel W. Brown 
+    email: isabel.brown@thecrimson.com
+  dir2:
+    name: Helen H. Wang
+    email: helen.wang@thecrimson.com
+
+editorial:
+  dir1:
+    name: Tommy Barone
+    email: tommy.barone@thecrimson.com
+  dir2:
+    name: Ruby Huang
+    email: ruby.huang@thecrimson.com
+
+magazine:
+  dir1:
+    name: Mila G. Barry
+    email: mila.barry@thecrimson.com
+  dir2:
+    name: Jade Lozada
+    email: jade.lozada@thecrimson.com
+
+news:
   dir1:
     name: Isabella B. Cho
     email: isabella.cho@thecrimson.com
   dir2:
-    name: Anya L. Henry
-    email: anya.henry@thecrimson.com
-
-blog:
-  dir1:
-    name: Tina Chen
-    email: tina.chen@thecrimson.com
-  dir2:
-    name: Matylda A. Urbaniak
-    email: matylda.urbaniak@thecrimson.com
-
-business:
-  dir1:
-    name: Alex L. Luchtenberg
-    email: alex.luchtenberg@thecrimson.com
-  dir2:
-    name: Jack K. Weldon
-    email: jack.weldon@thecrimson.com
-
-design:
-  dir1:
-    name: Helen H. Wang
-    email: helen.wang@thecrimson.com
-  dir2:
-    name:  Isabel W. Brown 
-    email: isabel.brown@thecrimson.com
-
-editorial:
-  dir1:
-    name: Gordon J. Ebanks
-    email: gordon.ebanks@thecrimson.com
-  dir2:
-    name: Libby Tseng
-    email: libby.tseng@thecrimson.com
-
-magazine:
-  dir1:
-    name: Maliya V. Ellis
-    email: maliya.ellis@thecrimson.com
-  dir2:
-    name: Garrett W. O'Brien
-    email: garrett.o'brien@thecrimson.com
-
-news:
-  dir1:
-    name: Juliet E. Isselbacher
-    email: juliet.isselbacher@thecrimson.com
-  dir2:
-    name: Alex M. Koller
-    email: alex.koller@thecrimson.com
+    name: Vivi E. Lu
+    email: vivi.lu@thecrimson.com
 
 multimedia:
   dir1:
-    name: Andrew Lu
-    email: andrew.lu@thecrimson.com
+    name: Joey Huang
+    email: joey.huang@thecrimson.com
   dir2:
-    name: Angela Dela Cruz
-    email: angela.delacruz@thecrimson.com
+    name: Julian J. Giordano
+    email: julian.giordano@thecrimson.com
 
 sports:
   dir1:
-    name: Zing Gee
-    email: zing.gee@thecrimson.com
+    name: Christopher D. Wright
+    email: christopher.wright@thecrimson.com
   dir2:
-    name: Noah Jun
-    email: noah.jun@thecrimson.com
+    name: Caroline G. Gage
+    email: caroline.gage@thecrimson.com
 
 technology:
   dir1:
     name: Naomi Kenyatta
     email: naomi.kenyatta@thecrimson.com
   dir2:
-    name: Kevin Luo
-    email: kevin.luo@thecrimson.com
+    name: Wittman Goh
+    email: wittman.goh@thecrimson.com
