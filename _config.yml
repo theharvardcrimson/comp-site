@@ -24,17 +24,17 @@ nav:
   - text: Tech
     url: /tech/
 
-season: Spring
+season: Fall
 year: 2023
-subtitle: Spring Comp 2023
+subtitle: Fall Comp 2023
 
 num_years_crimson_existed: 149
 
 monthly_page_views_millions: 1.5
-yearly_page_views_millions: 16.1
+yearly_page_views_millions: 15
 yearly_page_time_spent_years: 58
 
-google_doc_signup: https://docs.google.com/forms/d/e/1FAIpQLSd8Mzy0GMllJg-uxhhrKd7EjmwNNCI5ka33ORZNxZ1by5xZ2Q/viewform 
+google_doc_signup: https://docs.google.com/forms/d/e/1FAIpQLScOLoHEvaxOvwqGD7ggRmjhX9IdIlRV_2bbcUQFCENO54Ylgw/viewform?usp=sf_link 
 facebook_rsvp_link: https://www.facebook.com/events/515215159346903/
 
 president: Cara J. Chang
@@ -67,11 +67,11 @@ business:
 
 design:
   dir1:
+    name: Julia Freitag
+    email: julia.freitag@thecrimson.com
+  dir2:
     name:  Isabel W. Brown 
     email: isabel.brown@thecrimson.com
-  dir2:
-    name: Helen H. Wang
-    email: helen.wang@thecrimson.com
 
 editorial:
   dir1:
@@ -99,11 +99,11 @@ news:
 
 multimedia:
   dir1:
-    name: Joey Huang
-    email: joey.huang@thecrimson.com
+    name: Maria S. Cheng
+    email: maria.cheng@thecrimson.com
   dir2:
-    name: Julian J. Giordano
-    email: julian.giordano@thecrimson.com
+    name: Addison Y. Liu
+    email: addison.liu@thecrimson.com
 
 sports:
   dir1:
