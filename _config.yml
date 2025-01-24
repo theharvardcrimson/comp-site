@@ -24,99 +24,102 @@ nav:
   - text: Tech
     url: /tech/
 
-season: Fall
-year: 2024
-subtitle: Fall Comp 2024
+season: Spring
+year: 2025
+subtitle: Spring Comp 2025
 
-num_years_crimson_existed: 151
+num_years_crimson_existed: 152
 
 monthly_page_views_millions: 1.75
 yearly_page_views_millions: 21
 yearly_page_time_spent_years: 58
 
-google_doc_signup: https://docs.google.com/forms/u/1/d/e/1FAIpQLSdzt_80_M70jAqXOhhKZFZb7oV25K0e85dBaVTioquLZfAebA/viewform?usp=send_form
+google_doc_signup: https://docs.google.com/forms/d/e/1FAIpQLSeWqAvqCBrv2hdbVIaavzapgI-Sbhjov2De7O6Ds4qPmoTWPQ/viewform?usp=header
 facebook_rsvp_link: https://www.facebook.com/events/515215159346903/
 
-president: J. Sellers Hill
-managing_editor: Miles J. Herszenhorn
-business_manager: Matthew M. Doctoroff
+president: McKenna E. McKrell
+managing_editor: Tilly R. Robinson
+business_manager: Jack D. Jassy
 
 arts:
   dir1:
-    name: Thomas A. Ferro
-    email: thomas.ferro@thecrimson.com
+    name: Hannah M. Wilkoff
+    email: hannah.wilkoff@thecrimson.com
   dir2:
-    name: Stella A. Gilbert
-    email: stella.gilbert@thecrimson.com
+    name: Makenna J. Walko
+    email: makenna.walko@thecrimson.com
 
 blog:
   dir1:
-    name: Laasya N. Chidurappa
-    email: laasya.chidurappa@thecrimson.com
+    name: Ava H. Rem
+    email: ava.rem@thecrimson.com
   dir2:
-    name: Arezoo Ghazagh
-    email: arezoo.ghazagh@thecrimson.com
+    name: Wyatt G Croog
+    email: wyatt.croog@thecrimson.com
 
 business:
   dir1:
-    name: Mina H. Raj
-    email: mina.raj@thecrimson.com
+    name: Ella S. Dotzler
+    email: ella.dotzler@thecrimson.com
   dir2:
-    name: Lilian C. Smith
-    email: lilian.smith@thecrimson.com
+    name: Ben H. Morrison
+    email: ben.morrison@thecrimson.com
 
 design:
   dir1:
-    name: Julia B. Freitag
-    email: julia.freitag@thecrimson.com
+    name: Nicole M. Hernández Abud
+    email: nicole.hernandez@thecrimson.com
   dir2:
-    name:  Stephanie Nguyen 
-    email: stephanie.nguyen@thecrimson.com
+    name: Alexandra M. Kneiss
+    email: alex.kneiss@thecrimson.com
 
 editorial:
   dir1:
-    name: E. Matteo Diaz
-    email: matteo.diaz@thecrimson.com
+    name: Violet T.M. Barron
+    email: violet.barron@thecrimson.com
   dir2:
-    name: Hea Pushpraj
-    email: hea.pushpraj@thecrimson.com
+    name: Julia S. Dan
+    email: julia.dan@thecrimson.com
+  dir3:
+    name: Heidi S. Enger
+    email: heidi.enger@thecrimson.com
 
 magazine:
   dir1:
-    name: Adelaide E. Parker
-    email: adelaide.parker@thecrimson.com
+    name: Sunshine Chen
+    email: sunshine.chen@thecrimson.com
   dir2:
-    name: Jem K. Williams
-    email: jem.williams@thecrimson.com
+    name: Kate J. Kaufman
+    email: kate.kaufman@thecrimson.com
 
 news:
   dir1:
-    name: Rahem D. Hamid
-    email: rahem.hamid@thecrimson.com
+    name: Azusa M. Lippit
+    email: azusa.lippit@thecrimson.com
   dir2:
-    name: John N. Pe&ntilde;a
-    email: john.pena@thecrimson.com
+    name: Asher J. Montgomery
+    email: asher.montgomery@thecrimson.com
 
 multimedia:
   dir1:
-    name: Maria S. Cheng 
-    email: maria.cheng@thecrimson.com
+    name: Lotel L. Loeb
+    email: lotem.loeb@thecrimson.com
   dir2:
-    name: Jina H. Choe
-    email: jina.choe@thecrimson.com
+    name: Hugo C. Chiasson
+    email: hugo.chiasson@thecrimson.com
 
 sports:
   dir1:
-    name: Jack Canavan
-    email: jack.canavan@thecrimson.com
+    name: Isabel C. Smail
+    email: isabel.smail@thecrimson.com
   dir2:
-    name: Nadia A. Fairfax
-    email: nadia.fairfax@thecrimson.com
+    name: Reed M. Trimble
+    email: reed.trimble@thecrimson.com
 
 technology:
   dir1:
-    name: Neil H. Shah
-    email: neil.shah@thecrimson.com
+    name: Carly Y. Chen
+    email: carly.chen@thecrimson.com
   dir2:
     name: Milan Naropanth
     email: milan.naropanth@thecrimson.com
