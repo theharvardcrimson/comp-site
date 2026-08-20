@@ -4,3 +4,7 @@ rendered
 .DS_Store
 s3_website.yml
 _site
+
+# Pre-redesign reference screenshots (~58MB). Local-only, never committed.
+# Regenerate instructions live in CLAUDE.md.
+_baseline
