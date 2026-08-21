@@ -1,7 +1,6 @@
 ---
 name: Design
 hook: crafts the stunning graphics & print products that showcase our stories
-hours: ""
 photo: ""
 photo_caption: ""
 photo_credit: ""

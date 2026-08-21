@@ -238,12 +238,6 @@ a:hover{ text-decoration:underline; }
   font-family:var(--text); font-size:clamp(16px,1.5vw,21px);
   line-height:1.45; max-width:46ch; margin-top:8px;
 }
-.board-meta{
-  font-family:var(--display); text-transform:uppercase; letter-spacing:.18em;
-  font-size:clamp(14px,1.3vw,17px); color:var(--grey); margin-top:10px;
-}
-.board:hover .board-meta,.board:focus-visible .board-meta{ color:var(--paper); }
-
 @media (min-width:900px){
   .board{ display:grid; grid-template-columns:1.25fr 1fr; gap:clamp(24px,4vw,72px); align-items:end; }
   .board-desc{ margin-top:0; padding-bottom:.5em; }

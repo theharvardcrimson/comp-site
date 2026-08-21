@@ -1,7 +1,6 @@
 ---
 name: News
 hook: breaks high-impact stories, holding power to account & informing millions of readers
-hours: ""
 photo: ""
 photo_caption: ""
 photo_credit: ""

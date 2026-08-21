@@ -6,10 +6,6 @@ name: Arts
 # the sentence: "Arts <hook>".
 hook: writes about the cultural phenomena taking over Harvard, Cambridge, & the world
 
-# Hours per week. Leave as "" until the board confirms it -- blank hides the
-# slot rather than showing an empty one.
-hours: ""
-
 # Optional. Drop a file in images/ and put its name here, e.g. arts-01.jpg.
 # Leave "" and the page renders without a photo, by design.
 photo: ""

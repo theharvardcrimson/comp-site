@@ -29,15 +29,6 @@ layout: site
 </figure>
 {% endif %}
 
-{% if page.hours and page.hours != '' %}
-<div class="stats">
-  <div><b>{{ page.hours }}</b><span>hours a week</span></div>
-  {% if page.requirements and page.requirements.size > 0 %}
-    <div><b>{{ page.requirements.size }}</b><span>things to complete</span></div>
-  {% endif %}
-</div>
-{% endif %}
-
 <div class="prose reveal">
   {{ content }}
 </div>

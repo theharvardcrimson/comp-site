@@ -1,7 +1,6 @@
 ---
 name: Multimedia
 hook: captures & produces all of The Crimson's photo, video, & podcast content
-hours: ""
 photo: ""
 photo_caption: ""
 photo_credit: ""

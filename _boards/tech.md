@@ -1,7 +1,6 @@
 ---
 name: Tech
 hook: builds the website that powers one of the nation's most tech-savvy college newsrooms
-hours: ""
 photo: ""
 photo_caption: ""
 photo_credit: ""

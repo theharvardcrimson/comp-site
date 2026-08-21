@@ -2,7 +2,6 @@
 name: Blog
 display_name: Blog (Flyby)
 hook: provides witty & hilarious commentary on all things student life
-hours: ""
 photo: ""
 photo_caption: ""
 photo_credit: ""

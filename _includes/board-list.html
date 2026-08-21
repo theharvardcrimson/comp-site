@@ -8,20 +8,15 @@
   the footer list (sorted by name) rendered fine. If a deliberate running order
   is ever wanted, add `order:` to all ten files -- all ten, or this breaks again.
 
-  Hours and the hover colour-flip are decoration: every row states its board
-  and description in text, so nothing depends on hover or on hours being set.
+  The hover colour-flip is decoration: every row states its board and
+  description in text, so nothing depends on hover.
 {% endcomment %}
 <div class="boards">
   {% assign boards = site.boards | sort: 'name' %}
   {% for b in boards %}
     <a class="board" href="{{ b.url }}">
       <span class="board-name">{{ b.display_name | default: b.name }}</span>
-      <span>
-        <span class="board-desc">{{ b.hook }}</span>
-        {% if b.hours and b.hours != '' %}
-          <span class="board-meta">{{ b.hours }} hrs / week</span>
-        {% endif %}
-      </span>
+      <span class="board-desc">{{ b.hook }}</span>
     </a>
   {% endfor %}
 </div>

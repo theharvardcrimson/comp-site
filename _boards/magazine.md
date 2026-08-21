@@ -2,7 +2,6 @@
 name: Magazine
 display_name: Magazine (FM)
 hook: leads our longform coverage with incisive style & impactful investigations
-hours: ""
 photo: ""
 photo_caption: ""
 photo_credit: ""

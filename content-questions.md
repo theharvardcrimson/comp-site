@@ -13,6 +13,8 @@ means "hide it," never "show an empty space."
 ## Settled
 
 - **Flat list of ten boards.** No grouping by category.
+- **No hours-per-week figure.** Dropped at the owner's request; the field is
+  removed from all ten board files and from the templates.
 - **No shopping week for Fall.** Per-board info sessions are not happening, so
   no session dates, times, or venues anywhere on the site.
 - **Board one-liners supplied and approved** (below). Nothing else from that
@@ -45,38 +47,12 @@ repeating the heading.
 - **SPORTS** covers the nation's leading athletic program in varsity teams & Olympic gold medals
 - **TECH** builds the website that powers one of the nation's most tech-savvy college newsrooms
 
-Two display names to carry through the site: Blog is **Flyby**, Magazine is
-**FM**. Neither is shown that way in the current nav.
+Two display names carried through the site: Blog shows as **Flyby**, Magazine
+as **FM**.
 
 ---
 
-## 1. Needed: hours per week
-
-Still the highest-value gap on the site, and the slowest to gather — it needs
-ten sets of directors to answer. Worth starting first even though it lands last.
-
-Your one-liners each say what a board *does*. None says what it *costs*, and
-that is the number every prospective comper actually wants. A range is fine
-("4–6"). An honest-but-scary number beats no number, because people fill
-silence with their worst guess.
-
-| Board | Hours/week | Pieces or projects required |
-|---|---|---|
-| Arts | | 5 pieces |
-| Blog | | 6 posts |
-| Business | | |
-| Design | | |
-| Editorial | | 2 op-eds + 1 staff-ed |
-| Magazine | | 4 articles |
-| Multimedia | | |
-| News | | up to 6 articles |
-| Sports | | |
-| Tech | | |
-
-Pre-filled cells are what I could read off the current pages — correct them if
-they're stale. Empty cells aren't stated anywhere on the site today.
-
-## 2. Needed: what the Fall comp actually looks like
+## 1. Needed: what the Fall comp actually looks like
 
 Shopping week is gone, which removes the only per-board event structure the
 site had. So:
@@ -91,7 +67,7 @@ site had. So:
   is genuinely "sign up and we'll email you," that's fine — but the site should
   say so plainly instead of implying a calendar that doesn't exist.
 
-## 3. Open: where the shared reporting comp fact goes
+## 2. Open: where the shared reporting comp fact goes
 
 News, Magazine, Sports, and Arts comp together for the first three weeks before
 splitting off. This is the most useful undocumented fact on the site — it means
@@ -107,7 +83,7 @@ Still worth surfacing prominently somewhere. Also unresolved: can you switch
 boards after the split, and do the four boards' requirements overlap during
 those three weeks?
 
-## 4. The anxiety questions
+## 3. The anxiety questions
 
 Absent from all eleven current pages. A nervous first-year wants these and an
 unanswered "will I get in?" gets answered pessimistically by default.
@@ -121,27 +97,24 @@ unanswered "will I get in?" gets answered pessimistically by default.
 - **No experience required** — true for all ten, or are there exceptions?
   Several pages say it; worth stating once, authoritatively.
 
-## 5. Corrections needed
+## 4. Corrections needed
 
-**Business, second director.** `_config.yml` has a mismatch — which is right?
+**Business, second director.** Still a mismatch in `_data/directors.yml` — which
+is right?
 ```
 name:  Arman Lateef
 email: hamza.lateef@thecrimson.com
 ```
+This is the only outstanding item in this section. The trailing space in
+"Salma O. Siddiqui" is fixed, and `technology` is now `tech` everywhere.
 
-**Editorial, second director.** `Salma O. Siddiqui ` has a trailing space in
-`_config.yml`. Stripping it unless it's meaningful.
+## 5. Needs your rewrite (I won't touch prose)
 
-**`tech` vs `technology`.** File is `tech.html`, nav says "Tech", config key is
-`technology`. Standardizing on `tech` unless you object.
-
-## 6. Needs your rewrite (I won't touch prose)
-
-**`blog.html`** names last semester's directors in the body copy:
+**`_boards/blog.md`** names last semester's directors in the body copy:
 
 > "We (Wyatt + Ava) are super stoked to be working with our compers..."
 
-`_config.yml` now lists Cristian D. Dominguez and Grace E. St Laurent. The
+`_data/directors.yml` lists Cristian D. Dominguez and Grace E. St Laurent. The
 sentence is first-person and warm, so swapping names mechanically would put
 words in the new directors' mouths. Your call, or theirs.
 
@@ -149,14 +122,17 @@ While you're in there — anything else out of date across the ten board pages?
 Named people, specific events, "this year we're doing X" claims. That staleness
 is invisible to me; I can't tell a current fact from a 2024 one.
 
-## 7. Needed: typefaces
+## 6. Needed: typefaces
 
 The two faces from the new thecrimson.com — the display serif for headlines and
-the letterspaced sans for labels and bylines. Everything is currently set in
-Georgia as a stand-in. Swapping them is a one-line change, and it's the
-difference between resembling the paper and matching it.
+the letterspaced sans for labels and bylines.
 
-## 8. Photography (later)
+Worth knowing this is now optional rather than blocking: the site uses the
+repo's own fonts (League Gothic for display, Crimson for the wordmark, Vollkorn
+for body), which cost nothing and need no webfont service. Swapping in the real
+faces is a one-line change to the CSS custom properties whenever you have them.
+
+## 7. Photography (later)
 
 Optional field, so this can land any time.
 

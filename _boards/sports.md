@@ -1,7 +1,6 @@
 ---
 name: Sports
 hook: covers the nation's leading athletic program in varsity teams & Olympic gold medals
-hours: ""
 photo: ""
 photo_caption: ""
 photo_credit: ""

@@ -1,7 +1,6 @@
 ---
 name: Business
 hook: runs the million-dollar business that supports our independent journalism
-hours: ""
 photo: ""
 photo_caption: ""
 photo_credit: ""

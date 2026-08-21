@@ -1,7 +1,6 @@
 ---
 name: Editorial
 hook: shapes campus & national discourse with leading opinion coverage on Harvard
-hours: ""
 photo: ""
 photo_caption: ""
 photo_credit: ""
