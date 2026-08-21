@@ -10,19 +10,29 @@ means "hide it," never "show an empty space."
 
 ---
 
-## Supplied by Matteo, Aug 20 — with one blocker
+## Settled
 
-He sent a full set of board one-liners and a shopping-week schedule. The
-one-liners are **timeless and usable verbatim**. The dates are **Spring 2026 and
-cannot ship** — the sessions below ran 2/1–2/6, six months ago. Fall equivalents
-are needed for every one of the ten.
+- **Flat list of ten boards.** No grouping by category.
+- **No shopping week for Fall.** Per-board info sessions are not happening, so
+  no session dates, times, or venues anywhere on the site.
+- **Board one-liners supplied and approved** (below). Nothing else from that
+  batch is being used — not the intro paragraph, not the financial-aid line,
+  not the sign-off.
+- **Personal mobile number will not be published.** Resolved; `president@thecrimson.com`
+  is the contact.
+- **Board pages are showpiece-led**, one pattern reused ten times, with a
+  text-only fallback so a board with no photograph still looks deliberate.
+- **Brand red is `#a82931`** — 6.94:1 on white, AA for text, AAA at display
+  sizes. Secondary grey must be `#6b6b6b` or darker.
+- **Photos arriving later.** Photo is an optional field from the start, so
+  adding them is a one-line change per board, not a rebuild.
 
-### The ten one-liners — usable as-is
+## The ten board descriptions — approved, verbatim
 
-Verbatim, his wording and punctuation. These become the `hook` field on each
-board. Note the design intent: the board name stays as the opening word of the
-sentence, set bold as a newspaper run-in head, so his text is preserved intact
-rather than trimmed.
+His wording and punctuation, unaltered. These are the `hook` field on each
+board. The board name stays as the sentence's opening word, set as a newspaper
+run-in head, so the sentence is preserved intact rather than trimmed to avoid
+repeating the heading.
 
 - **ARTS** writes about the cultural phenomena taking over Harvard, Cambridge, & the world
 - **BLOG (FLYBY)** provides witty & hilarious commentary on all things student life
@@ -36,143 +46,82 @@ rather than trimmed.
 - **TECH** builds the website that powers one of the nation's most tech-savvy college newsrooms
 
 Two display names to carry through the site: Blog is **Flyby**, Magazine is
-**FM**. Neither is currently shown as such in the nav.
+**FM**. Neither is shown that way in the current nav.
 
-### Shopping week — structure good, dates dead
+---
 
-Spring's schedule, kept only as a shape to fill in. **Every date, time, and room
-below needs a Fall replacement.** Note that venues varied — three sessions were
-off-site, so location is per-session, not a site-wide constant.
+## 1. Needed: hours per week
 
-| Board | Spring slot (STALE) | Venue |
+Still the highest-value gap on the site, and the slowest to gather — it needs
+ten sets of directors to answer. Worth starting first even though it lands last.
+
+Your one-liners each say what a board *does*. None says what it *costs*, and
+that is the number every prospective comper actually wants. A range is fine
+("4–6"). An honest-but-scary number beats no number, because people fill
+silence with their worst guess.
+
+| Board | Hours/week | Pieces or projects required |
 |---|---|---|
-| Business | Sun 2/1, 2:00 pm | 14 Plympton St |
-| News | Mon 2/2, 5:00 p.m. | Fong Auditorium, Boylston Hall |
-| Magazine | Mon 2/2, 7:00 p.m. | Emerson Hall, Room 305 |
-| Multimedia | Mon 2/2, 7:30 p.m. | Emerson Hall, Room 305 |
-| Sports | Tue 2/3, 7:30 p.m. | 14 Plympton St |
-| Tech | Wed 2/4, 7:00 pm | 14 Plympton St |
-| Design | Wed 2/4, 7:30 pm | 14 Plympton St |
-| Arts | Thu 2/5, 6:30 p.m. | 14 Plympton St |
-| Editorial | Thu 2/5, 7:00 p.m. | 14 Plympton St |
-| Blog | Fri 2/6, 5:00 p.m. | 14 Plympton St |
-
-"Comp shopping week" is the right frame and it is currently absent from the
-site. It also reconciles with the single "Comp Kickoff" event: Spring ran a
-Saturday kickoff (1/31) and then per-board sessions the following week.
-
-### Still missing after this batch
-
-- **Hours per week, all ten boards.** The one-liners describe what each board
-  does but not what it costs you. Still the highest-value gap.
-- **Fall kickoff date**, plus the ten Fall session slots above.
-
-### Decision needed: the phone number
-
-His sign-off included a personal mobile:
-
-> Questions? Contact Crimson President E. Matteo Diaz
-> president@thecrimson.com | (415) 686-4169
-
-**Not publishing that without explicit confirmation.** This repo and the site
-are public and indexed, so a personal mobile on the page will be scraped. The
-email is institutional and safe. Options: email only, publish the number
-anyway, or route through a Google Voice number.
-
-## 0. Board groupings and the shared reporting comp
-
-The hub groups the ten boards by type rather than listing them A–Z. Working
-structure, from Matteo:
-
-| Group | Boards | Notes |
-|---|---|---|
-| Reporting | News, Magazine, Sports, Arts | **Shared comp: all four meet together for the first three weeks, then split off.** |
-| Opinion / Blog | Editorial, Blog | Written but not reporting. Group name still undecided. |
-| Visual + technical | Multimedia, Tech, Design | "Functional" boards — they make the paper rather than write it. |
-| Business | Business | Its own category; revenue side, not editorial. |
-
-**The shared three-week reporting comp is the most important undocumented fact
-on the site.** It means someone interested in reporting does not have to choose
-between four boards up front — which is exactly the fear that stops people from
-starting. It currently appears on zero pages.
-
-Questions on it:
-
-- **How does it actually work?** Three weeks of shared sessions, then you pick a
-  board? Or do you declare a board first and just train together?
-- **Can you switch after the split?** If someone starts toward News and lands on
-  Sports, is that fine?
-- **Do the four boards' requirements overlap during those three weeks**, or does
-  each still expect its own pieces from week one?
-- **Same meeting time and place for all four?**
-- **Do any of the other groups share a process** the way reporting does? Do
-  Multimedia / Tech / Design overlap at all, or are they fully separate comps?
-
-**Group names are yours to set.** "Reporting", "Visual + technical", and
-"Business" are placeholders that read fine. The Editorial + Blog pair is the
-awkward one — they are genuinely different from each other, and "Opinion / Blog"
-is descriptive but limp. Options: name it plainly, or drop the group and let
-those two stand alone between the others.
-
-## 1. Per board
-
-`hours_per_week` is the single highest-value missing fact on the whole site.
-It's what every prospective comper actually wants to know, it appears nowhere
-today, and it's the number that makes the ten-board comparison view work.
-A range is fine ("4–6"). An honest-but-scary number beats no number, because
-people fill silence with their worst guess.
-
-| Board | Hours/week | Meeting day + time | Pieces or projects required |
-|---|---|---|---|
-| Arts | | Mondays, 6 p.m. (seminars) | 5 pieces |
-| Blog | | | 6 posts |
-| Business | | | |
-| Design | | | |
-| Editorial | | | 2 op-eds + 1 staff-ed |
-| Magazine | | Mondays (writers' mtg) | 4 articles |
-| Multimedia | | | |
-| News | | | up to 6 articles |
-| Sports | | Mondays, 8 p.m. (board mtg) | |
-| Tech | | | |
+| Arts | | 5 pieces |
+| Blog | | 6 posts |
+| Business | | |
+| Design | | |
+| Editorial | | 2 op-eds + 1 staff-ed |
+| Magazine | | 4 articles |
+| Multimedia | | |
+| News | | up to 6 articles |
+| Sports | | |
+| Tech | | |
 
 Pre-filled cells are what I could read off the current pages — correct them if
-they're wrong or stale. Empty cells aren't stated anywhere on the site today.
+they're stale. Empty cells aren't stated anywhere on the site today.
 
-## 2. Comp logistics
+## 2. Needed: what the Fall comp actually looks like
 
-These apply site-wide and currently appear nowhere.
+Shopping week is gone, which removes the only per-board event structure the
+site had. So:
 
-- **Fall kickoff date:**
-- **Kickoff time:** (currently reads "4–6 p.m." — still right?)
-- **Kickoff location:** (currently "14 Plympton St")
-- **Comp start date:**
-- **Comp end date:**
+- **Is there still a kickoff event?** `index.html` currently reads "Fall Comp
+  Kickoff — Date and time TBA." If there's no kickoff either, that whole block
+  should come out rather than sit there empty.
+- **How does someone start?** Just the Google Form, or is there a first
+  meeting?
+- **Comp start and end dates.**
+- **Is there any date at all** that belongs on the site for Fall? If the answer
+  is genuinely "sign up and we'll email you," that's fine — but the site should
+  say so plainly instead of implying a calendar that doesn't exist.
 
-The About Us page currently says "Date and time TBA" because the old line said
-`Saturday, Jan. 31, 2026` — the Spring date. I removed it rather than let a
-false date ship, so this one is worth filling first.
+## 3. Open: where the shared reporting comp fact goes
 
-## 3. The anxiety questions
+News, Magazine, Sports, and Arts comp together for the first three weeks before
+splitting off. This is the most useful undocumented fact on the site — it means
+nobody has to pick correctly and cold among four boards.
 
-These are the things a nervous first-year wants to know and cannot find
-anywhere on the site. My read is that the silence is doing real damage — an
+Grouping is out, so it no longer has a natural home. Options:
+
+- One line above the board list, unattached to any group.
+- A small marker on those four rows only.
+- In the FAQ.
+
+Still worth surfacing prominently somewhere. Also unresolved: can you switch
+boards after the split, and do the four boards' requirements overlap during
+those three weeks?
+
+## 4. The anxiety questions
+
+Absent from all eleven current pages. A nervous first-year wants these and an
 unanswered "will I get in?" gets answered pessimistically by default.
 
 - **Is comp competitive? Is finishing enough to be elected?**
-
 - **Can you comp two boards at once?** (Arts hints at reduced requirements for
   multi-board compers; no other page mentions it.)
+- **What if you start late or miss meetings?** (Arts says the work still counts.
+  True board-wide, or Arts-specific?)
+- **What happens after comp?** What being an editor actually means.
+- **No experience required** — true for all ten, or are there exceptions?
+  Several pages say it; worth stating once, authoritatively.
 
-- **What if you start late, or miss meetings?** (Arts says the work still
-  counts. Is that true board-wide, or Arts-specific?)
-
-- **What happens after comp?** What being an editor actually means — time,
-  commitment, what you get.
-
-- **No experience required** — true for all ten boards, or are there
-  exceptions? Several pages say it; worth stating once, authoritatively.
-
-## 4. Corrections needed
+## 5. Corrections needed
 
 **Business, second director.** `_config.yml` has a mismatch — which is right?
 ```
@@ -181,36 +130,41 @@ email: hamza.lateef@thecrimson.com
 ```
 
 **Editorial, second director.** `Salma O. Siddiqui ` has a trailing space in
-`_config.yml`. Harmless today, but it would break an exact-match lookup later.
-I'll strip it unless it's meaningful.
+`_config.yml`. Stripping it unless it's meaningful.
 
-**`tech` vs `technology`.** The file is `tech.html`, the nav says "Tech", the
-config key is `technology`. Standardizing on `tech` unless you object.
+**`tech` vs `technology`.** File is `tech.html`, nav says "Tech", config key is
+`technology`. Standardizing on `tech` unless you object.
 
-## 5. Needs your rewrite (I won't touch prose)
+## 6. Needs your rewrite (I won't touch prose)
 
 **`blog.html`** names last semester's directors in the body copy:
 
 > "We (Wyatt + Ava) are super stoked to be working with our compers..."
 
 `_config.yml` now lists Cristian D. Dominguez and Grace E. St Laurent. The
-sentence is first-person and warm, so swapping two names mechanically would
-put words in the new directors' mouths. Your call, or theirs.
+sentence is first-person and warm, so swapping names mechanically would put
+words in the new directors' mouths. Your call, or theirs.
 
-While you're in there — is anything else on the ten board pages out of date?
-Named people, specific events, "this year we're doing X" claims. That kind of
-staleness is invisible to me; I can't tell a current fact from a 2024 one.
+While you're in there — anything else out of date across the ten board pages?
+Named people, specific events, "this year we're doing X" claims. That staleness
+is invisible to me; I can't tell a current fact from a 2024 one.
 
-## 6. Photography
+## 7. Needed: typefaces
 
-The redesign leans on real Crimson photography, which means we need a set to
-work from. Multimedia publishes 1,000+ photos a year and the site currently
-uses exactly one image: a static shot of the building.
+The two faces from the new thecrimson.com — the display serif for headlines and
+the letterspaced sans for labels and bylines. Everything is currently set in
+Georgia as a stand-in. Swapping them is a one-line change, and it's the
+difference between resembling the paper and matching it.
 
-- Can you get ~10–15 images cleared for site use from Multimedia?
-- Ideally: the newsroom at work, a few boards mid-activity, the building, and
-  two or three dramatic news/sports/arts shots.
-- Any credit or usage line they need alongside them?
+## 8. Photography (later)
 
-Worth flagging early: this is the one dependency in the redesign that runs
-through another board's time, during their busiest week.
+Optional field, so this can land any time.
+
+- ~18–20 images: ten board pages, one hub hero, plus spares.
+- Originals, or at least 2000px on the long edge. Don't pre-compress.
+- Name them by board (`news-01.jpg`).
+- **Per photo: photographer credit** (the design has a red byline slot; a photo
+  without a credit can't ship) **and a one-line caption** of what's happening —
+  that becomes the visible caption and the basis for correct alt text.
+- Prioritize people working over buildings. The current site's one photo is an
+  empty building exterior and it's the least persuasive image available.
