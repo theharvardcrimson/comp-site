@@ -12,6 +12,13 @@ layout: site
   <p class="actions on-red">
     <a class="btn btn-ghost" href="{{ site.data.semester.signup_url }}">Sign up</a>
   </p>
+
+  {% if hero and hero != '' and site.data.semester.hero_photo_credit != '' %}
+    <p class="hero-credit">
+      {%- if site.data.semester.hero_photo_caption != '' %}{{ site.data.semester.hero_photo_caption }} &middot; {% endif -%}
+      By {{ site.data.semester.hero_photo_credit }}
+    </p>
+  {% endif %}
 </section>
 
 {% if site.data.semester.stat_1_number != '' %}

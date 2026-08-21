@@ -4,30 +4,32 @@ layout: site
 {% assign slug = page.path | split: '/' | last | split: '.' | first %}
 {% assign people = site.data.directors[slug] %}
 
-<section class="field board-hero">
+{% comment %}
+  The board's photo becomes the hero background, not a figure below it -- that
+  is what "showpiece" means here. Optional throughout: with no photo the hero
+  is flat crimson and nothing looks missing. The same 88% scrim as the homepage
+  keeps the board name legible over any image.
+{% endcomment %}
+<section class="field board-hero{% if page.photo and page.photo != '' %} has-photo{% endif %}"
+  {%- if page.photo and page.photo != '' %} style="--hero-img:url('/images/{{ page.photo }}')"{% endif %}>
   <p class="eyebrow">{{ site.data.semester.season }} Comp {{ site.data.semester.year }}</p>
   <h1 class="poster">{{ page.display_name | default: page.name }}</h1>
   <p class="lede">{{ page.hook }}</p>
   <p class="actions on-red">
     <a class="btn btn-ghost" href="{{ site.data.semester.signup_url }}">Sign up</a>
   </p>
-</section>
 
-{% comment %}
-  Photo is optional and absent for every board right now. A board without one
-  renders with no gap -- the crimson hero above already carries the page.
-{% endcomment %}
-{% if page.photo and page.photo != '' %}
-<figure>
-  <img src="/images/{{ page.photo }}" alt="{{ page.photo_caption }}" loading="lazy">
-  {% if page.photo_caption != '' %}
-    <figcaption>
-      {{ page.photo_caption }}
-      {% if page.photo_credit != '' %}<span class="credit">By {{ page.photo_credit }}</span>{% endif %}
-    </figcaption>
+  {% comment %}
+    Credit lives inside the hero because a background image can carry no
+    figcaption. A photograph without a credit should not ship.
+  {% endcomment %}
+  {% if page.photo and page.photo != '' and page.photo_credit and page.photo_credit != '' %}
+    <p class="hero-credit">
+      {%- if page.photo_caption and page.photo_caption != '' %}{{ page.photo_caption }} &middot; {% endif -%}
+      By {{ page.photo_credit }}
+    </p>
   {% endif %}
-</figure>
-{% endif %}
+</section>
 
 <div class="prose reveal">
   {{ content }}

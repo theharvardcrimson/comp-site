@@ -38,6 +38,11 @@ hero_tagline: 153 years. 10 boards.
 # people working -- see content-questions.md for the spec.
 hero_photo: hero.jpg
 
+# Credit and caption for the hero photograph. The credit line only appears if
+# hero_photo_credit is filled in -- a photograph should not ship uncredited.
+hero_photo_caption: ""
+hero_photo_credit: ""
+
 # The 1873 seal. A filename in images/, or "" to hide it everywhere.
 # images/logo-mark.png is a 480px web version of the supplied artwork -- the
 # original was 22800x22800 and 18MB, which cannot ship.

@@ -255,6 +255,15 @@ a:hover{ text-decoration:underline; }
 }
 .field .actions{ margin-top:clamp(24px,3vw,40px); display:flex; gap:14px; flex-wrap:wrap; }
 
+/* Photo credit inside the hero. --on-red-muted measures 5.31:1 on the crimson,
+   and the scrim guarantees the composite never falls below that. */
+.hero-credit{
+  margin:clamp(28px,4vw,52px) 0 0;
+  font-family:var(--display); text-transform:uppercase; letter-spacing:.14em;
+  font-size:clamp(12px,1.1vw,14px); color:var(--on-red-muted);
+  max-width:60ch;
+}
+
 /* ---------- stats ---------- */
 /* One per row on phones. auto-fit produced a lopsided 2+1 at 390px, which
    reads like a mistake rather than a choice. */
