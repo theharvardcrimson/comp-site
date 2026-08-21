@@ -97,16 +97,17 @@ a:hover{ text-decoration:underline; }
   font-size:clamp(15px,1.5vw,19px); letter-spacing:.15em; color:var(--ink);
 }
 .drawer > summary::-webkit-details-marker{ display:none; }
+/* --grey rather than --ink: still 6.35:1 against the paper, so clearly visible,
+   but noticeably lighter than near-black. */
 .drawer-bars{ display:block; width:22px; }
-.drawer-bars i{ display:block; height:2px; background:var(--ink); margin:4px 0; }
+.drawer-bars i{ display:block; height:2px; background:var(--grey); margin:4px 0; }
+.drawer > summary:hover .drawer-bars i{ background:var(--red); }
 .drawer[open] .drawer-bars i:first-child{ transform:translateY(6px) rotate(45deg); }
 .drawer[open] .drawer-bars i:nth-child(2){ opacity:0; }
 .drawer[open] .drawer-bars i:last-child{ transform:translateY(-6px) rotate(-45deg); }
 @media (prefers-reduced-motion:no-preference){
   .drawer-bars i{ transition:transform .18s ease, opacity .18s ease; }
 }
-.drawer-word{ display:none; }
-@media (min-width:560px){ .drawer-word{ display:inline; } }
 
 /* The panel starts BELOW the header rather than at top:0.
    z-index alone could not fix this: .bar sets z-index 50 and so creates a
@@ -310,20 +311,30 @@ figcaption .credit{ color:var(--red); }
   font-family:var(--display); text-transform:uppercase; font-weight:400;
   font-size:clamp(30px,4.6vw,64px); line-height:.9; margin:0 0 20px;
 }
-.foot-boards{
-  columns:2; column-gap:28px; list-style:none; margin:26px 0 0; padding:0;
-  font-family:var(--display); text-transform:uppercase; letter-spacing:.13em;
-  font-size:clamp(16px,1.5vw,19px);
+.foot-top{ display:grid; gap:clamp(32px,5vw,64px); }
+@media (min-width:860px){
+  /* Not 1fr 1fr: the right half holds three columns, and an even split left
+     them ~190px each -- just narrow enough that the email address broke
+     mid-word ("president@thecrimson.co / m"). */
+  .foot-top{ grid-template-columns:.82fr 1.18fr; align-items:start; }
 }
-/* inline-block + padding so each link clears the 24x24 minimum in WCAG 2.2
-   AA 2.5.8. Line-height alone gave these a 23px hit box -- one pixel short. */
-.foot-boards a{ display:inline-block; padding:6px 0; line-height:1.35; }
-.foot small{
-  display:block; margin-top:28px; font-family:var(--text);
-  font-size:14.5px; line-height:1.7; color:var(--on-ink-muted);
+/* Single column until there is room for two. auto-fit with minmax(150px) gave
+   165px columns at 390px, and "president@thecrimson.com" is an unbreakable
+   ~190px string, so it pushed the page 12px wider than the viewport. */
+.foot-cols{ display:grid; gap:clamp(20px,3vw,32px); grid-template-columns:1fr; }
+@media (min-width:560px){
+  .foot-cols{ grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); }
 }
-.foot small a{ display:inline-block; padding:4px 0; }
-@media (min-width:700px){ .foot-boards{ columns:3; } }
+.foot-label{
+  font-family:var(--display); text-transform:uppercase; letter-spacing:.2em;
+  font-size:13px; color:var(--on-ink-muted); margin:0 0 8px;
+}
+.foot-cols p{ margin:0; font-family:var(--text); font-size:16px; line-height:1.6; }
+/* inline-block + padding so every footer link clears the 24x24 minimum in
+   WCAG 2.2 AA 2.5.8. Line-height alone gave 23px -- one pixel short. */
+/* Belt and braces alongside the single-column rule above: an email address has
+   no break opportunities, so allow one anywhere rather than let it overflow. */
+.foot-cols a{ display:inline-block; padding:3px 0; overflow-wrap:anywhere; max-width:100%; }
 
 /* ---------- motion ----------
    Scroll-driven, CSS only, no JavaScript. Browsers without animation-timeline

@@ -11,9 +11,12 @@
   requirements, and closing is always possible by activating the same control.
 {% endcomment %}
 <details class="drawer">
+  {% comment %}
+    Icon only -- no visible "Boards" label. The aria-label carries the
+    accessible name, so screen reader users still hear what it does.
+  {% endcomment %}
   <summary aria-label="Boards menu">
     <span class="drawer-bars" aria-hidden="true"><i></i><i></i><i></i></span>
-    <span class="drawer-word">Boards</span>
   </summary>
 
   <div class="drawer-panel">

@@ -20,6 +20,14 @@ contact_email: president@thecrimson.com
 # Where we are.
 address: 14 Plympton St
 
+# The big line in the footer. PLACEHOLDER -- Claude wrote this one, so replace
+# it with your own words whenever you like. Two short lines work best; a long
+# line wraps oddly because it is set large.
+footer_line: Ten boards. One newsroom.
+
+# The paper itself, linked from the footer so readers can go read it.
+paper_url: https://www.thecrimson.com
+
 
 # ---- Kickoff event. ----
 # Leave kickoff_date as "" and the whole block disappears from the page.

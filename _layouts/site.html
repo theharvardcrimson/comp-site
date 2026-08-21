@@ -34,25 +34,37 @@
     {{ content }}
   </main>
 
+  {% comment %}
+    The footer deliberately does NOT list the ten boards. They already appear
+    on the homepage, at the foot of every board page, and in the drawer -- a
+    fourth copy was noise. It carries only things that aren't findable
+    elsewhere on the site.
+  {% endcomment %}
   <footer class="foot">
-    <h2>Ten boards.<br>Pick one, or don't.</h2>
-    <a class="btn btn-ghost" href="{{ site.data.semester.signup_url }}">Sign up</a>
+    <div class="foot-top">
+      <div>
+        <h2>{{ site.data.semester.footer_line }}</h2>
+        <a class="btn btn-ghost" href="{{ site.data.semester.signup_url }}">Sign up</a>
+      </div>
 
-    <nav aria-label="All ten boards">
-      <ul class="foot-boards">
-        {% assign all = site.boards | sort: 'name' %}
-        {% for b in all %}
-          <li><a href="{{ b.url }}">{{ b.display_name | default: b.name }}</a></li>
-        {% endfor %}
-      </ul>
-    </nav>
-
-    <small>
-      {{ site.data.semester.address }} &middot;
-      <a href="mailto:{{ site.data.semester.contact_email }}">{{ site.data.semester.contact_email }}</a><br>
-      Questions about comp or financial aid? Write to {{ site.data.semester.contact_title }}
-      {{ site.data.semester.contact_name }}.
-    </small>
+      <div class="foot-cols">
+        <div>
+          <p class="foot-label">Read the paper</p>
+          <p><a href="{{ site.data.semester.paper_url }}">thecrimson.com</a></p>
+        </div>
+        <div>
+          <p class="foot-label">Questions</p>
+          <p>
+            {{ site.data.semester.contact_title }} {{ site.data.semester.contact_name }}<br>
+            <a href="mailto:{{ site.data.semester.contact_email }}">{{ site.data.semester.contact_email }}</a>
+          </p>
+        </div>
+        <div>
+          <p class="foot-label">Find us</p>
+          <p>{{ site.data.semester.address }}<br>Cambridge, MA</p>
+        </div>
+      </div>
+    </div>
   </footer>
 </body>
 </html>
