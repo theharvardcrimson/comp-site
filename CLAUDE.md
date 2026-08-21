@@ -70,6 +70,20 @@ paragraph in readable English, type over it. **No CMS, no admin UI, no
 click-to-edit.** Flat over nested, keys in plain English, zero HTML in content
 files. If the owner has to think about where a string lives, the design failed.
 
+## THE COPY RULE
+
+**The owner and the boards write all prose. You do not.**
+
+This is a student newspaper; the copy is the boards' own voice. Do not draft,
+rewrite, tighten, or "improve" prose unless explicitly asked for that specific
+passage.
+
+Permitted, because it moves text rather than authoring it: migrating existing
+copy between files or formats verbatim, converting HTML entities to real
+characters, and reporting word counts or flagging stale facts. When a new field
+has no existing copy to migrate, leave it empty and say so — never fill it with
+invented text.
+
 ## Known cruft (audited, not yet fixed)
 
 - **No `<meta name="viewport">` anywhere.** Phones render a 980px desktop layout
