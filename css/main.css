@@ -25,12 +25,18 @@
   --serif:'CompSerif',Georgia,serif;
   --text:'CompText',Georgia,serif;
 
-  --red:#a82931;          /* 6.94:1 on white, AA */
+  --red:#a82931;          /* 6.64:1 on paper, AA */
   --red-deep:#7f1d24;
   --paper:#fbfaf6;
   --ink:#15130f;          /* 17.76:1 on paper, AAA */
   --grey:#615c54;         /* 6.35:1 on paper, AA */
   --hair:#ddd7ca;
+
+  /* Muted text on the coloured fields. These are solid colours, NOT the paper
+     colour at reduced opacity: opacity multiplies against whatever is behind
+     it, so the real contrast drifts per surface and can't be checked. */
+  --on-red-muted:#f2dcde;   /* 5.31:1 on --red, AA */
+  --on-ink-muted:#cfc9bd;   /* 11.26:1 on --ink, AAA */
 
   --gut:clamp(18px,5vw,64px);
 }
@@ -92,7 +98,7 @@ a:hover{ text-decoration:underline; }
   font-family:var(--display); text-transform:uppercase;
   font-size:clamp(15px,1.7vw,21px); letter-spacing:.3em;
 }
-.field .eyebrow{ opacity:.85; }
+.field .eyebrow{ color:var(--on-red-muted); }
 
 /* The poster headline. League Gothic is condensed, so it tolerates huge sizes. */
 .poster{
@@ -231,9 +237,16 @@ figcaption .credit{ color:var(--red); }
 .foot-boards{
   columns:2; column-gap:28px; list-style:none; margin:26px 0 0; padding:0;
   font-family:var(--display); text-transform:uppercase; letter-spacing:.13em;
-  font-size:clamp(16px,1.5vw,19px); line-height:2;
+  font-size:clamp(16px,1.5vw,19px);
 }
-.foot small{ display:block; margin-top:28px; font-family:var(--text); font-size:14px; line-height:1.6; opacity:.8; }
+/* inline-block + padding so each link clears the 24x24 minimum in WCAG 2.2
+   AA 2.5.8. Line-height alone gave these a 23px hit box -- one pixel short. */
+.foot-boards a{ display:inline-block; padding:6px 0; line-height:1.35; }
+.foot small{
+  display:block; margin-top:28px; font-family:var(--text);
+  font-size:14.5px; line-height:1.7; color:var(--on-ink-muted);
+}
+.foot small a{ display:inline-block; padding:4px 0; }
 @media (min-width:700px){ .foot-boards{ columns:3; } }
 
 /* ---------- motion ----------

@@ -24,12 +24,14 @@
     <h2>Ten boards.<br>Pick one, or don't.</h2>
     <a class="btn btn-ghost" href="{{ site.data.semester.signup_url }}">Sign up</a>
 
-    <ul class="foot-boards">
-      {% assign all = site.boards | sort: 'name' %}
-      {% for b in all %}
-        <li><a href="{{ b.url }}">{{ b.display_name | default: b.name }}</a></li>
-      {% endfor %}
-    </ul>
+    <nav aria-label="All ten boards">
+      <ul class="foot-boards">
+        {% assign all = site.boards | sort: 'name' %}
+        {% for b in all %}
+          <li><a href="{{ b.url }}">{{ b.display_name | default: b.name }}</a></li>
+        {% endfor %}
+      </ul>
+    </nav>
 
     <small>
       {{ site.data.semester.address }} &middot;
