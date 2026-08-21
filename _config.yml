@@ -56,6 +56,36 @@ exclude:
   - images/final_logo.jpeg
   - images/Logo_vector (2).ai
 
+  # Legacy assets from the pre-redesign site. Verified unreferenced by any
+  # template, stylesheet, data file or content file. They stay in the repo
+  # rather than being deleted -- excluding them keeps them out of the build
+  # without throwing anything away, and they can go properly later.
+  - images/crimson.jpg        # superseded by the optimised images/hero.jpg
+  - images/crimson-large.jpg  # source for hero.jpg; 724KB
+  - images/harvard.jpg
+  - images/header-logo.png
+  - images/logo.svg           # old splash screen
+  - images/external.png       # old navbar external-link icon
+  - images/logo.png           # was the 714KB favicon
+
+  # Dead font formats. .eot is IE-only and SVG fonts are obsolete; every
+  # browser since ~2012 takes .woff, which is what main.css asks for.
+  - fonts/*.eot
+  - fonts/*.svg
+  - fonts/*.ttf
+
+  # Font families the redesign does not use. main.css loads exactly five
+  # files: League Gothic, Crimson Roman + Bold, Vollkorn Regular + Italic.
+  - fonts/Chunkfive-webfont.woff
+  - fonts/ColabBol-webfont.woff
+  - fonts/ColabLig-webfont.woff
+  - fonts/ColabReg-webfont.woff
+  - fonts/ColabThi-webfont.woff
+  - fonts/Melbourne_reg.woff
+  - fonts/gil_____-webfont.woff
+  - fonts/gilb____-webfont.woff
+  - fonts/gillsans-webfont.woff
+
 # ==========================================================================
 #  NO CONTENT BELOW THIS LINE, AND NONE ABOVE IT EITHER.
 #

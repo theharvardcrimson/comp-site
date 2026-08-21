@@ -6,7 +6,12 @@
   <title>{% if page.title %}{{ page.title }} | {% endif %}{{ site.data.semester.season }} Comp {{ site.data.semester.year }} | The Harvard Crimson</title>
   <meta name="description" content="{{ page.hook | default: 'Comp The Harvard Crimson. Ten boards, no experience necessary.' | strip_html }}">
   <link rel="stylesheet" href="/css/main.css">
-  <link rel="icon" href="/images/logo.png">
+  {% comment %}
+    Was /images/logo.png -- a 714KB image doing a 32px job. These are cut from
+    the seal with sips: 1.4KB and 18KB.
+  {% endcomment %}
+  <link rel="icon" href="/images/favicon-32.png" sizes="32x32">
+  <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
 </head>
 <body>
   <a class="skip" href="#main">Skip to content</a>
