@@ -10,6 +10,75 @@ means "hide it," never "show an empty space."
 
 ---
 
+## Supplied by Matteo, Aug 20 — with one blocker
+
+He sent a full set of board one-liners and a shopping-week schedule. The
+one-liners are **timeless and usable verbatim**. The dates are **Spring 2026 and
+cannot ship** — the sessions below ran 2/1–2/6, six months ago. Fall equivalents
+are needed for every one of the ten.
+
+### The ten one-liners — usable as-is
+
+Verbatim, his wording and punctuation. These become the `hook` field on each
+board. Note the design intent: the board name stays as the opening word of the
+sentence, set bold as a newspaper run-in head, so his text is preserved intact
+rather than trimmed.
+
+- **ARTS** writes about the cultural phenomena taking over Harvard, Cambridge, & the world
+- **BLOG (FLYBY)** provides witty & hilarious commentary on all things student life
+- **BUSINESS** runs the million-dollar business that supports our independent journalism
+- **DESIGN** crafts the stunning graphics & print products that showcase our stories
+- **EDITORIAL** shapes campus & national discourse with leading opinion coverage on Harvard
+- **MAGAZINE (FM)** leads our longform coverage with incisive style & impactful investigations
+- **MULTIMEDIA** captures & produces all of The Crimson's photo, video, & podcast content
+- **NEWS** breaks high-impact stories, holding power to account & informing millions of readers
+- **SPORTS** covers the nation's leading athletic program in varsity teams & Olympic gold medals
+- **TECH** builds the website that powers one of the nation's most tech-savvy college newsrooms
+
+Two display names to carry through the site: Blog is **Flyby**, Magazine is
+**FM**. Neither is currently shown as such in the nav.
+
+### Shopping week — structure good, dates dead
+
+Spring's schedule, kept only as a shape to fill in. **Every date, time, and room
+below needs a Fall replacement.** Note that venues varied — three sessions were
+off-site, so location is per-session, not a site-wide constant.
+
+| Board | Spring slot (STALE) | Venue |
+|---|---|---|
+| Business | Sun 2/1, 2:00 pm | 14 Plympton St |
+| News | Mon 2/2, 5:00 p.m. | Fong Auditorium, Boylston Hall |
+| Magazine | Mon 2/2, 7:00 p.m. | Emerson Hall, Room 305 |
+| Multimedia | Mon 2/2, 7:30 p.m. | Emerson Hall, Room 305 |
+| Sports | Tue 2/3, 7:30 p.m. | 14 Plympton St |
+| Tech | Wed 2/4, 7:00 pm | 14 Plympton St |
+| Design | Wed 2/4, 7:30 pm | 14 Plympton St |
+| Arts | Thu 2/5, 6:30 p.m. | 14 Plympton St |
+| Editorial | Thu 2/5, 7:00 p.m. | 14 Plympton St |
+| Blog | Fri 2/6, 5:00 p.m. | 14 Plympton St |
+
+"Comp shopping week" is the right frame and it is currently absent from the
+site. It also reconciles with the single "Comp Kickoff" event: Spring ran a
+Saturday kickoff (1/31) and then per-board sessions the following week.
+
+### Still missing after this batch
+
+- **Hours per week, all ten boards.** The one-liners describe what each board
+  does but not what it costs you. Still the highest-value gap.
+- **Fall kickoff date**, plus the ten Fall session slots above.
+
+### Decision needed: the phone number
+
+His sign-off included a personal mobile:
+
+> Questions? Contact Crimson President E. Matteo Diaz
+> president@thecrimson.com | (415) 686-4169
+
+**Not publishing that without explicit confirmation.** This repo and the site
+are public and indexed, so a personal mobile on the page will be scraped. The
+email is institutional and safe. Options: email only, publish the number
+anyway, or route through a Google Voice number.
+
 ## 0. Board groupings and the shared reporting comp
 
 The hub groups the ten boards by type rather than listing them A–Z. Working
