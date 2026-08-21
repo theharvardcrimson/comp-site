@@ -11,9 +11,12 @@
 <body>
   <a class="skip" href="#main">Skip to content</a>
 
+  {% comment %}
+    Left side is identity, right side is every control. That keeps the seal and
+    wordmark in the prime left position and stops the menu toggle sitting
+    awkwardly beside the logo.
+  {% endcomment %}
   <header class="bar">
-    {% include drawer.html %}
-
     {% comment %}
       The seal sits BESIDE the type wordmark rather than replacing it. Rendered
       at header size the 1873 seal's line work averages into the white
@@ -31,7 +34,14 @@
       </span>
     </a>
 
-    <a class="btn" href="{{ site.data.semester.signup_url }}">Sign up</a>
+    {% comment %}
+      Sign up sits outermost so the solid crimson block anchors the corner;
+      the menu toggle tucks inside it.
+    {% endcomment %}
+    <div class="bar-actions">
+      {% include drawer.html %}
+      <a class="btn" href="{{ site.data.semester.signup_url }}">Sign up</a>
+    </div>
   </header>
 
   <main id="main">

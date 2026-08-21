@@ -65,16 +65,19 @@ a:hover{ text-decoration:underline; }
 
 /* ---------- header ---------- */
 /* z-index 50 keeps the bar ABOVE the open drawer panel (z-index 40). The panel
-   used to cover the header, which hid the very control that closes it. */
+   used to cover the header, which hid the very control that closes it.
+   Padding is deliberately tighter than --gut: the page gutter runs to 64px,
+   which left the logo and the Sign up button marooned in the middle. */
 .bar{
   position:sticky; top:0; z-index:50;
   display:flex; align-items:center; justify-content:space-between; gap:12px;
-  padding:11px var(--gut);
+  padding:10px clamp(12px,2.2vw,26px);
   background:var(--paper); border-bottom:1px solid var(--hair);
 }
-.bar .wordmark{ display:flex; align-items:center; gap:10px; line-height:1; }
+.bar-actions{ display:flex; align-items:center; gap:clamp(6px,1.2vw,16px); }
+.bar .wordmark{ display:flex; align-items:center; gap:clamp(8px,1.1vw,14px); line-height:1; }
 .bar .wordmark:hover{ text-decoration:none; }
-.wordmark-txt{ text-align:center; }
+.wordmark-txt{ text-align:left; }
 .wordmark-type{
   font-family:var(--serif); font-size:clamp(18px,2.3vw,25px);
   color:var(--red); letter-spacing:-.01em;
@@ -90,11 +93,13 @@ a:hover{ text-decoration:underline; }
    crimson line work stays crimson -- no image editing, no transparency needed.
    Hidden below 700px: at that size the detail is illegible anyway and the
    header has the drawer toggle and Sign up button to fit. */
+/* Shown from 460px up now that the menu toggle has moved to the right and the
+   left side is entirely the wordmark's. Below that the bar is too tight. */
 .wordmark .mark{ display:none; }
-@media (min-width:700px){
+@media (min-width:460px){
   .wordmark .mark{
-    display:block; height:38px; width:38px; flex:none;
-    mix-blend-mode:multiply;
+    display:block; height:clamp(40px,3.4vw,50px); width:clamp(40px,3.4vw,50px);
+    flex:none; mix-blend-mode:multiply;
   }
 }
 
@@ -145,43 +150,49 @@ a:hover{ text-decoration:underline; }
 :root{ --bar-h:74px; }
 @media (min-width:1200px){ :root{ --bar-h:80px; } }
 
+/* Opens from the RIGHT, matching the side its toggle now sits on -- a panel
+   flying in from the opposite edge to the button reads as disconnected. */
+/* Ink, not crimson. Both page heroes are crimson fields, so a crimson drawer
+   opening over one merged into a single red area -- it read as a stripe rather
+   than a panel. Ink separates cleanly from the paper AND the crimson, and the
+   crimson edge stripe keeps the brand colour in play. */
 .drawer-panel{
-  position:fixed; top:var(--bar-h); left:0; bottom:0;
+  position:fixed; top:var(--bar-h); right:0; bottom:0;
   width:min(84vw,340px); z-index:40;
-  background:var(--red); color:var(--paper);
+  background:var(--ink); color:var(--paper);
   padding:clamp(22px,4vw,32px) clamp(20px,4vw,34px) clamp(24px,4vw,34px);
   overflow-y:auto; overscroll-behavior:contain;
-  border-right:6px solid var(--ink);
+  border-left:6px solid var(--red);
 }
 .drawer-panel a{ color:var(--paper); }
 .drawer-panel :focus-visible{ outline-color:var(--paper); }
 .drawer-head{
   font-family:var(--display); text-transform:uppercase; letter-spacing:.24em;
-  font-size:13px; color:var(--on-red-muted); margin:0 0 14px;
+  font-size:13px; color:var(--on-ink-muted); margin:0 0 14px;
 }
 .drawer-panel ul{ list-style:none; margin:0; padding:0; }
-.drawer-panel li{ border-top:1px solid rgba(251,250,246,.32); }
+.drawer-panel li{ border-top:1px solid rgba(251,250,246,.22); }
 .drawer-panel li a{
   display:block; padding:11px 0; font-family:var(--display);
   text-transform:uppercase; letter-spacing:.09em;
   font-size:clamp(21px,2.6vw,27px); line-height:1.1;
 }
-.drawer-panel li a:hover{ text-decoration:none; color:var(--on-red-muted); }
-.drawer-panel li.here a{ color:var(--on-red-muted); }
+.drawer-panel li a:hover{ text-decoration:none; color:var(--on-ink-muted); }
+.drawer-panel li.here a{ color:var(--on-ink-muted); }
 .drawer-panel li.here a::after{ content:" \2022"; }
 .drawer-foot{
   margin:22px 0; font-family:var(--text); font-size:16px;
-  border-top:1px solid rgba(251,250,246,.32); padding-top:18px;
+  border-top:1px solid rgba(251,250,246,.22); padding-top:18px;
 }
 .drawer-panel .btn{
-  background:transparent; border-color:var(--paper); color:var(--paper);
+  background:var(--red); border-color:var(--red); color:var(--paper);
 }
-.drawer-panel .btn:hover{ background:var(--paper); color:var(--red); }
+.drawer-panel .btn:hover{ background:var(--paper); border-color:var(--paper); color:var(--red); }
 
 @media (prefers-reduced-motion:no-preference){
   .drawer[open] .drawer-panel{ animation:drawer-in .22s ease both; }
 }
-@keyframes drawer-in{ from{ transform:translateX(-100%); } to{ transform:none; } }
+@keyframes drawer-in{ from{ transform:translateX(100%); } to{ transform:none; } }
 
 .btn{
   display:inline-block; background:var(--red); color:var(--paper);
