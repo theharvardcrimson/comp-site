@@ -20,6 +20,11 @@ contact_email: president@thecrimson.com
 # Where we are.
 address: 14 Plympton St
 
+# The 1873 seal. A filename in images/, or "" to hide it everywhere.
+# images/logo-mark.png is a 480px web version of the supplied artwork -- the
+# original was 22800x22800 and 18MB, which cannot ship.
+logo: logo-mark.png
+
 # The big line in the footer. PLACEHOLDER -- Claude wrote this one, so replace
 # it with your own words whenever you like. Two short lines work best; a long
 # line wraps oddly because it is set large.

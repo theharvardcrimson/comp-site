@@ -49,6 +49,13 @@ exclude:
   - README.md            # setup instructions for maintainers
   - content-questions.md # working checklist, deleted once answered
 
+  # Source artwork. .gitignore keeps these out of git but NOT out of the build
+  # -- Jekyll copies anything it isn't told to skip, so the 18MB original was
+  # being published until this line existed. Web versions live alongside as
+  # images/logo-mark.png.
+  - images/final_logo.jpeg
+  - images/Logo_vector (2).ai
+
 # ==========================================================================
 #  NO CONTENT BELOW THIS LINE, AND NONE ABOVE IT EITHER.
 #

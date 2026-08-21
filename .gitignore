@@ -8,3 +8,9 @@ _site
 # Pre-redesign reference screenshots (~58MB). Local-only, never committed.
 # Regenerate instructions live in CLAUDE.md.
 _baseline
+
+# Source artwork stays out of the repo. The supplied logo was a 22800x22800
+# 18MB JPEG and .ai is an authoring format, not a web one. Keep masters
+# somewhere else; the optimised images/logo-mark.png is what ships.
+*.ai
+final_logo.*

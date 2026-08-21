@@ -72,17 +72,43 @@ a:hover{ text-decoration:underline; }
   padding:11px var(--gut);
   background:var(--paper); border-bottom:1px solid var(--hair);
 }
-.bar .wordmark{ line-height:1; text-align:center; }
+.bar .wordmark{ display:flex; align-items:center; gap:10px; line-height:1; }
 .bar .wordmark:hover{ text-decoration:none; }
+.wordmark-txt{ text-align:center; }
 .wordmark-type{
   font-family:var(--serif); font-size:clamp(18px,2.3vw,25px);
   color:var(--red); letter-spacing:-.01em;
 }
-.wordmark .mark{ height:clamp(24px,3vw,34px); width:auto; margin:0 auto; }
 .wordmark-sub{
   display:block; font-family:var(--display); font-size:clamp(10px,1vw,12px);
   color:var(--grey); text-transform:uppercase; letter-spacing:.26em;
   margin-top:4px;
+}
+
+/* The seal is a JPEG with no alpha, so its white square would sit visibly on
+   the off-white paper. `multiply` makes white blend away to nothing while the
+   crimson line work stays crimson -- no image editing, no transparency needed.
+   Hidden below 700px: at that size the detail is illegible anyway and the
+   header has the drawer toggle and Sign up button to fit. */
+.wordmark .mark{ display:none; }
+@media (min-width:700px){
+  .wordmark .mark{
+    display:block; height:38px; width:38px; flex:none;
+    mix-blend-mode:multiply;
+  }
+}
+
+/* Closing mark on the paper, before the dark footer. `multiply` is the only
+   blend that works for a white-backed JPEG: white multiplies to the background
+   and disappears, crimson stays crimson. */
+.colophon{
+  border-top:1px solid var(--hair);
+  padding:clamp(34px,5vw,64px) var(--gut);
+  display:flex; justify-content:center;
+}
+.colophon .seal{
+  width:clamp(104px,12vw,150px); height:auto;
+  mix-blend-mode:multiply;
 }
 
 /* ---------- board drawer ----------

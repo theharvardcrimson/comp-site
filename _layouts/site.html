@@ -14,17 +14,21 @@
   <header class="bar">
     {% include drawer.html %}
 
+    {% comment %}
+      The seal sits BESIDE the type wordmark rather than replacing it. Rendered
+      at header size the 1873 seal's line work averages into the white
+      background and it reads as a pink smudge, so the words are set in type
+      and the seal is decorative. alt="" + aria-hidden because the adjacent
+      text already says "The Harvard Crimson" -- no point announcing it twice.
+    {% endcomment %}
     <a class="wordmark" href="/">
-      {% comment %}
-        Drop the real logo in as images/logo-mark.svg and this swaps to it.
-        Until then the wordmark is set in type.
-      {% endcomment %}
       {% if site.data.semester.logo and site.data.semester.logo != '' %}
-        <img class="mark" src="/images/{{ site.data.semester.logo }}" alt="The Harvard Crimson">
-      {% else %}
-        <span class="wordmark-type">The Harvard Crimson</span>
+        <img class="mark" src="/images/{{ site.data.semester.logo }}" alt="" aria-hidden="true">
       {% endif %}
-      <span class="wordmark-sub">{{ site.data.semester.season }} Comp {{ site.data.semester.year }}</span>
+      <span class="wordmark-txt">
+        <span class="wordmark-type">The Harvard Crimson</span>
+        <span class="wordmark-sub">{{ site.data.semester.season }} Comp {{ site.data.semester.year }}</span>
+      </span>
     </a>
 
     <a class="btn" href="{{ site.data.semester.signup_url }}">Sign up</a>
@@ -33,6 +37,21 @@
   <main id="main">
     {{ content }}
   </main>
+
+  {% comment %}
+    The seal, at a size where its line work actually reads -- 1873, the shield,
+    the lettering. It sits on the paper rather than in the dark footer for a
+    hard technical reason: the artwork is a JPEG with no alpha channel, so it
+    only works over a light background, where `multiply` blends the white away
+    to nothing. On the near-black footer, `multiply` would erase the crimson
+    too and `screen` renders the white as a bright box. A transparent SVG or
+    PNG would remove that constraint.
+  {% endcomment %}
+  {% if site.data.semester.logo and site.data.semester.logo != '' %}
+    <div class="colophon">
+      <img class="seal" src="/images/{{ site.data.semester.logo }}" alt="" aria-hidden="true">
+    </div>
+  {% endif %}
 
   {% comment %}
     The footer deliberately does NOT list the ten boards. They already appear
