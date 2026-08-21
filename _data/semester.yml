@@ -1,0 +1,41 @@
+# ==========================================================
+#  SEMESTER SETTINGS
+#  Update this file at the start of every comp cycle.
+#  After saving, RESTART the dev server -- livereload does
+#  not pick up changes to _data files.
+# ==========================================================
+
+# Shows as "Fall Comp 2026" in the header and page titles.
+season: Fall
+year: 2026
+
+# The "Sign up" button, used everywhere on the site.
+signup_url: https://docs.google.com/forms/d/e/1FAIpQLScnz4wmdtXud61rA9Zlm6n5JMqopGssM4RDw2PDQoXOsNWyXg/viewform
+
+# Who to email with questions. Shown in the footer and on every board page.
+contact_name: E. Matteo Diaz
+contact_title: Crimson President
+contact_email: president@thecrimson.com
+
+# Where we are.
+address: 14 Plympton St
+
+
+# ---- The three numbers in the stat strip. ----
+# Set any value to "" to hide that stat.
+
+stat_1_number: 153
+stat_1_label: years in print
+
+stat_2_number: 21M
+stat_2_label: readers a year
+
+stat_3_number: 10
+stat_3_label: boards to join
+
+
+# ---- One-line note above the board list. ----
+# Set to "" to hide it entirely.
+# Currently used for the shared reporting comp, which is the thing most
+# likely to stop someone worrying they have to pick correctly up front.
+before_you_choose: News, Magazine, Sports and Arts comp together for the first three weeks before splitting off. You don't have to decide yet.

@@ -1,0 +1,67 @@
+# ==========================================================
+#  COMP DIRECTORS -- every board, every semester
+#
+#  Add or remove a person by adding or deleting a "- name:" block.
+#  A board can have one director or three; the page adapts.
+#  Keys match the filenames in _boards/ (arts.md -> arts).
+# ==========================================================
+
+arts:
+  - name: Laura B. Martens
+    email: laura.martens@thecrimson.com
+  - name: Caroline J. Rubin
+    email: caroline.rubin@thecrimson.com
+
+blog:
+  - name: Cristian D. Dominguez
+    email: cristian.dominguez@thecrimson.com
+  - name: Grace E. St Laurent
+    email: grace.st.laurent@thecrimson.com
+
+business:
+  # NOTE: name/email mismatch carried over from _config.yml -- "Arman Lateef"
+  # with hamza.lateef@. Flagged in content-questions.md, awaiting confirmation.
+  - name: McKinley Paltzik
+    email: mckinley.paltzik@thecrimson.com
+  - name: Arman Lateef
+    email: hamza.lateef@thecrimson.com
+
+design:
+  - name: Analy Vega
+    email: analy.vega@thecrimson.com
+  - name: Shamus Mellarkey
+    email: shamusmellarkey@thecrimson.com
+
+editorial:
+  - name: Victoria L. Dolan
+    email: victoria.dolan@thecrimson.com
+  - name: Salma O. Siddiqui
+    email: salma.siddiqui@thecrimson.com
+
+magazine:
+  - name: Claire Jiang
+    email: claire.jiang@thecrimson.com
+  - name: Megha Khemka
+    email: megha.khemka@thecrimson.com
+
+multimedia:
+  - name: Lotem L. Loeb
+    email: lotem.loeb@thecrimson.com
+
+news:
+  - name: William C. Mao
+    email: william.mao@thecrimson.com
+  - name: Avani B. Rai
+    email: avani.rai@thecrimson.com
+
+sports:
+  - name: Bennett Trubey
+    email: bennett.trubey@thecrimson.com
+  - name: Connor Castañeda
+    email: connor.castaneda@thecrimson.com
+
+tech:
+  - name: Sidhi Dhanda
+    email: sidhi.dhanda@thecrimson.com
+  - name: Vivian W. Hui
+    email: vivian.hui@thecrimson.com
