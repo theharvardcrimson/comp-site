@@ -65,6 +65,15 @@ the redesign must **communicate what matters** rather than paste in every
 paragraph. Expect heavy copy cuts. Prefer boring, durable implementation
 underneath a distinctive surface.
 
+### Brand tokens (confirmed by owner)
+
+- **Crimson red: `#a82931`.** The official value. Supersedes the legacy
+  `#ba0600` in `css/style.css`. Measured 6.94:1 on white — AA for body text,
+  AAA at display sizes. White on it is the same ratio, so it is safe for
+  filled buttons.
+- Secondary grey must be `#6b6b6b` or darker to stay AA on white
+  (`#b3b3b3` measures 2.10:1 and fails). Verify any new grey before using it.
+
 Editing copy must be trivially easy: open a plain content file, find the
 paragraph in readable English, type over it. **No CMS, no admin UI, no
 click-to-edit.** Flat over nested, keys in plain English, zero HTML in content
