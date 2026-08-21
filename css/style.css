@@ -288,3 +288,33 @@ img.external {
 		float: none;
 	}
 }
+
+/*
+Responsive media
+The YouTube embeds on the About Us and Editorial pages carry a hardcoded
+width="560", which overflowed every viewport narrower than ~570px. Constrain
+the width and let aspect-ratio derive the height so the video is not letterboxed.
+*/
+iframe {
+	max-width: 100%;
+	height: auto;
+	aspect-ratio: 16 / 9;
+}
+
+/*
+Mobile refinements
+Deliberately at the end of the file: the max-width:900px block above also
+targets .overlay, and at equal specificity the later rule wins.
+*/
+@media (max-width: 480px) {
+	.overlay {
+		/* The fixed masthead measures ~126px tall, so 200px left a dead gap. */
+		margin-top: 140px;
+		/* 1.5em resolved to 21.6px, which fit ~27 characters per line. */
+		font-size: 1.15em;
+	}
+	.text {
+		/* 40px left only ~291px of usable text width at 390px. */
+		padding: 20px;
+	}
+}
