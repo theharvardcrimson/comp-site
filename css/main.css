@@ -208,6 +208,24 @@ a:hover{ text-decoration:underline; }
 .field{ background:var(--red); color:var(--paper); padding:clamp(52px,11vw,132px) var(--gut) clamp(46px,9vw,108px); }
 .field a{ color:var(--paper); }
 
+/* Optional photograph behind the hero, under a crimson scrim.
+   The 88% is not arbitrary. Composited over the worst possible photograph --
+   pure white -- an 88% scrim resolves to rgb(178,67,74), and --paper text on
+   that measures 5.30:1, comfortably past the 4.5:1 AA threshold. At 80% it
+   drops to 4.49:1 and fails. So the headline stays legible no matter how
+   bright an image someone drops in, which means the design cannot be broken
+   by a bad photo choice.
+   background-attachment stays default (scroll): `fixed` is janky on iOS and
+   was part of what made the old site feel dated. */
+.field.has-photo{
+  background-image:
+    linear-gradient(rgba(168,41,49,.88), rgba(168,41,49,.88)),
+    var(--hero-img);
+  background-size:cover, cover;
+  background-position:center, 50% 42%;
+  background-repeat:no-repeat, no-repeat;
+}
+
 .eyebrow{
   font-family:var(--display); text-transform:uppercase;
   font-size:clamp(15px,1.7vw,21px); letter-spacing:.3em;

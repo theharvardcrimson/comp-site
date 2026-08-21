@@ -20,6 +20,12 @@ contact_email: president@thecrimson.com
 # Where we are.
 address: 14 Plympton St
 
+# Photo behind the homepage hero. A filename in images/, or "" for plain
+# crimson. A crimson scrim sits over it at 88% so the headline stays legible
+# no matter how bright the photograph is -- see the note in css/main.css.
+# Currently a placeholder: the building exterior already in the repo.
+hero_photo: crimson.jpg
+
 # The 1873 seal. A filename in images/, or "" to hide it everywhere.
 # images/logo-mark.png is a 480px web version of the supplied artwork -- the
 # original was 22800x22800 and 18MB, which cannot ship.
