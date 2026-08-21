@@ -1,5 +1,29 @@
 permalink: pretty
 
+# Use kramdown's own parser, not GitHub-Flavored Markdown.
+#
+# Two reasons, both deliberate:
+#  1. GFM needs the kramdown-parser-gfm gem. Plain kramdown ships with Jekyll,
+#     so this keeps the dependency count at zero.
+#  2. GFM turns a single newline into a <br>. That means hard-wrapping a
+#     paragraph in your editor would silently inject line breaks into the page.
+#     Plain kramdown treats a wrapped paragraph as one paragraph, so content
+#     files can be wrapped for readability without changing the output.
+markdown: kramdown
+kramdown:
+  input: kramdown
+
+# The ten board pages. One file per board in _boards/, rendered by
+# _layouts/board.html, so all ten stay structurally identical.
+#
+# The /preview/ prefix is TEMPORARY: the old root-level arts.html etc. still
+# claim /arts/, and two things cannot own the same URL. At cutover this becomes
+# /:name/ and the old .html files are deleted in the same commit.
+collections:
+  boards:
+    output: true
+    permalink: /preview/:name/
+
 # Files kept out of the built site. Jekyll's own defaults (Gemfile, vendor/,
 # node_modules) are repeated here on purpose: setting `exclude` REPLACES the
 # default list rather than adding to it, so omitting them would start
