@@ -10,6 +10,41 @@ means "hide it," never "show an empty space."
 
 ---
 
+## 0. Board groupings and the shared reporting comp
+
+The hub groups the ten boards by type rather than listing them A–Z. Working
+structure, from Matteo:
+
+| Group | Boards | Notes |
+|---|---|---|
+| Reporting | News, Magazine, Sports, Arts | **Shared comp: all four meet together for the first three weeks, then split off.** |
+| Opinion / Blog | Editorial, Blog | Written but not reporting. Group name still undecided. |
+| Visual + technical | Multimedia, Tech, Design | "Functional" boards — they make the paper rather than write it. |
+| Business | Business | Its own category; revenue side, not editorial. |
+
+**The shared three-week reporting comp is the most important undocumented fact
+on the site.** It means someone interested in reporting does not have to choose
+between four boards up front — which is exactly the fear that stops people from
+starting. It currently appears on zero pages.
+
+Questions on it:
+
+- **How does it actually work?** Three weeks of shared sessions, then you pick a
+  board? Or do you declare a board first and just train together?
+- **Can you switch after the split?** If someone starts toward News and lands on
+  Sports, is that fine?
+- **Do the four boards' requirements overlap during those three weeks**, or does
+  each still expect its own pieces from week one?
+- **Same meeting time and place for all four?**
+- **Do any of the other groups share a process** the way reporting does? Do
+  Multimedia / Tech / Design overlap at all, or are they fully separate comps?
+
+**Group names are yours to set.** "Reporting", "Visual + technical", and
+"Business" are placeholders that read fine. The Editorial + Blog pair is the
+awkward one — they are genuinely different from each other, and "Opinion / Blog"
+is descriptive but limp. Options: name it plainly, or drop the group and let
+those two stand alone between the others.
+
 ## 1. Per board
 
 `hours_per_week` is the single highest-value missing fact on the whole site.
