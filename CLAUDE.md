@@ -1,8 +1,8 @@
 # comp.thecrimson.com
 
 Jekyll static site for The Harvard Crimson's semesterly comp (recruitment).
-11 pages: About Us (`index.html`) + 10 board pages. Live production site for a
-student newspaper. Deployed via **classic GitHub Pages from `master`**.
+11 pages: a homepage plus 10 board pages. Live production site for a student
+newspaper. Deployed via **classic GitHub Pages from `master`**.
 
 ## Commands
 
@@ -11,9 +11,11 @@ bundle exec jekyll serve --livereload   # dev server -> http://localhost:4000
 bundle exec jekyll build                # build into _site/
 ```
 
-Ruby 3.3.6 via rbenv; Jekyll 3.10.0. Anaconda may prefix the shell with
-`(base)` — if Ruby tooling misbehaves, suspect PATH ordering first.
-**Editing `_config.yml` requires a server restart** — livereload won't pick it up.
+Ruby 3.3.6 via rbenv (see `.ruby-version`); Jekyll 3.10.0. **rbenv shims must
+be ahead of system Ruby (2.6) on PATH** — Anaconda's `(base)` prefix can shadow
+them, and you'll get a bundler error that looks like a missing gem.
+**Editing `_config.yml` or `_data/` requires a server restart** — livereload
+won't pick those up.
 
 ## THE BRANCH RULE — ABSOLUTE
 
@@ -25,97 +27,86 @@ All work happens on **`redesign`**.
   localhost:4000 is the only preview that exists.**
 - Merging to `master` is the owner's decision alone. Never initiate it.
 
-## Layout of the repo
+## Where things live
+
+Content is separated from templates on purpose. Never put prose in a template,
+never put HTML or Liquid in a content file.
 
 | Path | What it is |
 |---|---|
-| `_config.yml` | Semester data: season/year, nav, stats, signup link, all board directors' names + emails. |
-| `_layouts/base.html` | Wrapper for the 10 board pages. |
-| `_layouts/index_base.html` | `index.html` only. Duplicates `base.html` + adds splash screen. |
-| `_includes/navbar.html` | Nav, built from `site.nav`, re-sorted alphabetically in Liquid. |
-| `_includes/comp_director.html` | Renders "Name (mailto link)". |
-| `*.html` (root) | The 11 content pages. Prose is currently tangled into markup. |
-| `css/`, `js/`, `fonts/`, `images/` | Assets. See "Known cruft". |
+| `index.md` | Homepage. Front matter for the headline; body is the intro prose. |
+| `_boards/*.md` | **One file per board.** Front matter (`hook`, `photo`, `requirements`, `showcase`) + prose body. |
+| `_sections/*.md` | Homepage prose blocks, ordered by `order`. `output: false`, so no URLs. |
+| `_data/semester.yml` | Season, year, signup link, contact, stats, tagline, events, hero photo, logo. Edited every cycle. |
+| `_data/directors.yml` | All 19 directors, a plain list per board. Edited every cycle. |
+| `_data/faq.yml` | Q&A pairs. **Only entries with a non-empty answer render.** |
+| `_layouts/site.html` | The one shell: head, header, colophon, footer. |
+| `_layouts/home.html` | Homepage. `_layouts/board.html` renders all ten boards. |
+| `_includes/board-list.html` | The ten typographic bands. `_includes/drawer.html` is the nav panel. |
+| `css/main.css` | Everything. Design tokens at the top. |
+| `_config.yml` | **Configuration only, no content.** Collections, kramdown, exclude list. |
 | `CNAME` | **Never modify or delete.** Custom domain binding. |
-| `_baseline/` | Pre-redesign screenshots, gitignored. Not deployed (Jekyll skips `_`-dirs). |
+| `_mockups/`, `_baseline/` | Design references. Underscore-prefixed, so never published. |
 
-**Content vs. templates:** structured data (names, emails, dates, stats, links)
-belongs in `_config.yml` / `_data/`. Prose belongs in content files. Templates
-render; they do not hold copy. Keep these jobs strictly separate — never edit
-content during design work, never edit templates during content work.
+Blank means hidden, never "empty slot": no `photo` renders no figure, no
+`hero_photo` leaves the hero flat crimson, an empty `faq.yml` removes the whole
+FAQ section. Optional fields are omitted rather than left as stubs.
 
 ## Constraints — do not violate
 
-- **Stack:** Jekyll. Do **not** propose Astro/Next/11ty/Hugo. Do **not** add a JS
-  framework. Do **not** add a Node build step without explicit owner approval.
-- **Dependencies:** a new volunteer student board with mixed skills inherits this
-  every year. Every dependency is a tax on them. Justify each one, or omit it.
+- **Stack:** Jekyll. Do **not** propose Astro/Next/11ty/Hugo. Do **not** add a
+  JS framework or a Node build step.
+- **The site ships ZERO JavaScript.** jQuery is gone and nothing replaced it.
+  The nav drawer is a native `<details>`; motion is CSS scroll-driven
+  animation. Keep it that way unless there is no alternative.
+- **No new dependencies.** kramdown uses its own parser, not GFM, specifically
+  to avoid the `kramdown-parser-gfm` gem — and because GFM turns a single
+  newline into a `<br>`, which would inject line breaks when someone
+  hard-wraps a paragraph. Image work uses `sips`, which ships with macOS.
 - **Accessibility:** WCAG 2.2 AA. Non-negotiable — university-affiliated org.
 - **Mobile:** mobile-first, genuinely. Most traffic and nearly all signups are
   phones.
-- **Security:** repo is public. No secrets, tokens, or keys in the tree, ever.
-- **Scope:** ship good over perfect. Say so explicitly when a request does not
-  fit the time available.
-
-## Design intent
-
-Modern and distinctive — **not** templated, **not** generic AI-startup aesthetic.
-The owner's words: "sleek, sexy, cool." The current site is far too text-heavy;
-the redesign must **communicate what matters** rather than paste in every
-paragraph. Expect heavy copy cuts. Prefer boring, durable implementation
-underneath a distinctive surface.
-
-### Brand tokens (confirmed by owner)
-
-- **Crimson red: `#a82931`.** The official value. Supersedes the legacy
-  `#ba0600` in `css/style.css`. Measured 6.94:1 on white — AA for body text,
-  AAA at display sizes. White on it is the same ratio, so it is safe for
-  filled buttons.
-- Secondary grey must be `#6b6b6b` or darker to stay AA on white
-  (`#b3b3b3` measures 2.10:1 and fails). Verify any new grey before using it.
-
-Editing copy must be trivially easy: open a plain content file, find the
-paragraph in readable English, type over it. **No CMS, no admin UI, no
-click-to-edit.** Flat over nested, keys in plain English, zero HTML in content
-files. If the owner has to think about where a string lives, the design failed.
+- **Security:** repo is public. No secrets, tokens, or keys, ever.
 
 ## THE COPY RULE
 
 **The owner and the boards write all prose. You do not.**
 
 This is a student newspaper; the copy is the boards' own voice. Do not draft,
-rewrite, tighten, or "improve" prose unless explicitly asked for that specific
-passage.
+rewrite, tighten, or "improve" prose unless asked for that specific passage.
 
-Permitted, because it moves text rather than authoring it: migrating existing
-copy between files or formats verbatim, converting HTML entities to real
-characters, and reporting word counts or flagging stale facts. When a new field
-has no existing copy to migrate, leave it empty and say so — never fill it with
-invented text.
+Permitted, because it moves text rather than authoring it: migrating copy
+between files verbatim, converting HTML entities to real characters, and
+reporting word counts or flagging stale facts. When a new field has no existing
+copy, leave it empty and say so — never fill it with invented text. If you
+catch yourself having written a headline, move it into a data field and flag it.
 
-## Known cruft (audited, not yet fixed)
+## Design tokens (owner-confirmed)
 
-- **No `<meta name="viewport">` anywhere.** Phones render a 980px desktop layout
-  scaled down; the `max-width:480px` CSS never fires on real devices. Biggest
-  single mobile defect. Adding it will reflow everything — expect that.
-- `_config.yml` holds **Spring 2026** data; a Jan. 31 2026 kickoff date is
-  hardcoded in `index.html` prose.
-- `blog.html` prose names last semester's directors ("We (Wyatt + Ava)").
-- Business `dir2`: name `Arman Lateef` vs. email `hamza.lateef@` — mismatch.
-- 16 of 19 font families in `fonts/` are never loaded. `Lato` is referenced in
-  CSS but never loaded. `Big Caslon` is macOS-only with no fallback.
-- `images/crimson-large.jpg` + `images/harvard.jpg` unreferenced (~1MB).
-  `logo.png` is 714KB serving as a favicon.
-- Google Analytics uses the deprecated `_gaq`/`ga.js` snippet (sunset by Google);
-  duplicated in both layouts. Almost certainly collecting nothing.
-- jQuery 3.3.1 from Google CDN powers only the mobile nav toggle and splash.
+- **Crimson `#a82931`.** 6.64:1 on the `#fbfaf6` paper — AA.
+- **Body ink `#15130f`** (17.76:1), **grey `#615c54`** (6.35:1).
+- Muted text on colour uses solid tokens, **never `opacity`** — opacity
+  multiplies against the background so the real ratio can't be verified.
+- **The hero scrim is 88% and that number is derived.** Over a pure-white
+  photo it resolves to 5.30:1 for paper text; at 80% it fails at 4.49:1.
+- Fonts are the repo's own: League Gothic (display), Crimson (wordmark),
+  Vollkorn (body), behind CSS custom properties so they swap in one line.
+
+**Measure every colour before shipping it.** Three greys failed AA during this
+redesign and each one looked fine by eye.
 
 ## Never do this
 
 - Commit or push to `master`. Force-push anything.
 - Touch `CNAME`.
-- Add a JS framework, a CSS framework, or a Node build step unasked.
+- Add a JS framework, a CSS framework, a Node build step, or any gem, unasked.
 - Put prose in templates, or HTML in content files.
-- Commit `_site/` or `_baseline/`.
+- Run `git add -A` without checking what's new. That committed a 1.4MB `.ai`
+  file, which is now stuck in history.
+- Assume `.gitignore` keeps a file out of the build. **It does not** — Jekyll
+  copies anything not in `_config.yml`'s `exclude`. An 18MB JPEG was being
+  published until that was caught.
+- Ship an `opacity: 0` starting frame on a scroll animation. Content that never
+  enters its animation range stays invisible; animate transform only.
 - Guess when uncertain — ask instead.
 - Claim something renders correctly without having actually looked at it.
