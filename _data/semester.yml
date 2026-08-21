@@ -29,12 +29,26 @@ footer_line: Ten boards. One newsroom.
 paper_url: https://www.thecrimson.com
 
 
-# ---- Kickoff event. ----
-# Leave kickoff_date as "" and the whole block disappears from the page.
-# Shopping week is not running this Fall, so nothing here is confirmed yet.
-kickoff_date: ""
-kickoff_time: ""
-kickoff_location: 14 Plympton St
+# ---- Comp events ----
+# Shown as a compact list just above the ten boards.
+#
+# Only `name` is required. Fill in `when` and `where` as they get confirmed --
+# an event with no date still tells someone it is happening. Delete an entry to
+# remove it; empty the whole list and the section disappears from the page.
+#
+#   when:  free text, e.g. "Sat. Sept. 6, 4-6 p.m."
+#   where: free text, e.g. "14 Plympton St"
+
+events:
+  - name: Harvard College Club Fair
+    when: ""
+    where: ""
+  - name: Comp Open House / Kickoff
+    when: ""
+    where: ""
+  - name: Comp Mixer
+    when: ""
+    where: ""
 
 
 # ---- The three numbers in the stat strip. ----

@@ -24,20 +24,32 @@ layout: site
 </div>
 {% endif %}
 
+{% comment %} The single intro blurb -- the body of index.md. {% endcomment %}
 {% if content != '' %}
 <div class="prose reveal">{{ content }}</div>
 {% endif %}
 
 {% comment %}
-  Kickoff block. Driven entirely by _data/semester.yml -- a blank kickoff_date
-  hides it, so the page never promises an event that isn't happening.
+  Comp events, deliberately compact and above the boards: they are the only
+  time-sensitive thing on the page, so a returning visitor finds them fast
+  without the boards being pushed far down. An event with no date still
+  renders -- knowing it exists is useful before the date is set.
 {% endcomment %}
-{% if site.data.semester.kickoff_date != '' %}
-<p class="note">
-  <span class="eyebrow">Come see for yourself</span>
-  {{ site.data.semester.kickoff_date }}{% if site.data.semester.kickoff_time != '' %}, {{ site.data.semester.kickoff_time }}{% endif %}
-  &middot; {{ site.data.semester.kickoff_location }}
-</p>
+{% if site.data.semester.events and site.data.semester.events.size > 0 %}
+<section class="events reveal">
+  <p class="eyebrow">Join us at</p>
+  <ul>
+    {% for e in site.data.semester.events %}
+      <li>
+        <span class="ev-name">{{ e.name }}</span>
+        <span class="ev-when">
+          {% if e.when and e.when != '' %}{{ e.when }}{% else %}Date to come{% endif %}
+          {% if e.where and e.where != '' %} &middot; {{ e.where }}{% endif %}
+        </span>
+      </li>
+    {% endfor %}
+  </ul>
+</section>
 {% endif %}
 
 <div class="head">
@@ -53,3 +65,30 @@ layout: site
 {% endif %}
 
 {% include board-list.html %}
+
+{% comment %} Prose sections from _sections/, in `order`. {% endcomment %}
+{% assign blocks = site.sections | sort: 'order' %}
+{% for s in blocks %}
+  <div class="panel reveal">
+    <h2>{{ s.title }}</h2>
+    {% if s.standfirst and s.standfirst != '' %}<p class="lede-dark">{{ s.standfirst }}</p>{% endif %}
+    <div class="prose-inline">{{ s.content }}</div>
+  </div>
+{% endfor %}
+
+{% comment %}
+  FAQ. Only entries with BOTH a question and an answer render, so the list can
+  be filled in one at a time without half-finished questions appearing.
+{% endcomment %}
+{% assign answered = site.data.faq | where_exp: "f", "f.answer != ''" %}
+{% if answered.size > 0 %}
+<div class="panel reveal faq">
+  <h2>Questions, answered</h2>
+  <dl>
+    {% for f in answered %}
+      <dt>{{ f.question }}</dt>
+      <dd>{{ f.answer }}</dd>
+    {% endfor %}
+  </dl>
+</div>
+{% endif %}

@@ -257,6 +257,43 @@ a:hover{ text-decoration:underline; }
 }
 .note .eyebrow{ display:block; color:var(--red); margin-bottom:12px; }
 
+/* ---------- comp events: compact, three lines ---------- */
+.events{ padding:clamp(28px,4vw,52px) var(--gut); border-top:1px solid var(--hair); }
+.events .eyebrow{ display:block; color:var(--red); margin-bottom:14px; }
+.events ul{ list-style:none; margin:0; padding:0; }
+.events li{
+  display:flex; flex-wrap:wrap; gap:4px 18px; align-items:baseline;
+  padding:11px 0; border-top:1px solid var(--hair);
+}
+.events li:first-child{ border-top:none; }
+.ev-name{
+  font-family:var(--display); text-transform:uppercase;
+  font-size:clamp(22px,3vw,38px); line-height:1.05; letter-spacing:.02em;
+}
+.ev-when{
+  font-family:var(--display); text-transform:uppercase; letter-spacing:.16em;
+  font-size:clamp(13px,1.2vw,15px); color:var(--grey);
+}
+
+/* ---------- homepage prose sections + FAQ ---------- */
+.prose-inline{ max-width:64ch; }
+.prose-inline p{ margin:0 0 1.1em; }
+.prose-inline > *:last-child{ margin-bottom:0; }
+.lede-dark{
+  font-family:var(--text); font-style:italic; color:var(--grey);
+  font-size:clamp(17px,1.8vw,21px); max-width:52ch; margin:-6px 0 18px;
+}
+
+.faq dl{ margin:0; max-width:70ch; }
+.faq dt{
+  font-family:var(--display); text-transform:uppercase;
+  font-size:clamp(18px,2.1vw,26px); letter-spacing:.05em; line-height:1.15;
+  color:var(--red); margin:0 0 8px; padding-top:16px;
+  border-top:1px solid var(--hair);
+}
+.faq dl > dt:first-child{ border-top:none; padding-top:0; }
+.faq dd{ margin:0 0 22px; font-family:var(--text); line-height:1.6; }
+
 /* ---------- board page ---------- */
 .board-hero .poster{ font-size:clamp(56px,15vw,208px); }
 .board-hero .lede{ max-width:40ch; font-style:normal; }

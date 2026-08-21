@@ -20,6 +20,12 @@ collections:
     output: true
     permalink: /:name/
 
+  # Prose blocks rendered into the homepage, one file per section, ordered by
+  # the `order` field. output:false because these are not pages of their own --
+  # they have no URL and exist only as blocks on the homepage.
+  sections:
+    output: false
+
 # Every file in _boards/ uses the same layout, so no board page can drift
 # structurally from the others. That drift is why the old ten pages ranged
 # from 1435 to 2729px tall with no shared shape.

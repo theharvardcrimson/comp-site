@@ -9,7 +9,16 @@ poster_line_2: Crimson
 
 # One sentence under the headline. This one is lifted verbatim from the
 # current About Us page.
+#
+# NOTE: the version you sent read "...and Harvard College's premier student
+# organization at Harvard College", which says Harvard College twice. Left as
+# the original wording rather than rewritten; change it however you like.
 lede: The nation's oldest continuously published daily newspaper, and the premier student organization at Harvard College.
+
+# The prose below the --- is the old About Us copy, carried over verbatim. It
+# is longer than the single intro blurb this page now calls for, and trimming
+# it is yours to do: open this file and type over the paragraphs. The alumni
+# paragraph is the biggest block and the one you said to leave out for now.
 ---
 
 Welcome to the {{ site.data.semester.season }} {{ site.data.semester.year }} comp
@@ -44,17 +53,3 @@ to hundreds of Crimson staffers. Its lasting friendships and vibrant community.
 
 Come see for yourself! Stop by 14 Plympton Street for a tour of The Crimson's
 historic building and to learn more about our 10 comps.
-
-## Financial aid
-
-Worried that you won't be able to spend time on The Crimson because you think
-you'll need a paying job? We can help. The Crimson's Financial Aid Program offers
-limited but substantial compensation to staff members with demonstrated financial
-need. It's meant to ensure that students who would otherwise need a term-time job
-can be Crimson editors, and it's part of our efforts to make sure that all Harvard
-students have the opportunity to enjoy and learn from the experience of working
-here, regardless of their socioeconomic background.
-
-Any questions? Want more information? Don't hesitate to contact Crimson President
-{{ site.data.semester.contact_name }} ([{{ site.data.semester.contact_email }}](mailto:{{ site.data.semester.contact_email }}))
-with any and all questions about the program.
