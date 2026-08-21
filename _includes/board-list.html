@@ -1,0 +1,27 @@
+{% comment %}
+  The ten boards, alphabetical. Each row is one link -- the whole band is the
+  target, so no chevrons or "read more" needed.
+
+  Sorted by 'name', NOT by an 'order' field. Jekyll's sort filter silently
+  yields an empty list when the property is missing from every document, which
+  is exactly what happened: the whole board list vanished from the page while
+  the footer list (sorted by name) rendered fine. If a deliberate running order
+  is ever wanted, add `order:` to all ten files -- all ten, or this breaks again.
+
+  Hours and the hover colour-flip are decoration: every row states its board
+  and description in text, so nothing depends on hover or on hours being set.
+{% endcomment %}
+<div class="boards">
+  {% assign boards = site.boards | sort: 'name' %}
+  {% for b in boards %}
+    <a class="board" href="{{ b.url }}">
+      <span class="board-name">{{ b.display_name | default: b.name }}</span>
+      <span>
+        <span class="board-desc">{{ b.hook }}</span>
+        {% if b.hours and b.hours != '' %}
+          <span class="board-meta">{{ b.hours }} hrs / week</span>
+        {% endif %}
+      </span>
+    </a>
+  {% endfor %}
+</div>

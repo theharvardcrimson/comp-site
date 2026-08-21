@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% if page.title %}{{ page.title }} | {% endif %}{{ site.data.semester.season }} Comp {{ site.data.semester.year }} | The Harvard Crimson</title>
+  <meta name="description" content="{{ page.hook | default: 'Comp The Harvard Crimson. Ten boards, no experience necessary.' | strip_html }}">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="icon" href="/images/logo.png">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="bar">
+    <a class="wordmark" href="/">The Harvard Crimson<span>{{ site.data.semester.season }} Comp {{ site.data.semester.year }}</span></a>
+    <a class="btn" href="{{ site.data.semester.signup_url }}">Sign up</a>
+  </header>
+
+  <main id="main">
+    {{ content }}
+  </main>
+
+  <footer class="foot">
+    <h2>Ten boards.<br>Pick one, or don't.</h2>
+    <a class="btn btn-ghost" href="{{ site.data.semester.signup_url }}">Sign up</a>
+
+    <ul class="foot-boards">
+      {% assign all = site.boards | sort: 'name' %}
+      {% for b in all %}
+        <li><a href="{{ b.url }}">{{ b.display_name | default: b.name }}</a></li>
+      {% endfor %}
+    </ul>
+
+    <small>
+      {{ site.data.semester.address }} &middot;
+      <a href="mailto:{{ site.data.semester.contact_email }}">{{ site.data.semester.contact_email }}</a><br>
+      Questions about comp or financial aid? Write to {{ site.data.semester.contact_title }}
+      {{ site.data.semester.contact_name }}.
+    </small>
+  </footer>
+</body>
+</html>

@@ -21,6 +21,14 @@ contact_email: president@thecrimson.com
 address: 14 Plympton St
 
 
+# ---- Kickoff event. ----
+# Leave kickoff_date as "" and the whole block disappears from the page.
+# Shopping week is not running this Fall, so nothing here is confirmed yet.
+kickoff_date: ""
+kickoff_time: ""
+kickoff_location: 14 Plympton St
+
+
 # ---- The three numbers in the stat strip. ----
 # Set any value to "" to hide that stat.
 

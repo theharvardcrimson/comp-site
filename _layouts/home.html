@@ -1,0 +1,55 @@
+---
+layout: site
+---
+<section class="field">
+  <p class="eyebrow">{{ site.data.semester.season }} {{ site.data.semester.year }} &middot; Sign-ups open</p>
+  <h1 class="poster">{{ page.poster_line_1 }}<br>{{ page.poster_line_2 }}</h1>
+  {% if page.lede and page.lede != '' %}<p class="lede">{{ page.lede }}</p>{% endif %}
+  <p class="actions on-red">
+    <a class="btn btn-ghost" href="{{ site.data.semester.signup_url }}">Sign up</a>
+  </p>
+</section>
+
+{% if site.data.semester.stat_1_number != '' %}
+<div class="stats">
+  {% if site.data.semester.stat_1_number != '' %}
+    <div class="reveal"><b>{{ site.data.semester.stat_1_number }}</b><span>{{ site.data.semester.stat_1_label }}</span></div>
+  {% endif %}
+  {% if site.data.semester.stat_2_number != '' %}
+    <div class="reveal"><b>{{ site.data.semester.stat_2_number }}</b><span>{{ site.data.semester.stat_2_label }}</span></div>
+  {% endif %}
+  {% if site.data.semester.stat_3_number != '' %}
+    <div class="reveal"><b>{{ site.data.semester.stat_3_number }}</b><span>{{ site.data.semester.stat_3_label }}</span></div>
+  {% endif %}
+</div>
+{% endif %}
+
+{% if content != '' %}
+<div class="prose reveal">{{ content }}</div>
+{% endif %}
+
+{% comment %}
+  Kickoff block. Driven entirely by _data/semester.yml -- a blank kickoff_date
+  hides it, so the page never promises an event that isn't happening.
+{% endcomment %}
+{% if site.data.semester.kickoff_date != '' %}
+<p class="note">
+  <span class="eyebrow">Come see for yourself</span>
+  {{ site.data.semester.kickoff_date }}{% if site.data.semester.kickoff_time != '' %}, {{ site.data.semester.kickoff_time }}{% endif %}
+  &middot; {{ site.data.semester.kickoff_location }}
+</p>
+{% endif %}
+
+<div class="head">
+  <p class="eyebrow">Where you'd go</p>
+  <h2>The ten boards</h2>
+</div>
+
+{% if site.data.semester.before_you_choose != '' %}
+<p class="note">
+  <span class="eyebrow">Before you choose</span>
+  {{ site.data.semester.before_you_choose }}
+</p>
+{% endif %}
+
+{% include board-list.html %}

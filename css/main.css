@@ -1,0 +1,257 @@
+/* ==========================================================================
+   comp.thecrimson.com
+
+   Draws on the paper's typefaces and crimson, but is not a newspaper pastiche:
+   no folio line, no masthead plate, no rule stacks, no column grid. League
+   Gothic is used as the POSTER face it is -- very large, condensed, uppercase.
+
+   Every colour pair here is measured against WCAG 2.2 AA. Do not lighten a
+   grey without re-measuring; two greys already shipped and failed during this
+   redesign (#b3b3b3 at 2.10:1 and #c9c3b6 at 1.68:1).
+
+   No JavaScript. Motion is CSS scroll-driven animation, feature-detected and
+   disabled under prefers-reduced-motion.
+   ========================================================================== */
+
+@font-face { font-family:'CompDisplay'; src:url('/fonts/League_Gothic-webfont.woff') format('woff'); font-display:swap; }
+@font-face { font-family:'CompSerif'; src:url('/fonts/Crimson-Roman-webfont.woff') format('woff'); font-weight:400; font-display:swap; }
+@font-face { font-family:'CompSerif'; src:url('/fonts/Crimson-Bold-webfont.woff') format('woff'); font-weight:700; font-display:swap; }
+@font-face { font-family:'CompText'; src:url('/fonts/Vollkorn-Regular-webfont.woff') format('woff'); font-weight:400; font-display:swap; }
+@font-face { font-family:'CompText'; src:url('/fonts/Vollkorn-Italic-webfont.woff') format('woff'); font-weight:400; font-style:italic; font-display:swap; }
+
+:root{
+  /* Swap these three when the real thecrimson.com faces arrive. */
+  --display:'CompDisplay','Arial Narrow',sans-serif;
+  --serif:'CompSerif',Georgia,serif;
+  --text:'CompText',Georgia,serif;
+
+  --red:#a82931;          /* 6.94:1 on white, AA */
+  --red-deep:#7f1d24;
+  --paper:#fbfaf6;
+  --ink:#15130f;          /* 17.76:1 on paper, AAA */
+  --grey:#615c54;         /* 6.35:1 on paper, AA */
+  --hair:#ddd7ca;
+
+  --gut:clamp(18px,5vw,64px);
+}
+
+*,*::before,*::after{ box-sizing:border-box; }
+html{ -webkit-text-size-adjust:100%; }
+body{
+  margin:0; background:var(--paper); color:var(--ink);
+  font-family:var(--text); font-size:clamp(17px,1.05rem + .2vw,19px);
+  line-height:1.62; -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+img{ max-width:100%; height:auto; display:block; }
+a{ color:var(--red); text-decoration:none; }
+a:hover{ text-decoration:underline; }
+
+:focus-visible{ outline:3px solid var(--red); outline-offset:3px; }
+.on-red :focus-visible{ outline-color:var(--paper); }
+
+.skip{
+  position:absolute; left:-9999px; top:0; z-index:99;
+  background:var(--ink); color:var(--paper); padding:14px 20px;
+  font-family:var(--display); text-transform:uppercase; letter-spacing:.12em;
+}
+.skip:focus{ left:0; text-decoration:none; }
+
+/* ---------- header ---------- */
+.bar{
+  position:sticky; top:0; z-index:20;
+  display:flex; align-items:center; justify-content:space-between; gap:12px;
+  padding:11px var(--gut);
+  background:var(--paper); border-bottom:1px solid var(--hair);
+}
+.bar .wordmark{
+  font-family:var(--serif); font-size:clamp(19px,2.4vw,25px);
+  color:var(--red); line-height:1; letter-spacing:-.01em;
+}
+.bar .wordmark span{
+  display:block; font-family:var(--display); font-size:.52em;
+  color:var(--grey); text-transform:uppercase; letter-spacing:.28em;
+  margin-top:3px;
+}
+
+.btn{
+  display:inline-block; background:var(--red); color:var(--paper);
+  font-family:var(--display); text-transform:uppercase;
+  font-size:clamp(15px,1.5vw,19px); letter-spacing:.15em;
+  padding:11px 20px 10px; border:2px solid var(--red); white-space:nowrap;
+}
+.btn:hover{ background:var(--red-deep); border-color:var(--red-deep); text-decoration:none; }
+.btn-ghost{ background:transparent; color:var(--paper); border-color:var(--paper); }
+.btn-ghost:hover{ background:var(--paper); color:var(--red); border-color:var(--paper); }
+
+/* ---------- crimson field ---------- */
+.field{ background:var(--red); color:var(--paper); padding:clamp(52px,11vw,132px) var(--gut) clamp(46px,9vw,108px); }
+.field a{ color:var(--paper); }
+
+.eyebrow{
+  font-family:var(--display); text-transform:uppercase;
+  font-size:clamp(15px,1.7vw,21px); letter-spacing:.3em;
+}
+.field .eyebrow{ opacity:.85; }
+
+/* The poster headline. League Gothic is condensed, so it tolerates huge sizes. */
+.poster{
+  font-family:var(--display); text-transform:uppercase;
+  font-size:clamp(58px,17.5vw,236px); line-height:.80; letter-spacing:.005em;
+  margin:.22em 0 0;
+}
+.lede{
+  font-family:var(--text); font-style:italic;
+  font-size:clamp(18px,2.2vw,27px); line-height:1.4;
+  max-width:34ch; margin:clamp(20px,2.6vw,34px) 0 0;
+}
+.field .actions{ margin-top:clamp(24px,3vw,40px); display:flex; gap:14px; flex-wrap:wrap; }
+
+/* ---------- stats ---------- */
+/* One per row on phones. auto-fit produced a lopsided 2+1 at 390px, which
+   reads like a mistake rather than a choice. */
+.stats{ display:grid; grid-template-columns:1fr; border-bottom:1px solid var(--hair); }
+@media (min-width:600px){ .stats{ grid-template-columns:repeat(3,1fr); } }
+.stats div{ padding:clamp(26px,4vw,52px) var(--gut); }
+.stats div + div{ border-top:1px solid var(--hair); }
+.stats b{
+  display:block; font-family:var(--display); font-size:clamp(54px,8vw,124px);
+  line-height:.84; color:var(--red);
+}
+.stats span{
+  display:block; font-family:var(--display); text-transform:uppercase;
+  letter-spacing:.2em; font-size:clamp(14px,1.4vw,18px);
+  color:var(--grey); margin-top:10px;
+}
+@media (min-width:760px){
+  .stats div + div{ border-top:none; border-left:1px solid var(--hair); }
+}
+
+/* ---------- section heads ---------- */
+.head{ padding:clamp(40px,6vw,86px) var(--gut) clamp(14px,1.6vw,22px); }
+.head h2{
+  font-family:var(--display); text-transform:uppercase; font-weight:400;
+  font-size:clamp(40px,7vw,104px); line-height:.86; margin:.12em 0 0;
+}
+.head p{ font-family:var(--text); max-width:52ch; color:var(--grey); margin:16px 0 0; }
+
+/* ---------- the board list: each row is a typographic band ---------- */
+.boards{ border-top:2px solid var(--ink); }
+.board{
+  display:block; padding:clamp(20px,2.6vw,34px) var(--gut);
+  border-bottom:1px solid var(--hair); color:inherit;
+  transition:background-color .18s ease, color .18s ease;
+}
+.board:hover,.board:focus-visible{
+  background:var(--red); color:var(--paper); text-decoration:none; outline-offset:-3px;
+}
+.board-name{
+  font-family:var(--display); text-transform:uppercase;
+  font-size:clamp(42px,9.4vw,132px); line-height:.86; color:var(--red);
+  transition:color .18s ease;
+}
+.board:hover .board-name,.board:focus-visible .board-name{ color:var(--paper); }
+.board-desc{
+  font-family:var(--text); font-size:clamp(16px,1.5vw,21px);
+  line-height:1.45; max-width:46ch; margin-top:8px;
+}
+.board-meta{
+  font-family:var(--display); text-transform:uppercase; letter-spacing:.18em;
+  font-size:clamp(14px,1.3vw,17px); color:var(--grey); margin-top:10px;
+}
+.board:hover .board-meta,.board:focus-visible .board-meta{ color:var(--paper); }
+
+@media (min-width:900px){
+  .board{ display:grid; grid-template-columns:1.25fr 1fr; gap:clamp(24px,4vw,72px); align-items:end; }
+  .board-desc{ margin-top:0; padding-bottom:.5em; }
+}
+
+.note{
+  padding:clamp(26px,4vw,52px) var(--gut);
+  border-bottom:1px solid var(--hair);
+  font-family:var(--text); font-size:clamp(18px,2vw,24px); line-height:1.45;
+  max-width:60ch;
+}
+.note .eyebrow{ display:block; color:var(--red); margin-bottom:12px; }
+
+/* ---------- board page ---------- */
+.board-hero .poster{ font-size:clamp(56px,15vw,208px); }
+.board-hero .lede{ max-width:40ch; font-style:normal; }
+
+.prose{ padding:clamp(36px,5vw,72px) var(--gut); max-width:68ch; }
+.prose > *:first-child{ margin-top:0; }
+.prose p{ margin:0 0 1.15em; }
+.prose strong{ font-weight:400; font-family:var(--serif); font-weight:700; }
+.prose em{ font-style:italic; }
+
+.panel{ padding:clamp(32px,4.5vw,64px) var(--gut); border-top:1px solid var(--hair); }
+.panel h2{
+  font-family:var(--display); text-transform:uppercase; font-weight:400;
+  font-size:clamp(28px,4vw,54px); line-height:.9; margin:0 0 clamp(16px,2vw,26px);
+}
+.reqs{ list-style:none; margin:0; padding:0; max-width:64ch; }
+.reqs li{
+  position:relative; padding:0 0 .8em 1.9em; margin:0 0 .8em;
+  border-bottom:1px solid var(--hair);
+}
+.reqs li:last-child{ border-bottom:none; margin-bottom:0; }
+.reqs li::before{
+  content:""; position:absolute; left:0; top:.52em;
+  width:.85em; height:.85em; background:var(--red);
+}
+
+.works{ list-style:none; margin:0; padding:0; }
+.works li{ padding:0 0 1.05em; margin:0 0 1.05em; border-bottom:1px solid var(--hair); max-width:66ch; }
+.works li:last-child{ border-bottom:none; }
+.works a{ font-family:var(--serif); font-size:clamp(19px,2vw,25px); line-height:1.22; display:block; }
+.works .by{
+  font-family:var(--display); text-transform:uppercase; letter-spacing:.15em;
+  font-size:14px; color:var(--grey); margin-top:7px;
+}
+.works .blurb{ font-style:italic; color:var(--grey); margin-top:8px; }
+
+.who{ display:grid; gap:clamp(14px,2vw,26px); grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); }
+.who div{ border-top:2px solid var(--red); padding-top:12px; }
+.who .nm{ font-family:var(--serif); font-size:clamp(19px,1.9vw,24px); }
+.who a{ display:block; word-break:break-word; }
+
+figure{ margin:0; }
+figcaption{
+  padding:9px var(--gut) 0; font-size:14px; line-height:1.45; color:var(--grey);
+}
+figcaption .credit{ color:var(--red); }
+
+/* ---------- footer ---------- */
+.foot{ background:var(--ink); color:var(--paper); padding:clamp(40px,6vw,80px) var(--gut); }
+.foot a{ color:var(--paper); }
+.foot h2{
+  font-family:var(--display); text-transform:uppercase; font-weight:400;
+  font-size:clamp(30px,4.6vw,64px); line-height:.9; margin:0 0 20px;
+}
+.foot-boards{
+  columns:2; column-gap:28px; list-style:none; margin:26px 0 0; padding:0;
+  font-family:var(--display); text-transform:uppercase; letter-spacing:.13em;
+  font-size:clamp(16px,1.5vw,19px); line-height:2;
+}
+.foot small{ display:block; margin-top:28px; font-family:var(--text); font-size:14px; line-height:1.6; opacity:.8; }
+@media (min-width:700px){ .foot-boards{ columns:3; } }
+
+/* ---------- motion ----------
+   Scroll-driven, CSS only, no JavaScript. Browsers without animation-timeline
+   show everything statically, which reads correctly -- motion is decoration.
+
+   These animate TRANSFORM ONLY, never opacity, and that is deliberate. An
+   opacity-0 starting frame means any element that never enters its animation
+   range is invisible rather than merely unstyled -- and that genuinely
+   happened here: a full-page render showed the stats, the prose and all ten
+   board rows as blank space. Animating position only means the worst possible
+   failure is content sitting a few pixels off, never content that vanishes.
+*/
+@media (prefers-reduced-motion:no-preference){
+  @supports (animation-timeline:view()){
+    .reveal{ animation:rise linear both; animation-timeline:view(); animation-range:entry 4% cover 30%; }
+    .boards .board{ animation:slide linear both; animation-timeline:view(); animation-range:entry 2% cover 24%; }
+  }
+}
+@keyframes rise{ from{ transform:translateY(26px); } to{ transform:none; } }
+@keyframes slide{ from{ transform:translateX(-22px); } to{ transform:none; } }

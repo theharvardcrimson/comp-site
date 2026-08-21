@@ -1,0 +1,105 @@
+---
+layout: site
+---
+{% assign slug = page.path | split: '/' | last | split: '.' | first %}
+{% assign people = site.data.directors[slug] %}
+
+<section class="field board-hero">
+  <p class="eyebrow">{{ site.data.semester.season }} Comp {{ site.data.semester.year }}</p>
+  <h1 class="poster">{{ page.display_name | default: page.name }}</h1>
+  <p class="lede">{{ page.hook }}</p>
+  <p class="actions on-red">
+    <a class="btn btn-ghost" href="{{ site.data.semester.signup_url }}">Sign up</a>
+  </p>
+</section>
+
+{% comment %}
+  Photo is optional and absent for every board right now. A board without one
+  renders with no gap -- the crimson hero above already carries the page.
+{% endcomment %}
+{% if page.photo and page.photo != '' %}
+<figure>
+  <img src="/images/{{ page.photo }}" alt="{{ page.photo_caption }}" loading="lazy">
+  {% if page.photo_caption != '' %}
+    <figcaption>
+      {{ page.photo_caption }}
+      {% if page.photo_credit != '' %}<span class="credit">By {{ page.photo_credit }}</span>{% endif %}
+    </figcaption>
+  {% endif %}
+</figure>
+{% endif %}
+
+{% if page.hours and page.hours != '' %}
+<div class="stats">
+  <div><b>{{ page.hours }}</b><span>hours a week</span></div>
+  {% if page.requirements and page.requirements.size > 0 %}
+    <div><b>{{ page.requirements.size }}</b><span>things to complete</span></div>
+  {% endif %}
+</div>
+{% endif %}
+
+<div class="prose reveal">
+  {{ content }}
+</div>
+
+{% if page.video_url and page.video_url != '' %}
+<div class="panel reveal">
+  <h2>Watch</h2>
+  <p><a href="{{ page.video_url | replace: '/embed/', '/watch?v=' }}">See what {{ page.name }} does &rarr;</a></p>
+  <p style="color:var(--grey);font-size:15px;">Opens on YouTube. Linked rather than embedded so this page stays fast on a phone.</p>
+</div>
+{% endif %}
+
+{% if page.requirements and page.requirements.size > 0 %}
+<div class="panel reveal">
+  <h2>What the comp involves</h2>
+  <ul class="reqs">
+    {% for r in page.requirements %}<li>{{ r }}</li>{% endfor %}
+  </ul>
+</div>
+{% endif %}
+
+{% if page.showcase and page.showcase.size > 0 %}
+<div class="panel reveal">
+  <h2>Our work</h2>
+  <ul class="works">
+    {% for w in page.showcase %}
+      <li>
+        <a href="{{ w.url }}">{{ w.title }}</a>
+        {% if w.byline %}<div class="by">{{ w.byline }}</div>{% endif %}
+        {% if w.blurb %}<div class="blurb">{{ w.blurb }}</div>{% endif %}
+      </li>
+    {% endfor %}
+  </ul>
+</div>
+{% endif %}
+
+<div class="panel reveal">
+  <h2>Who to ask</h2>
+  {% if people %}
+    <div class="who">
+      {% for p in people %}
+        <div>
+          <div class="nm">{{ p.name }}</div>
+          <a href="mailto:{{ p.email }}">{{ p.email }}</a>
+        </div>
+      {% endfor %}
+    </div>
+    {% if page.contact_note and page.contact_note != '' %}
+      <p style="margin-top:22px;max-width:60ch;">Write to them {{ page.contact_note }}</p>
+    {% endif %}
+  {% else %}
+    <p>Write to {{ site.data.semester.contact_title }} {{ site.data.semester.contact_name }} at
+      <a href="mailto:{{ site.data.semester.contact_email }}">{{ site.data.semester.contact_email }}</a>.</p>
+  {% endif %}
+
+  {% if page.extra_link_url and page.extra_link_url != '' %}
+    <p style="margin-top:20px;"><a href="{{ page.extra_link_url }}">{{ page.extra_link_text }} &rarr;</a></p>
+  {% endif %}
+</div>
+
+<div class="head">
+  <p class="eyebrow">Not sure yet?</p>
+  <h2>See all ten</h2>
+</div>
+{% include board-list.html %}

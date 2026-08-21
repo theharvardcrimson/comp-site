@@ -24,6 +24,16 @@ collections:
     output: true
     permalink: /preview/:name/
 
+# Every file in _boards/ uses the same layout, so no board page can drift
+# structurally from the others. That drift is why the old ten pages ranged
+# from 1435 to 2729px tall with no shared shape.
+defaults:
+  - scope:
+      path: ""
+      type: boards
+    values:
+      layout: board
+
 # Files kept out of the built site. Jekyll's own defaults (Gemfile, vendor/,
 # node_modules) are repeated here on purpose: setting `exclude` REPLACES the
 # default list rather than adding to it, so omitting them would start
