@@ -232,6 +232,16 @@ a:hover{ text-decoration:underline; }
 }
 .field .eyebrow{ color:var(--on-red-muted); }
 
+/* The hero tagline. Same face as .eyebrow but bigger and much less tracked:
+   .3em letterspacing suits a label, but it pulls a phrase apart and fights
+   the punctuation in something like "153 years. 10 boards." Full --paper
+   rather than muted, because this line is an argument, not metadata. */
+.tagline{
+  font-family:var(--display); text-transform:uppercase; color:var(--paper);
+  font-size:clamp(20px,2.6vw,34px); letter-spacing:.1em; line-height:1.1;
+  margin:0; max-width:26ch;
+}
+
 /* The poster headline. League Gothic is condensed, so it tolerates huge sizes. */
 .poster{
   font-family:var(--display); text-transform:uppercase;

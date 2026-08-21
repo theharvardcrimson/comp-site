@@ -20,6 +20,16 @@ contact_email: president@thecrimson.com
 # Where we are.
 address: 14 Plympton St
 
+# The line above the big headline. Set to "" to hide it.
+#
+# This used to read "Fall 2026 - Sign-ups open", which was administrative
+# metadata in the most valuable line on the page. The season and year are
+# already in the header, and the Sign up button says sign-ups are open, so
+# nothing is lost by using this space for something that argues.
+#
+# Keep it short -- one line on a phone is about 28 characters.
+hero_tagline: 153 years. 10 boards.
+
 # Photo behind the homepage hero. A filename in images/, or "" for plain
 # crimson. A crimson scrim sits over it at 88% so the headline stays legible
 # no matter how bright the photograph is -- see the note in css/main.css.

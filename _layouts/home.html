@@ -4,7 +4,9 @@ layout: site
 {% assign hero = site.data.semester.hero_photo %}
 <section class="field{% if hero and hero != '' %} has-photo{% endif %}"
   {%- if hero and hero != '' %} style="--hero-img:url('/images/{{ hero }}')"{% endif %}>
-  <p class="eyebrow">{{ site.data.semester.season }} {{ site.data.semester.year }} &middot; Sign-ups open</p>
+  {% if site.data.semester.hero_tagline and site.data.semester.hero_tagline != '' %}
+    <p class="tagline">{{ site.data.semester.hero_tagline }}</p>
+  {% endif %}
   <h1 class="poster">{{ page.poster_line_1 }}<br>{{ page.poster_line_2 }}</h1>
   {% if page.lede and page.lede != '' %}<p class="lede">{{ page.lede }}</p>{% endif %}
   <p class="actions on-red">
