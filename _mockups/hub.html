@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Comp hub mockup — The Harvard Crimson</title>
+<style>
+@font-face { font-family:'CrimsonS'; src:url('../fonts/Crimson-Roman-webfont.woff') format('woff'); font-weight:400; font-display:block; }
+@font-face { font-family:'CrimsonS'; src:url('../fonts/Crimson-Bold-webfont.woff') format('woff'); font-weight:700; font-display:block; }
+@font-face { font-family:'Gothic'; src:url('../fonts/League_Gothic-webfont.woff') format('woff'); font-display:block; }
+@font-face { font-family:'Vollkorn'; src:url('../fonts/Vollkorn-Regular-webfont.woff') format('woff'); font-weight:400; font-display:block; }
+@font-face { font-family:'Vollkorn'; src:url('../fonts/Vollkorn-Italic-webfont.woff') format('woff'); font-weight:400; font-style:italic; font-display:block; }
+
+:root{ --red:#a82931; --ink:#15130f; --paper:#fbfaf6; --grey:#615c54;
+       --rule:#c9c3b6; --num:#726c62; --serif:'CrimsonS',Georgia,serif; }
+*{ box-sizing:border-box; }
+body{ margin:0; background:var(--paper); color:var(--ink);
+      font-family:'Vollkorn',Georgia,serif; -webkit-font-smoothing:antialiased; }
+.wrap{ max-width:1180px; margin:0 auto; }
+.lab{ font-family:'Gothic','Arial Narrow',sans-serif; text-transform:uppercase;
+      letter-spacing:.14em; line-height:1; }
+.hair{ border-top:1px solid var(--rule); }
+.thick{ border-top:4px solid var(--ink); }
+.mid{ border-top:2px solid var(--ink); }
+.pad{ padding-left:15px; padding-right:15px; }
+a{ color:inherit; text-decoration:none; }
+
+.folio{ display:flex; justify-content:space-between; font-size:15px;
+        padding-top:8px; padding-bottom:7px; }
+.masthead{ font-family:var(--serif); font-size:clamp(44px,7.3vw,104px); line-height:.90;
+           color:var(--red); letter-spacing:-.016em; text-align:center; }
+.kicker{ font-size:16px; color:var(--red); letter-spacing:.2em; }
+h1{ font-family:var(--serif); font-weight:700; font-size:clamp(44px,5.3vw,74px); line-height:.94;
+    letter-spacing:-.021em; margin:11px 0 0; }
+.dek{ font-style:italic; font-size:17px; line-height:1.45; color:#3a352d; margin:15px 0 0; }
+.cta{ display:inline-block; background:var(--red); color:#fff;
+      padding:12px 26px 11px; font-size:17px; letter-spacing:.17em; }
+.hero-photo{ display:block; width:100%; height:232px; object-fit:cover; object-position:50% 62%; }
+.caption{ font-size:12.5px; line-height:1.45; color:var(--grey);
+          padding-top:6px; padding-bottom:18px; }
+
+.stats{ display:flex; text-align:center; }
+.stats > div{ flex:1; padding:15px 4px 13px; }
+.stats > div + div{ border-left:1px solid var(--rule); }
+.stats b{ font-family:var(--serif); font-weight:700; font-size:30px; line-height:1; display:block; }
+.stats span{ font-size:13px; color:var(--grey); letter-spacing:.13em; display:block; margin-top:5px; }
+
+.sechead{ display:flex; justify-content:space-between; align-items:baseline;
+          padding-top:9px; padding-bottom:8px; font-size:17px; }
+.sechead em{ font-style:normal; font-size:13px; color:var(--grey); letter-spacing:.1em; }
+
+.index{ display:block; }
+.row{ display:flex; gap:11px; padding:12px 15px 11px; }
+.row + .row{ border-top:1px solid var(--rule); }
+.row .n{ font-size:15px; color:var(--num); width:20px; flex:none; padding-top:4px; }
+.row .t{ flex:1; font-size:16px; line-height:1.42; }
+.row .t b{ font-family:var(--serif); font-weight:700; color:var(--red); }
+.row .h{ font-size:14px; color:var(--grey); flex:none; padding-top:4px; }
+
+.note p{ font-size:16px; line-height:1.5; margin:8px 0 0; }
+.nav{ display:none; }
+.foot{ text-align:center; padding:22px 15px 30px; }
+
+@media (min-width:700px){
+  .folio{ font-size:17px; padding:11px 22px 9px; }
+  .masthead{ letter-spacing:-.022em; padding:20px 20px 14px; }
+  .nav{ display:block; text-align:center; padding:10px 20px 9px; font-size:clamp(15px,1.4vw,19px);
+        letter-spacing:.11em; }
+  .nav a{ padding:0 3px; }
+  .nav i{ color:var(--rule); font-style:normal; padding:0 5px; }
+  .nav a.sign{ color:var(--red); }
+
+  .hero{ display:grid; grid-template-columns:1.72fr 1fr; }
+  .hero-main{ padding:30px 30px 30px 22px; }
+  .hero-side{ padding:30px 22px 30px 30px; border-left:1px solid var(--rule); }
+  h1{ line-height:.93; margin-top:14px; }
+  .kicker{ font-size:19px; }
+  .dek{ font-size:clamp(17px,1.45vw,20px); line-height:1.42; }
+  .cta{ font-size:19px; padding:14px 32px 13px; }
+  .hero-photo{ height:430px; object-position:50% 58%; }
+  .caption{ font-size:14px; padding:8px 22px 20px; }
+  .stats{ text-align:left; }
+  .stats > div{ padding:20px 22px 18px; }
+  .stats b{ font-size:clamp(32px,3.3vw,46px); }
+  .stats span{ font-size:15px; }
+  .sechead{ padding:12px 22px 10px; font-size:22px; }
+  .sechead em{ font-size:15px; }
+
+  .index{ display:grid; grid-auto-flow:column; grid-template-rows:repeat(5,auto); }
+  .row{ padding:15px 22px 14px; }
+  .row + .row{ border-top:none; }
+  .index .row:not(:nth-child(1)):not(:nth-child(6)){ border-top:1px solid var(--rule); }
+  .index .row:nth-child(n+6){ border-left:1px solid var(--rule); }
+  .row .t{ font-size:clamp(16px,1.36vw,19px); line-height:1.42; }
+  .row .n{ font-size:17px; }
+  .row .h{ font-size:16px; }
+  .note{ padding:24px 22px 10px; }
+  .note p{ font-size:20px; max-width:760px; }
+  .foot{ padding:30px 22px 44px; }
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div style="background:#3b4438; height:5px;"></div>
+
+  <div class="pad lab folio">
+    <span>Thursday, August 20</span><span>Vol. CLIII &nbsp;No. 4</span>
+  </div>
+  <div class="hair"></div>
+
+  <div class="masthead">The Harvard Crimson</div>
+
+  <div class="mid"></div><div style="height:2px;"></div><div class="hair"></div>
+  <div class="lab nav">
+    <a href="#">About</a><i>&middot;</i><a href="#">News</a><i>&middot;</i><a href="#">Magazine</a><i>&middot;</i><a href="#">Sports</a><i>&middot;</i><a href="#">Arts</a><i>&middot;</i><a href="#">Editorial</a><i>&middot;</i><a href="#">Blog</a><i>&middot;</i><a href="#">Multimedia</a><i>&middot;</i><a href="#">Design</a><i>&middot;</i><a href="#">Tech</a><i>&middot;</i><a href="#">Business</a><i>&middot;</i><a href="#" class="sign">Sign up</a>
+  </div>
+  <div class="pad lab" style="display:none;"></div>
+  <div class="thick"></div>
+
+  <div class="hero">
+    <div class="hero-main pad">
+      <div class="lab kicker">Fall 2026 &middot; Sign-ups open</div>
+      <h1>Ten boards.<br>No experience<br>necessary.</h1>
+      <a href="#" class="lab cta">Sign up</a>
+    </div>
+    <div class="hero-side pad">
+      <p class="dek" style="margin-top:0;">The nation&rsquo;s oldest continuously published daily college newspaper has been training reporters, editors, photographers and publishers at 14 Plympton Street for 153 years.</p>
+    </div>
+  </div>
+
+  <div class="thick"></div>
+  <img class="hero-photo" src="../images/crimson.jpg" alt="">
+  <div class="caption pad">
+    The Crimson&rsquo;s headquarters at 14 Plympton Street, where every board meets.
+    <span style="color:var(--red);">By Crimson Multimedia</span>
+  </div>
+
+  <div class="thick"></div>
+  <div class="stats">
+    <div><b>153</b><span class="lab">Years in print</span></div>
+    <div><b>21M</b><span class="lab">Readers a year</span></div>
+    <div><b>10</b><span class="lab">Boards</span></div>
+  </div>
+
+  <div class="thick"></div>
+  <div class="pad lab sechead"><span>The ten boards</span><em>Hrs / wk</em></div>
+  <div class="mid"></div>
+
+  <div class="index">
+    <a class="row" href="#"><span class="lab n">01</span><span class="t"><b>NEWS</b> breaks high-impact stories, holding power to account &amp; informing millions of readers</span><span class="lab h">&mdash;</span></a>
+    <a class="row" href="#"><span class="lab n">02</span><span class="t"><b>MAGAZINE (FM)</b> leads our longform coverage with incisive style &amp; impactful investigations</span><span class="lab h">&mdash;</span></a>
+    <a class="row" href="#"><span class="lab n">03</span><span class="t"><b>SPORTS</b> covers the nation&rsquo;s leading athletic program in varsity teams &amp; Olympic gold medals</span><span class="lab h">&mdash;</span></a>
+    <a class="row" href="#"><span class="lab n">04</span><span class="t"><b>ARTS</b> writes about the cultural phenomena taking over Harvard, Cambridge, &amp; the world</span><span class="lab h">&mdash;</span></a>
+    <a class="row" href="#"><span class="lab n">05</span><span class="t"><b>EDITORIAL</b> shapes campus &amp; national discourse with leading opinion coverage on Harvard</span><span class="lab h">&mdash;</span></a>
+    <a class="row" href="#"><span class="lab n">06</span><span class="t"><b>BLOG (FLYBY)</b> provides witty &amp; hilarious commentary on all things student life</span><span class="lab h">&mdash;</span></a>
+    <a class="row" href="#"><span class="lab n">07</span><span class="t"><b>MULTIMEDIA</b> captures &amp; produces all of The Crimson&rsquo;s photo, video, &amp; podcast content</span><span class="lab h">&mdash;</span></a>
+    <a class="row" href="#"><span class="lab n">08</span><span class="t"><b>DESIGN</b> crafts the stunning graphics &amp; print products that showcase our stories</span><span class="lab h">&mdash;</span></a>
+    <a class="row" href="#"><span class="lab n">09</span><span class="t"><b>TECH</b> builds the website that powers one of the nation&rsquo;s most tech-savvy college newsrooms</span><span class="lab h">&mdash;</span></a>
+    <a class="row" href="#"><span class="lab n">10</span><span class="t"><b>BUSINESS</b> runs the million-dollar business that supports our independent journalism</span><span class="lab h">&mdash;</span></a>
+  </div>
+
+  <div class="thick"></div>
+  <div class="note pad">
+    <div class="lab" style="font-size:16px; letter-spacing:.19em; color:var(--red);">Before you choose</div>
+    <p>News, Magazine, Sports and Arts comp together for the first three weeks before splitting off. You don&rsquo;t have to decide yet.</p>
+  </div>
+
+  <div class="hair" style="margin-top:18px;"></div>
+  <div class="foot">
+    <a href="#" class="lab cta">Sign up</a>
+    <div class="lab" style="margin-top:13px; font-size:13.5px; color:var(--grey); letter-spacing:.11em;">14 Plympton St &nbsp;&middot;&nbsp; president@thecrimson.com</div>
+  </div>
+
+</div>
+</body>
+</html>
