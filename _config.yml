@@ -1,5 +1,18 @@
 permalink: pretty
 
+# Files kept out of the built site. Jekyll's own defaults (Gemfile, vendor/,
+# node_modules) are repeated here on purpose: setting `exclude` REPLACES the
+# default list rather than adding to it, so omitting them would start
+# publishing them.
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - vendor
+  - node_modules
+  - CLAUDE.md            # internal notes for agents; not site content
+  - README.md            # setup instructions for maintainers
+  - content-questions.md # working checklist, deleted once answered
+
 nav:
   - text: About Us
     url: /
