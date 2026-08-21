@@ -1,0 +1,36 @@
+{% comment %}
+  Board navigation drawer.
+
+  Built on native <details>/<summary> rather than a button plus JavaScript.
+  That gets real disclosure semantics, keyboard operation (Enter and Space),
+  and browser-managed expanded state for free -- no script, so the site still
+  ships zero JavaScript.
+
+  The trade-off, stated honestly: without JS there is no Escape-to-close and
+  no click-outside-to-close. Both are conveniences rather than accessibility
+  requirements, and closing is always possible by activating the same control.
+{% endcomment %}
+<details class="drawer">
+  <summary aria-label="Boards menu">
+    <span class="drawer-bars" aria-hidden="true"><i></i><i></i><i></i></span>
+    <span class="drawer-word">Boards</span>
+  </summary>
+
+  <div class="drawer-panel">
+    <nav aria-label="Board pages">
+      <p class="drawer-head">The ten boards</p>
+      <ul>
+        {% assign drawer_boards = site.boards | sort: 'name' %}
+        {% for b in drawer_boards %}
+          <li{% if page.url == b.url %} class="here"{% endif %}>
+            <a href="{{ b.url }}">{{ b.display_name | default: b.name }}</a>
+          </li>
+        {% endfor %}
+      </ul>
+      <p class="drawer-foot">
+        <a href="/">About the comp</a>
+      </p>
+      <a class="btn" href="{{ site.data.semester.signup_url }}">Sign up</a>
+    </nav>
+  </div>
+</details>

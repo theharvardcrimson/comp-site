@@ -13,16 +13,12 @@ markdown: kramdown
 kramdown:
   input: kramdown
 
-# The ten board pages. One file per board in _boards/, rendered by
-# _layouts/board.html, so all ten stay structurally identical.
-#
-# The /preview/ prefix is TEMPORARY: the old root-level arts.html etc. still
-# claim /arts/, and two things cannot own the same URL. At cutover this becomes
-# /:name/ and the old .html files are deleted in the same commit.
+# The ten board pages. One file per board in _boards/, each served at /<name>/
+# so every URL the old site published still resolves.
 collections:
   boards:
     output: true
-    permalink: /preview/:name/
+    permalink: /:name/
 
 # Every file in _boards/ uses the same layout, so no board page can drift
 # structurally from the others. That drift is why the old ten pages ranged
@@ -47,120 +43,16 @@ exclude:
   - README.md            # setup instructions for maintainers
   - content-questions.md # working checklist, deleted once answered
 
-nav:
-  - text: About Us
-    url: /
-  - text: Arts
-    url: /arts/
-  - text: Blog
-    url: /blog/
-  - text: Business
-    url: /business/
-  - text: Design
-    url: /design/
-  - text: Editorial
-    url: /editorial/
-  - text: Magazine
-    url: /magazine/
-  - text: News
-    url: /news/
-  - text: Multimedia
-    url: /multimedia/
-  - text: Sports
-    url: /sports/
-  - text: Tech
-    url: /tech/
-
-season: Fall
-year: 2026
-subtitle: Fall Comp 2026
-
-num_years_crimson_existed: 153
-
-monthly_page_views_millions: 1.75
-yearly_page_views_millions: 21
-yearly_page_time_spent_years: 58
-
-google_doc_signup: https://docs.google.com/forms/d/e/1FAIpQLScnz4wmdtXud61rA9Zlm6n5JMqopGssM4RDw2PDQoXOsNWyXg/viewform?usp=header
-facebook_rsvp_link: https://www.facebook.com/events/515215159346903/
-
-president: E. Matteo Diaz
-managing_editor: Dhruv T. Patel
-business_manager: Luis Pedro (LP) Chavez
-
-arts:
-  dir1:
-    name: Laura B. Martens
-    email: laura.martens@thecrimson.com
-  dir2:
-    name: Caroline J. Rubin
-    email: caroline.rubin@thecrimson.com
-
-blog:
-  dir1:
-    name: Cristian D. Dominguez
-    email: cristian.dominguez@thecrimson.com
-  dir2:
-    name: Grace E. St Laurent
-    email: grace.st.laurent@thecrimson.com
-
-business:
-  dir1:
-    name: McKinley Paltzik
-    email: mckinley.paltzik@thecrimson.com
-  dir2:
-    name: Arman Lateef
-    email: hamza.lateef@thecrimson.com
-
-design:
-  dir1:
-    name: Analy Vega
-    email: analy.vega@thecrimson.com
-  dir2:
-    name: Shamus Mellarkey
-    email: shamusmellarkey@thecrimson.com
-
-editorial:
-  dir1:
-    name: Victoria L. Dolan
-    email: victoria.dolan@thecrimson.com
-  dir2:
-    name: Salma O. Siddiqui 
-    email: salma.siddiqui@thecrimson.com
-
-magazine:
-  dir1:
-    name: Claire Jiang 
-    email: claire.jiang@thecrimson.com
-  dir2:
-    name: Megha Khemka
-    email: megha.khemka@thecrimson.com
-
-news:
-  dir1:
-    name: William C. Mao
-    email: william.mao@thecrimson.com
-  dir2:
-    name: Avani B. Rai
-    email: avani.rai@thecrimson.com
-
-multimedia:
-  dir1:
-    name: Lotem L. Loeb
-    email: lotem.loeb@thecrimson.com
-
-sports:
-  dir1:
-    name: Bennett Trubey
-    email: bennett.trubey@thecrimson.com
-  dir2:
-    name: Connor Castañeda
-    email: connor.castaneda@thecrimson.com
-
-technology:
-  dir1:
-    name: Sidhi Dhanda
-    email: sidhi.dhanda@thecrimson.com
-  dir2:
-    name: Vivian W. Hui
-    email: vivian.hui@thecrimson.com
+# ==========================================================================
+#  NO CONTENT BELOW THIS LINE, AND NONE ABOVE IT EITHER.
+#
+#  This file is Jekyll configuration only. Everything editable lives in:
+#    _data/semester.yml   season, year, signup link, contact, stats
+#    _data/directors.yml  all nineteen directors
+#    _boards/*.md         one file per board
+#    index.md             the homepage
+#
+#  The nav list that used to live here is gone: navigation is generated from
+#  _boards/, so adding a board is one file rather than two edits that can
+#  drift apart.
+# ==========================================================================

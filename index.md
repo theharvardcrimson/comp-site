@@ -1,11 +1,6 @@
 ---
 layout: home
-permalink: /preview/
 title: About Us
-
-# TEMPORARY FILE. At cutover this becomes index.md and the permalink drops
-# to "/". It lives at /preview/ so the current homepage keeps working while
-# the redesign is built alongside it.
 
 # The two lines of the huge headline. Kept to two short lines -- this is set
 # very large, so a long line will not fit on a phone.

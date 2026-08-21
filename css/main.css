@@ -64,21 +64,97 @@ a:hover{ text-decoration:underline; }
 .skip:focus{ left:0; text-decoration:none; }
 
 /* ---------- header ---------- */
+/* z-index 50 keeps the bar ABOVE the open drawer panel (z-index 40). The panel
+   used to cover the header, which hid the very control that closes it. */
 .bar{
-  position:sticky; top:0; z-index:20;
+  position:sticky; top:0; z-index:50;
   display:flex; align-items:center; justify-content:space-between; gap:12px;
   padding:11px var(--gut);
   background:var(--paper); border-bottom:1px solid var(--hair);
 }
-.bar .wordmark{
-  font-family:var(--serif); font-size:clamp(19px,2.4vw,25px);
-  color:var(--red); line-height:1; letter-spacing:-.01em;
+.bar .wordmark{ line-height:1; text-align:center; }
+.bar .wordmark:hover{ text-decoration:none; }
+.wordmark-type{
+  font-family:var(--serif); font-size:clamp(18px,2.3vw,25px);
+  color:var(--red); letter-spacing:-.01em;
 }
-.bar .wordmark span{
-  display:block; font-family:var(--display); font-size:.52em;
-  color:var(--grey); text-transform:uppercase; letter-spacing:.28em;
-  margin-top:3px;
+.wordmark .mark{ height:clamp(24px,3vw,34px); width:auto; margin:0 auto; }
+.wordmark-sub{
+  display:block; font-family:var(--display); font-size:clamp(10px,1vw,12px);
+  color:var(--grey); text-transform:uppercase; letter-spacing:.26em;
+  margin-top:4px;
 }
+
+/* ---------- board drawer ----------
+   Native <details>. The panel is fixed so it slides over the page, but the
+   <details> itself stays in normal flow so the header layout is unaffected.
+*/
+.drawer{ position:relative; }
+.drawer > summary{
+  list-style:none; cursor:pointer; display:flex; align-items:center; gap:9px;
+  padding:9px 12px 9px 4px; min-height:44px;
+  font-family:var(--display); text-transform:uppercase;
+  font-size:clamp(15px,1.5vw,19px); letter-spacing:.15em; color:var(--ink);
+}
+.drawer > summary::-webkit-details-marker{ display:none; }
+.drawer-bars{ display:block; width:22px; }
+.drawer-bars i{ display:block; height:2px; background:var(--ink); margin:4px 0; }
+.drawer[open] .drawer-bars i:first-child{ transform:translateY(6px) rotate(45deg); }
+.drawer[open] .drawer-bars i:nth-child(2){ opacity:0; }
+.drawer[open] .drawer-bars i:last-child{ transform:translateY(-6px) rotate(-45deg); }
+@media (prefers-reduced-motion:no-preference){
+  .drawer-bars i{ transition:transform .18s ease, opacity .18s ease; }
+}
+.drawer-word{ display:none; }
+@media (min-width:560px){ .drawer-word{ display:inline; } }
+
+/* The panel starts BELOW the header rather than at top:0.
+   z-index alone could not fix this: .bar sets z-index 50 and so creates a
+   stacking context, and the panel lives inside it, so the panel always painted
+   above the summary no matter how the values were ordered -- which hid the very
+   control that closes the drawer. Offsetting the panel keeps the whole header
+   (toggle, wordmark and Sign up) visible and clickable while it is open.
+   --bar-h tracks the measured header height: 72px, 74px at 320, 79px at 1440. */
+:root{ --bar-h:74px; }
+@media (min-width:1200px){ :root{ --bar-h:80px; } }
+
+.drawer-panel{
+  position:fixed; top:var(--bar-h); left:0; bottom:0;
+  width:min(84vw,340px); z-index:40;
+  background:var(--red); color:var(--paper);
+  padding:clamp(22px,4vw,32px) clamp(20px,4vw,34px) clamp(24px,4vw,34px);
+  overflow-y:auto; overscroll-behavior:contain;
+  border-right:6px solid var(--ink);
+}
+.drawer-panel a{ color:var(--paper); }
+.drawer-panel :focus-visible{ outline-color:var(--paper); }
+.drawer-head{
+  font-family:var(--display); text-transform:uppercase; letter-spacing:.24em;
+  font-size:13px; color:var(--on-red-muted); margin:0 0 14px;
+}
+.drawer-panel ul{ list-style:none; margin:0; padding:0; }
+.drawer-panel li{ border-top:1px solid rgba(251,250,246,.32); }
+.drawer-panel li a{
+  display:block; padding:11px 0; font-family:var(--display);
+  text-transform:uppercase; letter-spacing:.09em;
+  font-size:clamp(21px,2.6vw,27px); line-height:1.1;
+}
+.drawer-panel li a:hover{ text-decoration:none; color:var(--on-red-muted); }
+.drawer-panel li.here a{ color:var(--on-red-muted); }
+.drawer-panel li.here a::after{ content:" \2022"; }
+.drawer-foot{
+  margin:22px 0; font-family:var(--text); font-size:16px;
+  border-top:1px solid rgba(251,250,246,.32); padding-top:18px;
+}
+.drawer-panel .btn{
+  background:transparent; border-color:var(--paper); color:var(--paper);
+}
+.drawer-panel .btn:hover{ background:var(--paper); color:var(--red); }
+
+@media (prefers-reduced-motion:no-preference){
+  .drawer[open] .drawer-panel{ animation:drawer-in .22s ease both; }
+}
+@keyframes drawer-in{ from{ transform:translateX(-100%); } to{ transform:none; } }
 
 .btn{
   display:inline-block; background:var(--red); color:var(--paper);

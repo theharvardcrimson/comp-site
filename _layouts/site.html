@@ -12,7 +12,21 @@
   <a class="skip" href="#main">Skip to content</a>
 
   <header class="bar">
-    <a class="wordmark" href="/">The Harvard Crimson<span>{{ site.data.semester.season }} Comp {{ site.data.semester.year }}</span></a>
+    {% include drawer.html %}
+
+    <a class="wordmark" href="/">
+      {% comment %}
+        Drop the real logo in as images/logo-mark.svg and this swaps to it.
+        Until then the wordmark is set in type.
+      {% endcomment %}
+      {% if site.data.semester.logo and site.data.semester.logo != '' %}
+        <img class="mark" src="/images/{{ site.data.semester.logo }}" alt="The Harvard Crimson">
+      {% else %}
+        <span class="wordmark-type">The Harvard Crimson</span>
+      {% endif %}
+      <span class="wordmark-sub">{{ site.data.semester.season }} Comp {{ site.data.semester.year }}</span>
+    </a>
+
     <a class="btn" href="{{ site.data.semester.signup_url }}">Sign up</a>
   </header>
 
