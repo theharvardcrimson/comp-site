@@ -2,10 +2,11 @@
 layout: home
 title: About Us
 
-# The two lines of the huge headline. Kept to two short lines -- this is set
-# very large, so a long line will not fit on a phone.
-poster_line_1: Comp the
-poster_line_2: Crimson
+# The huge headline. Put the whole phrase in poster_line_1 and leave
+# poster_line_2 blank: it sets on one line on a wide screen and the browser
+# wraps it to two on a phone, breaking in the same place you would by hand.
+poster_line_1: Comp the Crimson
+poster_line_2: ""
 
 # One sentence under the headline. This one is lifted verbatim from the
 # current About Us page.

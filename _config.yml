@@ -55,6 +55,7 @@ exclude:
   # images/logo-mark.png.
   - images/final_logo.jpeg
   - images/Logo_vector (2).ai
+  - images/new_hero.jpeg      # 5.5MB source for hero.jpg
 
   # Legacy assets from the pre-redesign site. Verified unreferenced by any
   # template, stylesheet, data file or content file. They stay in the repo
