@@ -210,52 +210,52 @@ a:hover{ text-decoration:underline; }
 
 /* Optional photograph behind the hero, under a crimson scrim.
 
-   The scrim is a GRADIENT, not a flat wash, and that is the whole trick. Text
-   only occupies the left portion of the hero, so the scrim is heavy there and
-   thins out to the right, where nothing has to stay legible. That shows far
-   more of the photograph than a flat scrim at the same safety level.
+   The scrim runs VERTICALLY -- light at the top, heavy at the bottom -- which
+   follows the layout: the text block is anchored to the bottom of the hero, so
+   that is the only band that has to stay legible, and the top can thin out and
+   let the photograph breathe.
 
-   The numbers are measured against the actual photograph, not guessed. The
-   brightest pixel inside the left 55% of hero.jpg -- the zone every line of
-   text occupies -- is rgb(216,197,191). Paper text over that clears 4.5:1 down
-   to about 72% crimson, so the gradient holds 82%-74% across that zone and
-   only drops to 42% at the right edge, which is decorative. Re-measure if the
-   photograph changes: a brighter image forces the numbers back up.
+   It used to run horizontally, heavy-left. That stopped working once the
+   headline went to one full-width line and the standfirst widened to 62ch:
+   text now reaches the right edge, so there is no longer an empty side to thin
+   out.
 
-   Mobile keeps a flat scrim: the text spans nearly the full width there, so
-   there is no "empty" side to thin out.
+   The numbers are measured against the actual photograph. The brightest pixel
+   anywhere in the bottom 58% of hero.jpg is rgb(240,240,240), and paper text
+   over an 84% crimson scrim on that measures 5.04:1 -- past 4.5:1 AA with
+   margin. Re-measure if the photograph changes.
+
+   hero.jpg is also converted to neutral grayscale before it ships (sips
+   --matchTo a Generic Gray profile). That is deliberate: a colour photograph
+   under a thin crimson wash mixes into other hues -- the blue sky in the
+   previous image went mauve, which is not in the palette. A neutral image can
+   only ever render as crimson tones, so the wash can be as thin as contrast
+   allows without ever going off-brand.
 
    background-attachment stays default (scroll): `fixed` is janky on iOS and
    was part of what made the old site feel dated. */
 .field.has-photo{
+  /* Text anchored bottom-left rather than floating mid-block: the photograph
+     gets room to breathe above it, and the type sits tight to the corner
+     instead of looking centred in its own padding. */
+  min-height:clamp(430px,64vh,780px);
+  display:flex; flex-direction:column; justify-content:flex-end;
+  padding-top:clamp(90px,14vw,190px);
+  padding-bottom:clamp(30px,4vw,54px);
+  padding-left:clamp(14px,2.4vw,34px);
+  padding-right:clamp(14px,2.4vw,34px);
   background-image:
-    linear-gradient(rgba(168,41,49,.76), rgba(168,41,49,.76)),
+    linear-gradient(180deg,
+      rgba(168,41,49,.44) 0%,
+      rgba(168,41,49,.50) 24%,
+      rgba(168,41,49,.84) 44%,
+      rgba(168,41,49,.88) 100%),
     var(--hero-img);
   background-size:cover, cover;
   background-position:center, 50% 42%;
   background-repeat:no-repeat, no-repeat;
 }
-@media (min-width:700px){
-  .field.has-photo{
-    background-image:
-      /* Vertical layer, heavier at the top: the photograph's blue sky mixes
-         with a thin crimson wash into mauve, which is not in the palette. This
-         suppresses the sky without darkening the warm-toned building below,
-         where the thin scrim is doing its job. Combined with the horizontal
-         layer it reaches ~62% at the top right and stays at ~42% at the
-         bottom right. */
-      linear-gradient(180deg,
-        rgba(168,41,49,.38) 0%,
-        rgba(168,41,49,.16) 34%,
-        rgba(168,41,49,0) 55%),
-      linear-gradient(90deg,
-        rgba(168,41,49,.82) 0%,
-        rgba(168,41,49,.78) 42%,
-        rgba(168,41,49,.74) 58%,
-        rgba(168,41,49,.42) 100%),
-      var(--hero-img);
-  }
-}
+
 
 .eyebrow{
   font-family:var(--display); text-transform:uppercase;
@@ -282,7 +282,10 @@ a:hover{ text-decoration:underline; }
 .lede{
   font-family:var(--text); font-style:italic;
   font-size:clamp(18px,2.2vw,27px); line-height:1.4;
-  max-width:34ch; margin:clamp(20px,2.6vw,34px) 0 0;
+  /* was 34ch, which squeezed the standfirst into a narrow column on the left
+     while the headline ran the full width -- the mismatch read as an accident.
+     62ch is long for sustained reading but fine for two lines of standfirst. */
+  max-width:62ch; margin:clamp(18px,2.2vw,28px) 0 0;
 }
 .field .actions{ margin-top:clamp(24px,3vw,40px); display:flex; gap:14px; flex-wrap:wrap; }
 
