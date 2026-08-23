@@ -7,7 +7,10 @@ layout: site
   {% if site.data.semester.hero_tagline and site.data.semester.hero_tagline != '' %}
     <p class="tagline">{{ site.data.semester.hero_tagline }}</p>
   {% endif %}
-  <h1 class="poster">{{ page.poster_line_1 }}<br>{{ page.poster_line_2 }}</h1>
+  {% comment %}
+    Leave poster_line_2 blank for a single-line headline -- no stray <br>.
+  {% endcomment %}
+  <h1 class="poster">{{ page.poster_line_1 }}{% if page.poster_line_2 and page.poster_line_2 != '' %}<br>{{ page.poster_line_2 }}{% endif %}</h1>
   {% if page.lede and page.lede != '' %}<p class="lede">{{ page.lede }}</p>{% endif %}
   <p class="actions on-red">
     <a class="btn btn-ghost" href="{{ site.data.semester.signup_url }}">Sign up</a>
