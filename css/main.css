@@ -236,9 +236,17 @@ a:hover{ text-decoration:underline; }
   /* Text anchored to the bottom of the hero. Padding is deliberately
      asymmetric -- generous above so the photograph has room, tight below so
      the Sign up button sits near the bottom edge rather than floating. */
-  min-height:clamp(420px,62vh,760px);
+  /* Exactly one screenful, so the photograph ends the moment you scroll.
+     dvh rather than vh: on mobile, vh is the tallest possible viewport and
+     ignores the browser's own chrome, so a 100vh hero sits partly offscreen
+     until the address bar collapses. dvh tracks the real height. The vh line
+     is the fallback for anything that doesn't know dvh.
+     min-height, not height: on a short window the content still needs room,
+     so the hero grows rather than clipping the Sign up button. */
+  min-height:calc(100vh - var(--bar-h));
+  min-height:calc(100dvh - var(--bar-h));
   display:flex; flex-direction:column; justify-content:flex-end;
-  padding-top:clamp(46px,6.6vw,96px);
+  padding-top:clamp(38px,5.1vw,74px);
   padding-bottom:clamp(16px,2vw,28px);
   padding-left:clamp(14px,2.4vw,34px);
   padding-right:clamp(14px,2.4vw,34px);
@@ -248,7 +256,11 @@ a:hover{ text-decoration:underline; }
 .field.has-photo::before{
   z-index:0;
   background-image:var(--hero-img);
-  background-size:cover; background-position:50% 42%; background-repeat:no-repeat;
+  background-size:cover;
+  /* 18% rather than 42%: pulls the crop upward so the pediment and roofline
+     show instead of being cut off. */
+  background-position:50% 18%;
+  background-repeat:no-repeat;
   filter:saturate(.45);
 }
 .field.has-photo::after{
@@ -261,10 +273,10 @@ a:hover{ text-decoration:underline; }
      heavier wash instead, to stop the pale sky reading cool against the crimson.
      Net effect: roughly half the photograph shows through where it matters. */
   background:linear-gradient(180deg,
-    rgba(168,41,49,.62) 0%,
-    rgba(168,41,49,.54) 34%,
-    rgba(168,41,49,.48) 62%,
-    rgba(168,41,49,.46) 100%);
+    rgba(168,41,49,.74) 0%,
+    rgba(168,41,49,.66) 34%,
+    rgba(168,41,49,.60) 62%,
+    rgba(168,41,49,.58) 100%);
 }
 .field.has-photo > *{ position:relative; z-index:2; }
 
@@ -301,7 +313,7 @@ a:hover{ text-decoration:underline; }
 /* margin-bottom:0 matters: this is a <p>, so it carried a default bottom
    margin that left ~19px of dead space between the button and the hero's
    bottom edge on top of the padding. */
-.field .actions{ margin:clamp(22px,2.6vw,34px) 0 0; display:flex; gap:14px; flex-wrap:wrap; }
+.field .actions{ margin:clamp(18px,2.1vw,27px) 0 0; display:flex; gap:14px; flex-wrap:wrap; }
 
 /* Photo credit inside the hero. --on-red-muted measures 5.31:1 on the crimson,
    and the scrim guarantees the composite never falls below that. */

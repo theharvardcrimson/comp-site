@@ -8,13 +8,9 @@ title: About Us
 poster_line_1: Comp the
 poster_line_2: Crimson
 
-# One sentence under the headline. This one is lifted verbatim from the
-# current About Us page.
-#
-# NOTE: the version you sent read "...and Harvard College's premier student
-# organization at Harvard College", which says Harvard College twice. Left as
-# the original wording rather than rewritten; change it however you like.
-lede: The nation's oldest continuously published daily newspaper, and the premier student organization at Harvard College.
+# One sentence under the headline. Owner's wording. Both apostrophes are
+# typographic (curly) rather than straight -- a normalisation, not an edit.
+lede: The nation’s oldest continuously published daily newspaper, and Harvard College’s premier student organization.
 
 # The prose below the --- is the old About Us copy, carried over verbatim. It
 # is longer than the single intro blurb this page now calls for, and trimming
