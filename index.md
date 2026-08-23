@@ -8,9 +8,12 @@ title: About Us
 poster_line_1: Comp the
 poster_line_2: Crimson
 
-# One sentence under the headline. Owner's wording. Both apostrophes are
-# typographic (curly) rather than straight -- a normalisation, not an edit.
-lede: The nation’s oldest continuously published daily newspaper, and Harvard College’s premier student organization.
+# The sentence under the headline, split across two lines so the break point
+# is yours rather than the browser's. Leave lede_line_2 blank to let it wrap
+# on its own. Both apostrophes are typographic (curly) rather than straight --
+# a normalisation, not an edit.
+lede_line_1: The nation’s oldest continuously published daily newspaper,
+lede_line_2: and Harvard College’s premier student organization.
 
 # The prose below the --- is the old About Us copy, carried over verbatim. It
 # is longer than the single intro blurb this page now calls for, and trimming

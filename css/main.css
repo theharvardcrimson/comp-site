@@ -147,8 +147,8 @@ a:hover{ text-decoration:underline; }
    control that closes the drawer. Offsetting the panel keeps the whole header
    (toggle, wordmark and Sign up) visible and clickable while it is open.
    --bar-h tracks the measured header height: 72px, 74px at 320, 79px at 1440. */
-:root{ --bar-h:74px; }
-@media (min-width:1200px){ :root{ --bar-h:80px; } }
+:root{ --bar-h:74px; --hero-offset:66px; }
+@media (min-width:1200px){ :root{ --bar-h:80px; --hero-offset:71px; } }
 
 /* Opens from the RIGHT, matching the side its toggle now sits on -- a panel
    flying in from the opposite edge to the button reads as disconnected. */
@@ -242,9 +242,16 @@ a:hover{ text-decoration:underline; }
      until the address bar collapses. dvh tracks the real height. The vh line
      is the fallback for anything that doesn't know dvh.
      min-height, not height: on a short window the content still needs room,
-     so the hero grows rather than clipping the Sign up button. */
-  min-height:calc(100vh - var(--bar-h));
-  min-height:calc(100dvh - var(--bar-h));
+     so the hero grows rather than clipping the Sign up button.
+
+     --hero-offset is deliberately a few px SMALLER than the real header
+     height, so the hero always overshoots the fold by a hair. Subtracting the
+     exact height left a 3-4px strip of paper visible under the photograph,
+     because the header measures 77px at desktop while --bar-h says 80. It is
+     a separate variable from --bar-h because that one positions the drawer
+     panel and needs to stay honest. */
+  min-height:calc(100vh - var(--hero-offset));
+  min-height:calc(100dvh - var(--hero-offset));
   display:flex; flex-direction:column; justify-content:flex-end;
   padding-top:clamp(38px,5.1vw,74px);
   padding-bottom:clamp(16px,2vw,28px);
