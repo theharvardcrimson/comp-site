@@ -5,8 +5,8 @@ title: About Us
 # The huge headline. Put the whole phrase in poster_line_1 and leave
 # poster_line_2 blank: it sets on one line on a wide screen and the browser
 # wraps it to two on a phone, breaking in the same place you would by hand.
-poster_line_1: Comp the Crimson
-poster_line_2: ""
+poster_line_1: Comp the
+poster_line_2: Crimson
 
 # One sentence under the headline. This one is lifted verbatim from the
 # current About Us page.

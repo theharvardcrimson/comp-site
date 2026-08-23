@@ -33,10 +33,9 @@ hero_tagline: ""
 # Photo behind the homepage hero. A filename in images/, or "" for plain
 # crimson. A crimson scrim sits over it at 88% so the headline stays legible
 # no matter how bright the photograph is -- see the note in css/main.css.
-# The flags at 14 Plympton, low angle. Resized to 1600px, converted to neutral
-# grayscale, compressed to 186KB from a 13.8MB original. Grayscale is
-# deliberate -- a colour photo under a thin crimson wash mixes into other hues,
-# and the previous image's blue sky went mauve. See the note in css/main.css.
+# 14 Plympton straight on, from images/crimson-large.jpg. Resized to 1600px,
+# 280KB. It ships in COLOUR and is desaturated to 45% in CSS instead -- full
+# greyscale was tried and read as flat and lifeless. See css/main.css.
 hero_photo: hero.jpg
 
 # Credit and caption for the hero photograph. The credit line only appears if

@@ -210,52 +210,63 @@ a:hover{ text-decoration:underline; }
 
 /* Optional photograph behind the hero, under a crimson scrim.
 
+   The photograph sits on its own layer (::before) so `filter: saturate()` can
+   desaturate IT without touching the crimson gradient. Putting both on one
+   element and filtering that would wash the brand colour out too. The scrim is
+   a second layer (::after), and the content is lifted above both.
+
+   The photo is partly desaturated rather than fully grey. Full greyscale read
+   as flat and lifeless; leaving it fully saturated let the blue sky mix with
+   the thin crimson wash into mauve, which is not in the palette. 45% saturation
+   keeps warmth in the brick without letting any competing hue survive.
+
    The scrim runs VERTICALLY -- light at the top, heavy at the bottom -- which
    follows the layout: the text block is anchored to the bottom of the hero, so
-   that is the only band that has to stay legible, and the top can thin out and
-   let the photograph breathe.
+   that is the only band that has to stay legible and the top can breathe.
 
-   It used to run horizontally, heavy-left. That stopped working once the
-   headline went to one full-width line and the standfirst widened to 62ch:
-   text now reaches the right edge, so there is no longer an empty side to thin
-   out.
-
-   The numbers are measured against the actual photograph. The brightest pixel
-   anywhere in the bottom 58% of hero.jpg is rgb(240,240,240), and paper text
-   over an 84% crimson scrim on that measures 5.04:1 -- past 4.5:1 AA with
-   margin. Re-measure if the photograph changes.
-
-   hero.jpg is also converted to neutral grayscale before it ships (sips
-   --matchTo a Generic Gray profile). That is deliberate: a colour photograph
-   under a thin crimson wash mixes into other hues -- the blue sky in the
-   previous image went mauve, which is not in the palette. A neutral image can
-   only ever render as crimson tones, so the wash can be as thin as contrast
-   allows without ever going off-brand.
+   Measured, not guessed -- see the gradient below for the numbers. Re-measure
+   whenever the photograph changes: the safe scrim depends entirely on what is
+   behind the text, and it moved by more than 40 percentage points between the
+   three photographs tried here.
 
    background-attachment stays default (scroll): `fixed` is janky on iOS and
    was part of what made the old site feel dated. */
 .field.has-photo{
-  /* Text anchored bottom-left rather than floating mid-block: the photograph
-     gets room to breathe above it, and the type sits tight to the corner
-     instead of looking centred in its own padding. */
-  min-height:clamp(430px,64vh,780px);
+  position:relative; isolation:isolate;
+  /* Text anchored to the bottom of the hero. Padding is deliberately
+     asymmetric -- generous above so the photograph has room, tight below so
+     the Sign up button sits near the bottom edge rather than floating. */
+  min-height:clamp(420px,62vh,760px);
   display:flex; flex-direction:column; justify-content:flex-end;
-  padding-top:clamp(90px,14vw,190px);
-  padding-bottom:clamp(30px,4vw,54px);
+  padding-top:clamp(46px,6.6vw,96px);
+  padding-bottom:clamp(16px,2vw,28px);
   padding-left:clamp(14px,2.4vw,34px);
   padding-right:clamp(14px,2.4vw,34px);
-  background-image:
-    linear-gradient(180deg,
-      rgba(168,41,49,.44) 0%,
-      rgba(168,41,49,.50) 24%,
-      rgba(168,41,49,.84) 44%,
-      rgba(168,41,49,.88) 100%),
-    var(--hero-img);
-  background-size:cover, cover;
-  background-position:center, 50% 42%;
-  background-repeat:no-repeat, no-repeat;
 }
-
+.field.has-photo::before,
+.field.has-photo::after{ content:""; position:absolute; inset:0; }
+.field.has-photo::before{
+  z-index:0;
+  background-image:var(--hero-img);
+  background-size:cover; background-position:50% 42%; background-repeat:no-repeat;
+  filter:saturate(.45);
+}
+.field.has-photo::after{
+  z-index:1;
+  /* Heavier at the TOP, lighter at the bottom -- the inverse of what you would
+     expect, and measured rather than assumed. In this photograph the sky is at
+     the top and the building fills the bottom, so the text band sits over dark
+     brick: its brightest pixel after desaturation is only rgb(137,126,121), and
+     paper text over a 46% scrim on that still measures 5.2:1. The top needs the
+     heavier wash instead, to stop the pale sky reading cool against the crimson.
+     Net effect: roughly half the photograph shows through where it matters. */
+  background:linear-gradient(180deg,
+    rgba(168,41,49,.62) 0%,
+    rgba(168,41,49,.54) 34%,
+    rgba(168,41,49,.48) 62%,
+    rgba(168,41,49,.46) 100%);
+}
+.field.has-photo > *{ position:relative; z-index:2; }
 
 .eyebrow{
   font-family:var(--display); text-transform:uppercase;
@@ -287,7 +298,10 @@ a:hover{ text-decoration:underline; }
      62ch is long for sustained reading but fine for two lines of standfirst. */
   max-width:62ch; margin:clamp(18px,2.2vw,28px) 0 0;
 }
-.field .actions{ margin-top:clamp(24px,3vw,40px); display:flex; gap:14px; flex-wrap:wrap; }
+/* margin-bottom:0 matters: this is a <p>, so it carried a default bottom
+   margin that left ~19px of dead space between the button and the hero's
+   bottom edge on top of the padding. */
+.field .actions{ margin:clamp(22px,2.6vw,34px) 0 0; display:flex; gap:14px; flex-wrap:wrap; }
 
 /* Photo credit inside the hero. --on-red-muted measures 5.31:1 on the crimson,
    and the scrim guarantees the composite never falls below that. */
