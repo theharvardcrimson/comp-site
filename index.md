@@ -28,23 +28,25 @@ intro_title: The comp
 #
 # Positioned "above" again: this wording sets the bullets up rather than summing
 # them up, so it belongs before them.
-intro_note: From journalism, to business or tech — regardless of your passion, The Crimson has a comp for you.
+intro_note: From journalism, to business or tech — regardless of your passion, The Crimson has a comp for you.
 intro_note_position: above
 
 # Its own line under the bullets, not a bullet itself -- it points somewhere
 # rather than stating a fact, so it does not belong in a list of facts. Spaced to
 # match the gap between bullets. Leave "" and it does not render.
 # The target is the boards heading, id="boards".
-intro_link_text: Learn more about our 10 comps below
+intro_link_text: Learn more about our 10 comps
 
 # The bullets below the --- are YOUR DRAFT, placed verbatim -- not tidied, not
 # rewritten. You said it still needs an editing pass, so here is what I noticed
 # while placing it, for you to fix or wave off:
 #
-#   1. You wrote " - " between each lead phrase and its sentence. The font change
-#      already does that separating, so the hyphen is doing the job twice. Kept
-#      because they are your words; say the word and they come out.
-#   2. No bullet has a closing full stop. Consistent, so fine.
+#   1. No bullet has a closing full stop. Consistent, so fine.
+#   2. There is a NON-BREAKING SPACE between "The" and "Crimson" in the teaser
+#      above -- it looks like an ordinary space but the two words can never be
+#      split across a line break. That, not the font size, is what stops "The"
+#      being orphaned at the end of a line. If you retype that phrase you will
+#      lose it; copy the line rather than retyping it.
 #
 # Lead phrases are both sentence case now, so the source agrees with itself. It
 # makes no visible difference -- the run-in style uppercases them either way --
@@ -64,5 +66,5 @@ intro_link_text: Learn more about our 10 comps below
 # section 1b, links intact, ready to paste back if you want any of it.
 ---
 
-- **Real work from day one** - Learn from current editors and see your work published before comp ends
-- **No experience needed** - Most Crimson editors had never worked for a newspaper before their comp
+- **Real work from day one** Learn from current editors and see your work published before comp ends
+- **No experience needed** Most Crimson editors had never worked for a newspaper before their comp

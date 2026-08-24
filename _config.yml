@@ -91,11 +91,14 @@ exclude:
   # section 7. If you ever want real bold body copy instead of the synthetic
   # bold <strong> currently gets, Vollkorn-Bold is the file to bring back, and
   # it needs an @font-face rule as well as removing from this list.
+  #
+  # Vollkorn-Bold IS now back -- it has an @font-face and the intro's jump link
+  # uses it. 28KB, and it means bold body text is a real weight rather than one
+  # the browser smears on.
   - fonts/Crimson-Italic-webfont.woff
   - fonts/Crimson-BoldItalic-webfont.woff
   - fonts/Crimson-Semibold-webfont.woff
   - fonts/Crimson-SemiboldItalic-webfont.woff
-  - fonts/Vollkorn-Bold-webfont.woff
   - fonts/Vollkorn-BoldItalic-webfont.woff
 
   # Font families the redesign does not use. main.css loads exactly five

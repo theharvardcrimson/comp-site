@@ -18,6 +18,10 @@
 @font-face { font-family:'CompSerif'; src:url('/fonts/Crimson-Bold-webfont.woff') format('woff'); font-weight:700; font-display:swap; }
 @font-face { font-family:'CompText'; src:url('/fonts/Vollkorn-Regular-webfont.woff') format('woff'); font-weight:400; font-display:swap; }
 @font-face { font-family:'CompText'; src:url('/fonts/Vollkorn-Italic-webfont.woff') format('woff'); font-weight:400; font-style:italic; font-display:swap; }
+/* The real bold body weight, 24KB. Declared so that asking for 700 in the body
+   face gets Vollkorn Bold rather than a browser-smeared fake. Used by the
+   intro's jump link. */
+@font-face { font-family:'CompText'; src:url('/fonts/Vollkorn-Bold-webfont.woff') format('woff'); font-weight:700; font-display:swap; }
 
 :root{
   /* Swap these three when the real thecrimson.com faces arrive. */
@@ -72,6 +76,13 @@
      override one of them locally. */
   --pair-cols:minmax(0,1fr) minmax(0,1fr);
   --pair-gap:clamp(34px,4vw,72px);
+
+  /* The single gap used between every line of the intro block -- teaser to first
+     bullet, bullet to bullet, last bullet to the link. It is absolute rather
+     than em BECAUSE those three now sit at different font sizes: an em-based
+     gap would come out different for each and the block would stop looking
+     evenly spaced. */
+  --intro-gap:clamp(13px,1.25vw,18px);
 }
 
 *,*::before,*::after{ box-sizing:border-box; }
@@ -675,9 +686,9 @@ a:hover{ text-decoration:underline; }
   /* A step smaller than before. Making the leads bigger was not enough on
      its own -- the GAP between lead and body is what creates the pop, so the
      body gives ground too. */
-  font-family:var(--text); font-size:clamp(16px,1.75vw,21px); line-height:1.5;
+  font-family:var(--text); font-size:clamp(17px,1.9vw,23px); line-height:1.5;
 }
-.intro-text ul li{ margin:0 0 .82em; }
+.intro-text ul li{ margin:0 0 var(--intro-gap); }
 .intro-text ul li:last-child{ margin-bottom:0; }
 .intro-text ul li::marker{ color:var(--red); }
 /* A link inside a bullet -- the third one jumps down to the board list. Crimson
@@ -715,16 +726,14 @@ a:hover{ text-decoration:underline; }
      would have the browser fake one. */
   color:var(--grey); max-width:60ch;
   font-style:italic;
-  /* THE SAME SIZE as the bullets, deliberately -- it was larger, and the owner
-     levelled them. Italic and grey are what mark it as a different voice now, so
-     it does not need the size as well. Keep this clamp identical to
-     .intro-text ul's; they are meant to match. */
-  font-size:clamp(16px,1.75vw,21px); line-height:1.5;
+  /* Larger than the bullets again, at the owner's call, and larger than it was:
+     it is the line that frames the section. */
+  font-size:clamp(19px,2.1vw,27px); line-height:1.45;
 }
 /* margin-bottom .82em, the same value .intro-text ul li carries, so the gap
    from the teaser down to the first bullet equals the gap between bullets. Both
    are em on the same font size now, which is what keeps them equal. */
-.intro-title + .intro-lead{ margin:0 0 .82em; }
+.intro-title + .intro-lead{ margin:0 0 var(--intro-gap); }
 .intro-text ul + .intro-note{ margin:clamp(18px,2vw,26px) 0 0; }
 
 /* The jump link down to the board list. Crimson, and the arrow is a real
@@ -744,12 +753,12 @@ a:hover{ text-decoration:underline; }
    sat flush against the last bullet. Second time this exact trap has bitten in
    this stylesheet -- if a margin here looks ignored, check what else selects it. */
 .intro-text .intro-jump{
-  /* The font-size is here so the .82em margin resolves against the SAME size the
-     bullets use. Inheriting 19px from the body made .82em come out 15.6px against
-     the bullets' 17.2px -- a 1.6px difference, small but the whole point of this
-     block is that the three gaps are identical. */
-  font-size:clamp(16px,1.75vw,21px);
-  margin:.82em 0 0;
+  /* Right-aligned again, at the owner's call: as the one line that sends you
+     somewhere, sitting apart from the left-aligned block reads as deliberate.
+     The gap above is the shared token, so it matches the bullet rhythm despite
+     this line being a different size. */
+  margin:var(--intro-gap) 0 0;
+  text-align:right;
 }
 .intro-jump a{
   /* Set in the body face at the teaser's size, so it reads as part of the same
@@ -761,7 +770,8 @@ a:hover{ text-decoration:underline; }
      a link, and colour on its own fails WCAG 1.4.1 for anyone who cannot
      distinguish it -- which matters more than usual here, since crimson is also
      used decoratively all over this page. */
-  font-family:var(--text); font-size:clamp(16px,1.75vw,21px);
+  font-family:var(--text); font-size:clamp(17px,1.9vw,23px);
+  font-weight:700;   /* real Vollkorn Bold, declared above -- not synthesised */
   font-style:normal; color:var(--red); text-decoration:none;
   border-bottom:1px solid currentColor; padding-bottom:2px;
 }
@@ -816,16 +826,13 @@ a:hover{ text-decoration:underline; }
      1.2em because condensed type reads smaller at a given size than the body it
      interrupts, and uppercase has no x-height letters to be judged against. */
   font-family:var(--display); font-weight:400; font-style:normal;
-  text-transform:uppercase; letter-spacing:.04em;
+  /* Ink, not crimson -- the owner levelled the bullet text to one colour, so the
+     face and the uppercase do all the distinguishing now. Letter-spacing is
+     wider than a heading's would be: condensed caps set tight read as a solid
+     block, and this needs to read as words. */
+  color:var(--ink);
+  text-transform:uppercase; letter-spacing:.09em;
   font-size:1.2em;
-  /* Crimson, chosen from six mocked treatments. 6.64:1 on paper, AA.
-
-     It puts two crimson things in one block -- this and the jump link below --
-     so keep them told apart the way they are now: the lead is uppercase bold
-     serif with NO underline, the link is roman body face WITH one. The underline
-     is what satisfies WCAG 1.4.1, since colour alone cannot mark a link. Do not
-     underline this, and do not remove the underline from that. */
-  color:var(--red);
 }
 .intro-text em{ font-style:italic; }
 
