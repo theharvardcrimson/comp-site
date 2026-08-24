@@ -360,7 +360,12 @@ a:hover{ text-decoration:underline; }
 .head p{ font-family:var(--text); max-width:52ch; color:var(--grey); margin:16px 0 0; }
 
 /* ---------- the board list: each row is a typographic band ---------- */
-.boards{ border-top:2px solid var(--ink); }
+/* overflow-x:clip, not hidden: the alternating row animation starts even rows
+   at translateX(22px), which extended the document 22px and gave the whole
+   page a horizontal scrollbar. `clip` contains that without creating a scroll
+   container, which `hidden` would -- and a scroll container here would
+   interfere with the view() timelines driving the rows. */
+.boards{ border-top:2px solid var(--ink); overflow-x:clip; }
 .board{
   display:block; padding:clamp(20px,2.6vw,34px) var(--gut);
   border-bottom:1px solid var(--hair); color:inherit;
@@ -527,3 +532,82 @@ figcaption .credit{ color:var(--red); }
 }
 @keyframes rise{ from{ transform:translateY(26px); } to{ transform:none; } }
 @keyframes slide{ from{ transform:translateX(-22px); } to{ transform:none; } }
+
+
+/* ---------- scroll-driven ticker ----------
+   Moves only while the reader scrolls. Auto-playing marquees need a pause
+   control to satisfy WCAG 2.2.2; scroll-driven motion needs none, because the
+   reader is the one driving it. animation-timeline:scroll() ties progress to
+   the document scrollport. Browsers without support show a static band, which
+   reads fine -- it is decoration.
+*/
+.ticker{
+  overflow:hidden; background:var(--red); color:var(--paper);
+  border-top:1px solid var(--red-deep); border-bottom:1px solid var(--red-deep);
+  padding:clamp(10px,1.4vw,18px) 0;
+}
+.ticker-track{
+  display:flex; align-items:center; gap:clamp(18px,2.4vw,34px);
+  width:max-content; white-space:nowrap;
+}
+.ticker-item{
+  font-family:var(--display); text-transform:uppercase;
+  font-size:clamp(30px,5vw,74px); line-height:1; letter-spacing:.02em;
+}
+.ticker-dot{ color:var(--on-red-muted); font-size:clamp(14px,1.6vw,22px); }
+@media (prefers-reduced-motion:no-preference){
+  @supports (animation-timeline:scroll()){
+    .ticker-track{
+      animation:ticker linear both;
+      animation-timeline:scroll();
+    }
+  }
+}
+/* translateX only -- never opacity. An opacity:0 keyframe would hide the band
+   outright in any browser that supports the timeline but never advances it. */
+@keyframes ticker{ from{ transform:translateX(0); } to{ transform:translateX(-50%); } }
+
+/* ---------- photo band + placeholder slots ----------
+   A slot keeps the layout final before the photograph exists: same aspect
+   ratio, same position, so dropping an image in changes nothing structurally.
+   Placeholders are switched off wholesale by show_photo_placeholders.
+*/
+.band{
+  display:grid; gap:clamp(10px,1.4vw,18px);
+  grid-template-columns:1fr;
+  padding:clamp(26px,4vw,56px) var(--gut);
+  border-bottom:1px solid var(--hair);
+}
+@media (min-width:700px){ .band{ grid-template-columns:repeat(3,1fr); } }
+.band-item{ margin:0; }
+.band-item img{ width:100%; aspect-ratio:4/5; object-fit:cover; display:block; }
+.band figcaption{
+  padding:8px 0 0; font-size:14px; line-height:1.45; color:var(--grey);
+}
+.band figcaption .credit{ color:var(--red); }
+
+.slot{
+  aspect-ratio:4/5; border:1px solid var(--red);
+  display:flex; flex-direction:column; justify-content:flex-end; gap:6px;
+  padding:clamp(14px,1.6vw,20px);
+  background:
+    repeating-linear-gradient(135deg,
+      rgba(168,41,49,.05) 0 10px, rgba(168,41,49,0) 10px 20px);
+}
+.slot-tag{
+  font-family:var(--display); text-transform:uppercase; letter-spacing:.22em;
+  font-size:12px; color:var(--red);
+}
+.slot-label{
+  font-family:var(--text); font-size:clamp(16px,1.6vw,20px); line-height:1.3;
+  color:var(--grey);
+}
+
+/* Board rows alternate their entry direction, so the list has a rhythm rather
+   than ten identical slides from the same side. */
+@media (prefers-reduced-motion:no-preference){
+  @supports (animation-timeline:view()){
+    .boards .board:nth-child(even){ animation-name:slide-right; }
+  }
+}
+@keyframes slide-right{ from{ transform:translateX(22px); } to{ transform:none; } }

@@ -1,0 +1,21 @@
+{% comment %}
+  Scroll-driven marquee. The band slides horizontally as the page scrolls --
+  it is NOT auto-playing, which is deliberate: continuously moving content
+  needs a pause control under WCAG 2.2.2, while motion the reader drives by
+  scrolling needs nothing. Same energy, no liability, still zero JavaScript.
+
+  The board list is printed twice so translateX(-50%) wraps seamlessly with no
+  gap. Content is the ten board names -- data, not written copy.
+  aria-hidden because it is decoration; the same names are a real list below.
+{% endcomment %}
+<div class="ticker" aria-hidden="true">
+  <div class="ticker-track">
+    {% assign tick = site.boards | sort: 'name' %}
+    {% for pass in (1..2) %}
+      {% for b in tick %}
+        <span class="ticker-item">{{ b.display_name | default: b.name }}</span>
+        <span class="ticker-dot">&bull;</span>
+      {% endfor %}
+    {% endfor %}
+  </div>
+</div>

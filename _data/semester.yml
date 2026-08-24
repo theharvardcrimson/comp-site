@@ -57,6 +57,28 @@ footer_line: Ten boards. One newsroom.
 paper_url: https://www.thecrimson.com
 
 
+# ---- Photo skeleton ----
+# Set to false before launch and every placeholder box disappears. While true,
+# each empty photo slot shows a labelled outline so the layout is visible and
+# final before the real photographs exist. Dropping a photo in changes nothing
+# structurally -- the slot is already the right shape.
+show_photo_placeholders: true
+
+# The three-up photo band on the homepage. `label` is what the placeholder box
+# says; `photo` is the filename once you have one. Delete an entry to drop a
+# slot, empty the list to remove the band.
+photo_band:
+  - label: The newsroom, late
+    photo: ""
+    credit: ""
+  - label: A board meeting
+    photo: ""
+    credit: ""
+  - label: Out on a story
+    photo: ""
+    credit: ""
+
+
 # ---- Comp events ----
 # Shown as a compact list just above the ten boards.
 #

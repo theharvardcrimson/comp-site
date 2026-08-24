@@ -27,6 +27,8 @@ layout: site
   {% endif %}
 </section>
 
+{% include ticker.html %}
+
 {% if site.data.semester.stat_1_number != '' %}
 <div class="stats">
   {% if site.data.semester.stat_1_number != '' %}
@@ -40,6 +42,8 @@ layout: site
   {% endif %}
 </div>
 {% endif %}
+
+{% include photo-band.html %}
 
 {% comment %} The single intro blurb -- the body of index.md. {% endcomment %}
 {% if content != '' %}

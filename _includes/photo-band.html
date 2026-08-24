@@ -1,0 +1,29 @@
+{% comment %}
+  Three-up photo band. Each slot renders a real photograph when `photo` is set
+  and a labelled placeholder when it isn't, so the layout is final before the
+  photographs exist. Set show_photo_placeholders to false in semester.yml and
+  the empty ones vanish entirely.
+{% endcomment %}
+{% assign band = site.data.semester.photo_band %}
+{% if band and band.size > 0 %}
+  {% assign filled = band | where_exp: "s", "s.photo != ''" %}
+  {% if filled.size > 0 or site.data.semester.show_photo_placeholders %}
+  <div class="band">
+    {% for slot in band %}
+      {% if slot.photo and slot.photo != '' %}
+        <figure class="band-item">
+          <img src="/images/{{ slot.photo }}" alt="{{ slot.label }}" loading="lazy">
+          {% if slot.credit and slot.credit != '' %}
+            <figcaption>{{ slot.label }} <span class="credit">By {{ slot.credit }}</span></figcaption>
+          {% endif %}
+        </figure>
+      {% elsif site.data.semester.show_photo_placeholders %}
+        <div class="band-item slot">
+          <span class="slot-tag">Photo</span>
+          <span class="slot-label">{{ slot.label }}</span>
+        </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+  {% endif %}
+{% endif %}
