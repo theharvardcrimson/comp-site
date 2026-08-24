@@ -8,12 +8,17 @@ title: About Us
 poster_line_1: Comp the
 poster_line_2: Crimson
 
-# The sentence under the headline, split across two lines so the break point
-# is yours rather than the browser's. Leave lede_line_2 blank to let it wrap
-# on its own. Both apostrophes are typographic (curly) rather than straight --
-# a normalisation, not an edit.
-lede_line_1: The nation’s oldest continuously published daily newspaper,
-lede_line_2: and Harvard College’s premier student organization.
+# The line under the headline, split across two lines so the break point is
+# yours rather than the browser's. Leave lede_line_2 blank to let it wrap on its
+# own. Apostrophes are typographic (curly) rather than straight.
+#
+# No comma before "and", and no full stop at the end. The comma was the genuine
+# error: two coordinated noun phrases do not take one, and there is no third item
+# to make it a serial comma. The full stop went because this is a fragment used
+# as a standfirst rather than a sentence -- display lines conventionally do
+# without, and it reads cleaner over the photograph.
+lede_line_1: The nation’s oldest continuously published daily newspaper
+lede_line_2: and Harvard College’s premier student organization
 
 # Heading over the intro bullets. Leave "" and no heading renders.
 intro_title: The comp
@@ -28,7 +33,12 @@ intro_title: The comp
 #
 # Positioned "above" again: this wording sets the bullets up rather than summing
 # them up, so it belongs before them.
-intro_note: From journalism, to business or tech — regardless of your passion, The Crimson has a comp for you.
+#
+# No full stop, matching the hero line and every bullet. Worth knowing this one
+# IS a real sentence -- subject and verb -- so the stop was not an error the way
+# the hero's comma was; it comes off for consistency, because no display line on
+# this page carries one now. Put one back and it needs putting back everywhere.
+intro_note: From journalism, to business or tech — regardless of your passion, The Crimson has a comp for you
 intro_note_position: above
 
 # Its own line under the bullets, not a bullet itself -- it points somewhere
