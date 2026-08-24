@@ -612,7 +612,12 @@ a:hover{ text-decoration:underline; }
 }
 @media (min-width:900px){
   .intro{
-    grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);
+    /* 1.1:1, not the 1.4:1 this started at -- the video was asked to be bigger.
+       The text column can afford it: it is capped at 68ch anyway, so above
+       about 1200px it was not using the extra width. Do not push past roughly
+       1:1, or the measure at the 900px end of the range drops below 40
+       characters a line and the paragraph starts reading as a column. */
+    grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);
     gap:clamp(30px,3.6vw,60px);
     /* Centred against the video, which is the taller item and therefore sets
        the row height. */
