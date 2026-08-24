@@ -12,12 +12,27 @@
   prefers-reduced-motion stops both outright.
 
   The covers are NOT lazy-loaded, deliberately. Both passes point at the same
-  six URLs, so laziness saves nothing once the band is reached -- and the band
-  sits directly under the hero, so essentially every visitor reaches it. With
+  URLs, so laziness saves nothing once the band is reached -- and the band sits
+  directly under the hero, so essentially every visitor reaches it. With
   loading="lazy" the duplicated second pass measured 1 of 6 copies painted
   after scrolling the band into view and waiting: the copies stay outside the
   viewport horizontally, so the load never triggers, and the loop would wrap
-  onto blanks. Six covers total 348KB at the size they are displayed.
+  onto blanks.
+
+  Because nothing here is lazy, srcset does the saving instead, and with twenty
+  covers it matters: the 292px-wide files total 848KB, the 156px ones 316KB.
+  A phone displays each cover at 78px and must not pay for desktop pixels --
+  most of this site's traffic and nearly all its signups are phones. `sizes`
+  states the real display width, 78px below 750px wide and 146px above, which
+  is where .press-item's height clamp stops growing.
+
+  Do NOT add width/height attributes to these. They map to presentational
+  hints for the CSS width/height properties, and an explicit width beats
+  aspect-ratio, so .press-item's `height: clamp(...) + aspect-ratio: 25/48`
+  stopped deriving the width: every cover rendered 292px wide instead of 146px
+  while srcset still picked the file for 146px, i.e. twice the size and blurry.
+  There is no layout-shift argument for adding them either -- CSS already fixes
+  the height and the ratio supplies the width before the image loads.
 
   Board names use `name`, not `display_name`: no "(Flyby)" or "(FM)" here.
   Those stay on each board's own page heading.
@@ -45,7 +60,12 @@
         {% for pass in (1..2) %}
           {% for slot in strip %}
             {% if slot.photo and slot.photo != '' %}
-              <img class="press-item" src="/images/{{ slot.photo }}" alt="" decoding="async">
+              <img class="press-item"
+                   src="/images/covers/292/{{ slot.photo }}"
+                   srcset="/images/covers/156/{{ slot.photo }} 156w,
+                           /images/covers/292/{{ slot.photo }} 292w"
+                   sizes="(max-width: 750px) 78px, 146px"
+                   alt="" decoding="async">
             {% elsif site.data.semester.show_photo_placeholders %}
               <span class="press-item press-slot"><span>{{ slot.label }}</span></span>
             {% endif %}

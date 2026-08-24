@@ -87,18 +87,58 @@ photo_band:
 # decoration, so the images carry alt="" by design and need no credit line.
 # Order here is the order they travel past. Add or remove entries freely.
 press_strip:
-  - label: Weekly issue, March 27
-    photo: covers/weekly_issue_march_27.jpg
-  - label: Commencement issue
-    photo: covers/commencement_issue.jpg
-  - label: Harvard-Yale supplement
-    photo: covers/harvard_yale_supplement.jpg
-  - label: Weekly issue, April 27
-    photo: covers/weekly_issue_april_27.jpg
-  - label: Visitas issue
-    photo: covers/vistas_issue.jpg
-  - label: Summer issue
-    photo: covers/summer_issue.jpg
+# Vol. CLIII front pages, in date order -- oldest first, so the band reads
+# forward in time as it travels. Sorting the filenames sorts the dates: they
+# are ISO-prefixed for exactly that reason. Keep that convention for new ones.
+#
+# `photo` is a bare filename. The template builds two URLs from it,
+# /images/covers/156/ and /images/covers/292/, and serves whichever fits --
+# a phone fetches the 156px file, not the desktop one. Both derivatives must
+# exist for every entry here.
+#
+# `label` is documentation only: it renders solely as an empty slot's caption,
+# and no slot is empty now. The band is aria-hidden decoration, so the images
+# carry alt="" by design and need no credit line.
+  - label: Dec. 19, 2025
+    photo: 2025-12-19_vol-cliii-no-01.jpg
+  - label: Jan. 30, 2026
+    photo: 2026-01-30_vol-cliii-no-02.jpg
+  - label: Feb. 6, 2026
+    photo: 2026-02-06_vol-cliii-no-03.jpg
+  - label: Feb. 13, 2026
+    photo: 2026-02-13_vol-cliii-no-04.jpg
+  - label: Feb. 20, 2026
+    photo: 2026-02-20_vol-cliii-no-05.jpg
+  - label: Feb. 27, 2026
+    photo: 2026-02-27_vol-cliii-no-06.jpg
+  - label: March 6, 2026
+    photo: 2026-03-06_vol-cliii-no-07.jpg
+  - label: March 27, 2026
+    photo: 2026-03-27_vol-cliii-no-08.jpg
+  - label: April 3, 2026
+    photo: 2026-04-03_vol-cliii-no-09.jpg
+  - label: April 10, 2026
+    photo: 2026-04-10_vol-cliii-no-10.jpg
+  - label: April 17, 2026
+    photo: 2026-04-17_vol-cliii-no-11.jpg
+  - label: April 24, 2026
+    photo: 2026-04-24_vol-cliii-no-12.jpg
+  - label: April 26, 2026 · Visitas
+    photo: 2026-04-26_vol-cliii-no-13_visitas.jpg
+  - label: May 1, 2026
+    photo: 2026-05-01_vol-cliii-no-14.jpg
+  - label: May 28, 2026 · Commencement
+    photo: 2026-05-28_vol-cliii-no-16_commencement.jpg
+  - label: June 5, 2026 · Class of 1976
+    photo: 2026-06-05_vol-cliii-no-16_class-of-1976.jpg
+  - label: June 5, 2026 · Class of 2001
+    photo: 2026-06-05_vol-cliii-no-17_class-of-2001.jpg
+  - label: June 5, 2026 · Reunion
+    photo: 2026-06-05_vol-cliii-no-18_reunion.jpg
+  - label: June 29, 2026
+    photo: 2026-06-29_vol-cliii-no-20.jpg
+  - label: July 28, 2026
+    photo: 2026-07-28_vol-cliii-no-21.jpg
 
 
 # ---- Comp events ----
