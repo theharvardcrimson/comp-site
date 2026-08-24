@@ -46,6 +46,13 @@
      two places -- .bar's padding-left and .field.has-photo -- so this token is
      what keeps them locked together. */
   --edge:clamp(14px,2.4vw,34px);
+
+  /* The vertical air above and below the stats block. ONE token because the
+     two gaps are required to be equal: the distance from the moving front-page
+     band down to the crimson figures must match the distance from the labels
+     down to the photographs. Two separate values drifted apart immediately
+     (52px above against 72px below). Change this and both move together. */
+  --stat-gap:clamp(38px,5.2vw,72px);
 }
 
 *,*::before,*::after{ box-sizing:border-box; }
@@ -411,7 +418,8 @@ a:hover{ text-decoration:underline; }
    gap, change it here too. */
 .stats{
   display:grid; grid-template-columns:1fr;
-  padding-left:var(--gut); padding-right:var(--gut);
+  padding:var(--stat-gap) var(--gut);
+  row-gap:clamp(18px,2.4vw,30px);
 }
 /* 700px, not 600px, because that is where .band goes three-up. They used to
    disagree: between 600 and 699px the figures were three across while the
@@ -422,9 +430,11 @@ a:hover{ text-decoration:underline; }
   .stats{ grid-template-columns:repeat(3,1fr); column-gap:clamp(10px,1.4vw,18px); }
 }
 @media (min-width:760px){ .stats{ text-align:center; } }
-/* Vertical padding only: the side inset now lives on the grid container, which
-   is what puts these columns on the same lines as the photographs. */
-.stats div{ padding:clamp(26px,4vw,52px) 0; text-align:center; }
+/* No padding at all now. The block's vertical air lives on .stats as
+   --stat-gap, because that is the only way the gap above the figures and the
+   gap below the labels can be held equal. row-gap there separates the stacked
+   cells on phones. */
+.stats div{ padding:0; text-align:center; }
 /* White figures on a crimson block. inline-block, NOT block, so the rectangle
    hugs the digits instead of stretching the full column -- "153", "10" and
    "TKM" therefore get different widths, which is the point. The parent is
@@ -444,21 +454,38 @@ a:hover{ text-decoration:underline; }
    2.75px bottom-heavy. Both values scale correctly in em: line-height and the
    font's own metrics are all proportional to the font size.
 
-   Solved for a 9px gap at 115.2px: top .0861em, bottom .0123em. Re-measure if
-   you change line-height or the face; do not adjust these by eye. */
+   Solved from those metrics: with padding-top .18em, padding-bottom must be
+   .1221em to put equal air above and below -- .172em of it, about 20px at
+   115.2px. If you change padding-top, recompute the bottom rather than
+   matching it: pb = pt - (line-height + ink offset - ink height) in em, which
+   with these values is pt - .074em. Do not adjust either by eye. */
 .stats b{
   display:inline-block;
   font-family:var(--display); font-size:clamp(54px,8vw,124px);
   line-height:.84; color:var(--paper); background:var(--red);
-  padding:.086em .12em .0123em;
+  padding:.18em .2em .1221em;
 }
 /* Direct child only. As `.stats span` this also caught the unit suffix nested
    inside the figure, which inherited display:block and the grey -- so the M of
    "TKM" dropped onto its own line in label grey. */
 .stats div > span{
   display:block; font-family:var(--display); text-transform:uppercase;
-  letter-spacing:.2em; font-size:clamp(17px,1.9vw,25px);
-  color:var(--grey); margin-top:12px;
+  letter-spacing:.2em; font-size:clamp(19px,2.2vw,29px);
+  color:var(--grey); margin-top:clamp(20px,2.3vw,32px);
+  /* line-height 1, not the inherited body value. Single-line caps: an
+     inherited 1.45 hangs ~7px of invisible descent under the ink, which throws
+     off the gap down to the photographs -- and that gap has to match the one
+     above the figures.
+
+     Even at line-height 1 there is leftover space under the ink: measured 4.75px
+     of it at 29px, because the caps sit on the baseline and the descender area
+     below is still part of the line box. The gap above the figures has no such
+     slack -- the crimson block's top is a painted edge -- so without this the
+     block sat 52px below the papers band but 56.75px above the photographs.
+     The negative margin cancels exactly that, and it is in em so it stays
+     correct at every clamp step of the label's size. */
+  line-height:1;
+  margin-bottom:-0.1638em;
 }
 /* Unit suffix -- the M of "21M". Uppercase, inline, same crimson as the
    figure, but set smaller so it reads as a unit rather than another digit. */
@@ -743,13 +770,11 @@ figcaption .credit{ color:var(--red); }
 }
 @media (min-width:700px){ .band{ grid-template-columns:repeat(3,1fr); } }
 
-/* The stats used to be separated from the photographs by a hairline. With the
-   line gone, the two blocks' own padding left 108px of empty paper between the
-   labels and the first photograph, which reads as a gap rather than a
-   transition -- the line had been doing the work of explaining that space.
-   Tightening only the top padding, and only when .band actually follows the
-   stats, so the band keeps its full padding anywhere else. */
-.stats + .band{ padding-top:clamp(10px,1.4vw,20px); }
+/* Zero, so the whole gap between the labels and the photographs is --stat-gap
+   and nothing else. Any padding here would be added on top of it and break the
+   equality with the gap above the figures. Only applies when .band follows the
+   stats; the band keeps its full padding anywhere else. */
+.stats + .band{ padding-top:0; }
 .band-item{ margin:0; }
 /* 5/4, and the direction reversed once on the way here. It began at 4/5
    portrait, which against these 3/2 landscape originals kept the full height
