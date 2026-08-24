@@ -890,6 +890,17 @@ a:hover{ text-decoration:underline; }
    the DOM -- that is how <details> works -- but the title should read BELOW the
    video in both states, so once open it is moved after the frame. */
 .vbox{ margin:0; display:grid; }
+/* Hide the player while closed, explicitly rather than relying on the browser's
+   own closed-<details> behaviour. Belt-and-braces, and cheap.
+
+   Being straight about what this does and does not buy: it does NOT stop the
+   iframe from loading on its own. Chrome fetches display:none iframes. What
+   actually defers the fetch is loading="lazy" on the iframe combined with the
+   frame being out of view, and that is a browser heuristic rather than a
+   contract -- a browser that ignores lazy will load Google's player on page
+   view. Verified holding in current Chrome: zero third-party requests on load,
+   one after the click. Re-check it if the markup here changes. */
+.vbox:not([open]) .vframe{ display:none; }
 /* The chain that lets the video fill the row's height. Every link is needed --
    the aside is the grid item, .vbox the disclosure inside it, .vshot the still's
    clipping box -- and breaking any one collapses the frame back to its ratio.
