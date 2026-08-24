@@ -172,6 +172,19 @@ the apostrophes. What I noticed while placing it:
 
 The same list is in the front matter of `index.md` so it is next to the words.
 
+**Teaser shortened at your instruction**, to: "Regardless of your passion — from
+journalism, to business, to tech — The Crimson has something for you."
+
+Worth one flag, because it dropped a fact rather than just words. The cut phrase
+was "Harvard's financially and editorially independent student newspaper", and
+that independence claim no longer appears anywhere on the homepage -- the only
+trace left is the word "independent" inside the Business one-liner in the board
+list. The full version survives on the Business board's own page ("100%
+financially independent from Harvard University"). Editorial independence is one
+of the stronger things you can tell a prospective comper, so if you want it back
+it probably belongs in the FAQ or as a fourth bullet rather than back in the
+teaser, which reads better short.
+
 ## 1k. The fourth stat, and what it cost
 
 `$1M BUSINESS` is in. The wording is a guess from "our 1 million dollar

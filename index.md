@@ -25,7 +25,7 @@ intro_title: The comp
 #
 # THIS IS YOUR DRAFT, placed verbatim. See the note at the bottom of this file
 # for the specific things you said still need editing.
-intro_note: Regardless of your passion, from journalism, to business, to tech, The Crimson — Harvard’s financially and editorially independent student newspaper — has something for you.
+intro_note: Regardless of your passion — from journalism, to business, to tech — The Crimson has something for you.
 intro_note_position: above
 
 # The bullets below the --- are YOUR DRAFT, placed verbatim -- not tidied, not
