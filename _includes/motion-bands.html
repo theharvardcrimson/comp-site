@@ -11,6 +11,14 @@
   Each band prints its list twice so translateX wraps with no visible gap.
   prefers-reduced-motion stops both outright.
 
+  The covers are NOT lazy-loaded, deliberately. Both passes point at the same
+  six URLs, so laziness saves nothing once the band is reached -- and the band
+  sits directly under the hero, so essentially every visitor reaches it. With
+  loading="lazy" the duplicated second pass measured 1 of 6 copies painted
+  after scrolling the band into view and waiting: the copies stay outside the
+  viewport horizontally, so the load never triggers, and the loop would wrap
+  onto blanks. Six covers total 348KB at the size they are displayed.
+
   Board names use `name`, not `display_name`: no "(Flyby)" or "(FM)" here.
   Those stay on each board's own page heading.
 {% endcomment %}
@@ -37,7 +45,7 @@
         {% for pass in (1..2) %}
           {% for slot in strip %}
             {% if slot.photo and slot.photo != '' %}
-              <img class="press-item" src="/images/{{ slot.photo }}" alt="" loading="lazy">
+              <img class="press-item" src="/images/{{ slot.photo }}" alt="" decoding="async">
             {% elsif site.data.semester.show_photo_placeholders %}
               <span class="press-item press-slot"><span>{{ slot.label }}</span></span>
             {% endif %}

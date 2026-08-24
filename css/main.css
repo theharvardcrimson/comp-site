@@ -100,7 +100,7 @@ a:hover{ text-decoration:underline; }
   font-family:var(--serif); font-size:clamp(18px,2.3vw,25px);
   color:var(--red); letter-spacing:-.01em;
 }
-/* DELIBERATE INDENT: +0.333em, setting FALL COMP 2026 in from the wordmark's
+/* DELIBERATE INDENT: +0.417em, setting FALL COMP 2026 in from the wordmark's
    left edge. Owner's choice. Do not "correct" it to flush.
 
    Be clear about what this is, because it is not an optical correction.
@@ -109,19 +109,19 @@ a:hover{ text-decoration:underline; }
    so with both boxes on one edge the ink differs by 0.191px -- a fifth of a
    pixel. Anything past about +1px stops compensating for bearing and becomes a
    design decision: the small letterspaced line reads as a caption hung off the
-   wordmark rather than a second line flush beneath it. +4px is that decision,
-   chosen deliberately after viewing the -2..+2 range.
+   wordmark rather than a second line flush beneath it. +5px is that decision,
+   chosen deliberately after viewing the -2..+2 range and then +4.
 
    Units matter here: em, not px. The size is clamp(10px,1vw,12px), so a fixed
-   4px would read proportionally heavier as the header shrinks -- 4px against
-   10px type on a phone is well over a third of the size. In em the indent
+   5px would read proportionally heavier as the header shrinks -- 5px against
+   10px type on a phone is half the size. In em the indent
    scales with the type and holds the same relationship at every width.
 
    An earlier -0.08em nudge on this rule was simply wrong: it put the F 1.125px
    LEFT of the T, which is what it claimed to fix. If you change this value,
    render the comparison first -- do not judge it from a single screenshot. */
 .wordmark-sub{
-  margin-left:var(--sub-nudge, 0.333em);   /* +4px at 12px; see note above */
+  margin-left:var(--sub-nudge, 0.417em);   /* +5px at 12px; see note above */
   display:block; font-family:var(--display); font-size:clamp(10px,1vw,12px);
   color:var(--grey); text-transform:uppercase; letter-spacing:.26em;
   margin-top:4px;
@@ -655,10 +655,15 @@ figcaption .credit{ color:var(--red); }
   display:flex; align-items:stretch; gap:clamp(10px,1.4vw,20px);
   width:max-content; padding-left:var(--gut);
 }
+/* 25/48 is the supplied covers' own ratio (2000x3840), so a front page shows
+   whole. It was 3/4, which with object-fit:cover sliced roughly the bottom
+   third off every one -- and the bottom of a broadsheet is still the paper.
+   If you ever mix in a differently-shaped image, object-position:top keeps the
+   masthead rather than centring the crop on the fold. */
 .press-item{
   display:block; flex:none;
-  height:clamp(150px,20vw,280px); aspect-ratio:3/4;
-  object-fit:cover;
+  height:clamp(150px,20vw,280px); aspect-ratio:25/48;
+  object-fit:cover; object-position:top;
 }
 .press-slot{
   display:flex; align-items:flex-end; padding:10px;

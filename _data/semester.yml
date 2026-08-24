@@ -82,19 +82,23 @@ photo_band:
 # Front pages that wipe across the homepage as you scroll. Same shape as
 # photo_band. Six slots so the strip is wide enough to move; delete entries or
 # empty the list to remove the band.
+# `label` is documentation only once `photo` is set -- it renders solely for an
+# empty slot, as the placeholder's caption. The band itself is aria-hidden
+# decoration, so the images carry alt="" by design and need no credit line.
+# Order here is the order they travel past. Add or remove entries freely.
 press_strip:
-  - label: Front page
-    photo: ""
-  - label: FM cover
-    photo: ""
-  - label: Sports back page
-    photo: ""
-  - label: Arts supplement
-    photo: ""
+  - label: Weekly issue, March 27
+    photo: covers/weekly_issue_march_27.jpg
   - label: Commencement issue
-    photo: ""
-  - label: The Game
-    photo: ""
+    photo: covers/commencement_issue.jpg
+  - label: Harvard-Yale supplement
+    photo: covers/harvard_yale_supplement.jpg
+  - label: Weekly issue, April 27
+    photo: covers/weekly_issue_april_27.jpg
+  - label: Visitas issue
+    photo: covers/vistas_issue.jpg
+  - label: Summer issue
+    photo: covers/summer_issue.jpg
 
 
 # ---- Comp events ----
