@@ -111,6 +111,82 @@ Come see for yourself! Stop by 14 Plympton Street for a tour of The Crimson's
 historic building and to learn more about our 10 comps.
 ```
 
+## 1c. PARKED: the financial aid panel prose
+
+Financial aid moved up into the two-column highlights block as bullets, so the
+standalone panel that used to sit below the boards is gone -- `_sections/`
+is now empty and that slot becomes the comp FAQ.
+
+The full paragraphs are below. They are longer and warmer than the bullets and
+say things the bullets do not, so keep them somewhere: they would work as an
+FAQ answer, or on a page of their own. Restoring the panel is one file --
+recreate `_sections/financial-aid.md` with this body and it reappears.
+
+```markdown
+Worried that you won't be able to spend time on The Crimson because you think
+you'll need a paying job? We can help. The Crimson's Financial Aid Program offers
+limited but substantial compensation to staff members with demonstrated financial
+need. It's meant to ensure that students who would otherwise need a term-time job
+can be Crimson editors, and it's part of our efforts to make sure that all Harvard
+students have the opportunity to enjoy and learn from the experience of working
+here, regardless of their socioeconomic background.
+
+Any questions? Want more information? Don't hesitate to contact Crimson President
+{{ site.data.semester.contact_name }} ([{{ site.data.semester.contact_email }}](mailto:{{ site.data.semester.contact_email }}))
+with any and all questions about the program.
+```
+
+## 1d. ROADMAP: things the owner has asked for, not yet built
+
+Recorded as they were said, with the one thing each would cost. None of this is
+started.
+
+**Events as a calendar, not a list.** Each event should look like a day or entry
+on a calendar rather than a row. One more event to add alongside the three.
+Also wants the venue -- 14 Plympton Street -- shown and easy to find, possibly
+with a small map.
+
+*The map is the only part with a real cost.* A Google Maps embed is an iframe
+that loads their JavaScript and sets cookies -- the same problem the comp video
+had, and worse, because a map has no natural "click to load" moment. Options,
+cheapest first: a static image of the block with a link out to directions;
+an OpenStreetMap static tile, same idea but no Google; or an embed, which
+breaks the no-third-party position the rest of the page now holds. Recommend
+the first.
+
+**Cut the "Before you choose" note** above the board list, replacing it with a
+simple line inviting people to learn more about the ten boards. Worth knowing
+what gets lost: that note carries the only mention anywhere on the site that
+News, Magazine, Sports and Arts comp together for three weeks before splitting,
+which is the most reassuring fact available to someone who cannot choose. If it
+comes out of there it should land somewhere -- most likely the FAQ.
+
+**Boards as accordions instead of pages.** Keep the ten rows as they are, and
+expand each in place with a plus/minus rather than navigating to a page.
+
+*This one is a genuine architecture decision, not styling.* Native <details>
+does it with no JavaScript, so the mechanism is easy. The cost is the ten URLs:
+/arts/, /news/ and the rest are what boards link to from their own pages and
+emails, what search engines have indexed, and what someone pastes into a group
+chat. Collapsing them into anchors on one page breaks every one of those links
+unless the pages are kept as well and the homepage merely duplicates them.
+Worth deciding deliberately, and worth checking with the boards first.
+
+**FAQ replaces the financial aid panel.** Done, in the sense that the panel is
+gone -- financial aid is now bullets in the two-column block, its prose is
+parked in section 1c above, and `_sections/` is empty. The FAQ block already
+exists and renders as soon as `_data/faq.yml` has answers, so writing them is
+all that is left.
+
+**Drawer should jump to sections, and list more than boards.** Anchor links to
+points on the page, plus entries for the FAQ and the About Us material.
+
+*Small note for whoever builds it:* the drawer is a native <details>, and it
+will not close itself when an anchor is followed, because closing needs
+JavaScript. The panel would sit open over the section just jumped to. Worth
+solving before shipping -- probably by having anchors only on a page where the
+drawer is not the primary navigation, or by accepting it.
+
 ## 2. Needed: what the Fall comp actually looks like
 
 Shopping week is gone, which removes the only per-board event structure the

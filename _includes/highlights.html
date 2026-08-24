@@ -1,0 +1,36 @@
+{% comment %}
+  Two columns of bullets under the intro. Content lives in
+  _data/highlights.yml; this file only lays it out.
+
+  Every part is optional so the section degrades rather than breaks: a column
+  with no items prints just its heading, a column with no note prints no note,
+  one column instead of two gives a single column at full width, and an empty
+  columns list removes the section from the page entirely.
+
+  The bullets are a real <ul>, not styled divs, so a screen reader announces
+  "list, 3 items" -- which is the whole reason to use bullets rather than
+  paragraphs here.
+{% endcomment %}
+{% assign cols = site.data.highlights.columns %}
+{% if cols and cols.size > 0 %}
+<section class="hl">
+  {% for col in cols %}
+    <div class="hl-col">
+      {% if col.title and col.title != '' %}<h2 class="hl-title">{{ col.title }}</h2>{% endif %}
+      {% if col.items and col.items.size > 0 %}
+        <ul class="hl-list">
+          {% for item in col.items %}<li>{{ item }}</li>{% endfor %}
+        </ul>
+      {% endif %}
+      {% if col.note and col.note != '' %}
+        <p class="hl-note">
+          {{ col.note }}{% if col.show_contact %}
+            {{ site.data.semester.contact_name }}
+            (<a href="mailto:{{ site.data.semester.contact_email }}">{{ site.data.semester.contact_email }}</a>)
+          {%- endif -%}.
+        </p>
+      {% endif %}
+    </div>
+  {% endfor %}
+</section>
+{% endif %}

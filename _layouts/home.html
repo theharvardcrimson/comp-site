@@ -83,9 +83,17 @@ layout: site
       {%- endcomment -%}
       <details class="vbox">
         <summary class="vthumb">
-          <img src="/images/video-thumb.jpg" alt=""
-               width="960" height="540" loading="lazy" decoding="async">
-          <span class="vplay" aria-hidden="true"></span>
+          {%- comment -%}
+            The still and the button share a wrapper so the button's position is
+            a percentage OF THE IMAGE. Positioned against the <summary> instead
+            it was measured against image plus title line, which put a nominal
+            72% at 79% of the frame.
+          {%- endcomment -%}
+          <span class="vshot">
+            <img src="/images/video-thumb.jpg" alt=""
+                 width="960" height="540" loading="lazy" decoding="async">
+            <span class="vplay" aria-hidden="true"></span>
+          </span>
           <span class="vlabel">{{ site.data.semester.video_title }}</span>
         </summary>
         <div class="vframe">
@@ -101,6 +109,8 @@ layout: site
   {% endif %}
 </div>
 {% endif %}
+
+{% include highlights.html %}
 
 {% comment %}
   Comp events, deliberately compact and above the boards: they are the only
