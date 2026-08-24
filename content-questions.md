@@ -132,15 +132,27 @@ While you're in there — anything else out of date across the ten board pages?
 Named people, specific events, "this year we're doing X" claims. That staleness
 is invisible to me; I can't tell a current fact from a 2024 one.
 
-## 7. Needed: typefaces
+## 7. Typefaces — SETTLED
 
-The two faces from the new thecrimson.com — the display serif for headlines and
-the letterspaced sans for labels and bylines.
+Four variants were rendered side by side at real size and the owner picked the
+one already in place:
 
-Worth knowing this is now optional rather than blocking: the site uses the
-repo's own fonts (League Gothic for display, Crimson for the wordmark, Vollkorn
-for body), which cost nothing and need no webfont service. Swapping in the real
-faces is a one-line change to the CSS custom properties whenever you have them.
+- **League Gothic** — display. Headlines, board names, labels, buttons.
+- **Crimson** — the wordmark, and nothing else.
+- **Vollkorn** — body copy and standfirsts.
+
+Rejected, with reasons, so this doesn't get relitigated:
+
+- *Crimson for body too* (one serif everywhere) — more unified and one fewer
+  font file, but it's a lighter face that reads thin on the crimson field, and
+  being narrower it pushed the hero standfirst from two lines to three.
+- *Chunk Five instead of League Gothic* — at the same size the headline is far
+  wider, so it would have to be set smaller. The scale is the point.
+- *Colaborate Light for labels* — too small a change to justify a fourth family.
+
+The two faces from the new thecrimson.com are still welcome if you want them
+later; all three are behind CSS custom properties at the top of `css/main.css`,
+so a swap is one line each. But nothing is waiting on them.
 
 ## 8. Photography (later)
 
