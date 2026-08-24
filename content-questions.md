@@ -253,6 +253,41 @@ Cheapest fix when you get to it: give both sections one shared grid definition
 in a custom property, the way --stat-gap already forces the vertical rhythm to
 agree. Then the two can never drift again.
 
+## 1i. TO RESOLVE: the board rows -- white space, and active voice
+
+**Less white space.** The rows are wide open, and the cause is the two-column
+grid rather than the padding: from 900px up each row is `1.25fr 1fr` with a gap
+of up to 72px, and because the descriptions are short they leave the middle of
+the row empty. Padding is only 34px at most, so trimming that will not fix it.
+The levers, in order of effect: narrow the description column so it starts
+closer to the name, drop the row padding, or set the two on one line at large
+sizes rather than as columns. Worth trying the first alone before touching the
+type.
+
+**Active voice, and this one has a consequence.** You want "write about..."
+rather than "writes about...", so it reads as what a comper would be doing.
+
+The edit itself is mechanical -- every one of the ten is a third-person verb
+that loses its "s", with Multimedia's "captures & produces" becoming "capture &
+produce". I have NOT made the change, because these are the board one-liners
+you approved verbatim and it is your call, but it is a find-and-replace rather
+than a rewrite if you want it.
+
+*The consequence:* the design currently uses the board name as the sentence's
+subject -- the row reads "ARTS writes about the cultural phenomena...". In the
+active voice that becomes "ARTS write about...", which is not a sentence. The
+run-in construction stops working, so the change means one of:
+
+- Accept the description as a separate phrase rather than a continuation of the
+  name. Cleanest, and probably what you already picture.
+- Add an implied lead-in, e.g. a small "you'll" or "here you" before each
+  description. Costs a word on every row.
+- Recast the descriptions as noun phrases instead of verbs.
+
+Flagging it because the sentence-continuation idea is deliberate in the current
+markup and comments, and whoever makes the verb change should know they are
+retiring it rather than tripping over it.
+
 ## 1f. TO RESOLVE: the mobile header looks clumsy
 
 Your words: "kind of dumb and not very sleek." Agreed, and note that renaming
