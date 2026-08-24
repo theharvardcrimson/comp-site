@@ -450,7 +450,20 @@ a:hover{ text-decoration:underline; }
    others. Below 740 the stats stack full-width and the label has room.
    Move one breakpoint and you must move the other. */
 @media (min-width:740px){
-  .stats{ grid-template-columns:repeat(3,1fr); column-gap:clamp(10px,1.4vw,18px); }
+  /* auto-fit, not a hard count, so adding or removing a stat in semester.yml
+     does not need a CSS edit. 150px is roughly the widest figure block plus its
+     label, so four fit across a desktop and two per row on a phone.
+
+     NOTE: this is what broke the stat-over-photograph alignment. Three stats
+     sat centred over three photographs by sharing repeat(3,1fr) with .band. A
+     fourth stat makes that impossible -- four columns cannot centre over three
+     -- so the relationship is deliberately abandoned rather than half-kept. If
+     the band ever gains a fourth photograph, both can go back to repeat(4,1fr)
+     and line up again. */
+  .stats{
+    grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+    column-gap:clamp(10px,1.4vw,18px);
+  }
 }
 @media (min-width:760px){ .stats{ text-align:center; } }
 /* No padding at all now. The block's vertical air lives on .stats as
@@ -663,6 +676,16 @@ a:hover{ text-decoration:underline; }
   line-height:1.55; color:var(--grey); max-width:56ch;
 }
 .intro-title + .intro-note{ margin:0 0 clamp(18px,2vw,26px); }
+/* The teaser, when it sits above the bullets. Ink rather than grey and the same
+   size as the bullets: it is framing the list, not qualifying it, and the
+   smaller grey treatment read as a caption attached to the heading. Given more
+   space beneath than the heading gives it, so the bullets read as a group under
+   it rather than a fourth paragraph. */
+.intro-lead{
+  color:var(--ink); max-width:60ch;
+  font-size:clamp(17px,1.9vw,23px); line-height:1.5;
+}
+.intro-title + .intro-lead{ margin:0 0 clamp(24px,2.8vw,36px); }
 .intro-text ul + .intro-note{ margin:clamp(18px,2vw,26px) 0 0; }
 /* -0.4408em, measured, not chosen, and only in the ONE-COLUMN layout.
    Stacked, the paragraph is the first thing under the photographs, and its

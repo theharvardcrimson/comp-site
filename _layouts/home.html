@@ -40,6 +40,9 @@ layout: site
   {% if site.data.semester.stat_3_number != '' %}
     <div class="reveal"><b>{{ site.data.semester.stat_3_number }}{% if site.data.semester.stat_3_unit and site.data.semester.stat_3_unit != '' %}<span class="unit">{{ site.data.semester.stat_3_unit }}</span>{% endif %}</b><span>{{ site.data.semester.stat_3_label }}</span></div>
   {% endif %}
+  {% if site.data.semester.stat_4_number and site.data.semester.stat_4_number != '' %}
+    <div class="reveal"><b>{{ site.data.semester.stat_4_number }}{% if site.data.semester.stat_4_unit and site.data.semester.stat_4_unit != '' %}<span class="unit">{{ site.data.semester.stat_4_unit }}</span>{% endif %}</b><span>{{ site.data.semester.stat_4_label }}</span></div>
+  {% endif %}
 </div>
 {% endif %}
 
@@ -65,7 +68,12 @@ layout: site
       {% if has_title %}<h2 class="intro-title">{{ page.intro_title }}</h2>{% endif %}
       {%- assign note = page.intro_note -%}
       {%- if note and note != '' and page.intro_note_position == 'above' -%}
-        <p class="intro-note">{{ note }}</p>
+        {%- comment -%}
+          Above the bullets it is a lead, not a footnote, so it gets a second
+          class -- the small grey treatment would have buried the line that
+          frames everything under it.
+        {%- endcomment -%}
+        <p class="intro-note intro-lead">{{ note }}</p>
       {%- endif -%}
       {{ content }}
       {%- if note and note != '' and page.intro_note_position != 'above' -%}

@@ -155,6 +155,45 @@ cycle's form. That is the single most important thing to fix before launch --
 a working button to the wrong form is worse than a broken one, because nobody
 notices. Paste the new URL over that line and every button follows.
 
+## 1j. YOUR DRAFT COPY IS IN, and here is what I did not touch
+
+The teaser and three bullets you sent are in `index.md`, verbatim. You said it
+still needs an editing pass, so I placed it and changed nothing except curling
+the apostrophes. What I noticed while placing it:
+
+1. Bullet 2 reads "completion base/just show up nd do the work" -- "base" for
+   "based", "nd" for "and".
+2. Bullets 1 and 3 have no closing full stop; bullet 2 does.
+3. The slashes in bullets 1 and 2 read as unfinished alternatives rather than a
+   deliberate either/or.
+4. Bullet 3, "Shape the journalism that shapes Harvard", is a fragment beside two
+   full sentences -- and it is the line you said you most want to highlight. It
+   may want to BE the teaser rather than the last bullet.
+
+The same list is in the front matter of `index.md` so it is next to the words.
+
+## 1k. The fourth stat, and what it cost
+
+`$1M BUSINESS` is in. The wording is a guess from "our 1 million dollar
+business" and is yours to set -- `_data/semester.yml` says how to make it read
+"MILLION-DOLLAR BUSINESS" instead if you prefer, and what that trades away.
+
+**It broke the stat-over-photograph alignment, deliberately.** Three stats sat
+centred over three photographs by sharing a three-column grid with the band --
+something you asked for and I measured to 0.0px. Four columns cannot centre over
+three, so rather than half-keep it I let it go. The stats grid is now `auto-fit`,
+so adding or removing a stat needs no CSS change at all.
+
+Two ways to get the alignment back, if you want it:
+
+- **A fourth photograph.** `printing_presses.jpg` is already in the gallery and
+  pairs naturally with a business stat. Needs a credit like the other three.
+- **Go back to three stats** and put the business figure somewhere else -- it is
+  also already in the Business board's one-liner.
+
+Not doing either without your say. Four stats over three photos does not look
+broken; it just no longer looks deliberate.
+
 ## 1d. ROADMAP: things the owner has asked for, not yet built
 
 Recorded as they were said, with the one thing each would cost. None of this is

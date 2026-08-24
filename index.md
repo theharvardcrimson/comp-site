@@ -18,26 +18,36 @@ lede_line_2: and Harvard College’s premier student organization.
 # Heading over the intro bullets. Leave "" and no heading renders.
 intro_title: The comp
 
-# One line of explainer alongside the bullets. PLACEHOLDER -- type over it.
-# Leave "" and it does not render.
+# The teaser line that sets up the bullets. Positioned "above", it is styled as
+# a lead -- ink rather than grey, and the same size as the bullets -- because it
+# is doing the framing rather than qualifying afterwards. Positioned "below" it
+# reverts to the smaller grey qualifier.
 #
-# intro_note_position: "above" puts it between the heading and the bullets,
-# "below" puts it after them. Which reads better depends on what it says: an
-# explainer that sets up the list wants to be above, one that qualifies the
-# list wants to be below.
-intro_note: Lorem ipsum dolor sit amet consectetur, adipiscing elit sed do eiusmod tempor.
-intro_note_position: below
+# THIS IS YOUR DRAFT, placed verbatim. See the note at the bottom of this file
+# for the specific things you said still need editing.
+intro_note: Regardless of your passion, from journalism, to business, to tech, The Crimson — Harvard’s financially and editorially independent student newspaper — has something for you.
+intro_note_position: above
 
-# The list below the --- is PLACEHOLDER, both the heading's content and the
-# bullets. It is lorem ipsum standing in until you know what the bullets should
-# say. Type over each line; keep the leading "- " and each one stays a bullet.
-# Add or delete lines freely.
+# The bullets below the --- are YOUR DRAFT, placed verbatim -- not tidied, not
+# rewritten. You said it still needs an editing pass, so here is what I noticed
+# while placing it, for you to fix or wave off:
+#
+#   1. Bullet 2 reads "completion base/just show up nd do the work" -- "base"
+#      for "based", and "nd" for "and".
+#   2. Bullets 1 and 3 have no closing full stop; bullet 2 does.
+#   3. The slashes in bullets 1 and 2 read as unfinished alternatives rather
+#      than a choice, e.g. "high school paper/have never worked for a newspaper".
+#   4. Bullet 3, "Shape the journalism that shapes Harvard", is a fragment next
+#      to two that are full sentences. It is also the line you said you most
+#      want to highlight, so it may want to be the teaser rather than a bullet.
+#
+# Apostrophes were curled to match the rest of the site. Nothing else changed.
+# Keep the leading "- " on each line and it stays a bullet.
 #
 # The real copy that used to be here is parked in content-questions.md,
 # section 1b, links intact, ready to paste back if you want any of it.
 ---
 
-- Lorem ipsum dolor sit amet, consectetur adipiscing elit
-- Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua
-- Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-- Nisi ut aliquip ex ea commodo consequat, duis aute irure dolor
+- No experience required! The majority of Crimson editors didn’t work for their high school paper/have never worked for a newspaper before coming to Harvard. We’ll teach you everything you need to know
+- Completion based! With the exception of our Business and Tech comps, every board at The Crimson is completion base/just show up nd do the work.
+- Shape the journalism that shapes Harvard
