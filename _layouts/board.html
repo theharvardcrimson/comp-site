@@ -16,7 +16,7 @@ layout: site
   <h1 class="poster">{{ page.display_name | default: page.name }}</h1>
   <p class="lede">{{ page.hook }}</p>
   <p class="actions on-red">
-    <a class="btn btn-ghost" href="{{ site.data.semester.signup_url }}">Sign up</a>
+    <a class="btn btn-ghost" href="{{ site.data.semester.signup_url }}">{{ site.data.semester.signup_label }}</a>
   </p>
 
   {% comment %}

@@ -625,6 +625,17 @@ a:hover{ text-decoration:underline; }
   }
 }
 .intro-text{ max-width:68ch; }
+/* The intro's list is styled like the highlight columns' -- same marker, same
+   rhythm -- because they are the same kind of thing on the same page.
+   list-style stays ON for the same reason: none strips list semantics in
+   Safari with VoiceOver. */
+.intro-text ul{
+  margin:0; padding-left:1.15em;
+  font-family:var(--text); font-size:clamp(16px,1.6vw,19px); line-height:1.5;
+}
+.intro-text ul li{ margin:0 0 .72em; }
+.intro-text ul li:last-child{ margin-bottom:0; }
+.intro-text ul li::marker{ color:var(--red); }
 /* -0.4408em, measured, not chosen, and only in the ONE-COLUMN layout.
    Stacked, the paragraph is the first thing under the photographs, and its
    line box carries 8.38px of leading above its cap ink at the 19px body size
@@ -636,9 +647,17 @@ a:hover{ text-decoration:underline; }
    video rather than sitting at the top: there the section's top edge is the
    video's, which is a painted edge with no leading to compensate for, and
    keeping the negative margin would just bias the centring by 4px. */
+/* Two values because the correction depends on which element leads: a
+   paragraph's line box carries 8.38px of leading above its ink at 19px
+   (0.4408em), a heading's carries 4.12px at 42px (0.0982em). The heading rule
+   is second so it wins when a heading is present. Both reset in two columns,
+   where the text is centred against the video and the section's top edge is
+   the video's painted edge. */
 .intro-text > *:first-child{ margin-top:-0.4408em; }
+.intro-text > .intro-title:first-child{ margin-top:-0.0982em; }
 @media (min-width:900px){
-  .intro-text > *:first-child{ margin-top:0; }
+  .intro-text > *:first-child,
+  .intro-text > .intro-title:first-child{ margin-top:0; }
 }
 .intro-text p{ margin:0 0 1.15em; }
 .intro-text p:last-child{ margin-bottom:0; }
@@ -669,10 +688,15 @@ a:hover{ text-decoration:underline; }
   .hl{ grid-template-columns:repeat(2,1fr); gap:clamp(34px,4vw,72px); }
 }
 .hl-col{ min-width:0; }
-.hl-title{
+/* One treatment for both section headings -- the intro's and the highlight
+   columns' -- so they cannot drift apart. The negative top margin is the
+   measured leading above the cap ink at line-height 1 (4.12px at 42px), the
+   same correction the labels and paragraphs need. */
+.hl-title,
+.intro-title{
   font-family:var(--display); text-transform:uppercase; font-weight:400;
   font-size:clamp(26px,3vw,42px); line-height:1; letter-spacing:.01em;
-  color:var(--ink); margin:-0.0982em 0 clamp(16px,1.8vw,24px);   /* measured leading; see note above */
+  color:var(--ink); margin:-0.0982em 0 clamp(16px,1.8vw,24px);
 }
 .hl-list{
   margin:0; padding-left:1.15em; max-width:52ch;

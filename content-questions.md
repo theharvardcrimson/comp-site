@@ -136,6 +136,23 @@ Any questions? Want more information? Don't hesitate to contact Crimson Presiden
 with any and all questions about the program.
 ```
 
+## 1e. WAITING ON YOU: the interest form link
+
+You said you would send an updated one. The button now reads **Interest form**
+everywhere -- hero, header, drawer, and the foot of all ten board pages -- from
+a single `signup_label` in `_data/semester.yml`.
+
+`signup_url` in that same file is still the OLD Google Form:
+
+```
+https://docs.google.com/forms/d/e/1FAIpQLScnz4wmdtXud61rA9Zlm6n5JMqopGssM4RDw2PDQoXOsNWyXg/viewform
+```
+
+So every button on the site currently says "Interest form" and points at last
+cycle's form. That is the single most important thing to fix before launch --
+a working button to the wrong form is worse than a broken one, because nobody
+notices. Paste the new URL over that line and every button follows.
+
 ## 1d. ROADMAP: things the owner has asked for, not yet built
 
 Recorded as they were said, with the one thing each would cost. None of this is
@@ -186,6 +203,53 @@ will not close itself when an anchor is followed, because closing needs
 JavaScript. The panel would sit open over the section just jumped to. Worth
 solving before shipping -- probably by having anchors only on a page where the
 drawer is not the primary navigation, or by accepting it.
+
+## 1f. TO RESOLVE: the mobile header looks clumsy
+
+Your words: "kind of dumb and not very sleek." Agreed, and note that renaming
+the button made it worse -- "Interest form" is nearly twice the width of "Sign
+up", so the crimson slab grew and now dominates a 390px bar next to a bare
+hamburger. Two controls, one a heavy filled block and one three thin lines,
+with nothing relating them.
+
+Options, cheapest first, all pure CSS:
+
+1. **Quiet both controls.** Drop the button's fill on small screens for the
+   ghost outline already used in the hero, cut its padding, and give the
+   toggle a small "Menu" text label so the two read as a matched pair of text
+   controls rather than icon-plus-slab.
+
+2. **Move the call to action out of the header on phones** into a slim sticky
+   bar along the bottom. Thumb-reachable, which the top-right corner is not,
+   frees the header to be just wordmark and menu, and the crimson stays a
+   full-width band rather than an awkward rectangle. This is the one I would
+   pick.
+
+3. **Shorten the label on small screens only** -- "Interest" or "Form". Cheap,
+   but it makes the most important control on the site vaguer, so I would not.
+
+4. **Shrink the bar.** 70px is tall for a phone; 56 with smaller controls would
+   look tauter on its own.
+
+Recommend 2, with 1 as the fallback if a bottom bar feels like too much.
+
+## 1g. TO RESOLVE: alumni and financial aid as colour blocks
+
+You want the two columns to become two boxes with the text sitting on a
+coloured background, crimson or something else, and asked for a few mockups
+before deciding.
+
+Worth flagging one thing to decide first, because it constrains the palette:
+body text on a coloured block has to clear 4.5:1. Crimson gives 6.64:1 with
+paper text, which is the pairing already used for the stat figures -- so
+reusing it is safe but means a third crimson element on one screen. Anything
+new, a warm grey or the dark ink, has to be measured before it ships, not
+picked by eye. Three greys failed during this redesign and each looked fine.
+
+Also: the financial aid column is roughly twice the height of the alumni one.
+As plain columns that reads as normal. As two boxes it will read as a mistake,
+so equal-height boxes with unequal content is part of what the mockups need to
+solve.
 
 ## 2. Needed: what the Fall comp actually looks like
 

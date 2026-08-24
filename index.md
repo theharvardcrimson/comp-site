@@ -15,17 +15,19 @@ poster_line_2: Crimson
 lede_line_1: The nation’s oldest continuously published daily newspaper,
 lede_line_2: and Harvard College’s premier student organization.
 
-# The prose below the --- is PLACEHOLDER. It is lorem ipsum, standing in until
-# you know what this paragraph should say. Type over it -- it is one paragraph
-# of plain text with no markup to preserve.
+# Heading over the intro bullets. Leave "" and no heading renders.
+intro_title: The comp
+
+# The list below the --- is PLACEHOLDER, both the heading's content and the
+# bullets. It is lorem ipsum standing in until you know what the bullets should
+# say. Type over each line; keep the leading "- " and each one stays a bullet.
+# Add or delete lines freely.
 #
 # The real copy that used to be here is parked in content-questions.md,
 # section 1b, links intact, ready to paste back if you want any of it.
 ---
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+- Lorem ipsum dolor sit amet, consectetur adipiscing elit
+- Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua
+- Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
+- Nisi ut aliquip ex ea commodo consequat, duis aute irure dolor

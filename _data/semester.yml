@@ -10,6 +10,10 @@ season: Fall
 year: 2026
 
 # The "Sign up" button, used everywhere on the site.
+# The words on every button that points at signup_url -- the hero, the header,
+# the drawer, the foot of each board page. One value so they cannot disagree.
+signup_label: Interest form
+
 signup_url: https://docs.google.com/forms/d/e/1FAIpQLScnz4wmdtXud61rA9Zlm6n5JMqopGssM4RDw2PDQoXOsNWyXg/viewform
 
 # Who to email with questions. Shown in the footer and on every board page.

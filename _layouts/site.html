@@ -40,12 +40,13 @@
     </a>
 
     {% comment %}
-      Sign up sits outermost so the solid crimson block anchors the corner;
-      the menu toggle tucks inside it.
+      The signup button sits outermost so the solid crimson block anchors the
+      corner; the menu toggle tucks inside it. Its label comes from
+      semester.yml so every button pointing at the form reads the same.
     {% endcomment %}
     <div class="bar-actions">
       {% include drawer.html %}
-      <a class="btn" href="{{ site.data.semester.signup_url }}">Sign up</a>
+      <a class="btn" href="{{ site.data.semester.signup_url }}">{{ site.data.semester.signup_label }}</a>
     </div>
   </header>
 
@@ -78,7 +79,7 @@
     <div class="foot-top">
       <div>
         <h2>{{ site.data.semester.footer_line }}</h2>
-        <a class="btn btn-ghost" href="{{ site.data.semester.signup_url }}">Sign up</a>
+        <a class="btn btn-ghost" href="{{ site.data.semester.signup_url }}">{{ site.data.semester.signup_label }}</a>
       </div>
 
       <div class="foot-cols">

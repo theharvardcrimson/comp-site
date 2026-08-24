@@ -16,7 +16,7 @@ layout: site
     <p class="lede">{{ page.lede_line_1 }}{% if page.lede_line_2 and page.lede_line_2 != '' %}<br>{{ page.lede_line_2 }}{% endif %}</p>
   {% endif %}
   <p class="actions on-red">
-    <a class="btn btn-ghost" href="{{ site.data.semester.signup_url }}">Sign up</a>
+    <a class="btn btn-ghost" href="{{ site.data.semester.signup_url }}">{{ site.data.semester.signup_label }}</a>
   </p>
 
   {% if hero and hero != '' and site.data.semester.hero_photo_credit != '' %}
@@ -58,7 +58,14 @@ layout: site
 {% assign vid = site.data.semester.video_id %}
 {% if content != '' or vid != '' %}
 <div class="intro reveal">
-  {% if content != '' %}<div class="intro-text">{{ content }}</div>{% endif %}
+  {% assign has_title = false %}
+  {% if page.intro_title and page.intro_title != '' %}{% assign has_title = true %}{% endif %}
+  {% if content != '' or has_title %}
+    <div class="intro-text">
+      {% if has_title %}<h2 class="intro-title">{{ page.intro_title }}</h2>{% endif %}
+      {{ content }}
+    </div>
+  {% endif %}
   {% if vid and vid != '' %}
     <aside class="intro-video">
       {%- comment -%}
