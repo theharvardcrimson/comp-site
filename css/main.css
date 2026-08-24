@@ -62,6 +62,16 @@
      If you ever want a neutral instead of a red-adjacent one, #f1ece2 is an oat
      that measures slightly better again (15.76 / 5.89 / 5.63). */
   --wash:#f4e7e5;
+
+  /* The two-up grid, shared by the intro (prose + video) and the highlights
+     (two boxes) so their column edges coincide -- the video sits directly above
+     the financial aid box and they should share an edge. They had drifted: the
+     intro was 1.1fr/1fr with a 51.8px gap against the highlights' 1fr/1fr with
+     57.6px, which put the video's left edge 27px inside the box below it. Both
+     read these tokens now, so the only way to break the alignment again is to
+     override one of them locally. */
+  --pair-cols:minmax(0,1fr) minmax(0,1fr);
+  --pair-gap:clamp(34px,4vw,72px);
 }
 
 *,*::before,*::after{ box-sizing:border-box; }
@@ -621,13 +631,8 @@ a:hover{ text-decoration:underline; }
 }
 @media (min-width:900px){
   .intro{
-    /* 1.1:1, not the 1.4:1 this started at -- the video was asked to be bigger.
-       The text column can afford it: it is capped at 68ch anyway, so above
-       about 1200px it was not using the extra width. Do not push past roughly
-       1:1, or the measure at the 900px end of the range drops below 40
-       characters a line and the paragraph starts reading as a column. */
-    grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);
-    gap:clamp(30px,3.6vw,60px);
+    grid-template-columns:var(--pair-cols);
+    gap:var(--pair-gap);
     /* Top-aligned, not centred. With a heading leading the column the ask is
        for its cap line to meet the top of the video, which centring cannot do.
        The cap-line correction below is what makes "top" mean the ink rather
@@ -708,7 +713,7 @@ a:hover{ text-decoration:underline; }
   padding:0 var(--gut) var(--stat-gap);
 }
 @media (min-width:740px){
-  .hl{ grid-template-columns:repeat(2,1fr); gap:clamp(34px,4vw,72px); }
+  .hl{ grid-template-columns:var(--pair-cols); gap:var(--pair-gap); }
 }
 /* Filled boxes, sitting apart rather than butted together -- the section's own
    gap is the space between them.

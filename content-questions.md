@@ -238,22 +238,28 @@ JavaScript. The panel would sit open over the section just jumped to. Worth
 solving before shipping -- probably by having anchors only on a page where the
 drawer is not the primary navigation, or by accepting it.
 
-## 1h. TO RESOLVE: the video should line up with the box beneath it
+## 1h. Video aligned to the box beneath it — SETTLED
 
-Once the alumni and financial aid columns become colour blocks (1g), the video
-and the financial aid block sit one above the other in the right-hand column
-and should share an edge.
+Both sections now read one shared pair of tokens, `--pair-cols` and
+`--pair-gap`, so the video's edges and the financial aid box's edges coincide.
+Verified to 0.0px at 1440, 1300, 1200, 1100, 1000 and 900.
 
-They do not today, and the reason is worth knowing before anyone tries: the
-intro is a 1.1fr / 1fr grid and the highlights are a plain 1fr / 1fr, so the
-column boundaries fall in different places -- at 1440 the video is 600px wide
-against a 683px financial aid column. Making them line up means both sections
-using the SAME column definition, which in turn means giving up either the
-video's extra width or the highlights' equal halves.
+They had drifted because each section defined its own grid: the intro was
+1.1fr/1fr with a 51.8px gap, the highlights 1fr/1fr with 57.6px, which put the
+video's left edge 27px inside the box below it. Overriding either token locally
+is now the only way to break it again.
 
-Cheapest fix when you get to it: give both sections one shared grid definition
-in a custom property, the way --stat-gap already forces the vertical rhythm to
-agree. Then the two can never drift again.
+Side effect, and it is the good direction: the video went from 600px to 627px at
+1440, since equal halves give it more than 1fr of a 1.1:1 split did.
+
+**One thing to keep an eye on.** The text column is narrower now, and the
+measure runs 52 characters a line at 1440 down to 42 from 1200 downward. For
+continuous prose 42 would be too tight — the comfortable band is 45 to 75. It is
+acceptable here only because that column is BULLETS, which are short and
+self-contained and tolerate a narrow measure in a way a paragraph does not. If
+that column ever goes back to running prose, revisit the ratio: an earlier note
+warned against pushing past 1:1 for exactly this reason, and 1:1 is where it now
+sits.
 
 ## 1i. TO RESOLVE: the board rows -- white space, and active voice
 
