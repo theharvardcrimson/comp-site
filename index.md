@@ -38,7 +38,7 @@ intro_title: The comp
 # IS a real sentence -- subject and verb -- so the stop was not an error the way
 # the hero's comma was; it comes off for consistency, because no display line on
 # this page carries one now. Put one back and it needs putting back everywhere.
-intro_note: From journalism, to business or tech — regardless of your passion, The Crimson has a comp for you
+intro_note: From journalism to business or tech — regardless of your passion, The Crimson has a comp for you
 intro_note_position: above
 
 # Its own line under the bullets, not a bullet itself -- it points somewhere
@@ -52,6 +52,11 @@ intro_link_text: Learn more about our 10 comps
 # while placing it, for you to fix or wave off:
 #
 #   1. No bullet has a closing full stop. Consistent, so fine.
+#   2. The separator between each lead phrase and its sentence is NOT typed here.
+#      It comes from CSS -- .intro-text strong::after in css/main.css -- because
+#      it is presentation rather than words. Changing it is one line there and
+#      applies to every bullet at once, instead of a character to remember on
+#      each line. Do not type a colon or a dash into these; you will get two.
 #   2. There is a NON-BREAKING SPACE between "The" and "Crimson" in the teaser
 #      above -- it looks like an ordinary space but the two words can never be
 #      split across a line break. That, not the font size, is what stops "The"

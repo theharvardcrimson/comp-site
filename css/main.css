@@ -753,12 +753,10 @@ a:hover{ text-decoration:underline; }
    sat flush against the last bullet. Second time this exact trap has bitten in
    this stylesheet -- if a margin here looks ignored, check what else selects it. */
 .intro-text .intro-jump{
-  /* Right-aligned again, at the owner's call: as the one line that sends you
-     somewhere, sitting apart from the left-aligned block reads as deliberate.
-     The gap above is the shared token, so it matches the bullet rhythm despite
-     this line being a different size. */
+  /* Left-aligned, flush with everything above it. It has been both ways; this is
+     where it landed. The gap above is the shared token, so it matches the bullet
+     rhythm regardless of the sizes involved. */
   margin:var(--intro-gap) 0 0;
-  text-align:right;
 }
 .intro-jump a{
   /* Set in the body face at the teaser's size, so it reads as part of the same
@@ -825,15 +823,30 @@ a:hover{ text-decoration:underline; }
 
      1.2em because condensed type reads smaller at a given size than the body it
      interrupts, and uppercase has no x-height letters to be judged against. */
-  font-family:var(--display); font-weight:400; font-style:normal;
-  /* Ink, not crimson -- the owner levelled the bullet text to one colour, so the
-     face and the uppercase do all the distinguishing now. Letter-spacing is
-     wider than a heading's would be: condensed caps set tight read as a solid
-     block, and this needs to read as words. */
+  /* The body face's own bold, at the body's own size, sentence case. Nothing
+     changes across the colon except weight.
+
+     This replaces League Gothic uppercase, which looked wrong for a reason no
+     amount of tracking could fix: condensed sans caps butting against a serif
+     mid-sentence are two different alphabets, and the eye reads the seam rather
+     than the emphasis. Same alphabet, heavier -- the newspaper run-in.
+
+     700 is a real weight here: Vollkorn-Bold has an @font-face at the top of
+     this file. Without it the browser would fake one. */
+  font-family:var(--text); font-weight:700; font-style:normal;
   color:var(--ink);
-  text-transform:uppercase; letter-spacing:.09em;
-  font-size:1.2em;
+  text-transform:none; letter-spacing:0;
+  font-size:1em;
 }
+/* THE SEPARATOR between a lead phrase and its sentence lives here, not in
+   index.md. It is punctuation in the typographic sense -- presentation -- so it
+   belongs with the styling: one line to change it, applied to every bullet at
+   once, and nothing for whoever writes the copy to remember.
+
+   A colon because the lead is a label and what follows explains it, which is
+   what a colon is for. A dash would read as an aside, a pipe as a table
+   divider. Swap the content value to try another. */
+.intro-text strong::after{ content:":"; }
 .intro-text em{ font-style:italic; }
 
 /* ---------- highlights: two columns of bullets ----------
