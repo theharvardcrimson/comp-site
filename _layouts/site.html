@@ -41,12 +41,20 @@
 
     {% comment %}
       The signup button sits outermost so the solid crimson block anchors the
-      corner; the menu toggle tucks inside it. Its label comes from
-      semester.yml so every button pointing at the form reads the same.
+      corner; the menu toggle tucks inside it.
+
+      This one uses header_signup_label rather than signup_label, and falls back
+      to it when empty. The bar is the tightest place a button appears -- 390px
+      shared with the menu toggle on a phone -- so it gets the short wording
+      while every other button carries the full one.
     {% endcomment %}
     <div class="bar-actions">
       {% include drawer.html %}
-      <a class="btn" href="{{ site.data.semester.signup_url }}">{{ site.data.semester.signup_label }}</a>
+      {%- assign bar_label = site.data.semester.header_signup_label -%}
+      {%- if bar_label == nil or bar_label == '' -%}
+        {%- assign bar_label = site.data.semester.signup_label -%}
+      {%- endif -%}
+      <a class="btn" href="{{ site.data.semester.signup_url }}">{{ bar_label }}</a>
     </div>
   </header>
 

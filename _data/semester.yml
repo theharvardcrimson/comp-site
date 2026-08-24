@@ -10,9 +10,18 @@ season: Fall
 year: 2026
 
 # The "Sign up" button, used everywhere on the site.
-# The words on every button that points at signup_url -- the hero, the header,
-# the drawer, the foot of each board page. One value so they cannot disagree.
+# The words on the buttons pointing at signup_url. TWO values, on purpose.
+#
+# signup_label is the full wording, used everywhere the button has room: the
+# hero, the drawer, the footer, and the foot of every board page.
+#
+# header_signup_label is the sticky top bar only, where the bar is 390px wide on
+# a phone and shares it with the menu toggle. "Interest form" is nearly twice
+# the width of "Sign up" and made that corner top-heavy, so the bar gets the
+# short wording. Leave header_signup_label empty and the bar falls back to
+# signup_label.
 signup_label: Interest form
+header_signup_label: Sign up
 
 signup_url: https://docs.google.com/forms/d/e/1FAIpQLScnz4wmdtXud61rA9Zlm6n5JMqopGssM4RDw2PDQoXOsNWyXg/viewform
 

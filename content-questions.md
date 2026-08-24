@@ -138,9 +138,11 @@ with any and all questions about the program.
 
 ## 1e. WAITING ON YOU: the interest form link
 
-You said you would send an updated one. The button now reads **Interest form**
-everywhere -- hero, header, drawer, and the foot of all ten board pages -- from
-a single `signup_label` in `_data/semester.yml`.
+You said you would send an updated one. The buttons read **Interest form** in
+the hero, the drawer, the footer and the foot of all ten board pages, from
+`signup_label` in `_data/semester.yml`; the sticky top bar reads **Sign up**,
+from `header_signup_label` in the same file, because the bar is the one place
+where the longer wording crowded the corner.
 
 `signup_url` in that same file is still the OLD Google Form:
 
