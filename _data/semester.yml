@@ -67,15 +67,31 @@ show_photo_placeholders: true
 # The three-up photo band on the homepage. `label` is what the placeholder box
 # says; `photo` is the filename once you have one. Delete an entry to drop a
 # slot, empty the list to remove the band.
+# Three-up photo band. `label` is the image's ALT TEXT, so it must describe
+# what is actually in the photograph -- it is not a headline and not a slogan.
+# It also becomes the visible caption, but only when `credit` is filled in;
+# with `credit` empty nothing is printed on the page.
+#
+# CREDITS ARE STILL MISSING for all three. The design has a byline slot and it
+# stays hidden until a photographer's name is here. Fill `credit` and the
+# caption appears automatically.
+#
+# The alt text below was written from looking at each photograph and is the
+# owner's to correct -- particularly the event names, which were inferred from
+# the filenames rather than known.
+#
+# Order is deliberate: archival black-and-white first as the anchor, then the
+# bright modern room, then the dark press-room colour frame. That alternates
+# tone rather than putting the two dark frames side by side.
 photo_band:
-  - label: The newsroom, late
-    photo: ""
+  - label: Crimson editors crowded around a bottle of champagne in the press room, December 1966
+    photo: photos/press-room-1966.jpg
     credit: ""
-  - label: A board meeting
-    photo: ""
+  - label: A phone on a tripod livestreaming a Harvard Undergraduate Association event
+    photo: photos/hua-livestream.jpg
     credit: ""
-  - label: Out on a story
-    photo: ""
+  - label: An editor holding up a stack of freshly printed Commencement issues in the newsroom
+    photo: photos/commencement-issues.jpg
     credit: ""
 
 

@@ -154,7 +154,32 @@ The two faces from the new thecrimson.com are still welcome if you want them
 later; all three are behind CSS custom properties at the top of `css/main.css`,
 so a swap is one line each. But nothing is waiting on them.
 
-## 8. Photography (later)
+## 8a. Photography — three in, credits still needed
+
+The homepage three-up band is filled from `images/gallery/front_page_gallery/`:
+
+1. The Dec. 1966 press-room celebration (black and white)
+2. The HUA livestream
+3. Commencement issues in the newsroom
+
+**Still needed: a photographer credit for each.** The design has a byline slot
+that stays hidden until `credit` is filled in `_data/semester.yml`; fill it and
+the caption appears by itself. Nothing on the page is broken without them, but
+the photographers are currently uncredited.
+
+**Also worth your eye: the alt text.** `label` on each of the three is the alt
+text, written from looking at the photographs. The event names were inferred
+from filenames, not known — particularly whether the livestream really is an
+HUA event. Correct them in `_data/semester.yml`; they are one line each.
+
+The lower marquee band is filled separately from
+`images/gallery/crimson_front_pages/` — twenty Vol. CLIII front pages in date
+order. Those are aria-hidden decoration, carry `alt=""` by design, and need no
+credits. Three cosmetic oddities in that supplied run, none of which affect
+anything: there is no no-15 or no-19, and two different issues are both
+numbered no-16.
+
+## 8b. Photography — the rest, later
 
 Optional field, so this can land any time.
 
