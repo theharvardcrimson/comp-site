@@ -421,12 +421,16 @@ a:hover{ text-decoration:underline; }
   padding:var(--stat-gap) var(--gut);
   row-gap:clamp(18px,2.4vw,30px);
 }
-/* 700px, not 600px, because that is where .band goes three-up. They used to
-   disagree: between 600 and 699px the figures were three across while the
-   photographs were still stacked one per row, so there was nothing to line up
-   with. Both blocks now switch together, which is the only way the alignment
-   holds at every width. Move one breakpoint and you must move the other. */
-@media (min-width:700px){
+/* 740px, and .band below must match. Two reasons it is this number.
+   First, both blocks have to switch to three-up at the same width or there is
+   nothing to line up with -- at one point .stats went three-up at 600px while
+   the photographs were still stacked, and the alignment was meaningless there.
+   Second, 740 rather than 700 because "VIEWS IN THE LAST YEAR" needs about
+   210px and a third of a 700px viewport is only 203px, so it wrapped to two
+   lines in the 700-739px window and made that one label sit lower than the
+   others. Below 740 the stats stack full-width and the label has room.
+   Move one breakpoint and you must move the other. */
+@media (min-width:740px){
   .stats{ grid-template-columns:repeat(3,1fr); column-gap:clamp(10px,1.4vw,18px); }
 }
 @media (min-width:760px){ .stats{ text-align:center; } }
@@ -768,7 +772,7 @@ figcaption .credit{ color:var(--red); }
   grid-template-columns:1fr;
   padding:clamp(26px,4vw,56px) var(--gut);
 }
-@media (min-width:700px){ .band{ grid-template-columns:repeat(3,1fr); } }
+@media (min-width:740px){ .band{ grid-template-columns:repeat(3,1fr); } }  /* must match .stats above */
 
 /* Zero, so the whole gap between the labels and the photographs is --stat-gap
    and nothing else. Any padding here would be added on top of it and break the
