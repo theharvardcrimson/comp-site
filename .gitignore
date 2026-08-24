@@ -16,3 +16,10 @@ _baseline
 final_logo.*
 new_hero.*
 new_new_hero.*
+
+# Photo masters as supplied: 6000x4000 frames and full-size cover scans, 60MB+.
+# The repo is public and these are large; keep your masters in Drive/Photos.
+# Only the optimised web versions are committed (images/covers/, images/hero.jpg).
+# NOTE: this keeps them out of git, NOT out of the build -- _config.yml's
+# `exclude` is what stops Jekyll publishing them.
+images/gallery/

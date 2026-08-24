@@ -49,6 +49,14 @@ exclude:
   - README.md            # setup instructions for maintainers
   - content-questions.md # working checklist, deleted once answered
 
+  # PHOTO MASTERS. images/gallery/ holds the originals as supplied -- 6000x4000
+  # frames and full-size cover scans, 60MB+ and growing. Without this line
+  # Jekyll copies every one of them into _site: the built site measured 168MB,
+  # of which 167MB was this directory. Optimised web versions live OUTSIDE
+  # gallery/ (images/covers/, images/hero.jpg) precisely so this whole tree can
+  # be excluded in one line. Put new masters in gallery/, never beside them.
+  - images/gallery
+
   # Source artwork. .gitignore keeps these out of git but NOT out of the build
   # -- Jekyll copies anything it isn't told to skip, so the 18MB original was
   # being published until this line existed. Web versions live alongside as
