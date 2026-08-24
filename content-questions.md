@@ -189,6 +189,38 @@ chat. Collapsing them into anchors on one page breaks every one of those links
 unless the pages are kept as well and the homepage merely duplicates them.
 Worth deciding deliberately, and worth checking with the boards first.
 
+*What goes inside each dropdown*, as specified:
+
+1. **Selected work** -- photos from thecrimson.com linking back to the pieces.
+2. **A short description** of the board, cut down from what exists.
+3. **Comp requirements and details.**
+4. **The comp directors' names and contact details.**
+5. **Date, time and location of the first meeting.**
+
+Business will be laid out differently; to be discussed when we get there.
+
+*What already exists versus what has to be gathered,* because the split matters
+for how long this takes:
+
+- Already in the repo: requirements (the `requirements` field on each board),
+  directors and their emails (`_data/directors.yml`), and a one-line hook per
+  board. Item 3 and item 4 are essentially done.
+- Needs cutting down, not gathering: item 2. Each board file already carries
+  its full prose; a short version is an edit, and it is the boards' own words
+  so it is theirs to shorten.
+- Needs gathering from scratch: item 1 and item 5. Selected work means, per
+  board, a headline, a URL and an image -- with a photographer credit for each
+  image, same rule as everywhere else on this site. Ten boards times three or
+  four pieces is thirty to forty items, and that is the long pole. First-meeting
+  details are ten short entries but depend on the Fall calendar existing, which
+  is still open in section 2 below.
+
+*One design note to settle early:* thumbnails that link out to thecrimson.com
+mean either hosting copies of those images here, which is the pattern used for
+the video thumbnail and keeps the page free of third-party requests, or hotlinking
+them, which is lighter to maintain but reaches another server on every page view
+and breaks silently when an image is moved. Recommend hosting copies.
+
 **FAQ replaces the financial aid panel.** Done, in the sense that the panel is
 gone -- financial aid is now bullets in the two-column block, its prose is
 parked in section 1c above, and `_sections/` is empty. The FAQ block already
