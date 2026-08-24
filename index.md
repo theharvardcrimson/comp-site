@@ -18,6 +18,16 @@ lede_line_2: and Harvard College’s premier student organization.
 # Heading over the intro bullets. Leave "" and no heading renders.
 intro_title: The comp
 
+# One line of explainer alongside the bullets. PLACEHOLDER -- type over it.
+# Leave "" and it does not render.
+#
+# intro_note_position: "above" puts it between the heading and the bullets,
+# "below" puts it after them. Which reads better depends on what it says: an
+# explainer that sets up the list wants to be above, one that qualifies the
+# list wants to be below.
+intro_note: Lorem ipsum dolor sit amet consectetur, adipiscing elit sed do eiusmod tempor.
+intro_note_position: below
+
 # The list below the --- is PLACEHOLDER, both the heading's content and the
 # bullets. It is lorem ipsum standing in until you know what the bullets should
 # say. Type over each line; keep the leading "- " and each one stays a bullet.

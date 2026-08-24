@@ -204,6 +204,23 @@ JavaScript. The panel would sit open over the section just jumped to. Worth
 solving before shipping -- probably by having anchors only on a page where the
 drawer is not the primary navigation, or by accepting it.
 
+## 1h. TO RESOLVE: the video should line up with the box beneath it
+
+Once the alumni and financial aid columns become colour blocks (1g), the video
+and the financial aid block sit one above the other in the right-hand column
+and should share an edge.
+
+They do not today, and the reason is worth knowing before anyone tries: the
+intro is a 1.1fr / 1fr grid and the highlights are a plain 1fr / 1fr, so the
+column boundaries fall in different places -- at 1440 the video is 600px wide
+against a 683px financial aid column. Making them line up means both sections
+using the SAME column definition, which in turn means giving up either the
+video's extra width or the highlights' equal halves.
+
+Cheapest fix when you get to it: give both sections one shared grid definition
+in a custom property, the way --stat-gap already forces the vertical rhythm to
+agree. Then the two can never drift again.
+
 ## 1f. TO RESOLVE: the mobile header looks clumsy
 
 Your words: "kind of dumb and not very sleek." Agreed, and note that renaming

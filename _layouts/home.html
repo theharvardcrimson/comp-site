@@ -63,7 +63,14 @@ layout: site
   {% if content != '' or has_title %}
     <div class="intro-text">
       {% if has_title %}<h2 class="intro-title">{{ page.intro_title }}</h2>{% endif %}
+      {%- assign note = page.intro_note -%}
+      {%- if note and note != '' and page.intro_note_position == 'above' -%}
+        <p class="intro-note">{{ note }}</p>
+      {%- endif -%}
       {{ content }}
+      {%- if note and note != '' and page.intro_note_position != 'above' -%}
+        <p class="intro-note">{{ note }}</p>
+      {%- endif -%}
     </div>
   {% endif %}
   {% if vid and vid != '' %}

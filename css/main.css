@@ -619,9 +619,11 @@ a:hover{ text-decoration:underline; }
        characters a line and the paragraph starts reading as a column. */
     grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);
     gap:clamp(30px,3.6vw,60px);
-    /* Centred against the video, which is the taller item and therefore sets
-       the row height. */
-    align-items:center;
+    /* Top-aligned, not centred. With a heading leading the column the ask is
+       for its cap line to meet the top of the video, which centring cannot do.
+       The cap-line correction below is what makes "top" mean the ink rather
+       than the line box. */
+    align-items:start;
   }
 }
 .intro-text{ max-width:68ch; }
@@ -631,11 +633,23 @@ a:hover{ text-decoration:underline; }
    Safari with VoiceOver. */
 .intro-text ul{
   margin:0; padding-left:1.15em;
-  font-family:var(--text); font-size:clamp(16px,1.6vw,19px); line-height:1.5;
+  /* Larger than the highlight columns' bullets and larger than body copy. This
+     column has to hold its own against a 600px video beside it, and at 19px it
+     left obvious dead space below the list. */
+  font-family:var(--text); font-size:clamp(17px,1.9vw,23px); line-height:1.5;
 }
-.intro-text ul li{ margin:0 0 .72em; }
+.intro-text ul li{ margin:0 0 .82em; }
 .intro-text ul li:last-child{ margin-bottom:0; }
 .intro-text ul li::marker{ color:var(--red); }
+/* The explainer line. Set smaller than the bullets and in grey so it reads as
+   support rather than another item, and given generous space from the list
+   whichever side of it lands on. */
+.intro-note{
+  font-family:var(--text); font-size:clamp(15px,1.4vw,17px);
+  line-height:1.55; color:var(--grey); max-width:56ch;
+}
+.intro-title + .intro-note{ margin:0 0 clamp(18px,2vw,26px); }
+.intro-text ul + .intro-note{ margin:clamp(18px,2vw,26px) 0 0; }
 /* -0.4408em, measured, not chosen, and only in the ONE-COLUMN layout.
    Stacked, the paragraph is the first thing under the photographs, and its
    line box carries 8.38px of leading above its cap ink at the 19px body size
@@ -648,17 +662,17 @@ a:hover{ text-decoration:underline; }
    video's, which is a painted edge with no leading to compensate for, and
    keeping the negative margin would just bias the centring by 4px. */
 /* Two values because the correction depends on which element leads: a
-   paragraph's line box carries 8.38px of leading above its ink at 19px
-   (0.4408em), a heading's carries 4.12px at 42px (0.0982em). The heading rule
-   is second so it wins when a heading is present. Both reset in two columns,
-   where the text is centred against the video and the section's top edge is
-   the video's painted edge. */
+   paragraph's line box carries 0.4408em of leading above its cap ink, a
+   heading at line-height 1 carries 0.0982em. The heading rule is second so it
+   wins whenever a heading is present.
+
+   No media-query reset any more. It was there while the column was vertically
+   centred, where the correction only skewed the centring; now the column is
+   top-aligned in both layouts and the correction is exactly what makes the
+   leading element's INK line up -- with the video's top edge in two columns,
+   and with the gap above in one. */
 .intro-text > *:first-child{ margin-top:-0.4408em; }
 .intro-text > .intro-title:first-child{ margin-top:-0.0982em; }
-@media (min-width:900px){
-  .intro-text > *:first-child,
-  .intro-text > .intro-title:first-child{ margin-top:0; }
-}
 .intro-text p{ margin:0 0 1.15em; }
 .intro-text p:last-child{ margin-bottom:0; }
 .intro-text strong{ font-family:var(--serif); font-weight:700; }
@@ -688,16 +702,24 @@ a:hover{ text-decoration:underline; }
   .hl{ grid-template-columns:repeat(2,1fr); gap:clamp(34px,4vw,72px); }
 }
 .hl-col{ min-width:0; }
-/* One treatment for both section headings -- the intro's and the highlight
-   columns' -- so they cannot drift apart. The negative top margin is the
-   measured leading above the cap ink at line-height 1 (4.12px at 42px), the
-   same correction the labels and paragraphs need. */
+/* Two section headings, deliberately at DIFFERENT sizes now: .intro-title is
+   the section's own title and is set large, .hl-title labels a column inside a
+   section and stays small. They shared one rule until the intro heading was
+   asked to be big; keeping them equal would have flattened the hierarchy.
+
+   Both keep line-height 1 and the same -0.0982em top margin. That number is
+   the measured leading above the cap ink at line-height 1, and it is in em, so
+   it stays correct at either size. */
 .hl-title,
 .intro-title{
   font-family:var(--display); text-transform:uppercase; font-weight:400;
-  font-size:clamp(26px,3vw,42px); line-height:1; letter-spacing:.01em;
-  color:var(--ink); margin:-0.0982em 0 clamp(16px,1.8vw,24px);
+  line-height:1; letter-spacing:.01em; color:var(--ink);
+  margin:-0.0982em 0 clamp(16px,1.8vw,24px);
 }
+.hl-title{ font-size:clamp(26px,3vw,42px); }
+/* Sits between the board index's h2 (104px) and the column labels, so the page
+   reads poster > section title > column label rather than two tiers. */
+.intro-title{ font-size:clamp(38px,5.4vw,78px); margin-bottom:clamp(20px,2.4vw,32px); }
 .hl-list{
   margin:0; padding-left:1.15em; max-width:52ch;
   font-family:var(--text); font-size:clamp(16px,1.5vw,18px); line-height:1.5;
@@ -751,12 +773,13 @@ a:hover{ text-decoration:underline; }
   position:absolute; inset:0; width:100%; height:100%; border:0; display:block;
 }
 /* Play triangle drawn with borders -- no extra image, no icon font. */
-/* 72% down, not centred: this particular thumbnail has the film's title
-   burned into the frame across the middle, and a centred button sat on top of
-   it. If the thumbnail is ever replaced, 50% is the neutral value to go back
-   to. */
+/* 61% down, not centred. This thumbnail has the film's title burned across the
+   middle of the frame -- it runs from roughly 38% to 48% -- so a centred button
+   sat on top of the words. At 61% the button's top edge clears the title's
+   descenders and it reads as sitting just beneath them. If the thumbnail is
+   ever replaced, 50% is the neutral value to go back to. */
 .vplay{
-  position:absolute; top:72%; left:50%; transform:translate(-50%,-50%);
+  position:absolute; top:61%; left:50%; transform:translate(-50%,-50%);
   width:clamp(54px,5vw,74px); aspect-ratio:1; border-radius:50%;
   background:var(--red); display:grid; place-items:center;
 }
@@ -766,13 +789,29 @@ a:hover{ text-decoration:underline; }
   border-top:clamp(10px,1vw,14px) solid transparent;
   border-bottom:clamp(10px,1vw,14px) solid transparent;
 }
+/* VISUALLY hidden while closed, not removed. The thumbnail already has the
+   title burned into it, so printing it again underneath was repetition -- but
+   this span is the disclosure's accessible name, and a <summary> containing
+   only an alt="" image and an aria-hidden triangle would be announced as
+   nothing at all. Clipped rather than display:none for that reason.
+
+   It becomes visible once open, which is deliberate two ways: the burned-in
+   title is gone at that point so it is no longer a repeat, and it gives the
+   disclosure a visible control to collapse it again. Hiding it in both states
+   would leave the player with no way back. */
 .vlabel{
+  position:absolute; width:1px; height:1px; overflow:hidden;
+  clip-path:inset(50%); white-space:nowrap;
+}
+.vbox[open] .vlabel{
+  position:static; width:auto; height:auto; overflow:visible;
+  clip-path:none; white-space:normal;
   display:block; padding:10px 0 0;
   font-family:var(--display); text-transform:uppercase; letter-spacing:.16em;
   font-size:clamp(12px,1.1vw,14px); color:var(--grey);
 }
-.vbox[open] .vlabel{ padding:10px 0 0; }   /* same offset, now under the frame */
-.vthumb:hover .vlabel,.vthumb:focus-visible .vlabel{ color:var(--red); }
+.vbox[open] .vthumb:hover .vlabel,
+.vbox[open] .vthumb:focus-visible .vlabel{ color:var(--red); }
 /* The disclosure is the interactive element, so it needs a visible focus ring
    of its own -- the default one is suppressed along with the marker. */
 .vthumb:focus-visible{ outline:3px solid var(--red); outline-offset:3px; }
