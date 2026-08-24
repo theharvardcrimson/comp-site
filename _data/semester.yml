@@ -196,7 +196,7 @@ stat_2_label: boards
 # the metric from readers to VIEWS, which is what was actually said.
 stat_3_number: 15
 stat_3_unit: M+
-stat_3_label: views in the last year
+stat_3_label: views last year
 
 
 # ---- One-line note above the board list. ----

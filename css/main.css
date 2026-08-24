@@ -52,7 +52,7 @@
      band down to the crimson figures must match the distance from the labels
      down to the photographs. Two separate values drifted apart immediately
      (52px above against 72px below). Change this and both move together. */
-  --stat-gap:clamp(38px,5.2vw,72px);
+  --stat-gap:clamp(48px,6.7vw,96px);
 }
 
 *,*::before,*::after{ box-sizing:border-box; }
