@@ -680,6 +680,17 @@ a:hover{ text-decoration:underline; }
 .intro-text ul li{ margin:0 0 .82em; }
 .intro-text ul li:last-child{ margin-bottom:0; }
 .intro-text ul li::marker{ color:var(--red); }
+/* A link inside a bullet -- the third one jumps down to the board list. Crimson
+   plus an underline, matching the retired standalone jump link: colour alone
+   cannot mark a link (WCAG 1.4.1), and it matters more than usual here because
+   the run-in leads in the bullets above are also crimson. The underline is what
+   separates the clickable crimson from the decorative crimson. */
+.intro-text ul a{
+  color:var(--red); text-decoration:none;
+  border-bottom:1px solid currentColor;
+}
+.intro-text ul a:hover,
+.intro-text ul a:focus-visible{ color:var(--ink); }
 /* The explainer line. Set smaller than the bullets and in grey so it reads as
    support rather than another item, and given generous space from the list
    whichever side of it lands on. */
