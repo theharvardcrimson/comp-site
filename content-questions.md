@@ -319,23 +319,46 @@ Options, cheapest first, all pure CSS:
 
 Recommend 2, with 1 as the fallback if a bottom bar feels like too much.
 
-## 1g. TO RESOLVE: alumni and financial aid as colour blocks
+## 1g. Colour blocks — SETTLED
 
-You want the two columns to become two boxes with the text sitting on a
-coloured background, crimson or something else, and asked for a few mockups
-before deciding.
+Four variants were mocked with the real copy and type, every colour pair
+measured, and the owner picked **D, the pale wash**: `--wash: #f4e7e5`, ink body
+text, crimson headings and markers, grey note. Boxes sit apart, separated by the
+section's own gap.
 
-Worth flagging one thing to decide first, because it constrains the palette:
-body text on a coloured block has to clear 4.5:1. Crimson gives 6.64:1 with
-paper text, which is the pairing already used for the stat figures -- so
-reusing it is safe but means a third crimson element on one screen. Anything
-new, a warm grey or the dark ink, has to be measured before it ships, not
-picked by eye. Three greys failed during this redesign and each looked fine.
+Measured on that tint: body ink 15.38:1, crimson heading 5.75:1, grey note
+5.50:1. All AA.
 
-Also: the financial aid column is roughly twice the height of the alumni one.
-As plain columns that reads as normal. As two boxes it will read as a mistake,
-so equal-height boxes with unequal content is part of what the mockups need to
-solve.
+Rejected, with reasons kept so it does not get relitigated:
+
+- *Crimson fill* (6.64:1) — correct and on-brand, but the page already carries a
+  full-bleed crimson hero, three crimson stat blocks, a crimson play button and
+  a near-black marquee band. Two more saturated slabs competed with all of it.
+- *Ink fill* (17.76:1) — punched two dark holes into a light page directly after
+  the dark marquee band.
+- *One of each* — implied a distinction between alumni and financial aid that
+  does not exist.
+
+One thing the measuring caught that looking did not: **crimson markers on ink
+are 2.67:1 and fail.** Irrelevant now that D won, but it is the kind of thing to
+check rather than eyeball if the fill ever changes.
+
+Two problems solved along the way, both worth knowing if these boxes are edited:
+
+- The height mismatch resolved itself. Grid stretches both boxes to the same
+  height, and pushing the contact note to the floor of its box means the spare
+  space in the shorter one collects above the note rather than showing as a hole.
+- `margin-top:auto` alone was not enough. In the taller box the content fills the
+  height, so auto resolved to zero and the note butted against the last bullet.
+  It needs a `padding-top` as a minimum separation. Now 28px at 1440.
+
+Body text matches the intro's bullets exactly — clamp(17px,1.9vw,23px) at every
+width — so the two bulleted sections read as one voice. Keep them in step.
+
+**Still open:** the two column headings are 42px against the intro's 78px. That
+was deliberate, to keep a hierarchy of section title over column label, but the
+instruction was to match the text size and it is not certain that meant the body
+only. Ask before changing.
 
 ## 2. Needed: what the Fall comp actually looks like
 

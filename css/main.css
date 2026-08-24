@@ -53,6 +53,15 @@
      down to the photographs. Two separate values drifted apart immediately
      (52px above against 72px below). Change this and both move together. */
   --stat-gap:clamp(48px,6.7vw,96px);
+
+  /* Surface for the highlight boxes. A pale crimson wash rather than the brand
+     crimson: the page already carries a full-bleed crimson hero, three crimson
+     stat blocks, a crimson play button and a near-black marquee band, and two
+     more saturated slabs competed with all of it. Measured on this tint: body
+     ink 15.38:1, crimson heading 5.75:1, grey note 5.50:1 -- all AA.
+     If you ever want a neutral instead of a red-adjacent one, #f1ece2 is an oat
+     that measures slightly better again (15.76 / 5.89 / 5.63). */
+  --wash:#f4e7e5;
 }
 
 *,*::before,*::after{ box-sizing:border-box; }
@@ -701,7 +710,26 @@ a:hover{ text-decoration:underline; }
 @media (min-width:740px){
   .hl{ grid-template-columns:repeat(2,1fr); gap:clamp(34px,4vw,72px); }
 }
-.hl-col{ min-width:0; }
+/* Filled boxes, sitting apart rather than butted together -- the section's own
+   gap is the space between them.
+
+   flex column with the note pushed to the bottom is what makes the unequal
+   content work: grid stretches both boxes to the same height, and financial aid
+   is nearly twice the length of alumni, so without this the shorter box had a
+   hole under its last bullet. The note now sits on the floor of its box and the
+   spare space collects above it, which reads as deliberate. */
+.hl-col{
+  min-width:0;
+  display:flex; flex-direction:column;
+  background:var(--wash); color:var(--ink);
+  padding:clamp(22px,2.6vw,38px);
+  border-radius:clamp(4px,0.55vw,9px);
+}
+/* margin-top:auto pushes the note to the floor of the box; padding-top is the
+   MINIMUM separation for when it is already there. Without it the taller box --
+   financial aid, whose content fills the height -- resolved auto to zero and the
+   note butted straight against the last bullet. */
+.hl-col .hl-note{ margin-top:auto; padding-top:clamp(18px,2vw,28px); }
 /* Two section headings, deliberately at DIFFERENT sizes now: .intro-title is
    the section's own title and is set large, .hl-title labels a column inside a
    section and stays small. They shared one rule until the intro heading was
@@ -716,13 +744,19 @@ a:hover{ text-decoration:underline; }
   line-height:1; letter-spacing:.01em; color:var(--ink);
   margin:-0.0982em 0 clamp(16px,1.8vw,24px);
 }
-.hl-title{ font-size:clamp(26px,3vw,42px); }
+/* margin-top:0 overrides the shared cap-line correction. That correction exists
+   to line a heading's INK up with the top of its section, which is right when
+   the heading sits on bare paper. Inside a padded box the box edge is what
+   aligns, and pulling the heading up would just eat 4px of the padding. */
+.hl-title{ font-size:clamp(26px,3vw,42px); margin-top:0; }
 /* Sits between the board index's h2 (104px) and the column labels, so the page
    reads poster > section title > column label rather than two tiers. */
 .intro-title{ font-size:clamp(38px,5.4vw,78px); margin-bottom:clamp(20px,2.4vw,32px); }
+/* Same size as the intro's bullets -- clamp(17px,1.9vw,23px) -- so the two
+   bulleted sections read as one voice. Keep them in step if either changes. */
 .hl-list{
   margin:0; padding-left:1.15em; max-width:52ch;
-  font-family:var(--text); font-size:clamp(16px,1.5vw,18px); line-height:1.5;
+  font-family:var(--text); font-size:clamp(17px,1.9vw,23px); line-height:1.5;
 }
 .hl-list li{ margin:0 0 .72em; }
 .hl-list li:last-child{ margin-bottom:0; }
@@ -732,7 +766,7 @@ a:hover{ text-decoration:underline; }
   font-family:var(--text); font-size:clamp(14px,1.3vw,16px);
   line-height:1.5; color:var(--grey);
 }
-.hl-note a{ color:var(--red); }
+.hl-note a{ color:var(--red); }   /* 5.75:1 on --wash */
 
 /* ---------- video: click to load, plays in place ----------
    Built on native <details>, like the nav drawer, so no JavaScript is
