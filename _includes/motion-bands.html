@@ -1,0 +1,50 @@
+{% comment %}
+  Two perpetually moving bands, opposite directions: the ten board names on
+  top, front pages below.
+
+  Both are pure decoration -- no links, no interaction, aria-hidden. That is
+  what keeps them clear of WCAG 2.2.2: they convey no information that isn't
+  already a static list further down the page, and nothing here is reachable
+  only through moving content. Every board is a real row in the index below, in
+  the drawer, and at the foot of every board page.
+
+  Each band prints its list twice so translateX wraps with no visible gap.
+  prefers-reduced-motion stops both outright.
+
+  Board names use `name`, not `display_name`: no "(Flyby)" or "(FM)" here.
+  Those stay on each board's own page heading.
+{% endcomment %}
+{% assign tick = site.boards | sort: 'name' %}
+{% assign strip = site.data.semester.press_strip %}
+
+<div class="motion" aria-hidden="true">
+  <div class="ticker">
+    <div class="ticker-track">
+      {% for pass in (1..2) %}
+        {% for b in tick %}
+          <span class="ticker-item">{{ b.name }}</span>
+          <span class="ticker-dot">&bull;</span>
+        {% endfor %}
+      {% endfor %}
+    </div>
+  </div>
+
+  {% if strip and strip.size > 0 %}
+    {% assign shot = strip | where_exp: "s", "s.photo != ''" %}
+    {% if shot.size > 0 or site.data.semester.show_photo_placeholders %}
+    <div class="press">
+      <div class="press-track">
+        {% for pass in (1..2) %}
+          {% for slot in strip %}
+            {% if slot.photo and slot.photo != '' %}
+              <img class="press-item" src="/images/{{ slot.photo }}" alt="" loading="lazy">
+            {% elsif site.data.semester.show_photo_placeholders %}
+              <span class="press-item press-slot"><span>{{ slot.label }}</span></span>
+            {% endif %}
+          {% endfor %}
+        {% endfor %}
+      </div>
+    </div>
+    {% endif %}
+  {% endif %}
+</div>

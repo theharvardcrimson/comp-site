@@ -535,18 +535,13 @@ figcaption .credit{ color:var(--red); }
 
 
 /* ---------- marquee ----------
-   Rotates continuously. Because it auto-plays it needs a stop mechanism to
-   satisfy WCAG 2.2.2, and because its items are LINKS it also needs to stop
-   when someone reaches for one -- a moving target is close to unclickable.
-   Hence three ways to pause, all CSS: the checkbox control, :hover, and
-   :focus-within.
+   Rotates continuously. Decoration only -- see motion-bands.html.
 
-   Earlier this was scroll-driven and silently never moved. Cause worth
-   recording: `overflow:hidden` makes an element a scroll container, so a bare
-   `animation-timeline: scroll()` inside it bound to the ticker itself, which
-   has no scrollable height -- progress stayed at 0 forever. Anything
-   scroll-driven needs scroll(root) explicitly, or an ancestor that clips
-   without scrolling.
+   Worth recording for anything scroll-driven added later: `overflow:hidden`
+   makes an element a scroll container, so a bare `animation-timeline: scroll()`
+   inside .ticker bound to the ticker itself, which has no scrollable height --
+   progress sat at 0 forever and it silently never moved. Use scroll(root)
+   explicitly, or an ancestor that clips without scrolling.
 */
 .ticker{
   position:relative; overflow:hidden;
@@ -563,46 +558,24 @@ figcaption .credit{ color:var(--red); }
   font-family:var(--display); text-transform:uppercase; color:var(--paper);
   font-size:clamp(30px,5vw,74px); line-height:1; letter-spacing:.02em;
 }
-a.ticker-item:hover{ color:var(--on-red-muted); text-decoration:none; }
 .ticker-dot{ color:var(--on-red-muted); font-size:clamp(14px,1.6vw,22px); }
 
+/* Both bands run perpetually in OPPOSITE directions, at different speeds so
+   they never look locked together. No pause control and no hover behaviour:
+   both bands are aria-hidden decoration with no links, so they convey nothing
+   that isn't a static list further down the page, which is what keeps them
+   clear of WCAG 2.2.2. prefers-reduced-motion still stops them outright. */
 @media (prefers-reduced-motion:no-preference){
   .ticker-track{ animation:ticker 44s linear infinite; }
-  .ticker:hover .ticker-track,
-  .ticker:focus-within .ticker-track,
-  .ticker-pause-input:checked ~ .ticker-track{ animation-play-state:paused; }
+  .press-track{ animation:press 66s linear infinite; }
 }
 /* translateX only, never opacity: an opacity:0 keyframe would blank the band
    outright anywhere the animation failed to advance. */
 @keyframes ticker{ from{ transform:translateX(0); } to{ transform:translateX(-50%); } }
 
-/* The pause control. The input stays in the accessibility tree and the tab
-   order -- it is only visually collapsed, not display:none, which would make
-   it unfocusable. */
-.ticker-pause-input{
-  position:absolute; width:1px; height:1px; opacity:0;
-  top:8px; right:12px; margin:0;
-}
-.ticker-pause{
-  position:absolute; z-index:3; top:8px; right:12px; cursor:pointer;
-  font-family:var(--display); text-transform:uppercase; letter-spacing:.14em;
-  font-size:12px; line-height:1; padding:6px 10px;
-  color:var(--paper); border:1px solid var(--on-red-muted);
-  /* Solid, not translucent: the marquee text slides underneath, so a
-     see-through background would make this control's contrast depend on
-     whatever letter happened to be behind it. */
-  background:var(--red-deep);
-}
-.ticker-pause:hover{ background:var(--red-deep); }
-.ticker-pause-input:focus-visible + .ticker-pause{
-  outline:3px solid var(--paper); outline-offset:2px;
-}
-.ticker-pause-input:checked + .ticker-pause{ border-color:var(--paper); }
-
-/* ---------- front pages wiping across, scroll-driven ----------
-   overflow-x:clip rather than hidden, so this does not become a scroll
-   container and steal the timeline from the document.
-*/
+/* ---------- front pages, moving opposite the marquee ---------- */
+/* Wraps both moving bands so they read as one unit. */
+.motion{ position:relative; }
 .press{
   overflow-x:clip; background:var(--ink);
   padding:clamp(14px,1.8vw,26px) 0;
@@ -626,16 +599,9 @@ a.ticker-item:hover{ color:var(--on-red-muted); text-decoration:none; }
   font-family:var(--display); text-transform:uppercase; letter-spacing:.14em;
   font-size:11px; line-height:1.3; color:var(--on-ink-muted);
 }
-@media (prefers-reduced-motion:no-preference){
-  @supports (animation-timeline:scroll()){
-    .press-track{
-      animation:press linear both;
-      animation-timeline:scroll(root);
-      animation-range:0% 60%;
-    }
-  }
-}
-@keyframes press{ from{ transform:translateX(0); } to{ transform:translateX(-38%); } }
+/* Rightward: starts on the duplicate copy and travels back to the first, so
+   the loop is seamless while running opposite the marquee. */
+@keyframes press{ from{ transform:translateX(-50%); } to{ transform:translateX(0); } }
 
 /* ---------- photo band + placeholder slots ----------
    A slot keeps the layout final before the photograph exists: same aspect
