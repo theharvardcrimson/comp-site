@@ -614,36 +614,69 @@ a:hover{ text-decoration:underline; }
   .intro{
     grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);
     gap:clamp(30px,3.6vw,60px);
-    align-items:start;
+    /* Centred against the video, which is the taller item and therefore sets
+       the row height. */
+    align-items:center;
   }
 }
 .intro-text{ max-width:68ch; }
-/* -0.4408em, measured, not chosen. The paragraph's line box carries 8.38px of
-   leading above its cap ink at the 19px body size, so with padding-top:0 the
-   text LOOKED 104px below the photographs while the photographs sat 96px below
-   the labels. Pulling the block up by exactly that leading does two things at
-   once: the cap line lands 96px under the photographs, matching the gap above
-   them, and the video's top edge -- which starts at the grid's content edge --
-   comes out flush with that cap line. Same correction as .stats div > span's
-   margin-bottom, same reason: a line box is not its ink. */
+/* -0.4408em, measured, not chosen, and only in the ONE-COLUMN layout.
+   Stacked, the paragraph is the first thing under the photographs, and its
+   line box carries 8.38px of leading above its cap ink at the 19px body size
+   -- so the text LOOKED 104px down while the photographs sat 96px down.
+   Pulling the block up by exactly that leading evens it. Same correction as
+   .stats div > span's margin-bottom, same reason: a line box is not its ink.
+
+   Reset to 0 in two columns, where the text is vertically centred against the
+   video rather than sitting at the top: there the section's top edge is the
+   video's, which is a painted edge with no leading to compensate for, and
+   keeping the negative margin would just bias the centring by 4px. */
 .intro-text > *:first-child{ margin-top:-0.4408em; }
+@media (min-width:900px){
+  .intro-text > *:first-child{ margin-top:0; }
+}
 .intro-text p{ margin:0 0 1.15em; }
 .intro-text p:last-child{ margin-bottom:0; }
 .intro-text strong{ font-family:var(--serif); font-weight:700; }
 .intro-text em{ font-style:italic; }
 
-/* ---------- video facade ----------
-   A still frame that links out, not an embed. The thumbnail is served from
-   this repo, not from a Google CDN, so the page makes no third-party request
-   at all -- an embed would have pulled roughly 1MB of player, and even a
-   remote thumbnail would have handed every visitor's IP to Google before they
-   asked for anything. Cost of the choice: playback opens in a new tab. */
+/* ---------- video: click to load, plays in place ----------
+   Built on native <details>, like the nav drawer, so no JavaScript is
+   involved. Inside a closed disclosure the iframe is display:none, which means
+   loading="lazy" never fires and nothing is requested from Google until
+   someone opens it -- a plain embed would have cost about 1MB of player on
+   every page view. The thumbnail is local, so a visitor who never plays it
+   touches no third party at all.
+
+   When it opens, the still and the play button go and the iframe takes their
+   place; the title line stays, which is what lets the disclosure be collapsed
+   again and gives it a stable accessible name in both states. */
 .intro-video{ margin:0; }
+/* Grid so the title line can be reordered. The summary has to come first in
+   the DOM -- that is how <details> works -- but the title should read BELOW the
+   video in both states, so once open it is moved after the frame. */
+.vbox{ margin:0; display:grid; }
+.vbox[open] .vthumb{ order:2; }
 .vthumb{
-  display:block; position:relative; color:inherit; text-decoration:none;
+  display:block; position:relative; cursor:pointer;
+  list-style:none; color:inherit; text-decoration:none;
   border-radius:clamp(4px,0.55vw,9px); overflow:hidden;
 }
+.vthumb::-webkit-details-marker{ display:none; }
 .vthumb img{ display:block; width:100%; height:auto; aspect-ratio:16/9; object-fit:cover; }
+.vbox[open] .vthumb img,
+.vbox[open] .vplay{ display:none; }
+/* Overflow has to come back off once open, or the rounded corners clip the
+   player's own fullscreen affordances. */
+.vbox[open] .vthumb{ overflow:visible; border-radius:0; }
+.vframe{
+  position:relative; aspect-ratio:16/9;
+  border-radius:clamp(4px,0.55vw,9px); overflow:hidden;
+  background:var(--ink);
+}
+.vframe iframe{
+  position:absolute; inset:0; width:100%; height:100%; border:0; display:block;
+}
 /* Play triangle drawn with borders -- no extra image, no icon font. */
 .vplay{
   position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
@@ -661,7 +694,11 @@ a:hover{ text-decoration:underline; }
   font-family:var(--display); text-transform:uppercase; letter-spacing:.16em;
   font-size:clamp(12px,1.1vw,14px); color:var(--grey);
 }
+.vbox[open] .vlabel{ padding:10px 0 0; }   /* same offset, now under the frame */
 .vthumb:hover .vlabel,.vthumb:focus-visible .vlabel{ color:var(--red); }
+/* The disclosure is the interactive element, so it needs a visible focus ring
+   of its own -- the default one is suppressed along with the marker. */
+.vthumb:focus-visible{ outline:3px solid var(--red); outline-offset:3px; }
 @media (prefers-reduced-motion:no-preference){
   .vplay,.vlabel{ transition:transform .18s ease, color .18s ease; }
   .vthumb:hover .vplay{ transform:translate(-50%,-50%) scale(1.06); }

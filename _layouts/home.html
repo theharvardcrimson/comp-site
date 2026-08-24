@@ -50,14 +50,10 @@ layout: site
   can be absent -- no prose and the video sits alone, no video_id and the prose
   runs the full measure -- so the section survives someone emptying one of them.
 
-  The video is a facade, NOT a live iframe: a locally hosted still frame that
-  links out to YouTube. That keeps the promise at the top of this repo that the
-  site ships no third-party JavaScript, and it means the page makes no
-  third-party request at all -- a real embed would pull about 1MB of Google's
-  player before anyone pressed play, and even a remote thumbnail would hand
-  every visitor's IP to Google unasked. The trade-off, stated plainly: playback
-  happens on YouTube in a new tab rather than in place. To swap the thumbnail,
-  replace images/video-thumb.jpg.
+  The video plays in place, but nothing is loaded from Google until someone
+  clicks -- see the note on the disclosure below. The thumbnail is served from
+  this repo, so a visitor who never plays it never touches a third party at
+  all. To swap it, replace images/video-thumb.jpg.
 {% endcomment %}
 {% assign vid = site.data.semester.video_id %}
 {% if content != '' or vid != '' %}
@@ -65,13 +61,42 @@ layout: site
   {% if content != '' %}<div class="intro-text">{{ content }}</div>{% endif %}
   {% if vid and vid != '' %}
     <aside class="intro-video">
-      <a class="vthumb" href="https://www.youtube.com/watch?v={{ vid }}"
-         rel="noopener external">
-        <img src="/images/video-thumb.jpg" alt=""
-             width="960" height="540" loading="lazy" decoding="async">
-        <span class="vplay" aria-hidden="true"></span>
-        <span class="vlabel">Watch: {{ site.data.semester.video_title }}</span>
-      </a>
+      {%- comment -%}
+        Click-to-load, and it plays in place. <details> is the same native
+        disclosure the nav drawer uses, so this still ships no JavaScript.
+
+        Why not a plain iframe, which is what the old site had: it costs about
+        1MB of Google's player on every page view whether or not anyone
+        watches, and it reaches a third party before the visitor has asked for
+        anything. Inside a closed <details> the iframe is display:none, so
+        loading="lazy" never fires -- nothing is requested until someone opens
+        it. Verified by watching the network: zero youtube requests on load.
+
+        autoplay=1 is what makes it play rather than needing a second click.
+        Opening the disclosure is a user gesture, which is what browser
+        autoplay policies require, so the click that opens it is the click that
+        starts it. If a browser refuses, the player is still there and its own
+        play button works -- degrades to two clicks, never to nothing.
+
+        The label is the video's title, not "Watch this", because it is also
+        the disclosure's accessible name and has to make sense in both states.
+      {%- endcomment -%}
+      <details class="vbox">
+        <summary class="vthumb">
+          <img src="/images/video-thumb.jpg" alt=""
+               width="960" height="540" loading="lazy" decoding="async">
+          <span class="vplay" aria-hidden="true"></span>
+          <span class="vlabel">{{ site.data.semester.video_title }}</span>
+        </summary>
+        <div class="vframe">
+          <iframe
+            src="https://www.youtube-nocookie.com/embed/{{ vid }}?autoplay=1&amp;rel=0"
+            title="{{ site.data.semester.video_title }}"
+            loading="lazy" allowfullscreen
+            allow="autoplay; fullscreen; encrypted-media; picture-in-picture"
+            referrerpolicy="strict-origin-when-cross-origin"></iframe>
+        </div>
+      </details>
     </aside>
   {% endif %}
 </div>
