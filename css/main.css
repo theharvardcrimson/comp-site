@@ -304,10 +304,24 @@ a:hover{ text-decoration:underline; }
 }
 
 /* The poster headline. League Gothic is condensed, so it tolerates huge sizes. */
+/* OPTICAL LEFT ALIGNMENT.
+   Every element in the hero shares the same box left edge, but glyphs do not
+   start at the edge of their box -- each face carries a left side bearing, so
+   the boxes lined up while the ink did not. Measured at 1440px: the button's
+   border sat at 34, the standfirst's ink at 36, the headline's ink at 38.
+
+   These negative margins are those bearings, expressed in em so they scale with
+   the font size rather than only working at one width. The target is the
+   declared gutter, so the CSS gutter value is now the true optical edge.
+
+   Note: a bearing belongs to a specific glyph. Both headline lines start with
+   C, so one value covers both -- but change the opening letter of the headline
+   or the standfirst and this wants re-measuring. */
 .poster{
   font-family:var(--display); text-transform:uppercase;
   font-size:clamp(58px,17.5vw,236px); line-height:.80; letter-spacing:.005em;
   margin:.22em 0 0;
+  margin-left:-0.0169em;   /* League Gothic "C" */
 }
 .lede{
   font-family:var(--text); font-style:italic;
@@ -315,7 +329,10 @@ a:hover{ text-decoration:underline; }
   /* was 34ch, which squeezed the standfirst into a narrow column on the left
      while the headline ran the full width -- the mismatch read as an accident.
      62ch is long for sustained reading but fine for two lines of standfirst. */
-  max-width:62ch; margin:clamp(18px,2.2vw,28px) 0 0;
+  /* Left margin is inside the shorthand deliberately: declared separately
+     BEFORE it, the shorthand reset it back to 0 and the correction silently
+     did nothing. -0.08em is Vollkorn italic's "T" bearing. */
+  max-width:62ch; margin:clamp(18px,2.2vw,28px) 0 0 -0.08em;
 }
 /* margin-bottom:0 matters: this is a <p>, so it carried a default bottom
    margin that left ~19px of dead space between the button and the hero's
@@ -336,16 +353,26 @@ a:hover{ text-decoration:underline; }
    reads like a mistake rather than a choice. */
 .stats{ display:grid; grid-template-columns:1fr; border-bottom:1px solid var(--hair); }
 @media (min-width:600px){ .stats{ grid-template-columns:repeat(3,1fr); } }
-.stats div{ padding:clamp(26px,4vw,52px) var(--gut); }
+@media (min-width:760px){ .stats{ text-align:center; } }
+.stats div{ padding:clamp(26px,4vw,52px) var(--gut); text-align:center; }
 .stats div + div{ border-top:1px solid var(--hair); }
 .stats b{
   display:block; font-family:var(--display); font-size:clamp(54px,8vw,124px);
   line-height:.84; color:var(--red);
 }
-.stats span{
+/* Direct child only. As `.stats span` this also caught the unit suffix nested
+   inside the figure, which inherited display:block and the grey -- so the M of
+   "TKM" dropped onto its own line in label grey. */
+.stats div > span{
   display:block; font-family:var(--display); text-transform:uppercase;
-  letter-spacing:.2em; font-size:clamp(14px,1.4vw,18px);
-  color:var(--grey); margin-top:10px;
+  letter-spacing:.2em; font-size:clamp(17px,1.9vw,25px);
+  color:var(--grey); margin-top:12px;
+}
+/* Unit suffix -- the M of "21M". Uppercase, inline, same crimson as the
+   figure, but set smaller so it reads as a unit rather than another digit. */
+.stats b .unit{
+  display:inline; font-size:.56em; text-transform:uppercase;
+  color:inherit; letter-spacing:0; margin:0;
 }
 @media (min-width:760px){
   .stats div + div{ border-top:none; border-left:1px solid var(--hair); }

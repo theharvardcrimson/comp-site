@@ -130,8 +130,10 @@ stat_2_label: boards
 
 # TK is a placeholder -- "to come". It renders on the page as typed, so this
 # needs a real figure before launch. Tracked in content-questions.md.
-stat_3_number: TKm
-stat_3_label: readers
+# stat_N_unit is an optional suffix (M, K) set smaller than the figure.
+stat_3_number: TK
+stat_3_unit: M
+stat_3_label: readers per year
 
 
 # ---- One-line note above the board list. ----

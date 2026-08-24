@@ -32,13 +32,13 @@ layout: site
 {% if site.data.semester.stat_1_number != '' %}
 <div class="stats">
   {% if site.data.semester.stat_1_number != '' %}
-    <div class="reveal"><b>{{ site.data.semester.stat_1_number }}</b><span>{{ site.data.semester.stat_1_label }}</span></div>
+    <div class="reveal"><b>{{ site.data.semester.stat_1_number }}{% if site.data.semester.stat_1_unit and site.data.semester.stat_1_unit != '' %}<span class="unit">{{ site.data.semester.stat_1_unit }}</span>{% endif %}</b><span>{{ site.data.semester.stat_1_label }}</span></div>
   {% endif %}
   {% if site.data.semester.stat_2_number != '' %}
-    <div class="reveal"><b>{{ site.data.semester.stat_2_number }}</b><span>{{ site.data.semester.stat_2_label }}</span></div>
+    <div class="reveal"><b>{{ site.data.semester.stat_2_number }}{% if site.data.semester.stat_2_unit and site.data.semester.stat_2_unit != '' %}<span class="unit">{{ site.data.semester.stat_2_unit }}</span>{% endif %}</b><span>{{ site.data.semester.stat_2_label }}</span></div>
   {% endif %}
   {% if site.data.semester.stat_3_number != '' %}
-    <div class="reveal"><b>{{ site.data.semester.stat_3_number }}</b><span>{{ site.data.semester.stat_3_label }}</span></div>
+    <div class="reveal"><b>{{ site.data.semester.stat_3_number }}{% if site.data.semester.stat_3_unit and site.data.semester.stat_3_unit != '' %}<span class="unit">{{ site.data.semester.stat_3_unit }}</span>{% endif %}</b><span>{{ site.data.semester.stat_3_label }}</span></div>
   {% endif %}
 </div>
 {% endif %}
