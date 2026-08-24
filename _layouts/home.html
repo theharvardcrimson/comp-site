@@ -99,11 +99,18 @@ layout: site
         loading="lazy" never fires -- nothing is requested until someone opens
         it. Verified by watching the network: zero youtube requests on load.
 
-        autoplay=1 is what makes it play rather than needing a second click.
-        Opening the disclosure is a user gesture, which is what browser
-        autoplay policies require, so the click that opens it is the click that
-        starts it. If a browser refuses, the player is still there and its own
-        play button works -- degrades to two clicks, never to nothing.
+        NO autoplay, and that is deliberate after it went wrong. The src used to
+        carry autoplay=1 on the theory that opening the disclosure was the user
+        gesture browser policies require. The flaw: the parameter lives in the
+        URL permanently, so it fires whenever the iframe LOADS -- and the load is
+        not tied to the click. Whenever the browser decided to fetch the frame,
+        the video started, sometimes with the player still hidden, which means
+        sound coming from nothing visible.
+
+        That is also a WCAG 1.4.2 failure -- audio playing automatically for more
+        than three seconds needs a way to stop it, and there was none. Removed
+        from both the src and the allow list, so the permission is not granted
+        either. Cost: one extra click on the player's own button. Worth it.
 
         The label is the video's title, not "Watch this", because it is also
         the disclosure's accessible name and has to make sense in both states.
@@ -125,10 +132,10 @@ layout: site
         </summary>
         <div class="vframe">
           <iframe
-            src="https://www.youtube-nocookie.com/embed/{{ vid }}?autoplay=1&amp;rel=0"
+            src="https://www.youtube-nocookie.com/embed/{{ vid }}?rel=0"
             title="{{ site.data.semester.video_title }}"
             loading="lazy" allowfullscreen
-            allow="autoplay; fullscreen; encrypted-media; picture-in-picture"
+            allow="fullscreen; encrypted-media; picture-in-picture"
             referrerpolicy="strict-origin-when-cross-origin"></iframe>
         </div>
       </details>

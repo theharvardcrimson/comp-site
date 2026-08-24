@@ -207,6 +207,47 @@ Two ways to get the alignment back, if you want it:
 Not doing either without your say. Four stats over three photos does not look
 broken; it just no longer looks deliberate.
 
+## 1l. TO DECIDE: the video player and the collapse problem
+
+Autoplay is removed, which fixes the video starting on its own. Opening the
+disclosure now shows a paused player and you press play yourself -- one extra
+click, and nothing ever starts unprompted.
+
+**What is NOT fixed, and cannot be without JavaScript.** Collapsing the
+disclosure hides the player but does not stop it. Verified: after closing, the
+iframe is still in the document with its src intact and only `display:none`
+applied. A video someone had started would keep playing, unseen. Chrome does not
+reliably pause media in a hidden frame.
+
+Why autoplay made this worse, for the record: the parameter lives in the URL
+permanently, so it fired whenever the frame loaded rather than when you clicked.
+Combined with the collapse behaviour, that gave sound with no visible player --
+which is also a WCAG 1.4.2 failure, since audio playing automatically for over
+three seconds needs a stop mechanism.
+
+Three ways forward. Your call:
+
+1. **Leave it.** Nothing autoplays now, so this only bites someone who presses
+   play and then collapses the panel. The stop mechanism technically exists --
+   reopen and pause -- but it is not obvious.
+2. **Remove the ability to collapse.** Once opened, the player stays for the rest
+   of the page view, so audio always has a visible player and controls. Costs the
+   disclosure pattern some correctness -- a <details> that will not close is
+   strange for keyboard and screen reader users.
+3. **Go back to linking out.** The thumbnail opens YouTube in a new tab. No
+   embedded player, so no hidden playback, and no third-party contact at all
+   until the click. Costs playback in place, which is what you asked for.
+
+Recommend 1 for now and revisit if it actually bothers anyone: it is a narrow
+case, and 2 and 3 both give up something real.
+
+Worth also recording that the no-third-party-until-click property does hold.
+Tested across three fresh browser instances: zero requests to
+youtube-nocookie.com both before and after scrolling the video into view, and one
+after the click. Earlier readings that said otherwise came from a degraded
+browser instance that had stopped honouring loading="lazy" -- the same fault that
+twice made page images report as never loading.
+
 ## 1d. ROADMAP: things the owner has asked for, not yet built
 
 Recorded as they were said, with the one thing each would cost. None of this is
