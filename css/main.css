@@ -735,10 +735,10 @@ a:hover{ text-decoration:underline; }
    financial aid, whose content fills the height -- resolved auto to zero and the
    note butted straight against the last bullet. */
 .hl-col .hl-note{ margin-top:auto; padding-top:clamp(18px,2vw,28px); }
-/* Two section headings, deliberately at DIFFERENT sizes now: .intro-title is
-   the section's own title and is set large, .hl-title labels a column inside a
-   section and stays small. They shared one rule until the intro heading was
-   asked to be big; keeping them equal would have flattened the hierarchy.
+/* ONE size for both section headings, at the owner's call. They were briefly
+   split -- intro large, column labels small -- to keep a hierarchy of section
+   title over column label. That is retired deliberately, so the headings on
+   this stretch of page read as peers rather than as two tiers.
 
    Both keep line-height 1 and the same -0.0982em top margin. That number is
    the measured leading above the cap ink at line-height 1, and it is in em, so
@@ -747,16 +747,17 @@ a:hover{ text-decoration:underline; }
 .intro-title{
   font-family:var(--display); text-transform:uppercase; font-weight:400;
   line-height:1; letter-spacing:.01em; color:var(--ink);
+  font-size:clamp(38px,5.4vw,78px);
   margin:-0.0982em 0 clamp(16px,1.8vw,24px);
 }
 /* margin-top:0 overrides the shared cap-line correction. That correction exists
    to line a heading's INK up with the top of its section, which is right when
    the heading sits on bare paper. Inside a padded box the box edge is what
    aligns, and pulling the heading up would just eat 4px of the padding. */
-.hl-title{ font-size:clamp(26px,3vw,42px); margin-top:0; }
-/* Sits between the board index's h2 (104px) and the column labels, so the page
-   reads poster > section title > column label rather than two tiers. */
-.intro-title{ font-size:clamp(38px,5.4vw,78px); margin-bottom:clamp(20px,2.4vw,32px); }
+.hl-title{ margin-top:0; }   /* size comes from the shared rule above */
+/* Only the space beneath differs -- this heading sits on bare paper rather than
+   inside a padded box, so it needs more air under it. */
+.intro-title{ margin-bottom:clamp(20px,2.4vw,32px); }   /* ditto */
 /* Same size as the intro's bullets -- clamp(17px,1.9vw,23px) -- so the two
    bulleted sections read as one voice. Keep them in step if either changes. */
 .hl-list{
