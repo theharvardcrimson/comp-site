@@ -100,28 +100,28 @@ a:hover{ text-decoration:underline; }
   font-family:var(--serif); font-size:clamp(18px,2.3vw,25px);
   color:var(--red); letter-spacing:-.01em;
 }
-/* OPTICAL NUDGE: +0.167em, indenting FALL COMP 2026 to the RIGHT of the
-   wordmark's left edge. Owner's choice, made by looking at -2/-1/0/+1/+2px
-   rendered side by side at real size and again magnified 7x. Not a bug.
+/* DELIBERATE INDENT: +0.333em, setting FALL COMP 2026 in from the wordmark's
+   left edge. Owner's choice. Do not "correct" it to flush.
 
-   What the measurements say, so the two things are not confused:
-   flush is 0. Canvas actualBoundingBoxLeft on the live faces gives Crimson's
+   Be clear about what this is, because it is not an optical correction.
+   Flush is 0: canvas actualBoundingBoxLeft on the live faces gives Crimson's
    "T" 0.671px of left bearing at 25px and League Gothic's "F" 0.480px at 12px,
    so with both boxes on one edge the ink differs by 0.191px -- a fifth of a
-   pixel. Mechanically, 0 is exact. +2px is a deliberate optical indent on top
-   of that, because the eye aligns to mass and a letterspaced 12px caps line
-   reads as hanging left when it is mathematically flush.
+   pixel. Anything past about +1px stops compensating for bearing and becomes a
+   design decision: the small letterspaced line reads as a caption hung off the
+   wordmark rather than a second line flush beneath it. +4px is that decision,
+   chosen deliberately after viewing the -2..+2 range.
 
    Units matter here: em, not px. The size is clamp(10px,1vw,12px), so a fixed
-   2px would grow proportionally heavier as the header shrinks -- 2px against
-   10px type on a phone is a fifth of the size instead of a sixth. In em the
-   indent scales with the type and looks the same at every width.
+   4px would read proportionally heavier as the header shrinks -- 4px against
+   10px type on a phone is well over a third of the size. In em the indent
+   scales with the type and holds the same relationship at every width.
 
    An earlier -0.08em nudge on this rule was simply wrong: it put the F 1.125px
    LEFT of the T, which is what it claimed to fix. If you change this value,
    render the comparison first -- do not judge it from a single screenshot. */
 .wordmark-sub{
-  margin-left:var(--sub-nudge, 0.167em);   /* +2px at 12px; see note above */
+  margin-left:var(--sub-nudge, 0.333em);   /* +4px at 12px; see note above */
   display:block; font-family:var(--display); font-size:clamp(10px,1vw,12px);
   color:var(--grey); text-transform:uppercase; letter-spacing:.26em;
   margin-top:4px;
