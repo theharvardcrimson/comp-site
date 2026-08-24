@@ -315,14 +315,23 @@ sits.
 
 ## 1i. TO RESOLVE: the board rows -- white space, and active voice
 
-**Less white space.** The rows are wide open, and the cause is the two-column
-grid rather than the padding: from 900px up each row is `1.25fr 1fr` with a gap
-of up to 72px, and because the descriptions are short they leave the middle of
-the row empty. Padding is only 34px at most, so trimming that will not fix it.
-The levers, in order of effect: narrow the description column so it starts
-closer to the name, drop the row padding, or set the two on one line at large
-sizes rather than as columns. Worth trying the first alone before touching the
-type.
+**Less white space — DONE, partly.** The cause was the grid, not the padding, as
+suspected. Measured at 1440: the name column was 697px while the widest board
+name, Multimedia, is only 445px of actual ink, so the description sat 309px clear
+of the longest name and much further from short ones like Tech (178px).
+
+Now `0.72fr 1fr` with a tighter gap, and the row padding down from 34px to 26px.
+Dead space at 1440 goes from 309px to 126px. No name overflows its column at any
+width; the widest keeps 89px of headroom at 1440 and 44px at 900.
+
+The board name ink widths at 1440, for anyone re-tuning this: Arts 184, Blog 181,
+Business 349, Design 259, Editorial 363, Magazine 368, Multimedia 445, News 205,
+Sports 273, Tech 178. Multimedia is the constraint. If a board is ever renamed to
+something longer, re-measure before narrowing further.
+
+Still available if you want it tighter: the description column is capped at 46ch
+and does not use its full width, so the ratio could go further. I stopped at
+0.72fr because 900px is where the headroom gets thin.
 
 **Active voice, and this one has a consequence.** You want "write about..."
 rather than "writes about...", so it reads as what a comper would be doing.

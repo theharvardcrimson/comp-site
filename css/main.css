@@ -550,7 +550,7 @@ a:hover{ text-decoration:underline; }
    interfere with the view() timelines driving the rows. */
 .boards{ border-top:2px solid var(--ink); overflow-x:clip; }
 .board{
-  display:block; padding:clamp(20px,2.6vw,34px) var(--gut);
+  display:block; padding:clamp(16px,2vw,26px) var(--gut);
   border-bottom:1px solid var(--hair); color:inherit;
   transition:background-color .18s ease, color .18s ease;
 }
@@ -568,7 +568,17 @@ a:hover{ text-decoration:underline; }
   line-height:1.45; max-width:46ch; margin-top:8px;
 }
 @media (min-width:900px){
-  .board{ display:grid; grid-template-columns:1.25fr 1fr; gap:clamp(24px,4vw,72px); align-items:end; }
+  /* 0.72fr, not 1.25fr, and a tighter gap. The name column was far wider than
+     any name needs: at 1440 it measured 697px while the widest board name,
+     Multimedia, is 445px of actual ink -- so the description sat 309px clear of
+     the longest name and much further from the short ones. That gulf is what
+     read as dead space, and it was the grid, not the padding.
+
+     0.72fr leaves the widest name 89px of headroom at 1440 and 33px at 900,
+     which is enough because the ten names are fixed. If a board is ever renamed
+     to something longer than Multimedia, re-measure -- the ink widths are in the
+     commit message for this change. */
+  .board{ display:grid; grid-template-columns:0.72fr 1fr; gap:clamp(20px,2.6vw,44px); align-items:end; }
   .board-desc{ margin-top:0; padding-bottom:.5em; }
 }
 
