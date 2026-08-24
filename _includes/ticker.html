@@ -1,21 +1,39 @@
 {% comment %}
-  Scroll-driven marquee. The band slides horizontally as the page scrolls --
-  it is NOT auto-playing, which is deliberate: continuously moving content
-  needs a pause control under WCAG 2.2.2, while motion the reader drives by
-  scrolling needs nothing. Same energy, no liability, still zero JavaScript.
+  Continuously rotating marquee of the ten board names, each linking to its
+  board page.
 
-  The board list is printed twice so translateX(-50%) wraps seamlessly with no
-  gap. Content is the ten board names -- data, not written copy.
-  aria-hidden because it is decoration; the same names are a real list below.
+  Three accessibility consequences of it moving AND being interactive, all
+  handled here:
+
+  1. It auto-plays, so WCAG 2.2.2 requires a way to stop it. The checkbox is a
+     real, keyboard-operable pause control with no JavaScript. Screen readers
+     announce it as a checkbox with its state.
+  2. A moving link is hard to click and hard to keep focus on, so the track
+     also pauses on hover and on focus-within (see main.css). Reach for a link
+     and it stops.
+  3. The list prints twice so translateX(-50%) wraps with no visible gap, but
+     only the FIRST pass is links. The second is inert spans, aria-hidden, so
+     the ten boards appear once in the tab order and once to a screen reader
+     rather than twice.
+
+  Names come from `name`, not `display_name`: no "(Flyby)" or "(FM)" here.
+  Those stay on each board's own page.
 {% endcomment %}
-<div class="ticker" aria-hidden="true">
+{% assign tick = site.boards | sort: 'name' %}
+<div class="ticker">
+  <input type="checkbox" id="ticker-pause" class="ticker-pause-input">
+  <label for="ticker-pause" class="ticker-pause">Pause</label>
+
   <div class="ticker-track">
-    {% assign tick = site.boards | sort: 'name' %}
-    {% for pass in (1..2) %}
+    {% for b in tick %}
+      <a class="ticker-item" href="{{ b.url }}">{{ b.name }}</a>
+      <span class="ticker-dot" aria-hidden="true">&bull;</span>
+    {% endfor %}
+    <span aria-hidden="true" class="ticker-dup">
       {% for b in tick %}
-        <span class="ticker-item">{{ b.display_name | default: b.name }}</span>
+        <span class="ticker-item">{{ b.name }}</span>
         <span class="ticker-dot">&bull;</span>
       {% endfor %}
-    {% endfor %}
+    </span>
   </div>
 </div>

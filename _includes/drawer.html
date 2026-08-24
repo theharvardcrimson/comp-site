@@ -26,7 +26,7 @@
         {% assign drawer_boards = site.boards | sort: 'name' %}
         {% for b in drawer_boards %}
           <li{% if page.url == b.url %} class="here"{% endif %}>
-            <a href="{{ b.url }}">{{ b.display_name | default: b.name }}</a>
+            <a href="{{ b.url }}">{{ b.name }}</a>
           </li>
         {% endfor %}
       </ul>

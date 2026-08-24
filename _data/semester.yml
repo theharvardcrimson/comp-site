@@ -79,6 +79,24 @@ photo_band:
     credit: ""
 
 
+# Front pages that wipe across the homepage as you scroll. Same shape as
+# photo_band. Six slots so the strip is wide enough to move; delete entries or
+# empty the list to remove the band.
+press_strip:
+  - label: Front page
+    photo: ""
+  - label: FM cover
+    photo: ""
+  - label: Sports back page
+    photo: ""
+  - label: Arts supplement
+    photo: ""
+  - label: Commencement issue
+    photo: ""
+  - label: The Game
+    photo: ""
+
+
 # ---- Comp events ----
 # Shown as a compact list just above the ten boards.
 #

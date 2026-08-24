@@ -15,7 +15,7 @@
   {% assign boards = site.boards | sort: 'name' %}
   {% for b in boards %}
     <a class="board" href="{{ b.url }}">
-      <span class="board-name">{{ b.display_name | default: b.name }}</span>
+      <span class="board-name">{{ b.name }}</span>
       <span class="board-desc">{{ b.hook }}</span>
     </a>
   {% endfor %}

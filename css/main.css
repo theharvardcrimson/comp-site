@@ -534,15 +534,23 @@ figcaption .credit{ color:var(--red); }
 @keyframes slide{ from{ transform:translateX(-22px); } to{ transform:none; } }
 
 
-/* ---------- scroll-driven ticker ----------
-   Moves only while the reader scrolls. Auto-playing marquees need a pause
-   control to satisfy WCAG 2.2.2; scroll-driven motion needs none, because the
-   reader is the one driving it. animation-timeline:scroll() ties progress to
-   the document scrollport. Browsers without support show a static band, which
-   reads fine -- it is decoration.
+/* ---------- marquee ----------
+   Rotates continuously. Because it auto-plays it needs a stop mechanism to
+   satisfy WCAG 2.2.2, and because its items are LINKS it also needs to stop
+   when someone reaches for one -- a moving target is close to unclickable.
+   Hence three ways to pause, all CSS: the checkbox control, :hover, and
+   :focus-within.
+
+   Earlier this was scroll-driven and silently never moved. Cause worth
+   recording: `overflow:hidden` makes an element a scroll container, so a bare
+   `animation-timeline: scroll()` inside it bound to the ticker itself, which
+   has no scrollable height -- progress stayed at 0 forever. Anything
+   scroll-driven needs scroll(root) explicitly, or an ancestor that clips
+   without scrolling.
 */
 .ticker{
-  overflow:hidden; background:var(--red); color:var(--paper);
+  position:relative; overflow:hidden;
+  background:var(--red); color:var(--paper);
   border-top:1px solid var(--red-deep); border-bottom:1px solid var(--red-deep);
   padding:clamp(10px,1.4vw,18px) 0;
 }
@@ -550,22 +558,84 @@ figcaption .credit{ color:var(--red); }
   display:flex; align-items:center; gap:clamp(18px,2.4vw,34px);
   width:max-content; white-space:nowrap;
 }
+.ticker-dup{ display:flex; align-items:center; gap:clamp(18px,2.4vw,34px); }
 .ticker-item{
-  font-family:var(--display); text-transform:uppercase;
+  font-family:var(--display); text-transform:uppercase; color:var(--paper);
   font-size:clamp(30px,5vw,74px); line-height:1; letter-spacing:.02em;
 }
+a.ticker-item:hover{ color:var(--on-red-muted); text-decoration:none; }
 .ticker-dot{ color:var(--on-red-muted); font-size:clamp(14px,1.6vw,22px); }
+
+@media (prefers-reduced-motion:no-preference){
+  .ticker-track{ animation:ticker 44s linear infinite; }
+  .ticker:hover .ticker-track,
+  .ticker:focus-within .ticker-track,
+  .ticker-pause-input:checked ~ .ticker-track{ animation-play-state:paused; }
+}
+/* translateX only, never opacity: an opacity:0 keyframe would blank the band
+   outright anywhere the animation failed to advance. */
+@keyframes ticker{ from{ transform:translateX(0); } to{ transform:translateX(-50%); } }
+
+/* The pause control. The input stays in the accessibility tree and the tab
+   order -- it is only visually collapsed, not display:none, which would make
+   it unfocusable. */
+.ticker-pause-input{
+  position:absolute; width:1px; height:1px; opacity:0;
+  top:8px; right:12px; margin:0;
+}
+.ticker-pause{
+  position:absolute; z-index:3; top:8px; right:12px; cursor:pointer;
+  font-family:var(--display); text-transform:uppercase; letter-spacing:.14em;
+  font-size:12px; line-height:1; padding:6px 10px;
+  color:var(--paper); border:1px solid var(--on-red-muted);
+  /* Solid, not translucent: the marquee text slides underneath, so a
+     see-through background would make this control's contrast depend on
+     whatever letter happened to be behind it. */
+  background:var(--red-deep);
+}
+.ticker-pause:hover{ background:var(--red-deep); }
+.ticker-pause-input:focus-visible + .ticker-pause{
+  outline:3px solid var(--paper); outline-offset:2px;
+}
+.ticker-pause-input:checked + .ticker-pause{ border-color:var(--paper); }
+
+/* ---------- front pages wiping across, scroll-driven ----------
+   overflow-x:clip rather than hidden, so this does not become a scroll
+   container and steal the timeline from the document.
+*/
+.press{
+  overflow-x:clip; background:var(--ink);
+  padding:clamp(14px,1.8vw,26px) 0;
+}
+.press-track{
+  display:flex; align-items:stretch; gap:clamp(10px,1.4vw,20px);
+  width:max-content; padding-left:var(--gut);
+}
+.press-item{
+  display:block; flex:none;
+  height:clamp(150px,20vw,280px); aspect-ratio:3/4;
+  object-fit:cover;
+}
+.press-slot{
+  display:flex; align-items:flex-end; padding:10px;
+  border:1px solid var(--on-ink-muted);
+  background:repeating-linear-gradient(135deg,
+    rgba(251,250,246,.06) 0 9px, rgba(251,250,246,0) 9px 18px);
+}
+.press-slot span{
+  font-family:var(--display); text-transform:uppercase; letter-spacing:.14em;
+  font-size:11px; line-height:1.3; color:var(--on-ink-muted);
+}
 @media (prefers-reduced-motion:no-preference){
   @supports (animation-timeline:scroll()){
-    .ticker-track{
-      animation:ticker linear both;
-      animation-timeline:scroll();
+    .press-track{
+      animation:press linear both;
+      animation-timeline:scroll(root);
+      animation-range:0% 60%;
     }
   }
 }
-/* translateX only -- never opacity. An opacity:0 keyframe would hide the band
-   outright in any browser that supports the timeline but never advances it. */
-@keyframes ticker{ from{ transform:translateX(0); } to{ transform:translateX(-50%); } }
+@keyframes press{ from{ transform:translateX(0); } to{ transform:translateX(-38%); } }
 
 /* ---------- photo band + placeholder slots ----------
    A slot keeps the layout final before the photograph exists: same aspect
