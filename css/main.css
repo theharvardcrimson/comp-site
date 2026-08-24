@@ -394,15 +394,63 @@ a:hover{ text-decoration:underline; }
 
 /* ---------- stats ---------- */
 /* One per row on phones. auto-fit produced a lopsided 2+1 at 390px, which
-   reads like a mistake rather than a choice. */
-.stats{ display:grid; grid-template-columns:1fr; border-bottom:1px solid var(--hair); }
-@media (min-width:600px){ .stats{ grid-template-columns:repeat(3,1fr); } }
+   reads like a mistake rather than a choice.
+
+   NO RULES HERE -- no dividers between the figures and no line under the block.
+   The three numerals are 124px crimson against small letterspaced caps; they
+   separate themselves, and hairlines boxing them in was the most templated
+   thing on the page. Removing the bottom border is what lets the stats run
+   straight into the photographs.
+
+   THE COLUMN GEOMETRY IS COPIED FROM .band ON PURPOSE, so each figure sits
+   centred over the photograph beneath it. It must stay in sync: same --gut
+   side padding, same column-gap as .band's gap. When the stats grid spanned
+   the full width instead, its columns were 480px against the band's 425.33px
+   and the outer two figures sat 36.7px off centre from their photographs --
+   only the middle one lined up, and only by coincidence. If you change .band's
+   gap, change it here too. */
+.stats{
+  display:grid; grid-template-columns:1fr;
+  padding-left:var(--gut); padding-right:var(--gut);
+}
+/* 700px, not 600px, because that is where .band goes three-up. They used to
+   disagree: between 600 and 699px the figures were three across while the
+   photographs were still stacked one per row, so there was nothing to line up
+   with. Both blocks now switch together, which is the only way the alignment
+   holds at every width. Move one breakpoint and you must move the other. */
+@media (min-width:700px){
+  .stats{ grid-template-columns:repeat(3,1fr); column-gap:clamp(10px,1.4vw,18px); }
+}
 @media (min-width:760px){ .stats{ text-align:center; } }
-.stats div{ padding:clamp(26px,4vw,52px) var(--gut); text-align:center; }
-.stats div + div{ border-top:1px solid var(--hair); }
+/* Vertical padding only: the side inset now lives on the grid container, which
+   is what puts these columns on the same lines as the photographs. */
+.stats div{ padding:clamp(26px,4vw,52px) 0; text-align:center; }
+/* White figures on a crimson block. inline-block, NOT block, so the rectangle
+   hugs the digits instead of stretching the full column -- "153", "10" and
+   "TKM" therefore get different widths, which is the point. The parent is
+   text-align:center, so an inline-block centres itself.
+
+   Colour is the solid --paper token on solid --red: 6.64:1, AA at any size and
+   AAA at this one. Never do this with opacity -- the ratio stops being
+   checkable, per the note at the top of this file.
+
+   Padding is in em so the block scales with the figure, and it is asymmetric
+   because League Gothic's digits do NOT sit centred in their line box. These
+   numbers are solved, not guessed. Measured at 115.2px with line-height .84:
+   the content box is 96.77px, the digits are 90.10px tall, and their ink starts
+   0.92px ABOVE the content box because a sub-1 line-height gives negative
+   half-leading. So padding-bottom must be far smaller than padding-top to put
+   equal air above and below the figures -- symmetric padding left the block
+   2.75px bottom-heavy. Both values scale correctly in em: line-height and the
+   font's own metrics are all proportional to the font size.
+
+   Solved for a 9px gap at 115.2px: top .0861em, bottom .0123em. Re-measure if
+   you change line-height or the face; do not adjust these by eye. */
 .stats b{
-  display:block; font-family:var(--display); font-size:clamp(54px,8vw,124px);
-  line-height:.84; color:var(--red);
+  display:inline-block;
+  font-family:var(--display); font-size:clamp(54px,8vw,124px);
+  line-height:.84; color:var(--paper); background:var(--red);
+  padding:.086em .12em .0123em;
 }
 /* Direct child only. As `.stats span` this also caught the unit suffix nested
    inside the figure, which inherited display:block and the grey -- so the M of
@@ -419,7 +467,8 @@ a:hover{ text-decoration:underline; }
   color:inherit; letter-spacing:0; margin:0;
 }
 @media (min-width:760px){
-  .stats div + div{ border-top:none; border-left:1px solid var(--hair); }
+  /* The vertical dividers that used to sit here are gone with the rest of the
+     stats rules; nothing replaces them. */
 }
 
 /* ---------- section heads ---------- */
@@ -691,15 +740,30 @@ figcaption .credit{ color:var(--red); }
   border-bottom:1px solid var(--hair);
 }
 @media (min-width:700px){ .band{ grid-template-columns:repeat(3,1fr); } }
+
+/* The stats used to be separated from the photographs by a hairline. With the
+   line gone, the two blocks' own padding left 108px of empty paper between the
+   labels and the first photograph, which reads as a gap rather than a
+   transition -- the line had been doing the work of explaining that space.
+   Tightening only the top padding, and only when .band actually follows the
+   stats, so the band keeps its full padding anywhere else. */
+.stats + .band{ padding-top:clamp(10px,1.4vw,20px); }
 .band-item{ margin:0; }
-.band-item img{ width:100%; aspect-ratio:4/5; object-fit:cover; display:block; }
+/* 4/3, not the 4/5 this started as. The supplied photographs are all 3/2
+   landscape, so a 4/5 portrait frame kept the full height and only 60% of the
+   width -- it was cutting 40% off every picture. At 4/3 the crop keeps 89% of
+   the width, so the frames are shorter and show very nearly the whole frame.
+   3/2 would crop nothing at all; it was tried and read as too thin in a
+   three-up. If the photographs are ever replaced with portrait originals, this
+   is the number to revisit. */
+.band-item img{ width:100%; aspect-ratio:4/3; object-fit:cover; display:block; }
 .band figcaption{
   padding:8px 0 0; font-size:14px; line-height:1.45; color:var(--grey);
 }
 .band figcaption .credit{ color:var(--red); }
 
 .slot{
-  aspect-ratio:4/5; border:1px solid var(--red);
+  aspect-ratio:4/3;   /* must track .band-item img above */ border:1px solid var(--red);
   display:flex; flex-direction:column; justify-content:flex-end; gap:6px;
   padding:clamp(14px,1.6vw,20px);
   background:

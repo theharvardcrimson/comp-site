@@ -52,15 +52,15 @@ as **FM**.
 
 ---
 
-## 1. Needed: the readers figure
+## 1. The third stat — SETTLED
 
-The third stat on the homepage currently reads **TKm readers** and renders that
-way on the page. Fill in `stat_3_number` in `_data/semester.yml` when you have
-the number — the old copy said 21 million page views in 2023, so it may just be
-a matter of confirming the current figure.
+`15M+ VIEWS IN THE LAST YEAR`, from the owner's "15+ million views in the last
+year". Note this changed the metric from *readers* to *views*.
 
-This is the only deliberate placeholder that is visible to a visitor. Nothing
-else on the site shows a TK.
+Written as 15 / M+ so it renders "15M+", the conventional order. "15+M" is a
+one-character change in `_data/semester.yml` if the literal phrasing is wanted.
+
+No TK remains anywhere on the site.
 
 ## 2. Needed: what the Fall comp actually looks like
 
