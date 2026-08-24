@@ -458,8 +458,8 @@ a:hover{ text-decoration:underline; }
    2.75px bottom-heavy. Both values scale correctly in em: line-height and the
    font's own metrics are all proportional to the font size.
 
-   Solved from those metrics: with padding-top .18em, padding-bottom must be
-   .1221em to put equal air above and below -- .172em of it, about 20px at
+   Solved from those metrics: with padding-top .26em, padding-bottom must be
+   .186em to put equal air above and below -- .252em of it, about 29px at
    115.2px. If you change padding-top, recompute the bottom rather than
    matching it: pb = pt - (line-height + ink offset - ink height) in em, which
    with these values is pt - .074em. Do not adjust either by eye. */
@@ -467,7 +467,7 @@ a:hover{ text-decoration:underline; }
   display:inline-block;
   font-family:var(--display); font-size:clamp(54px,8vw,124px);
   line-height:.84; color:var(--paper); background:var(--red);
-  padding:.18em .2em .1221em;
+  padding:.26em .28em .186em;
 }
 /* Direct child only. As `.stats span` this also caught the unit suffix nested
    inside the figure, which inherited display:block and the grey -- so the M of
@@ -718,7 +718,13 @@ figcaption .credit{ color:var(--red); }
    clear of WCAG 2.2.2. prefers-reduced-motion still stops them outright. */
 @media (prefers-reduced-motion:no-preference){
   .ticker-track{ animation:ticker 44s linear infinite; }
-  .press-track{ animation:press 66s linear infinite; }
+  /* Duration comes from the template as --press-dur, computed from the number
+     of covers, so adding covers lengthens the loop instead of speeding it up.
+     The fallback matters only if that inline style is ever lost. The papers
+     must read as SLOWER than the board names above: measured, they run about
+     two thirds of the ticker's speed. At a fixed 66s with twenty covers they
+     were 0.94x on desktop and 1.10x on a phone -- i.e. level, then faster. */
+  .press-track{ animation:press var(--press-dur, 100s) linear infinite; }
 }
 /* translateX only, never opacity: an opacity:0 keyframe would blank the band
    outright anywhere the animation failed to advance. */

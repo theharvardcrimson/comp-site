@@ -56,7 +56,16 @@
     {% assign shot = strip | where_exp: "s", "s.photo != ''" %}
     {% if shot.size > 0 or site.data.semester.show_photo_placeholders %}
     <div class="press">
-      <div class="press-track">
+      {%- comment -%}
+        The duration is computed from the number of covers, not fixed, so the
+        band's SPEED stays put when covers are added or removed. It was fixed at
+        66s when there were six; going to twenty made the track three times
+        longer and therefore three times faster, which put the papers level with
+        the board names above and actually faster than them on a phone. Five
+        seconds per cover keeps the papers at roughly two thirds of the board
+        marquee's speed at every width.
+      {%- endcomment -%}
+      <div class="press-track" style="--press-dur:{{ strip.size | times: 5 }}s">
         {% for pass in (1..2) %}
           {% for slot in strip %}
             {% if slot.photo and slot.photo != '' %}
