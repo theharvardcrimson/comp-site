@@ -233,6 +233,11 @@ a:hover{ text-decoration:underline; }
    was part of what made the old site feel dated. */
 .field.has-photo{
   position:relative; isolation:isolate;
+  /* clip, not hidden: the entrance animation starts the text 34px to the right
+     of its resting place, which would otherwise extend the document and add a
+     horizontal scrollbar -- the same bug the alternating board rows caused.
+     `clip` contains it without making this a scroll container. */
+  overflow-x:clip;
   /* Text anchored to the bottom of the hero. Padding is deliberately
      asymmetric -- generous above so the photograph has room, tight below so
      the Sign up button sits near the bottom edge rather than floating. */
@@ -674,3 +679,32 @@ figcaption .credit{ color:var(--red); }
   }
 }
 @keyframes slide-right{ from{ transform:translateX(22px); } to{ transform:none; } }
+
+
+/* ---------- hero entrance ----------
+   The page used to open completely still: both moving bands sit below the fold,
+   so the first impression was a photograph and nothing else.
+
+   Unlike the scroll-driven animations elsewhere in this file, these MAY start
+   from opacity:0. A time-based animation always runs to completion, so the end
+   state is guaranteed; a scroll timeline can sit at 0% forever, which is what
+   blanked whole sections earlier in this redesign. That is the distinction --
+   not a style preference.
+*/
+@media (prefers-reduced-motion:no-preference){
+  .field.has-photo .poster,
+  .field.has-photo .lede,
+  .field.has-photo .actions{
+    animation:pan-in .8s cubic-bezier(.16,.84,.3,1) both;
+  }
+  .field.has-photo .poster{ animation-delay:.06s; }
+  .field.has-photo .lede{ animation-delay:.26s; }
+  .field.has-photo .actions{ animation-delay:.42s; }
+}
+/* Enters from the RIGHT. That direction is why the hero needs overflow-x:clip
+   -- starting the text 34px right of its resting place would otherwise extend
+   the document and add a horizontal scrollbar. */
+@keyframes pan-in{
+  from{ opacity:0; transform:translateX(34px); }
+  to{ opacity:1; transform:none; }
+}
