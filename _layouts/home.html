@@ -45,9 +45,36 @@ layout: site
 
 {% include photo-band.html %}
 
-{% comment %} The single intro blurb -- the body of index.md. {% endcomment %}
-{% if content != '' %}
-<div class="prose reveal">{{ content }}</div>
+{% comment %}
+  Intro: the body of index.md on the left, the video on the right. Either half
+  can be absent -- no prose and the video sits alone, no video_id and the prose
+  runs the full measure -- so the section survives someone emptying one of them.
+
+  The video is a facade, NOT a live iframe: a locally hosted still frame that
+  links out to YouTube. That keeps the promise at the top of this repo that the
+  site ships no third-party JavaScript, and it means the page makes no
+  third-party request at all -- a real embed would pull about 1MB of Google's
+  player before anyone pressed play, and even a remote thumbnail would hand
+  every visitor's IP to Google unasked. The trade-off, stated plainly: playback
+  happens on YouTube in a new tab rather than in place. To swap the thumbnail,
+  replace images/video-thumb.jpg.
+{% endcomment %}
+{% assign vid = site.data.semester.video_id %}
+{% if content != '' or vid != '' %}
+<div class="intro reveal">
+  {% if content != '' %}<div class="intro-text">{{ content }}</div>{% endif %}
+  {% if vid and vid != '' %}
+    <aside class="intro-video">
+      <a class="vthumb" href="https://www.youtube.com/watch?v={{ vid }}"
+         rel="noopener external">
+        <img src="/images/video-thumb.jpg" alt=""
+             width="960" height="540" loading="lazy" decoding="async">
+        <span class="vplay" aria-hidden="true"></span>
+        <span class="vlabel">Watch: {{ site.data.semester.video_title }}</span>
+      </a>
+    </aside>
+  {% endif %}
+</div>
 {% endif %}
 
 {% comment %}

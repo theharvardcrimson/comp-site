@@ -157,6 +157,18 @@ press_strip:
     photo: 2026-07-28_vol-cliii-no-21.jpg
 
 
+# ---- Homepage video ----
+# The YouTube id only, not a full URL -- the template builds the embed and the
+# thumbnail from it. This is the video that was on the old comp homepage.
+# Empty the id and the whole video column disappears; the prose then runs full
+# width on its own.
+#
+# `video_title` is the link's accessible name, so it must say what the video
+# is. Taken from the title burned into the video's own opening frame, not
+# invented -- correct it if the official title differs.
+video_id: MGrF5ZJE7Yw
+video_title: Keep the Old Sheet Flying
+
 # ---- Comp events ----
 # Shown as a compact list just above the ten boards.
 #
