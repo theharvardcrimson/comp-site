@@ -82,7 +82,18 @@ a:hover{ text-decoration:underline; }
   font-family:var(--serif); font-size:clamp(18px,2.3vw,25px);
   color:var(--red); letter-spacing:-.01em;
 }
+/* OPTICAL NUDGE. The two header lines measure aligned to within a third of a
+   pixel (ink at 89.67 and 89.33 at 1440px), so this is not a measurement fix --
+   it is a judgement call. The serif "T" leads with a thin crossbar tip while
+   League Gothic's "F" leads with a full-height stem, and the eye aligns to
+   mass, so identical edges do not read as identical.
+
+   Chosen by rendering 0, -0.04, -0.08, -0.14 and +0.06em at 4x magnification
+   against a guide on the box edge: at 0 the F's stem sat right of the guide
+   and read as indented, and by -0.14em it overshot and began to hang left.
+   -0.08em puts the stem on the guide. Tune this one value. */
 .wordmark-sub{
+  margin-left:var(--sub-nudge, -0.08em);   /* -1px at 12px; see note above */
   display:block; font-family:var(--display); font-size:clamp(10px,1vw,12px);
   color:var(--grey); text-transform:uppercase; letter-spacing:.26em;
   margin-top:4px;
@@ -233,8 +244,8 @@ a:hover{ text-decoration:underline; }
    was part of what made the old site feel dated. */
 .field.has-photo{
   position:relative; isolation:isolate;
-  /* clip, not hidden: the entrance animation starts the text 34px to the right
-     of its resting place, which would otherwise extend the document and add a
+  /* clip, not hidden: the entrance animation starts the text 34px off its
+     resting place, which would otherwise extend the document and add a
      horizontal scrollbar -- the same bug the alternating board rows caused.
      `clip` contains it without making this a scroll container. */
   overflow-x:clip;
@@ -701,10 +712,10 @@ figcaption .credit{ color:var(--red); }
   .field.has-photo .lede{ animation-delay:.26s; }
   .field.has-photo .actions{ animation-delay:.42s; }
 }
-/* Enters from the RIGHT. That direction is why the hero needs overflow-x:clip
-   -- starting the text 34px right of its resting place would otherwise extend
-   the document and add a horizontal scrollbar. */
+/* Enters from the LEFT. Either direction needs the hero's overflow-x:clip --
+   starting the text off its resting place extends the document and would add a
+   scrollbar without it. */
 @keyframes pan-in{
-  from{ opacity:0; transform:translateX(34px); }
+  from{ opacity:0; transform:translateX(-34px); }
   to{ opacity:1; transform:none; }
 }
