@@ -52,7 +52,17 @@ as **FM**.
 
 ---
 
-## 1. Needed: what the Fall comp actually looks like
+## 1. Needed: the readers figure
+
+The third stat on the homepage currently reads **TKm readers** and renders that
+way on the page. Fill in `stat_3_number` in `_data/semester.yml` when you have
+the number — the old copy said 21 million page views in 2023, so it may just be
+a matter of confirming the current figure.
+
+This is the only deliberate placeholder that is visible to a visitor. Nothing
+else on the site shows a TK.
+
+## 2. Needed: what the Fall comp actually looks like
 
 Shopping week is gone, which removes the only per-board event structure the
 site had. So:
@@ -67,7 +77,7 @@ site had. So:
   is genuinely "sign up and we'll email you," that's fine — but the site should
   say so plainly instead of implying a calendar that doesn't exist.
 
-## 2. Open: where the shared reporting comp fact goes
+## 3. Open: where the shared reporting comp fact goes
 
 News, Magazine, Sports, and Arts comp together for the first three weeks before
 splitting off. This is the most useful undocumented fact on the site — it means
@@ -83,7 +93,7 @@ Still worth surfacing prominently somewhere. Also unresolved: can you switch
 boards after the split, and do the four boards' requirements overlap during
 those three weeks?
 
-## 3. The anxiety questions
+## 4. The anxiety questions
 
 Absent from all eleven current pages. A nervous first-year wants these and an
 unanswered "will I get in?" gets answered pessimistically by default.
@@ -97,7 +107,7 @@ unanswered "will I get in?" gets answered pessimistically by default.
 - **No experience required** — true for all ten, or are there exceptions?
   Several pages say it; worth stating once, authoritatively.
 
-## 4. Corrections needed
+## 5. Corrections needed
 
 **Business, second director.** Still a mismatch in `_data/directors.yml` — which
 is right?
@@ -108,7 +118,7 @@ email: hamza.lateef@thecrimson.com
 This is the only outstanding item in this section. The trailing space in
 "Salma O. Siddiqui" is fixed, and `technology` is now `tech` everywhere.
 
-## 5. Needs your rewrite (I won't touch prose)
+## 6. Needs your rewrite (I won't touch prose)
 
 **`_boards/blog.md`** names last semester's directors in the body copy:
 
@@ -122,7 +132,7 @@ While you're in there — anything else out of date across the ten board pages?
 Named people, specific events, "this year we're doing X" claims. That staleness
 is invisible to me; I can't tell a current fact from a 2024 one.
 
-## 6. Needed: typefaces
+## 7. Needed: typefaces
 
 The two faces from the new thecrimson.com — the display serif for headlines and
 the letterspaced sans for labels and bylines.
@@ -132,7 +142,7 @@ repo's own fonts (League Gothic for display, Crimson for the wordmark, Vollkorn
 for body), which cost nothing and need no webfont service. Swapping in the real
 faces is a one-line change to the CSS custom properties whenever you have them.
 
-## 7. Photography (later)
+## 8. Photography (later)
 
 Optional field, so this can land any time.
 
