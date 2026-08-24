@@ -712,7 +712,23 @@ a:hover{ text-decoration:underline; }
 .intro-text > .intro-title:first-child{ margin-top:-0.0982em; }
 .intro-text p{ margin:0 0 1.15em; }
 .intro-text p:last-child{ margin-bottom:0; }
-.intro-text strong{ font-family:var(--serif); font-weight:700; }
+/* A run-in lead at the head of a bullet. Set in the display face and uppercase
+   rather than as bold body type: League Gothic is the voice every other label on
+   this site speaks in, so an opening phrase in it reads as a tag introducing the
+   sentence rather than as a shouted word inside it.
+
+   font-weight 400 on purpose. League Gothic ships one weight, so asking for 700
+   makes the browser synthesise a fake bold -- smeared, uneven, and worse than the
+   real thing. The face is dense enough that it reads as emphasis unaided.
+
+   The lowercase-to-uppercase swap needs a size nudge: uppercase at the same
+   font-size looks larger than surrounding lowercase because there are no
+   x-height letters to compare against, so this sets slightly smaller. */
+.intro-text strong{
+  font-family:var(--display); font-weight:400;
+  text-transform:uppercase; letter-spacing:.05em;
+  font-size:.94em;
+}
 .intro-text em{ font-style:italic; }
 
 /* ---------- highlights: two columns of bullets ----------

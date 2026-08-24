@@ -32,14 +32,18 @@ intro_note_position: above
 # rewritten. You said it still needs an editing pass, so here is what I noticed
 # while placing it, for you to fix or wave off:
 #
-#   1. Bullet 2 reads "completion base/just show up nd do the work" -- "base"
-#      for "based", and "nd" for "and".
+#   1. Bullet 2 still reads "completion base/just show up nd do the work" --
+#      "base" for "based", and "nd" for "and". Bullet 1 has been rewritten and
+#      no longer has these problems.
 #   2. Bullets 1 and 3 have no closing full stop; bullet 2 does.
-#   3. The slashes in bullets 1 and 2 read as unfinished alternatives rather
-#      than a choice, e.g. "high school paper/have never worked for a newspaper".
+#   3. Bullet 2 still has a slash reading as an unfinished alternative.
 #   4. Bullet 3, "Shape the journalism that shapes Harvard", is a fragment next
 #      to two that are full sentences. It is also the line you said you most
 #      want to highlight, so it may want to be the teaser rather than a bullet.
+#
+# The **bold** at the start of a bullet is a run-in lead: it sets in the display
+# face, uppercase, so it reads as a tag introducing the sentence. Wrap any
+# opening phrase in ** and it behaves the same way.
 #
 # Apostrophes were curled to match the rest of the site. Nothing else changed.
 # Keep the leading "- " on each line and it stays a bullet.
@@ -48,6 +52,6 @@ intro_note_position: above
 # section 1b, links intact, ready to paste back if you want any of it.
 ---
 
-- No experience required! The majority of Crimson editors didn’t work for their high school paper/have never worked for a newspaper before coming to Harvard. We’ll teach you everything you need to know
+- **No experience required** The majority of Crimson editors have never worked for a newspaper before
 - Completion based! With the exception of our Business and Tech comps, every board at The Crimson is completion base/just show up nd do the work.
 - Shape the journalism that shapes Harvard
