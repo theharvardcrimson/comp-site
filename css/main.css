@@ -39,6 +39,13 @@
   --on-ink-muted:#cfc9bd;   /* 11.26:1 on --ink, AAA */
 
   --gut:clamp(18px,5vw,64px);
+
+  /* The page's outer left edge, shared by the header and the full-bleed hero so
+     the top of the page reads as one column. Interior sections use the roomier
+     --gut instead; that inset is deliberate, not drift. Referenced in exactly
+     two places -- .bar's padding-left and .field.has-photo -- so this token is
+     what keeps them locked together. */
+  --edge:clamp(14px,2.4vw,34px);
 }
 
 *,*::before,*::after{ box-sizing:border-box; }
@@ -66,12 +73,23 @@ a:hover{ text-decoration:underline; }
 /* ---------- header ---------- */
 /* z-index 50 keeps the bar ABOVE the open drawer panel (z-index 40). The panel
    used to cover the header, which hid the very control that closes it.
-   Padding is deliberately tighter than --gut: the page gutter runs to 64px,
-   which left the logo and the Sign up button marooned in the middle. */
+
+   ASYMMETRIC PADDING, on purpose, and the two sides answer to different things:
+
+   LEFT uses --edge -- the same expression as the hero -- so the seal and the
+   hero headline share one left edge at every width. They used to differ (26 vs
+   34 at 1440px) and an 8px step at the very top of the page is exactly where a
+   misalignment is most visible. Because both sides now reference one token they
+   cannot drift apart again; change --edge and both move together.
+
+   RIGHT stays tighter than --edge: the right side is a control cluster (menu
+   toggle + Sign up) that should sit close to the corner, not a typographic
+   column. Neither side uses --gut -- at 64px the logo and the button were
+   marooned in the middle of the bar. */
 .bar{
   position:sticky; top:0; z-index:50;
   display:flex; align-items:center; justify-content:space-between; gap:12px;
-  padding:10px clamp(12px,2.2vw,26px);
+  padding:10px clamp(12px,2.2vw,26px) 10px var(--edge);
   background:var(--paper); border-bottom:1px solid var(--hair);
 }
 .bar-actions{ display:flex; align-items:center; gap:clamp(6px,1.2vw,16px); }
@@ -82,18 +100,21 @@ a:hover{ text-decoration:underline; }
   font-family:var(--serif); font-size:clamp(18px,2.3vw,25px);
   color:var(--red); letter-spacing:-.01em;
 }
-/* OPTICAL NUDGE. The two header lines measure aligned to within a third of a
-   pixel (ink at 89.67 and 89.33 at 1440px), so this is not a measurement fix --
-   it is a judgement call. The serif "T" leads with a thin crossbar tip while
-   League Gothic's "F" leads with a full-height stem, and the eye aligns to
-   mass, so identical edges do not read as identical.
+/* NO OPTICAL NUDGE HERE -- and that is the measured answer, not laziness.
 
-   Chosen by rendering 0, -0.04, -0.08, -0.14 and +0.06em at 4x magnification
-   against a guide on the box edge: at 0 the F's stem sat right of the guide
-   and read as indented, and by -0.14em it overshot and began to hang left.
-   -0.08em puts the stem on the guide. Tune this one value. */
+   A -0.08em nudge used to sit on this rule, chosen by eye at 4x magnification.
+   It was wrong, and wrong in the wrong direction: measuring the rendered
+   pixels showed the "F" of FALL hanging 1.125px LEFT of the "T" of The, which
+   is over a full pixel and plainly visible. That is what it was "fixing."
+
+   The real numbers, from canvas actualBoundingBoxLeft on the two live faces:
+   Crimson's "T" at 25px carries 0.671px of left side bearing, League Gothic's
+   "F" at 12px carries 0.480px. So with both boxes on the same edge the ink
+   differs by 0.191px -- a fifth of a pixel, below what any display can show.
+
+   Identical box edges is therefore correct. If you think you see an offset
+   here, measure it before nudging: that is how the last one got shipped. */
 .wordmark-sub{
-  margin-left:var(--sub-nudge, -0.08em);   /* -1px at 12px; see note above */
   display:block; font-family:var(--display); font-size:clamp(10px,1vw,12px);
   color:var(--grey); text-transform:uppercase; letter-spacing:.26em;
   margin-top:4px;
@@ -271,8 +292,8 @@ a:hover{ text-decoration:underline; }
   display:flex; flex-direction:column; justify-content:flex-end;
   padding-top:clamp(38px,5.1vw,74px);
   padding-bottom:clamp(16px,2vw,28px);
-  padding-left:clamp(14px,2.4vw,34px);
-  padding-right:clamp(14px,2.4vw,34px);
+  padding-left:var(--edge);
+  padding-right:var(--edge);
 }
 .field.has-photo::before,
 .field.has-photo::after{ content:""; position:absolute; inset:0; }
