@@ -67,17 +67,22 @@ layout: site
     <div class="intro-text">
       {% if has_title %}<h2 class="intro-title">{{ page.intro_title }}</h2>{% endif %}
       {%- assign note = page.intro_note -%}
+      {%- comment -%}
+        The note carries .intro-lead in BOTH positions. It is the same voice
+        either way -- italic, grey, a step up in size -- and only the margins
+        differ, which the stylesheet handles by which element precedes it.
+      {%- endcomment -%}
       {%- if note and note != '' and page.intro_note_position == 'above' -%}
-        {%- comment -%}
-          Above the bullets it is a lead, not a footnote, so it gets a second
-          class -- the small grey treatment would have buried the line that
-          frames everything under it.
-        {%- endcomment -%}
         <p class="intro-note intro-lead">{{ note }}</p>
       {%- endif -%}
       {{ content }}
       {%- if note and note != '' and page.intro_note_position != 'above' -%}
-        <p class="intro-note">{{ note }}</p>
+        <p class="intro-note intro-lead">{{ note }}</p>
+      {%- endif -%}
+      {%- if page.intro_link_text and page.intro_link_text != '' -%}
+        <p class="intro-jump">
+          <a href="#boards">{{ page.intro_link_text }}</a>
+        </p>
       {%- endif -%}
     </div>
   {% endif %}
@@ -157,7 +162,11 @@ layout: site
 </section>
 {% endif %}
 
-<div class="head">
+{% comment %}
+  id="boards" is the target of the intro's jump link. scroll-margin-top in the
+  stylesheet keeps the sticky header from covering this heading on arrival.
+{% endcomment %}
+<div class="head" id="boards">
   <p class="eyebrow">Where you'd go</p>
   <h2>The ten boards</h2>
 </div>

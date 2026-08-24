@@ -646,11 +646,10 @@ a:hover{ text-decoration:underline; }
   .intro{
     grid-template-columns:var(--pair-cols);
     gap:var(--pair-gap);
-    /* Top-aligned, not centred. With a heading leading the column the ask is
-       for its cap line to meet the top of the video, which centring cannot do.
-       The cap-line correction below is what makes "top" mean the ink rather
-       than the line box. */
-    align-items:start;
+    /* stretch, so the video is exactly as tall as the text beside it. Both
+       items still START on the same grid line, so the heading's cap-line
+       correction keeps working -- "top" still means the ink, not the line box. */
+    align-items:stretch;
   }
 }
 .intro-text{ max-width:68ch; }
@@ -663,7 +662,10 @@ a:hover{ text-decoration:underline; }
   /* Larger than the highlight columns' bullets and larger than body copy. This
      column has to hold its own against a 600px video beside it, and at 19px it
      left obvious dead space below the list. */
-  font-family:var(--text); font-size:clamp(17px,1.9vw,23px); line-height:1.5;
+  /* A step smaller than before. Making the leads bigger was not enough on
+     its own -- the GAP between lead and body is what creates the pop, so the
+     body gives ground too. */
+  font-family:var(--text); font-size:clamp(16px,1.75vw,21px); line-height:1.5;
 }
 .intro-text ul li{ margin:0 0 .82em; }
 .intro-text ul li:last-child{ margin-bottom:0; }
@@ -682,11 +684,45 @@ a:hover{ text-decoration:underline; }
    space beneath than the heading gives it, so the bullets read as a group under
    it rather than a fourth paragraph. */
 .intro-lead{
-  color:var(--ink); max-width:60ch;
-  font-size:clamp(17px,1.9vw,23px); line-height:1.5;
+  /* Italic, a step smaller than the bullets, and grey rather than ink: it is
+     setting the list up, so it should read as a voice-over rather than compete
+     with the points underneath. Grey on paper is 6.35:1, AA -- and it is a
+     solid token, not ink at reduced opacity, so the ratio stays checkable.
+
+     "Lighter" here means colour, not weight: Vollkorn ships Regular and Italic
+     in this repo and nothing lighter, and asking for a weight that is not there
+     would have the browser fake one. */
+  color:var(--grey); max-width:60ch;
+  font-style:italic;
+  /* Larger than the bullets, not smaller: italic and grey already mark it as
+     a different voice, so the size can lead. */
+  font-size:clamp(18px,2.05vw,25px); line-height:1.5;
 }
 .intro-title + .intro-lead{ margin:0 0 clamp(24px,2.8vw,36px); }
 .intro-text ul + .intro-note{ margin:clamp(18px,2vw,26px) 0 0; }
+
+/* The jump link down to the board list. Crimson, and the arrow is a real
+   character rather than an icon so it inherits the type. scroll-margin-top on
+   the target is the part that is easy to forget: without it a sticky header
+   sits on top of the heading you just jumped to. */
+.intro-jump{ margin:clamp(20px,2.2vw,30px) 0 0; }
+.intro-jump a{
+  /* Set in the body face at the teaser's size, so it reads as part of the same
+     run of text rather than as a small label bolted underneath. Roman, not
+     italic -- the italic belongs to the teaser above it, and reusing it here
+     would make the two look like one continued sentence.
+
+     The underline stays. Crimson alone would be the only thing marking this as
+     a link, and colour on its own fails WCAG 1.4.1 for anyone who cannot
+     distinguish it -- which matters more than usual here, since crimson is also
+     used decoratively all over this page. */
+  font-family:var(--text); font-size:clamp(18px,2.05vw,25px);
+  font-style:normal; color:var(--red); text-decoration:none;
+  border-bottom:1px solid currentColor; padding-bottom:2px;
+}
+.intro-jump a::after{ content:" \2193"; }
+.intro-jump a:hover,.intro-jump a:focus-visible{ color:var(--ink); }
+#boards{ scroll-margin-top:calc(var(--bar-h) + 18px); }
 /* -0.4408em, measured, not chosen, and only in the ONE-COLUMN layout.
    Stacked, the paragraph is the first thing under the photographs, and its
    line box carries 8.38px of leading above its cap ink at the 19px body size
@@ -725,9 +761,14 @@ a:hover{ text-decoration:underline; }
    font-size looks larger than surrounding lowercase because there are no
    x-height letters to compare against, so this sets slightly smaller. */
 .intro-text strong{
-  font-family:var(--display); font-weight:400;
-  text-transform:uppercase; letter-spacing:.05em;
-  font-size:.94em;
+  /* Crimson Bold, not the condensed display face this started as. League
+     Gothic reads as a label -- right for a nav item, wrong here; it sat back
+     instead of jumping out. This is a real 700 weight (Crimson-Bold is one of
+     the five faces the site loads), so nothing is synthesised, and it sets
+     slightly LARGER than the body it interrupts rather than smaller. */
+  font-family:var(--serif); font-weight:700; font-style:normal;
+  text-transform:uppercase; letter-spacing:.02em;
+  font-size:1.06em;
 }
 .intro-text em{ font-style:italic; }
 
@@ -767,7 +808,6 @@ a:hover{ text-decoration:underline; }
   display:flex; flex-direction:column;
   background:var(--wash); color:var(--ink);
   padding:clamp(22px,2.6vw,38px);
-  border-radius:clamp(4px,0.55vw,9px);
 }
 /* margin-top:auto pushes the note to the floor of the box; padding-top is the
    MINIMUM separation for when it is already there. Without it the taller box --
@@ -829,6 +869,48 @@ a:hover{ text-decoration:underline; }
    the DOM -- that is how <details> works -- but the title should read BELOW the
    video in both states, so once open it is moved after the frame. */
 .vbox{ margin:0; display:grid; }
+/* The chain that lets the video fill the row's height. Every link is needed --
+   the aside is the grid item, .vbox the disclosure inside it, .vshot the still's
+   clipping box -- and breaking any one collapses the frame back to its ratio.
+
+   Only above 900px, where the two columns exist. Stacked, the video keeps 16:9.
+
+   The cost, stated plainly: the frame becomes whatever shape the text column
+   makes it rather than 16:9. The still is object-fit:cover so it crops instead
+   of distorting, and the player letterboxes inside the frame when the ratio
+   differs. That is why the resulting ratio is measured, not assumed. */
+@media (min-width:900px){
+  .intro-video,
+  .vbox,
+  .vthumb,
+  .vshot{ height:100%; }
+  /* The row templates are the part that actually does the work. Without them
+     .vbox's rows size to their content, so height:100% on the children resolves
+     against an auto height and nothing stretches -- the frame grew a little and
+     then stopped, 65px short. Closed there is one row and it takes everything;
+     open there are two, the player taking the space and the title line its own
+     height. The summary carries order:2 when open, so the player is row one. */
+  .vbox{ grid-template-rows:1fr; }
+  /* Open, the rows go back to auto so the PLAYER keeps 16:9. This is the one
+     deliberate asymmetry here, and it is the lesser of two evils.
+
+     Stretching the player too would have matched the heights in both states,
+     but the frame is 1.15:1 at 1200px against a 16:9 video, so 35% of it would
+     have been black bars every time anyone pressed play. Letting it snap back
+     to 16:9 costs a single reflow when the disclosure opens -- the column gets
+     shorter -- and buys a player with no bars at all.
+
+     The still can stretch freely because object-fit:cover crops it rather than
+     distorting it, and a cropped still is invisible; a letterboxed video is not. */
+  .vbox[open]{ grid-template-rows:auto auto; }
+  .vbox[open],
+  .vbox[open] .vthumb{ height:auto; }
+  /* .vbox .vshot img, not .vshot img: `.vthumb img` further down the file has
+     the same specificity and would win on order, which is exactly what happened
+     -- the frame stretched but the picture inside it stayed 16:9 and 75px short.
+     Two classes beats one. */
+  .vbox .vshot img{ height:100%; width:100%; object-fit:cover; aspect-ratio:auto; }
+}
 .vbox[open] .vthumb{ order:2; }
 .vthumb{
   display:block; cursor:pointer;
@@ -839,13 +921,13 @@ a:hover{ text-decoration:underline; }
    the rounded corners and clipping live. */
 .vshot{
   display:block; position:relative;
-  border-radius:clamp(4px,0.55vw,9px); overflow:hidden;
+  overflow:hidden;
 }
 .vthumb img{ display:block; width:100%; height:auto; aspect-ratio:16/9; object-fit:cover; }
 .vbox[open] .vshot{ display:none; }
 .vframe{
   position:relative; aspect-ratio:16/9;
-  border-radius:clamp(4px,0.55vw,9px); overflow:hidden;
+  overflow:hidden;
   background:var(--ink);
 }
 .vframe iframe{
@@ -1102,14 +1184,12 @@ figcaption .credit{ color:var(--red); }
    5/4 crops 20%, 6/5 crops 25%, 4/5 crops 40%. Past 5/4 you start losing the
    edges of the frame that make these photographs read.
 
-   The radius is deliberately small. These sit in a design whose every other
-   edge is square -- the crimson stat blocks, the hero, the marquee bands -- so
-   a large radius would read as a different visual language rather than a
-   softened corner. overflow is not needed: border-radius clips the image's own
-   painted content because the radius is on the img itself. */
+   Corners are square. They were briefly rounded and the owner cut it: every
+   other edge in this design is hard -- the crimson stat blocks, the hero, the
+   marquee bands, the highlight boxes -- so a radius here read as a different
+   visual language rather than a softened corner. */
 .band-item img{
   width:100%; aspect-ratio:5/4; object-fit:cover; display:block;
-  border-radius:clamp(4px,0.55vw,9px);
 }
 .band figcaption{
   padding:8px 0 0; font-size:14px; line-height:1.45; color:var(--grey);
@@ -1118,7 +1198,6 @@ figcaption .credit{ color:var(--red); }
 
 .slot{
   aspect-ratio:5/4;   /* must track .band-item img above */ border:1px solid var(--red);
-  border-radius:clamp(4px,0.55vw,9px);   /* ditto */
   display:flex; flex-direction:column; justify-content:flex-end; gap:6px;
   padding:clamp(14px,1.6vw,20px);
   background:

@@ -223,14 +223,12 @@ stat_3_number: 15
 stat_3_unit: M+
 stat_3_label: views last year
 
-# The business. Wording is a guess from "our 1 million dollar business" and is
-# yours to set: it renders as "$1M BUSINESS". If you would rather it read
-# "MILLION-DOLLAR BUSINESS", put the whole thing in stat_4_label and set
-# stat_4_number to $1M with no unit -- though the figure then stops being the
-# big element, which is the point of a stat.
+# Renders as "$1M ANNUAL REVENUE". This is the longest of the four labels, and
+# with four stats across it is the one that will wrap first if the figures ever
+# get bigger or the label longer -- checked to 320px as it stands.
 stat_4_number: $1
 stat_4_unit: M
-stat_4_label: business
+stat_4_label: annual revenue
 
 
 # ---- One-line note above the board list. ----

@@ -25,21 +25,33 @@ intro_title: The comp
 #
 # THIS IS YOUR DRAFT, placed verbatim. See the note at the bottom of this file
 # for the specific things you said still need editing.
-intro_note: Regardless of your passion — from journalism, to business, to tech — The Crimson has something for you.
-intro_note_position: above
+#
+# Now positioned "below": it reads as the summing-up after the bullets rather
+# than the set-up before them.
+intro_note: Regardless of your passion — from journalism, to business or tech — The Crimson has something for you.
+intro_note_position: below
+
+# A link under the intro that jumps down to the board list on the same page.
+# Leave "" and it does not render. The target is the boards heading, id="boards".
+intro_link_text: Learn more about our 10 comps
 
 # The bullets below the --- are YOUR DRAFT, placed verbatim -- not tidied, not
 # rewritten. You said it still needs an editing pass, so here is what I noticed
 # while placing it, for you to fix or wave off:
 #
-#   1. Bullet 2 still reads "completion base/just show up nd do the work" --
-#      "base" for "based", and "nd" for "and". Bullet 1 has been rewritten and
-#      no longer has these problems.
-#   2. Bullets 1 and 3 have no closing full stop; bullet 2 does.
-#   3. Bullet 2 still has a slash reading as an unfinished alternative.
-#   4. Bullet 3, "Shape the journalism that shapes Harvard", is a fragment next
-#      to two that are full sentences. It is also the line you said you most
-#      want to highlight, so it may want to be the teaser rather than a bullet.
+#   1. No bullet has a closing full stop now. Consistent, so fine -- just be
+#      deliberate about it if you add a fourth.
+#   2. Bullet 2 writes the board names lowercase, "our business and tech
+#      boards". Everywhere else on this site they are capitalised: Business,
+#      Tech. Worth matching.
+#   3. Bullet 2's exception is a mid-sentence parenthesis, which interrupts the
+#      reassuring half of the sentence with the caveat. See the note in my reply
+#      for shorter ways to put it -- your call, not mine to change.
+#   4. Two lines have now been cut from this list and are nowhere on the site:
+#      "Shape the journalism that shapes Harvard", which you said was the line
+#      you most wanted to highlight, and the independence bullet. Independence
+#      also came out of the teaser earlier, so that fact has no home on the
+#      homepage at all now -- only on the Business board's page.
 #
 # The **bold** at the start of a bullet is a run-in lead: it sets in the display
 # face, uppercase, so it reads as a tag introducing the sentence. Wrap any
@@ -53,5 +65,4 @@ intro_note_position: above
 ---
 
 - **No experience required** The majority of Crimson editors have never worked for a newspaper before
-- Completion based! With the exception of our Business and Tech comps, every board at The Crimson is completion base/just show up nd do the work.
-- Shape the journalism that shapes Harvard
+- **Completion based** The Crimson’s comps are open to all students and (with the exception of our business and tech boards) noncompetitive
