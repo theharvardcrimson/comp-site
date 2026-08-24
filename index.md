@@ -40,14 +40,14 @@ intro_link_text: ""
 # rewritten. You said it still needs an editing pass, so here is what I noticed
 # while placing it, for you to fix or wave off:
 #
-#   1. The two lead phrases are cased differently in the source: "Real Work From
-#      Day One" is title case, "No experience needed" is sentence case. On the
-#      page you cannot tell, because the run-in style sets them uppercase -- but
-#      the file still disagrees with itself.
-#   2. You wrote " - " between each lead phrase and its sentence. The font change
+#   1. You wrote " - " between each lead phrase and its sentence. The font change
 #      already does that separating, so the hyphen is doing the job twice. Kept
 #      because they are your words; say the word and they come out.
-#   3. No bullet has a closing full stop. Consistent, so fine.
+#   2. No bullet has a closing full stop. Consistent, so fine.
+#
+# Lead phrases are both sentence case now, so the source agrees with itself. It
+# makes no visible difference -- the run-in style uppercases them either way --
+# but it means the next person editing this does not have two patterns to copy.
 #   4. Still nowhere on the site: "Shape the journalism that shapes Harvard",
 #      which you called the line you most wanted to highlight, and the
 #      independence fact, which now survives only on the Business board's page.
@@ -63,6 +63,6 @@ intro_link_text: ""
 # section 1b, links intact, ready to paste back if you want any of it.
 ---
 
-- **Real Work From Day One** - Learn from current editors and see your work published before comp ends
+- **Real work from day one** - Learn from current editors and see your work published before comp ends
 - **No experience needed** - Most Crimson editors had never worked for a newspaper before their comp
 - [Learn more about our 10 comps below](#boards)
