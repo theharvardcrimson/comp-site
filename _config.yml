@@ -84,6 +84,20 @@ exclude:
   - fonts/*.svg
   - fonts/*.ttf
 
+  # Weights and styles of the three chosen families that main.css never
+  # declares an @font-face for. A browser therefore never requests them, so
+  # this does not change page weight -- it keeps 231KB of dead bytes out of the
+  # deploy. Unblocked now that the typefaces are settled; see content-questions
+  # section 7. If you ever want real bold body copy instead of the synthetic
+  # bold <strong> currently gets, Vollkorn-Bold is the file to bring back, and
+  # it needs an @font-face rule as well as removing from this list.
+  - fonts/Crimson-Italic-webfont.woff
+  - fonts/Crimson-BoldItalic-webfont.woff
+  - fonts/Crimson-Semibold-webfont.woff
+  - fonts/Crimson-SemiboldItalic-webfont.woff
+  - fonts/Vollkorn-Bold-webfont.woff
+  - fonts/Vollkorn-BoldItalic-webfont.woff
+
   # Font families the redesign does not use. main.css loads exactly five
   # files: League Gothic, Crimson Roman + Bold, Vollkorn Regular + Italic.
   - fonts/Chunkfive-webfont.woff
