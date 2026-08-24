@@ -733,11 +733,13 @@ figcaption .credit{ color:var(--red); }
    ratio, same position, so dropping an image in changes nothing structurally.
    Placeholders are switched off wholesale by show_photo_placeholders.
 */
+/* No bottom rule. The stats above lost theirs first, and leaving this one made
+   the band look fenced in from below only. The prose section that follows
+   brings its own top padding, so the separation is spatial now, not drawn. */
 .band{
   display:grid; gap:clamp(10px,1.4vw,18px);
   grid-template-columns:1fr;
   padding:clamp(26px,4vw,56px) var(--gut);
-  border-bottom:1px solid var(--hair);
 }
 @media (min-width:700px){ .band{ grid-template-columns:repeat(3,1fr); } }
 
@@ -749,21 +751,32 @@ figcaption .credit{ color:var(--red); }
    stats, so the band keeps its full padding anywhere else. */
 .stats + .band{ padding-top:clamp(10px,1.4vw,20px); }
 .band-item{ margin:0; }
-/* 4/3, not the 4/5 this started as. The supplied photographs are all 3/2
-   landscape, so a 4/5 portrait frame kept the full height and only 60% of the
-   width -- it was cutting 40% off every picture. At 4/3 the crop keeps 89% of
-   the width, so the frames are shorter and show very nearly the whole frame.
-   3/2 would crop nothing at all; it was tried and read as too thin in a
-   three-up. If the photographs are ever replaced with portrait originals, this
-   is the number to revisit. */
-.band-item img{ width:100%; aspect-ratio:4/3; object-fit:cover; display:block; }
+/* 5/4, and the direction reversed once on the way here. It began at 4/5
+   portrait, which against these 3/2 landscape originals kept the full height
+   and only 60% of the width -- cutting 40% off every picture. 4/3 fixed that
+   but read a little squat, so 5/4 is one step back toward taller: it keeps 80%
+   of the width and stands about 7% taller than 4/3.
+   The scale, for whoever tunes this next: 3/2 crops nothing, 4/3 crops 11%,
+   5/4 crops 20%, 6/5 crops 25%, 4/5 crops 40%. Past 5/4 you start losing the
+   edges of the frame that make these photographs read.
+
+   The radius is deliberately small. These sit in a design whose every other
+   edge is square -- the crimson stat blocks, the hero, the marquee bands -- so
+   a large radius would read as a different visual language rather than a
+   softened corner. overflow is not needed: border-radius clips the image's own
+   painted content because the radius is on the img itself. */
+.band-item img{
+  width:100%; aspect-ratio:5/4; object-fit:cover; display:block;
+  border-radius:clamp(4px,0.55vw,9px);
+}
 .band figcaption{
   padding:8px 0 0; font-size:14px; line-height:1.45; color:var(--grey);
 }
 .band figcaption .credit{ color:var(--red); }
 
 .slot{
-  aspect-ratio:4/3;   /* must track .band-item img above */ border:1px solid var(--red);
+  aspect-ratio:5/4;   /* must track .band-item img above */ border:1px solid var(--red);
+  border-radius:clamp(4px,0.55vw,9px);   /* ditto */
   display:flex; flex-direction:column; justify-content:flex-end; gap:6px;
   padding:clamp(14px,1.6vw,20px);
   background:
