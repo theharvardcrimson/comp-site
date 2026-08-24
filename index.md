@@ -31,10 +31,11 @@ intro_title: The comp
 intro_note: From journalism, to business or tech — regardless of your passion, The Crimson has a comp for you.
 intro_note_position: above
 
-# The standalone jump link is off: the third bullet now carries that job, as a
-# markdown link to #boards. Put text back here if you ever want both.
+# Its own line under the bullets, not a bullet itself -- it points somewhere
+# rather than stating a fact, so it does not belong in a list of facts. Spaced to
+# match the gap between bullets. Leave "" and it does not render.
 # The target is the boards heading, id="boards".
-intro_link_text: ""
+intro_link_text: Learn more about our 10 comps below
 
 # The bullets below the --- are YOUR DRAFT, placed verbatim -- not tidied, not
 # rewritten. You said it still needs an editing pass, so here is what I noticed
@@ -65,4 +66,3 @@ intro_link_text: ""
 
 - **Real work from day one** - Learn from current editors and see your work published before comp ends
 - **No experience needed** - Most Crimson editors had never worked for a newspaper before their comp
-- [Learn more about our 10 comps below](#boards)

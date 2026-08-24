@@ -715,21 +715,42 @@ a:hover{ text-decoration:underline; }
      would have the browser fake one. */
   color:var(--grey); max-width:60ch;
   font-style:italic;
-  /* Larger than the bullets, not smaller: italic and grey already mark it as
-     a different voice, so the size can lead. */
-  font-size:clamp(18px,2.05vw,25px); line-height:1.5;
+  /* THE SAME SIZE as the bullets, deliberately -- it was larger, and the owner
+     levelled them. Italic and grey are what mark it as a different voice now, so
+     it does not need the size as well. Keep this clamp identical to
+     .intro-text ul's; they are meant to match. */
+  font-size:clamp(16px,1.75vw,21px); line-height:1.5;
 }
-.intro-title + .intro-lead{ margin:0 0 clamp(24px,2.8vw,36px); }
+/* margin-bottom .82em, the same value .intro-text ul li carries, so the gap
+   from the teaser down to the first bullet equals the gap between bullets. Both
+   are em on the same font size now, which is what keeps them equal. */
+.intro-title + .intro-lead{ margin:0 0 .82em; }
 .intro-text ul + .intro-note{ margin:clamp(18px,2vw,26px) 0 0; }
 
 /* The jump link down to the board list. Crimson, and the arrow is a real
    character rather than an icon so it inherits the type. scroll-margin-top on
    the target is the part that is easy to forget: without it a sticky header
    sits on top of the heading you just jumped to. */
-/* Right-aligned, flush to the right edge of the text column -- which in two
-   columns is the edge facing the video. The underline sits on the inline <a>,
-   not the paragraph, so it hugs the words rather than running the full measure. */
-.intro-jump{ margin:clamp(20px,2.2vw,30px) 0 0; text-align:right; }
+/* Its own line beneath the bullets rather than one of them, and spaced to match
+   the bullet rhythm: .82em is what separates the bullets from each other, so the
+   same value here makes the link read as part of the same run without pretending
+   to be another fact in the list.
+
+   Left-aligned, flush with the teaser and heading. It was briefly right-aligned,
+   when it sat alone after the teaser; as the closing line of a left-aligned
+   block that no longer fits. */
+/* .intro-text .intro-jump, not .intro-jump: `.intro-text p` is class-plus-type
+   and outranks a lone class, so it was resetting this margin to 0 and the link
+   sat flush against the last bullet. Second time this exact trap has bitten in
+   this stylesheet -- if a margin here looks ignored, check what else selects it. */
+.intro-text .intro-jump{
+  /* The font-size is here so the .82em margin resolves against the SAME size the
+     bullets use. Inheriting 19px from the body made .82em come out 15.6px against
+     the bullets' 17.2px -- a 1.6px difference, small but the whole point of this
+     block is that the three gaps are identical. */
+  font-size:clamp(16px,1.75vw,21px);
+  margin:.82em 0 0;
+}
 .intro-jump a{
   /* Set in the body face at the teaser's size, so it reads as part of the same
      run of text rather than as a small label bolted underneath. Roman, not
@@ -740,7 +761,7 @@ a:hover{ text-decoration:underline; }
      a link, and colour on its own fails WCAG 1.4.1 for anyone who cannot
      distinguish it -- which matters more than usual here, since crimson is also
      used decoratively all over this page. */
-  font-family:var(--text); font-size:clamp(18px,2.05vw,25px);
+  font-family:var(--text); font-size:clamp(16px,1.75vw,21px);
   font-style:normal; color:var(--red); text-decoration:none;
   border-bottom:1px solid currentColor; padding-bottom:2px;
 }
@@ -785,14 +806,18 @@ a:hover{ text-decoration:underline; }
    font-size looks larger than surrounding lowercase because there are no
    x-height letters to compare against, so this sets slightly smaller. */
 .intro-text strong{
-  /* Crimson Bold, not the condensed display face this started as. League
-     Gothic reads as a label -- right for a nav item, wrong here; it sat back
-     instead of jumping out. This is a real 700 weight (Crimson-Bold is one of
-     the five faces the site loads), so nothing is synthesised, and it sets
-     slightly LARGER than the body it interrupts rather than smaller. */
-  font-family:var(--serif); font-weight:700; font-style:normal;
-  text-transform:uppercase; letter-spacing:.02em;
-  font-size:1.06em;
+  /* The display face, matching the section title above -- the owner's call, and
+     it is the same face every other label on this site speaks in.
+
+     weight 400, NOT bold: League Gothic ships a single weight, so asking for 700
+     makes the browser synthesise one, which comes out smeared and uneven. The
+     face is dense enough to carry the emphasis on its own.
+
+     1.2em because condensed type reads smaller at a given size than the body it
+     interrupts, and uppercase has no x-height letters to be judged against. */
+  font-family:var(--display); font-weight:400; font-style:normal;
+  text-transform:uppercase; letter-spacing:.04em;
+  font-size:1.2em;
   /* Crimson, chosen from six mocked treatments. 6.64:1 on paper, AA.
 
      It puts two crimson things in one block -- this and the jump link below --
@@ -868,7 +893,7 @@ a:hover{ text-decoration:underline; }
 .hl-title{ margin-top:0; }   /* size comes from the shared rule above */
 /* Only the space beneath differs -- this heading sits on bare paper rather than
    inside a padded box, so it needs more air under it. */
-.intro-title{ margin-bottom:clamp(20px,2.4vw,32px); }   /* ditto */
+.intro-title{ margin-bottom:clamp(14px,1.5vw,20px); }   /* space above the teaser */   /* ditto */
 /* Same size as the intro's bullets -- clamp(17px,1.9vw,23px) -- so the two
    bulleted sections read as one voice. Keep them in step if either changes. */
 .hl-list{
