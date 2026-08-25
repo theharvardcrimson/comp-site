@@ -843,10 +843,24 @@ a:hover{ text-decoration:underline; }
    belongs with the styling: one line to change it, applied to every bullet at
    once, and nothing for whoever writes the copy to remember.
 
-   A colon because the lead is a label and what follows explains it, which is
-   what a colon is for. A dash would read as an aside, a pipe as a table
-   divider. Swap the content value to try another. */
-.intro-text strong::after{ content:":"; }
+   A crimson middot, picked from six. It is the quietest mark of the set and it
+   answers the crimson bullet a few characters to its left, so the two read as a
+   pair rather than as one stray spot of colour.
+
+   Set to weight 400 and crimson explicitly, because it inherits from the bold
+   ink lead otherwise -- a bold dot is a blob. Crimson on paper is 6.64:1, though
+   nothing depends on reading this mark.
+
+   Rejected, so it does not get relitigated: a colon (correct but ordinary), an
+   em dash (reads as an aside, and competes with the em dash in the teaser just
+   above), an en dash (same but quieter), a pipe (reads as a table divider), and
+   nothing at all (cleanest, but the two halves blur on a fast read). Swap the
+   content value to try another. */
+.intro-text strong::after{
+  content:" \00B7";
+  font-weight:400;
+  color:var(--red);
+}
 .intro-text em{ font-style:italic; }
 
 /* ---------- highlights: two columns of bullets ----------

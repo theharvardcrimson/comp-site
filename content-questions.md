@@ -468,6 +468,17 @@ was deliberate, to keep a hierarchy of section title over column label, but the
 instruction was to match the text size and it is not certain that meant the body
 only. Ask before changing.
 
+## 1m. Bullet separator — SETTLED
+
+The owner picked E, a small crimson middot, from six mocked options. It answers
+the crimson bullet a few characters to its left, so the two read as a pair. The
+other five are recorded in css/main.css next to the rule, with why each lost --
+colon (correct but ordinary), em dash (competes with the teaser's own em dash),
+en dash, pipe (reads as a table), and nothing at all.
+
+Lives entirely in CSS (.intro-text strong::after), not in the copy, so this is a
+one-line change if it is ever revisited.
+
 ## 2. Needed: what the Fall comp actually looks like
 
 Shopping week is gone, which removes the only per-board event structure the
