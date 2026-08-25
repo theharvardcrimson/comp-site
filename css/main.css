@@ -837,11 +837,15 @@ details[name="board-popup"][open] > summary:focus-visible{
    P.M." at 13ch was still wrapping tight to four short lines. 16ch plus a
    taller line-height gives the wrapped date room to breathe without reading
    as a different kind of thing than the crimson tick that marks it. */
+/* white-space:pre-line renders the line breaks already in the `when` string
+   (day / date / time, each its own line in semester.yml) -- explicit breaks
+   chosen in the data, not left to word-wrap at this column's width. */
 .ev-when{
   grid-row:1 / 3;
   font-family:var(--display); text-transform:uppercase; letter-spacing:.04em;
   font-size:clamp(13px,1.3vw,15px); line-height:1.6; color:var(--red);
   border-left:3px solid var(--red); padding-left:10px; max-width:16ch;
+  white-space:pre-line;
 }
 .ev-name{
   font-family:var(--display); text-transform:uppercase;
