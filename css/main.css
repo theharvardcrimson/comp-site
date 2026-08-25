@@ -617,7 +617,14 @@ a:hover{ text-decoration:underline; }
      to something longer than Multimedia, re-measure -- the ink widths are in the
      commit message for this change. */
   .board{ display:grid; grid-template-columns:0.72fr 1fr; gap:clamp(20px,2.6vw,44px); align-items:end; }
-  .board-desc{ margin-top:0; padding-bottom:.5em; }
+  /* Right-aligned and pinned to the column's own right edge (margin-left:auto),
+     not just text-align on its own -- max-width already stops the box short of
+     the column's full width, so without the margin push it would still sit
+     flush left, just with ragged-right lines inside a left-anchored box. This
+     turns the empty space into a deliberate gutter between two anchored
+     edges (name pinned left, tagline pinned right) instead of dead air
+     trailing off to the right of left-aligned text. */
+  .board-desc{ margin-top:0; margin-left:auto; padding-bottom:.5em; text-align:right; }
 }
 
 /* ---------- board popup (PROTOTYPE, News only) ----------
