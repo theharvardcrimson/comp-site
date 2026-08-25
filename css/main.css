@@ -665,13 +665,12 @@ details[name="board-popup"][open] > summary:focus-visible{
 .board-card-section:first-of-type{ border-top:none; }
 /* One label style for every section heading in the card -- "during the comp",
    "featured work", "first meeting", the contact line -- so they read as the
-   same kind of thing instead of four different sizes. Placeholder typeface
-   for now (CompDisplay, matching the rest of the site) pending the owner
-   picking from the font options shown separately; only this one rule needs to
-   change once that's decided. */
+   same kind of thing instead of four different sizes. Option B from the
+   rendered comparison: CompSerif (Crimson), bold, sentence case -- the
+   owner's pick over the site's usual all-caps CompDisplay treatment. */
 .board-card-label{
-  font-family:var(--display); text-transform:uppercase; font-weight:400;
-  font-size:18px; letter-spacing:.02em; line-height:1.15; margin:0 0 14px;
+  font-family:var(--serif); text-transform:none; font-weight:700;
+  font-size:21px; letter-spacing:0; line-height:1.25; margin:0 0 14px;
 }
 /* Fixed sizes, not vw-scaled: vw was tuned for full-width page sections, and
    inside a card capped at 760px it kept growing with the BROWSER window long
