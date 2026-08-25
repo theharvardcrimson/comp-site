@@ -620,36 +620,141 @@ details[name="board-popup"][open] > summary .board-row-close{
 }
 
 /* Closed, a popup-enabled row looks and behaves exactly like every other
-   board row -- same .board class, same hover flip, same grid. Open, the same
-   <summary> (still the thing that closes it -- there is no second control)
-   detaches from the row and becomes a full-width bar fixed above the panel,
-   the same way .drawer-panel sits below a fixed .bar rather than under it.
-   z-index 80/70, both above .bar's 50, so the popup covers the header too --
-   "fills the screen" means the whole screen, not the space below the nav. */
+   board row -- same .board class, same hover flip, same grid. Open, <details>
+   ITSELF becomes the fixed, full-viewport layer -- both the dimmed scrim and
+   the flex container that centers its two children (the close bar, then the
+   card) as a single column. That means no transform math to center a card of
+   unknown height: flex does it, and the homepage stays visible, dimmed,
+   around the edges -- a real popup over the page rather than a takeover of it.
+   z-index 80, above .bar's 50, so the popup still sits above the header. */
+details[name="board-popup"][open]{
+  position:fixed; inset:0; z-index:80;
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  gap:0; background:rgba(21,19,15,.66); padding:clamp(16px,3vw,40px) var(--gut);
+}
 details[name="board-popup"][open] > summary{
-  position:fixed; inset:0 0 auto 0; z-index:80;
-  display:block; height:var(--bar-h);
+  display:block; width:min(92vw,760px); flex:none;
   background:var(--ink); color:var(--paper); border-bottom:none;
-  padding:0 var(--gut);
+  padding:14px var(--gut);
 }
 details[name="board-popup"][open] > summary:hover,
 details[name="board-popup"][open] > summary:focus-visible{
   background:var(--red-deep); color:var(--paper);
 }
 .board-panel{
-  position:fixed; inset:0; z-index:70;
+  width:min(92vw,760px); max-height:min(78vh,720px); flex:none;
   background:var(--paper); color:var(--ink);
-  padding-top:var(--bar-h); overflow-y:auto; overscroll-behavior:contain;
+  overflow-y:auto; overscroll-behavior:contain;
+  box-shadow:0 24px 70px rgba(0,0,0,.35);
 }
 /* Locks the page behind the popup so a wheel/touch gesture that runs off the
-   bottom of the fixed panel can't leak through to the homepage underneath.
+   bottom of the card can't leak through to the homepage underneath.
    :has() is the only way to do this without JavaScript; browsers without it
-   just don't get the lock -- the panel still covers the screen either way,
-   so nothing breaks, the page behind can just be scrolled by whoever's under
-   the (invisible) fold. */
+   just don't get the lock -- the scrim still visually covers the page either
+   way, so nothing breaks, the page behind can just be scrolled by whoever's
+   under it. */
 @supports selector(:has(*)){
   body:has(details[name="board-popup"][open]){ overflow:hidden; }
 }
+
+/* One flat scroll, no accordion -- the owner tried the collapsed +/- sections
+   and preferred everything just listed in order. Sections are plain divs,
+   each with a top rule, same rhythm as .panel elsewhere but sized for a
+   760px-wide card rather than a full-width page. */
+.board-card-section{ padding:22px var(--gut); border-top:1px solid var(--hair); }
+.board-card-section:first-of-type{ border-top:none; }
+/* One label style for every section heading in the card -- "during the comp",
+   "featured work", "first meeting", the contact line -- so they read as the
+   same kind of thing instead of four different sizes. Placeholder typeface
+   for now (CompDisplay, matching the rest of the site) pending the owner
+   picking from the font options shown separately; only this one rule needs to
+   change once that's decided. */
+.board-card-label{
+  font-family:var(--display); text-transform:uppercase; font-weight:400;
+  font-size:18px; letter-spacing:.02em; line-height:1.15; margin:0 0 14px;
+}
+/* Fixed sizes, not vw-scaled: vw was tuned for full-width page sections, and
+   inside a card capped at 760px it kept growing with the BROWSER window long
+   after the card itself had stopped growing, which is what read as
+   inconsistent. Everything below reads at one plain 17px now. */
+.board-card-section p,
+.board-card-section .reqs li,
+.board-card-section .who .nm,
+.board-card-section .who a{
+  font-size:17px; line-height:1.55;
+}
+.board-card-section .reqs{ max-width:none; }
+
+/* Condensed stand-in for .board-hero inside the card: at 760px max-width, the
+   page hero's vw-scaled poster type (clamp up to 208px) would overflow a name
+   longer than "News". Paper, not crimson -- the card is small enough that a
+   full-bleed colour field read as a stripe rather than a hero. No eyebrow --
+   the owner asked to cut everything at the top except the name and the
+   tagline, straight into the description. */
+.board-card-head{ padding:clamp(20px,4vw,32px) var(--gut) 0; }
+.board-card-head h1{
+  font-family:var(--display); text-transform:uppercase; font-weight:400;
+  font-size:clamp(38px,7vw,56px); line-height:.9; margin:0 0 10px;
+}
+.board-card-hook{
+  font-family:var(--text); font-size:17px; line-height:1.45;
+  color:var(--grey); max-width:52ch; margin:0 0 16px;
+}
+.board-card-prose{ padding-top:0; }
+.board-card-prose p{ font-size:17px; }
+
+/* Featured work: a thumbnail grid instead of a list of links, so a piece
+   reads as a photo first, headline second -- closer to how the paper's own
+   site presents a story. Thumbnails are a placeholder slot until real photos
+   are pulled from the article pages (see the note in _boards/news.md);
+   dropping a `photo` into a showcase entry replaces the slot with nothing
+   structural changing. The zoom on hover is the only motion here -- deliberate
+   and small, not a scroll reveal, since a thumbnail grid inside a scrolling
+   card has no good "entering the viewport" moment to key off of. */
+.work-grid{
+  list-style:none; margin:0; padding:0;
+  display:grid; grid-template-columns:repeat(2,1fr); gap:18px;
+}
+.work-card{ display:block; color:inherit; }
+.work-card:hover,.work-card:focus-visible{ text-decoration:none; }
+.work-thumb{
+  aspect-ratio:4/3; overflow:hidden; margin-bottom:10px;
+  background:var(--paper);
+}
+.work-thumb img{
+  width:100%; height:100%; object-fit:cover; display:block;
+  transition:transform .3s ease;
+}
+.work-card:hover .work-thumb img,.work-card:focus-visible .work-thumb img{
+  transform:scale(1.06);
+}
+/* Same placeholder convention as .slot -- crimson hairline, diagonal wash --
+   sized to the thumbnail's own 4/3 box instead of the photo band's 5/4. */
+.work-thumb.slot{
+  aspect-ratio:4/3; display:flex; align-items:flex-end; padding:10px;
+  border-width:1px;
+}
+.work-card:hover .work-thumb.slot,.work-card:focus-visible .work-thumb.slot{
+  transform:none;
+}
+.work-title{
+  font-family:var(--serif); font-size:17px; line-height:1.3;
+  text-decoration:underline; text-decoration-color:transparent;
+  transition:text-decoration-color .18s ease;
+}
+.work-card:hover .work-title,.work-card:focus-visible .work-title{
+  text-decoration-color:currentColor;
+}
+@media (max-width:520px){ .work-grid{ grid-template-columns:1fr 1fr; gap:12px; } }
+
+/* First meeting: boxed and centered, at the owner's request for something
+   nicer than another paragraph in the flow -- reads like a printed detail
+   card (a ticket stub, a save-the-date) rather than body copy. */
+.first-meeting-box{
+  text-align:center; border:1px solid var(--hair); padding:20px;
+  max-width:46ch; margin:0 auto;
+}
+.first-meeting-box p{ margin:0; font-size:17px; }
 
 .note{
   padding:clamp(26px,4vw,52px) var(--gut);

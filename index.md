@@ -17,7 +17,7 @@ poster_line_2: Crimson
 # to make it a serial comma. The full stop went because this is a fragment used
 # as a standfirst rather than a sentence -- display lines conventionally do
 # without, and it reads cleaner over the photograph.
-lede_line_1: The nation’s oldest continuously published daily newspaper
+lede_line_1: The nation’s oldest continuously published daily college newspaper
 lede_line_2: and Harvard College’s premier student organization
 
 # Heading over the intro bullets. Leave "" and no heading renders.

@@ -198,13 +198,6 @@ layout: site
   <h2>The boards</h2>
 </div>
 
-{% if site.data.semester.before_you_choose != '' %}
-<p class="note">
-  <span class="eyebrow">Before you choose</span>
-  {{ site.data.semester.before_you_choose }}
-</p>
-{% endif %}
-
 {% include board-list.html %}
 
 {% comment %} Prose sections from _sections/, in `order`. {% endcomment %}

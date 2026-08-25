@@ -1,37 +1,28 @@
 {% comment %}
-  One board's full content, for the fullscreen popup on the homepage board
-  list. Deliberately mirrors _layouts/board.html's own sections (hero,
-  prose, requirements, showcase, first meeting, contact) -- this is the same
-  board page design, repackaged into an overlay instead of a standalone URL,
-  not a new design. Takes `board`, a doc from site.boards.
+  One board's content, condensed for the modal card popup on the homepage
+  board list. Flat scroll, no accordion -- tried, and the owner preferred
+  everything just listed in order. Does NOT reuse the full-bleed crimson hero
+  from the standalone board page -- at the card's own width (760px max) that
+  hero's page-scale type would overflow a name longer than "News". Takes
+  `board`, a doc from site.boards.
 {% endcomment %}
 {% assign b = include.board %}
 {% assign slug = b.path | split: '/' | last | split: '.' | first %}
 {% assign people = site.data.directors[slug] %}
 
-<section class="field board-hero{% if b.photo and b.photo != '' %} has-photo{% endif %}"
-  {%- if b.photo and b.photo != '' %} style="--hero-img:url('/images/{{ b.photo }}')"{% endif %}>
-  <p class="eyebrow">{{ site.data.semester.season }} Comp {{ site.data.semester.year }}</p>
-  <h1 class="poster">{{ b.display_name | default: b.name }}</h1>
-  <p class="lede">{{ b.hook }}</p>
-  <p class="actions on-red">
-    <a class="btn btn-ghost" href="{{ site.data.semester.signup_url }}">{{ site.data.semester.signup_label }}</a>
-  </p>
-  {% if b.photo and b.photo != '' and b.photo_credit and b.photo_credit != '' %}
-    <p class="hero-credit">
-      {%- if b.photo_caption and b.photo_caption != '' %}{{ b.photo_caption }} &middot; {% endif -%}
-      By {{ b.photo_credit }}
-    </p>
-  {% endif %}
-</section>
+<div class="board-card-head">
+  <h1>{{ b.display_name | default: b.name }}</h1>
+  <p class="board-card-hook">{{ b.hook }}</p>
+  <a class="btn" href="{{ site.data.semester.signup_url }}">{{ site.data.semester.signup_label }}</a>
+</div>
 
-<div class="prose reveal">
+<div class="prose board-card-prose">
   {{ b.content }}
 </div>
 
 {% if b.requirements and b.requirements.size > 0 %}
-<div class="panel reveal">
-  <h2>What the comp involves</h2>
+<div class="board-card-section">
+  <p class="board-card-label">During our semester-long comp, you will:</p>
   <ul class="reqs">
     {% for r in b.requirements %}<li>{{ r }}</li>{% endfor %}
   </ul>
@@ -39,14 +30,19 @@
 {% endif %}
 
 {% if b.showcase and b.showcase.size > 0 %}
-<div class="panel reveal">
-  <h2>Our work</h2>
-  <ul class="works">
+<div class="board-card-section">
+  <p class="board-card-label">Featured work</p>
+  <ul class="work-grid">
     {% for w in b.showcase %}
       <li>
-        <a href="{{ w.url }}">{{ w.title }}</a>
-        {% if w.byline %}<div class="by">{{ w.byline }}</div>{% endif %}
-        {% if w.blurb %}<div class="blurb">{{ w.blurb }}</div>{% endif %}
+        <a class="work-card" href="{{ w.url }}">
+          {% if w.photo and w.photo != '' %}
+            <span class="work-thumb"><img src="/images/{{ w.photo }}" alt="" loading="lazy" decoding="async"></span>
+          {% else %}
+            <span class="work-thumb slot"><span class="slot-tag">Photo</span></span>
+          {% endif %}
+          <span class="work-title">{{ w.title }}</span>
+        </a>
       </li>
     {% endfor %}
   </ul>
@@ -54,14 +50,14 @@
 {% endif %}
 
 {% if b.first_meeting and b.first_meeting != '' %}
-<div class="panel reveal">
-  <h2>First meeting</h2>
-  <p>{{ b.first_meeting }}</p>
+<div class="board-card-section">
+  <p class="board-card-label">First meeting</p>
+  <div class="first-meeting-box"><p>{{ b.first_meeting }}</p></div>
 </div>
 {% endif %}
 
-<div class="panel reveal">
-  <h2>Who to ask</h2>
+<div class="board-card-section">
+  <p class="board-card-label">Questions? Contact your {{ b.name }} comp directors</p>
   {% if people %}
     <div class="who">
       {% for p in people %}
