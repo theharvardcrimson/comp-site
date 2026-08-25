@@ -54,12 +54,17 @@
      what keeps them locked together. */
   --edge:clamp(14px,2.4vw,34px);
 
-  /* The vertical air above and below the stats block. ONE token because the
-     two gaps are required to be equal: the distance from the moving front-page
-     band down to the crimson figures must match the distance from the labels
-     down to the photographs. Two separate values drifted apart immediately
-     (52px above against 72px below). Change this and both move together. */
-  --stat-gap:clamp(48px,6.7vw,96px);
+  /* The vertical air above and below the stats block -- and, because it's the
+     one shared token nearly every back-to-back section transition on the
+     page reads from, the de facto "gap between sections" value site-wide.
+     ONE token because the two gaps around the stats block are required to be
+     equal: the distance from the moving front-page band down to the crimson
+     figures must match the distance from the labels down to the photographs.
+     Two separate values drifted apart immediately (52px above against 72px
+     below). Change this and every section gap that uses it moves together --
+     bumped ~17% at the owner's request for more air between sections
+     generally, not just around the stats specifically. */
+  --stat-gap:clamp(56px,7.6vw,112px);
 
   /* Surface for the highlight boxes. A pale crimson wash rather than the brand
      crimson: the page already carries a full-bleed crimson hero, three crimson
@@ -555,7 +560,11 @@ a:hover{ text-decoration:underline; }
 }
 
 /* ---------- section heads ---------- */
-.head{ padding:clamp(40px,6vw,86px) var(--gut) clamp(14px,1.6vw,22px); }
+/* Top value is this section's own "gap since the last one" wherever nothing
+   more specific (like --stat-gap) already governs the transition -- bumped
+   the same ~17% as --stat-gap so it stays proportionate. Bottom value is
+   internal (heading to the eyebrow/standfirst below it), left alone. */
+.head{ padding:clamp(47px,7vw,101px) var(--gut) clamp(14px,1.6vw,22px); }
 .head h2{
   font-family:var(--display); text-transform:uppercase; font-weight:400;
   font-size:clamp(40px,7vw,104px); line-height:.86; margin:.12em 0 0;
@@ -1450,7 +1459,9 @@ details[name="board-popup"][open] > summary:focus-visible{
   .vthumb:hover .vplay{ transform:translate(-50%,-50%) scale(1.06); }
 }
 
-.panel{ padding:clamp(32px,4.5vw,64px) var(--gut); border-top:1px solid var(--hair); }
+/* Same ~17% bump as --stat-gap and .head, so consecutive .panel sections
+   (FAQ, the board-page panels) keep pace with the rest of the page's gaps. */
+.panel{ padding:clamp(38px,5.3vw,75px) var(--gut); border-top:1px solid var(--hair); }
 .panel h2{
   font-family:var(--display); text-transform:uppercase; font-weight:400;
   font-size:clamp(28px,4vw,54px); line-height:.9; margin:0 0 clamp(16px,2vw,26px);
