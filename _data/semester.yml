@@ -233,12 +233,12 @@ events:
 # the "why come to any of these" framing the owner gave alongside the location.
 events_note: Each event will take place at The Crimson's historic, newly renovated building at 14 Plympton St. All are non-evaluative ways for you to meet Crimson members and leadership and learn more about the organization!
 
-# ---- 14 Plympton St widget, beside the events list ----
-# A filler slot shows (same convention as show_photo_placeholders above) when
-# this is empty. The owner's photo -- source in images/gallery/map.jpg,
-# excluded from the build like every other gallery master; this is the
-# optimised web copy sips made from it, 1088x946, 238KB.
-office_photo: map.jpg
+# office_photo (was: filename in images/, shown beside the events list) is
+# retired -- that widget is a live embedded Google Map now, not a photo. The
+# owner's own map screenshot is still in images/gallery/map.jpg (excluded from
+# the build, like every gallery master) and the optimised copy sips made from
+# it is still at images/map.jpg, unreferenced now but left in place rather
+# than deleted.
 
 
 # ---- The three numbers in the stat strip. ----

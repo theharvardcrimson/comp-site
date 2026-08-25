@@ -877,46 +877,14 @@ details[name="board-popup"][open] > summary:focus-visible{
    dead space below it. That's what makes the photo match the dates list's
    height rather than just the widget's outer box. */
 .events-widget{ display:flex; flex-direction:column; height:100%; }
-/* Crimson border on the link itself, not .slot -- .slot carries its own
-   border everywhere else it's used (the photo band's placeholders), but
-   here it's nested one level inside the link, and a real photo has no .slot
-   at all, so the border has to live on the wrapper both states share.
-
-   flex-basis:0, not auto: with auto, the flex item's starting size comes
-   from its CONTENT before growing/shrinking -- and that content is a photo
-   with its own intrinsic aspect ratio, wider than tall, which at this
-   column's width computed out to a taller box than the dates list even
-   after shrinking. Starting from 0 makes flex-grow the only thing deciding
-   the height, so it fills exactly what's left after the caption, matching
-   the list regardless of whatever photo is dropped in here. No margin-bottom
-   any more -- the caption that used to sit below it is cut, so the photo is
-   .events-widget's only child and can claim the full stretched height. */
-.events-widget-photo{
-  position:relative; display:block; flex:1 1 0%; min-height:180px;
-  overflow:hidden; color:inherit;
+/* flex-basis:0, not auto: an iframe's default intrinsic size (historically
+   300x150) would otherwise set the starting size before flex-grow gets a
+   say, same issue the photo version of this widget had with its own
+   intrinsic aspect ratio. Starting from 0 makes flex-grow the only thing
+   deciding the height, matching the dates list regardless. */
+.events-widget-map{
+  flex:1 1 0%; min-height:180px; width:100%;
   border:1px solid var(--red);
-}
-.events-widget-photo img{
-  width:100%; height:100%; object-fit:cover; display:block;
-}
-.events-widget-photo .slot{ height:100%; aspect-ratio:auto; border:none; }
-/* Hover/focus scrim: the photo itself is the link now, not a separate text
-   line below it -- this is the affordance that replaces "Open in Google
-   Maps" as a sentence. Ink, not black, matching the scrim colour used
-   elsewhere on the page (the board popup's own backdrop). */
-.events-widget-photo::after{
-  content:""; position:absolute; inset:0; background:rgba(21,19,15,0);
-  transition:background-color .18s ease;
-}
-.events-widget-photo:hover::after,
-.events-widget-photo:focus-visible::after{ background:rgba(21,19,15,.28); }
-/* The corner arrow is the OTHER half of that affordance -- always visible,
-   not just on hover, since a hover cue alone is invisible to a touch
-   device. Same glyph the removed text line used to carry. */
-.events-widget-arrow{
-  position:absolute; right:10px; bottom:10px; z-index:1;
-  width:34px; height:34px; display:flex; align-items:center; justify-content:center;
-  background:var(--red); color:var(--paper); font-size:17px; line-height:1;
 }
 
 /* ---------- homepage prose sections + FAQ ---------- */
@@ -1567,22 +1535,15 @@ figcaption .credit{ color:var(--red); }
     .reveal{ animation:rise linear both; animation-timeline:view(); animation-range:entry 4% cover 30%; }
     .boards .board{ animation:slide linear both; animation-timeline:view(); animation-range:entry 2% cover 24%; }
 
-    /* Three motion languages, one per kind of content, not one animation
-       applied everywhere regardless of what it's moving. Tried alternating
-       slide on all of it first; too much of the page moved the same way
-       and the owner singled out four specific spots as the problem. Sorted
-       by what each thing actually IS, not by where it sits:
-
-       -- Repeated rows/pairs of roughly-equal weight (the events list, the
-          two highlight boxes) keep the alternating slide/slide-right that
-          worked -- .boards' own technique, unchanged, still here.
-       -- Photographic content (the photo band, the video thumbnail, the map
-          widget) shares one calm .rise-photo instead -- three images, one
-          consistent settle, no direction to alternate since they don't read
-          as a sequence the way rows do.
-       -- The stat numbers get their own .pop -- scaling in reads as the
-          numbers arriving/counting up, which suits big standalone figures
-          in a way sliding sideways didn't. */
+    /* Alternating slide/slide-right (.boards' own technique) for repeated
+       rows/pairs of roughly-equal weight -- the events list and the two
+       highlight boxes. Tried the same alternation on the stats, the photo
+       band, the video, and the map widget too; the owner didn't like it
+       there, and a vertical-only rise tried afterward for the photographic
+       content (band/video/map) turned out too subtle to register as motion
+       at all -- cut rather than debugged, so those are static for now.
+       Stats keep their own .pop -- scaling in reads as the numbers
+       arriving/settling, which held up better than either alternative. */
     .stats > div,
     .hl-col,
     .events li{
@@ -1590,9 +1551,6 @@ figcaption .credit{ color:var(--red); }
     }
     .hl-col:last-child,
     .events li:nth-child(even){ animation-name:slide-right; }
-
-    .rise-photo,
-    .band-item{ animation:rise linear both; animation-timeline:view(); animation-range:entry 4% cover 30%; }
 
     .stats > div{ animation-name:pop; }
   }

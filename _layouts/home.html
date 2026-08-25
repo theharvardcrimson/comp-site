@@ -87,7 +87,7 @@ layout: site
     </div>
   {% endif %}
   {% if vid and vid != '' %}
-    <aside class="intro-video rise-photo">
+    <aside class="intro-video">
       {%- comment -%}
         Click-to-load, and it plays in place. <details> is the same native
         disclosure the nav drawer uses, so this still ships no JavaScript.
@@ -175,26 +175,20 @@ layout: site
         <p class="events-note reveal">{{ site.data.semester.events_note }}</p>
       {% endif %}
     </div>
-    <div class="events-widget rise-photo">
+    <div class="events-widget">
       {% comment %}
-        The photo itself is the link now, not a separate text line below it --
-        a hover/focus scrim darkens it and a corner arrow marks it as a link,
-        same &#8599; glyph the removed text line used to carry. Still linked
-        rather than embedded, matching the homepage video's own precedent, so
-        this doesn't load Google's script and cookies on every visit.
+        A real embedded map, at the owner's explicit request, reversing the
+        link-out-don't-embed precedent the homepage video and this widget's
+        own earlier version both followed. Stated plainly: this loads Google's
+        iframe (script + cookies) on every homepage visit now, where the
+        photo-with-a-link version didn't load anything until clicked.
+        loading="lazy" is the only mitigation left available -- it still
+        defers the request until the section is scrolled near.
       {% endcomment %}
-      <a class="events-widget-photo" href="https://maps.app.goo.gl/d9Zm7qz7t4v4pjsy9">
-        {% if site.data.semester.office_photo and site.data.semester.office_photo != '' %}
-          <img src="/images/{{ site.data.semester.office_photo }}" alt="The Crimson's building at 14 Plympton St"
-               loading="lazy" decoding="async">
-        {% elsif site.data.semester.show_photo_placeholders %}
-          <div class="slot">
-            <span class="slot-tag">Photo</span>
-            <span class="slot-label">14 Plympton St</span>
-          </div>
-        {% endif %}
-        <span class="events-widget-arrow" aria-hidden="true">&#8599;</span>
-      </a>
+      <iframe class="events-widget-map"
+        src="https://www.google.com/maps?q=14+Plympton+St,+Cambridge,+MA&output=embed"
+        title="Map showing The Crimson's location at 14 Plympton St"
+        loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
     </div>
   </div>
 </section>
