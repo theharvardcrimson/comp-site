@@ -631,8 +631,24 @@ a:hover{ text-decoration:underline; }
      flush left, just with ragged-right lines inside a left-anchored box. This
      turns the empty space into a deliberate gutter between two anchored
      edges (name pinned left, tagline pinned right) instead of dead air
-     trailing off to the right of left-aligned text. */
-  .board-desc{ margin-top:0; margin-left:auto; padding-bottom:.5em; text-align:right; }
+     trailing off to the right of left-aligned text.
+
+     One line, always, at the owner's explicit call after the two didn't fit
+     together: Sports' tagline needs 896px at the old 21px size, and even the
+     absolute best-case column width (the name column shrunk to zero safety
+     buffer) only ever reaches 741px at 1440 wide -- there was no honest
+     column-widening path to "one line AND today's size" for the genuinely
+     long taglines (Arts, Sports, Tech). white-space:nowrap plus a smaller,
+     still-responsive clamp is what actually guarantees it -- max-width:none
+     because nowrap makes that constraint moot for wrapping but it would still
+     visually truncate the box otherwise. Checked against Sports' tagline
+     specifically (896px at 21px is the long pole) at every width from 900 to
+     1920 -- see the commit message for the per-width numbers this clamp was
+     fit to. */
+  .board-desc{
+    margin-top:0; margin-left:auto; padding-bottom:.5em; text-align:right;
+    white-space:nowrap; max-width:none; font-size:clamp(9.5px,1.15vw,16.5px);
+  }
 }
 
 /* ---------- board popup (PROTOTYPE, News only) ----------
