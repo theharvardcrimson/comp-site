@@ -207,15 +207,16 @@ events:
   - name: Comp Open House
     when: "Tuesday, Sept. 8, 4-7 p.m."
     where: 14 Plympton St.
-  - name: Crimson Comp Mixer
+  - name: Rooftop Mixer
     when: "Friday, Sept. 12, 5-7 p.m."
     where: 14 Plympton St.
 
 # ---- 14 Plympton St widget, beside the events list ----
-# A filler slot shows (same convention as show_photo_placeholders above) until
-# a photo is dropped in here. The Google Maps link ships live regardless --
-# it doesn't depend on this photo existing.
-office_photo: ""
+# A filler slot shows (same convention as show_photo_placeholders above) when
+# this is empty. The owner's photo -- source in images/gallery/map.jpg,
+# excluded from the build like every other gallery master; this is the
+# optimised web copy sips made from it, 1088x946, 238KB.
+office_photo: map.jpg
 
 
 # ---- The three numbers in the stat strip. ----

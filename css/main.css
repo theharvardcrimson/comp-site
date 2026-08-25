@@ -823,18 +823,56 @@ details[name="board-popup"][open] > summary:focus-visible{
 }
 .ev-where{ font-family:var(--text); font-size:clamp(14px,1.3vw,16px); color:var(--grey); }
 
-/* The widget: a filler slot (or the real photo once one exists), the address
-   line the owner asked for, and a live link out. Matching the homepage video's
-   own precedent -- link out, don't embed -- so this doesn't load Google's
-   script and cookies on every visit just to show one static pin. */
-.events-widget .slot{ margin-bottom:16px; }
+/* The widget: a filler slot (or the real photo once one exists) and the
+   address line the owner asked for. .events-inner's grid already stretches
+   both columns to match the taller one (default align-items:stretch) --
+   flex column here passes that height down to the photo/slot itself via
+   flex:1, instead of the photo sizing off its own aspect-ratio and leaving
+   dead space below it. That's what makes the photo match the dates list's
+   height rather than just the widget's outer box. */
+.events-widget{ display:flex; flex-direction:column; height:100%; }
+/* Crimson border on the link itself, not .slot -- .slot carries its own
+   border everywhere else it's used (the photo band's placeholders), but
+   here it's nested one level inside the link, and a real photo has no .slot
+   at all, so the border has to live on the wrapper both states share.
+
+   flex-basis:0, not auto: with auto, the flex item's starting size comes
+   from its CONTENT before growing/shrinking -- and that content is a photo
+   with its own intrinsic aspect ratio, wider than tall, which at this
+   column's width computed out to a taller box than the dates list even
+   after shrinking. Starting from 0 makes flex-grow the only thing deciding
+   the height, so it fills exactly what's left after the caption, matching
+   the list regardless of whatever photo is dropped in here. */
+.events-widget-photo{
+  position:relative; display:block; flex:1 1 0%; min-height:180px;
+  overflow:hidden; margin-bottom:14px; color:inherit;
+  border:1px solid var(--red);
+}
+.events-widget-photo img{
+  width:100%; height:100%; object-fit:cover; display:block;
+}
+.events-widget-photo .slot{ height:100%; aspect-ratio:auto; border:none; }
+/* Hover/focus scrim: the photo itself is the link now, not a separate text
+   line below it -- this is the affordance that replaces "Open in Google
+   Maps" as a sentence. Ink, not black, matching the scrim colour used
+   elsewhere on the page (the board popup's own backdrop). */
+.events-widget-photo::after{
+  content:""; position:absolute; inset:0; background:rgba(21,19,15,0);
+  transition:background-color .18s ease;
+}
+.events-widget-photo:hover::after,
+.events-widget-photo:focus-visible::after{ background:rgba(21,19,15,.28); }
+/* The corner arrow is the OTHER half of that affordance -- always visible,
+   not just on hover, since a hover cue alone is invisible to a touch
+   device. Same glyph the removed text line used to carry. */
+.events-widget-arrow{
+  position:absolute; right:10px; bottom:10px; z-index:1;
+  width:34px; height:34px; display:flex; align-items:center; justify-content:center;
+  background:var(--red); color:var(--paper); font-size:17px; line-height:1;
+}
 .events-widget-caption{
   font-family:var(--text); font-size:clamp(15px,1.4vw,17px); line-height:1.5;
-  max-width:36ch; margin:0 0 10px;
-}
-.events-widget-link{
-  font-family:var(--display); text-transform:uppercase; letter-spacing:.1em;
-  font-size:clamp(13px,1.2vw,15px);
+  margin:0;
 }
 
 /* ---------- homepage prose sections + FAQ ---------- */
