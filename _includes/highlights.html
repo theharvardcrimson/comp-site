@@ -17,6 +17,7 @@
   {% for col in cols %}
     <div class="hl-col">
       {% if col.title and col.title != '' %}<h2 class="hl-title">{{ col.title }}</h2>{% endif %}
+      {% if col.teaser and col.teaser != '' %}<p class="hl-teaser">{{ col.teaser }}</p>{% endif %}
       {% if col.items and col.items.size > 0 %}
         <ul class="hl-list">
           {% for item in col.items %}<li>{{ item }}</li>{% endfor %}

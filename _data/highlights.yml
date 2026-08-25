@@ -1,42 +1,39 @@
 # Two columns under the intro on the homepage.
 #
-# HOW TO EDIT: each column has a `title`, a list of `items`, and an optional
-# `note` printed under the bullets. Type over any line. Delete an item to drop
-# the bullet; delete a whole column to leave a single-column section; empty this
-# file and the section disappears from the page.
+# HOW TO EDIT: each column has a `title`, an optional `teaser` line above the
+# bullets, a list of `items`, and an optional `note` printed under the bullets.
+# Type over any line. Delete an item to drop the bullet; delete a whole column
+# to leave a single-column section; empty this file and the section disappears
+# from the page.
 #
-# WHERE THIS TEXT CAME FROM, because it matters for correcting it: every phrase
-# below is lifted from the old comp site, not written fresh. But turning
-# paragraphs into bullets meant dropping the words that joined them together
-# and, in two places, reordering a clause so the bullet stands on its own. So
-# these are your sentences, cut up -- read them as bullets and fix anything the
-# surgery broke.
+# This is the owner's second draft, replacing the first cut of the old comp
+# site's paragraphs. Placed verbatim.
 #
-# Specifically dropped: "Our prominent alumni include", "just to name a few",
-# and the "Its Financial Aid Program, which has..." construction, which became
-# the second financial-aid bullet in the active voice.
-#
-# STALE-DATE WARNING: "close to $1 million over the past decade" was written for
-# the old site and is now a decade further on. Worth checking before launch.
+# The financial-aid note below reads "Contact Crimson President E. Matteo Diaz
+# at president@thecrimson.com" in the owner's draft, and show_contact is still
+# what appends the name and mailto link -- checked against semester.yml, whose
+# contact_name and contact_email already match those exact values, so nothing
+# had to change there. If either ever needs to differ from what is written
+# here, edit semester.yml, not this file.
 
 columns:
   - title: Our alumni
+    teaser: For over 150 years, The Crimson has trained the nation’s brightest journalists, public servants, and business leaders
     items:
       - U.S. Presidents Franklin D. Roosevelt ’1904 and John F. Kennedy ’40
-      - 30 Pulitzer prize-winners including Nicholas D. Kristof ’81, Linda Greenhouse ’68, David Sanger ’82, and Susan C. Faludi ’81
-      - Titans of business, media, and technology, such as Microsoft CEO Steve Ballmer ’77, fmr. YouTube CEO Susan D. Wojcicki ’90, and Mad Money host Jim Cramer ’77
+      - 70+ Pulitzer prize-winners, including Nicholas D. Kristof ’81, Linda Greenhouse ’68, David Sanger ’82, and Susan C. Faludi ’81
+      - Titans of business, media, and technology, such as fmr. Microsoft CEO Steve Ballmer ’77, fmr. YouTube CEO Susan D. Wojcicki ’90, and Mad Money host Jim Cramer ’77
     note: ""
     show_contact: false
 
   - title: Financial aid
+    teaser: We’re committed to making sure every Harvard student can join The Crimson, regardless of financial circumstance
     items:
-      - Limited but substantial compensation to staff members with demonstrated financial need
-      - Close to $1 million given out over the past decade to hundreds of Crimson staffers
-      - Meant to ensure that students who would otherwise need a term-time job can be Crimson editors
-      - Part of our efforts to make sure that all Harvard students have the opportunity to enjoy and learn from the experience of working here, regardless of their socioeconomic background
+      - Worried you’ll need a term-time job instead of The Crimson? You don’t have to choose
+      - We offer limited but substantial compensation to staff members with demonstrated financial need
+      - More than $1 million disbursed to Crimson editors over the last decade
     # `show_contact: true` appends the president's name and a mailto link from
-    # _data/semester.yml, so the address is not duplicated here. The original
-    # sentence ended "...with any and all questions about the program"; that
-    # tail is the one thing dropped from this note.
-    note: Any questions? Want more information? Don’t hesitate to contact Crimson President
+    # semester.yml, so the address is not typed twice. "Questions?" is the whole
+    # note now; the rest of the sentence is generated.
+    note: Questions? Contact Crimson President
     show_contact: true

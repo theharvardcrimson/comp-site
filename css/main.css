@@ -887,9 +887,10 @@ a:hover{ text-decoration:underline; }
      round off. Even with equal margins on both sides, the rendered gap measured
      16.8px after the dot against 14.7px before it -- the glyph's own ink sits
      left of centre in its advance box, so a margin that is nominally "the same"
-     on each side is not visually the same. Shifted 1px from each side to close
-     it: measured equal afterward, see the commit for this change. */
-  margin:0 clamp(8px,.9vw,10px) 0 clamp(10px,1.1vw,12px);
+     on each side is not visually the same. The 2px gap between the two values
+     is what keeps it looking equal; shrink both by the same amount to tighten
+     the overall space without reopening that asymmetry. */
+  margin:0 clamp(6px,.65vw,8px) 0 clamp(8px,.85vw,10px);
 }
 .intro-text em{ font-style:italic; }
 
@@ -960,6 +961,15 @@ a:hover{ text-decoration:underline; }
 .intro-title{ margin-bottom:clamp(14px,1.5vw,20px); }   /* space above the teaser */   /* ditto */
 /* Same size as the intro's bullets -- clamp(17px,1.9vw,23px) -- so the two
    bulleted sections read as one voice. Keep them in step if either changes. */
+/* The teaser line above each column's bullets. Same treatment as the intro's:
+   italic, grey, a step up from the bullets -- it introduces the list rather than
+   being one of its facts. Kept in step with .intro-lead on purpose; if that
+   changes, check this too. */
+.hl-teaser{
+  font-style:italic; color:var(--grey); max-width:52ch;
+  font-size:clamp(16px,1.75vw,19px); line-height:1.5;
+  margin:0 0 clamp(16px,1.8vw,22px);
+}
 .hl-list{
   margin:0; padding-left:1.15em; max-width:52ch;
   font-family:var(--text); font-size:clamp(17px,1.9vw,23px); line-height:1.5;
