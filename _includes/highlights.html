@@ -15,7 +15,7 @@
 {% if cols and cols.size > 0 %}
 <section class="hl">
   {% for col in cols %}
-    <div class="hl-col reveal">
+    <div class="hl-col">
       {% if col.title and col.title != '' %}<h2 class="hl-title">{{ col.title }}</h2>{% endif %}
       {% if col.teaser and col.teaser != '' %}<p class="hl-teaser">{{ col.teaser }}</p>{% endif %}
       {% if col.items and col.items.size > 0 %}

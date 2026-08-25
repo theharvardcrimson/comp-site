@@ -32,16 +32,16 @@ layout: site
 {% if site.data.semester.stat_1_number != '' %}
 <div class="stats">
   {% if site.data.semester.stat_1_number != '' %}
-    <div class="reveal"><b>{{ site.data.semester.stat_1_number }}{% if site.data.semester.stat_1_unit and site.data.semester.stat_1_unit != '' %}<span class="unit">{{ site.data.semester.stat_1_unit }}</span>{% endif %}</b><span>{{ site.data.semester.stat_1_label }}</span></div>
+    <div><b>{{ site.data.semester.stat_1_number }}{% if site.data.semester.stat_1_unit and site.data.semester.stat_1_unit != '' %}<span class="unit">{{ site.data.semester.stat_1_unit }}</span>{% endif %}</b><span>{{ site.data.semester.stat_1_label }}</span></div>
   {% endif %}
   {% if site.data.semester.stat_2_number != '' %}
-    <div class="reveal"><b>{{ site.data.semester.stat_2_number }}{% if site.data.semester.stat_2_unit and site.data.semester.stat_2_unit != '' %}<span class="unit">{{ site.data.semester.stat_2_unit }}</span>{% endif %}</b><span>{{ site.data.semester.stat_2_label }}</span></div>
+    <div><b>{{ site.data.semester.stat_2_number }}{% if site.data.semester.stat_2_unit and site.data.semester.stat_2_unit != '' %}<span class="unit">{{ site.data.semester.stat_2_unit }}</span>{% endif %}</b><span>{{ site.data.semester.stat_2_label }}</span></div>
   {% endif %}
   {% if site.data.semester.stat_3_number != '' %}
-    <div class="reveal"><b>{{ site.data.semester.stat_3_number }}{% if site.data.semester.stat_3_unit and site.data.semester.stat_3_unit != '' %}<span class="unit">{{ site.data.semester.stat_3_unit }}</span>{% endif %}</b><span>{{ site.data.semester.stat_3_label }}</span></div>
+    <div><b>{{ site.data.semester.stat_3_number }}{% if site.data.semester.stat_3_unit and site.data.semester.stat_3_unit != '' %}<span class="unit">{{ site.data.semester.stat_3_unit }}</span>{% endif %}</b><span>{{ site.data.semester.stat_3_label }}</span></div>
   {% endif %}
   {% if site.data.semester.stat_4_number and site.data.semester.stat_4_number != '' %}
-    <div class="reveal"><b>{{ site.data.semester.stat_4_number }}{% if site.data.semester.stat_4_unit and site.data.semester.stat_4_unit != '' %}<span class="unit">{{ site.data.semester.stat_4_unit }}</span>{% endif %}</b><span>{{ site.data.semester.stat_4_label }}</span></div>
+    <div><b>{{ site.data.semester.stat_4_number }}{% if site.data.semester.stat_4_unit and site.data.semester.stat_4_unit != '' %}<span class="unit">{{ site.data.semester.stat_4_unit }}</span>{% endif %}</b><span>{{ site.data.semester.stat_4_label }}</span></div>
   {% endif %}
 </div>
 {% endif %}
@@ -60,11 +60,11 @@ layout: site
 {% endcomment %}
 {% assign vid = site.data.semester.video_id %}
 {% if content != '' or vid != '' %}
-<div class="intro reveal">
+<div class="intro">
   {% assign has_title = false %}
   {% if page.intro_title and page.intro_title != '' %}{% assign has_title = true %}{% endif %}
   {% if content != '' or has_title %}
-    <div class="intro-text">
+    <div class="intro-text reveal">
       {% if has_title %}<h2 class="intro-title">{{ page.intro_title }}</h2>{% endif %}
       {%- assign note = page.intro_note -%}
       {%- comment -%}
@@ -87,7 +87,7 @@ layout: site
     </div>
   {% endif %}
   {% if vid and vid != '' %}
-    <aside class="intro-video">
+    <aside class="intro-video slide-from-right">
       {%- comment -%}
         Click-to-load, and it plays in place. <details> is the same native
         disclosure the nav drawer uses, so this still ships no JavaScript.
@@ -158,10 +158,10 @@ layout: site
   since it doesn't depend on that photo.
 {% endcomment %}
 {% if site.data.semester.events and site.data.semester.events.size > 0 %}
-<section class="events reveal">
+<section class="events">
   <div class="events-inner">
     <div class="events-list">
-      <h2 class="events-head">Join us at our upcoming comp events!</h2>
+      <h2 class="events-head reveal">Join us at our upcoming comp events!</h2>
       <ul>
         {% for e in site.data.semester.events %}
           <li>
@@ -172,7 +172,7 @@ layout: site
         {% endfor %}
       </ul>
     </div>
-    <div class="events-widget">
+    <div class="events-widget slide-from-right">
       {% comment %}
         The photo itself is the link now, not a separate text line below it --
         a hover/focus scrim darkens it and a corner arrow marks it as a link,
@@ -196,7 +196,7 @@ layout: site
   </div>
   {% if site.data.semester.events_note and site.data.semester.events_note != '' %}
     {% comment %} Full section width, not just the list column's -- deliberately outside .events-inner's grid. {% endcomment %}
-    <p class="events-note">{{ site.data.semester.events_note }}</p>
+    <p class="events-note reveal">{{ site.data.semester.events_note }}</p>
   {% endif %}
 </section>
 {% endif %}

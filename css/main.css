@@ -449,10 +449,16 @@ a:hover{ text-decoration:underline; }
    and the outer two figures sat 36.7px off centre from their photographs --
    only the middle one lined up, and only by coincidence. If you change .band's
    gap, change it here too. */
+/* overflow-x:clip, not hidden -- same reasoning as .boards: the alternating
+   slide-right entrance starts even items at translateX(22px), which without
+   this extends the document and shows up as horizontal overflow at narrow
+   widths (measured at 320/390; 768+ didn't show it, but the cause isn't
+   width-specific, so this is not conditional on a breakpoint either). */
 .stats{
   display:grid; grid-template-columns:1fr;
   padding:var(--stat-gap) var(--gut);
   row-gap:clamp(18px,2.4vw,30px);
+  overflow-x:clip;
 }
 /* 740px, and .band below must match. Two reasons it is this number.
    First, both blocks have to switch to three-up at the same width or there is
@@ -791,7 +797,9 @@ details[name="board-popup"][open] > summary:focus-visible{
 
    Two columns past 740px, same --pair-cols/--pair-gap grid .hl already uses for
    its two boxes -- events list on the left, the building widget on the right. */
-.events{ padding:0 var(--gut) var(--stat-gap); }
+/* overflow-x:clip -- same reasoning as .boards/.stats: contains the
+   alternating rows' and .events-widget's slide-right starting offset. */
+.events{ padding:0 var(--gut) var(--stat-gap); overflow-x:clip; }
 .events-inner{
   display:grid; grid-template-columns:1fr; gap:clamp(30px,3.6vw,56px);
 }
@@ -941,10 +949,13 @@ details[name="board-popup"][open] > summary:focus-visible{
 
    One column until 900px. The video is an aside, so on a phone it follows the
    prose rather than pushing it down. */
+/* overflow-x:clip -- same reasoning as .boards/.stats: contains
+   .intro-video's slide-right starting offset. */
 .intro{
   display:grid; grid-template-columns:1fr;
   gap:clamp(26px,3.2vw,44px);
   padding:0 var(--gut) var(--stat-gap);
+  overflow-x:clip;
 }
 @media (min-width:900px){
   .intro{
@@ -1176,10 +1187,13 @@ details[name="board-popup"][open] > summary:focus-visible{
    semantics in Safari with VoiceOver, so the count is no longer announced --
    which would defeat the point of using bullets. The marker is coloured
    through ::marker instead. */
+/* overflow-x:clip -- same reasoning as .boards/.stats: contains .hl-col's
+   slide-right starting offset. */
 .hl{
   display:grid; grid-template-columns:1fr;
   gap:clamp(30px,3.6vw,56px);
   padding:0 var(--gut) var(--stat-gap);
+  overflow-x:clip;
 }
 @media (min-width:740px){
   .hl{ grid-template-columns:var(--pair-cols); gap:var(--pair-gap); }
@@ -1543,15 +1557,35 @@ figcaption .credit{ color:var(--red); }
   @supports (animation-timeline:view()){
     .reveal{ animation:rise linear both; animation-timeline:view(); animation-range:entry 4% cover 30%; }
     .boards .board{ animation:slide linear both; animation-timeline:view(); animation-range:entry 2% cover 24%; }
+
+    /* Standalone "arrives from the right" -- .intro-video and .events-widget,
+       the two places on the page where a single element sits opposite a block
+       of text rather than being one of a repeated row. Same range as .reveal
+       so a text/aside pair like .intro-text + .intro-video settles at the
+       same time instead of one visibly trailing the other. */
+    .slide-from-right{ animation:slide-right linear both; animation-timeline:view(); animation-range:entry 4% cover 30%; }
+
+    /* Alternating pairs/rows, the same technique .boards uses, applied
+       everywhere else on the page a group of similar items sits in a row or
+       list -- added because the boards list was the only thing with any
+       rhythm to it; everything above just rose in place, uniformly, or not
+       at all. Base direction is left (.slide); even-positioned items switch
+       to .slide-right. .hl-col only ever has two children, so :last-child
+       does the same job :nth-child(even) does for the others. */
+    .stats > div,
+    .band-item,
+    .hl-col,
+    .events li{
+      animation:slide linear both; animation-timeline:view(); animation-range:entry 4% cover 30%;
+    }
+    .stats > div:nth-child(even),
+    .band-item:nth-child(even),
+    .hl-col:last-child,
+    .events li:nth-child(even){ animation-name:slide-right; }
   }
 }
 @keyframes rise{ from{ transform:translateY(26px); } to{ transform:none; } }
 @keyframes slide{ from{ transform:translateX(-22px); } to{ transform:none; } }
-/* .reveal is also on .band-item (the three-up photo band) and .hl-col (the two
-   highlight boxes), added when the top of the page was otherwise the least
-   animated stretch of it -- the hero and the board rows moved, the stats
-   revealed individually, but the photos and the highlight boxes just appeared.
-   Same mechanism, no new rule needed. */
 
 
 /* ---------- marquee ----------
@@ -1649,6 +1683,9 @@ figcaption .credit{ color:var(--red); }
      them, continuing the rhythm the stats block established. Top is zero when
      the stats precede it (see .stats + .band) and its own value otherwise. */
   padding:clamp(26px,4vw,56px) var(--gut) var(--stat-gap);
+  /* overflow-x:clip -- same reasoning as .boards/.stats: contains .band-item's
+     slide-right starting offset. */
+  overflow-x:clip;
 }
 @media (min-width:740px){ .band{ grid-template-columns:repeat(3,1fr); } }  /* must match .stats above */
 
