@@ -601,7 +601,15 @@ a:hover{ text-decoration:underline; }
   transition:color .18s ease;
 }
 .board:hover .board-name,.board:focus-visible .board-name{ color:var(--paper); }
+/* display:block: .board-name and .board-desc are both spans, inline by
+   default, and .board-name's own huge type doesn't reliably fill an entire
+   line by itself -- short names (Arts, Blog, News, Tech) left enough room
+   on that same line for the tagline to start flowing right after them
+   instead of dropping to its own line below. Below 900px, .board has no
+   grid to place things into, so this is what makes the tagline sit under
+   the name rather than beside it. */
 .board-desc{
+  display:block;
   font-family:var(--text); font-size:clamp(16px,1.5vw,21px);
   line-height:1.45; max-width:46ch; margin-top:8px;
 }
