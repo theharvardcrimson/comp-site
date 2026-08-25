@@ -563,14 +563,23 @@ a:hover{ text-decoration:underline; }
    container, which `hidden` would -- and a scroll container here would
    interfere with the view() timelines driving the rows. */
 .boards{ border-top:2px solid var(--ink); overflow-x:clip; }
+/* .board is the interactive row -- normally the <a> itself, but a popup-enabled
+   row (see board-row below) puts it on a <summary> instead. Either way it's
+   the direct thing hovered, focused and clicked, so nothing else needed to
+   change to support both. */
 .board{
   display:block; padding:clamp(16px,2vw,26px) var(--gut);
   border-bottom:1px solid var(--hair); color:inherit;
   transition:background-color .18s ease, color .18s ease;
+  cursor:pointer;
 }
 .board:hover,.board:focus-visible{
   background:var(--red); color:var(--paper); text-decoration:none; outline-offset:-3px;
 }
+/* Native <details> marker reset -- same trick as .drawer > summary. */
+.board::-webkit-details-marker{ display:none; }
+.board{ list-style:none; }
+.board-row-close{ display:none; }
 .board-name{
   font-family:var(--display); text-transform:uppercase;
   font-size:clamp(42px,9.4vw,132px); line-height:.86; color:var(--red);
@@ -594,6 +603,52 @@ a:hover{ text-decoration:underline; }
      commit message for this change. */
   .board{ display:grid; grid-template-columns:0.72fr 1fr; gap:clamp(20px,2.6vw,44px); align-items:end; }
   .board-desc{ margin-top:0; padding-bottom:.5em; }
+}
+
+/* ---------- board popup (PROTOTYPE, News only) ----------
+   display:contents so .board-name/.board-desc sit directly in .board's own
+   grid, exactly as they would with no wrapper at all -- the wrapper exists
+   only so CSS has one thing to hide as a unit when the popup opens, without
+   it, .board's grid-template-columns above would apply to the wrong pair of
+   elements. */
+.board-row-main{ display:contents; }
+details[name="board-popup"][open] > summary .board-row-main{ display:none; }
+details[name="board-popup"][open] > summary .board-row-close{
+  display:flex; align-items:center; height:100%;
+  font-family:var(--display); text-transform:uppercase; letter-spacing:.1em;
+  font-size:clamp(15px,1.5vw,19px);
+}
+
+/* Closed, a popup-enabled row looks and behaves exactly like every other
+   board row -- same .board class, same hover flip, same grid. Open, the same
+   <summary> (still the thing that closes it -- there is no second control)
+   detaches from the row and becomes a full-width bar fixed above the panel,
+   the same way .drawer-panel sits below a fixed .bar rather than under it.
+   z-index 80/70, both above .bar's 50, so the popup covers the header too --
+   "fills the screen" means the whole screen, not the space below the nav. */
+details[name="board-popup"][open] > summary{
+  position:fixed; inset:0 0 auto 0; z-index:80;
+  display:block; height:var(--bar-h);
+  background:var(--ink); color:var(--paper); border-bottom:none;
+  padding:0 var(--gut);
+}
+details[name="board-popup"][open] > summary:hover,
+details[name="board-popup"][open] > summary:focus-visible{
+  background:var(--red-deep); color:var(--paper);
+}
+.board-panel{
+  position:fixed; inset:0; z-index:70;
+  background:var(--paper); color:var(--ink);
+  padding-top:var(--bar-h); overflow-y:auto; overscroll-behavior:contain;
+}
+/* Locks the page behind the popup so a wheel/touch gesture that runs off the
+   bottom of the fixed panel can't leak through to the homepage underneath.
+   :has() is the only way to do this without JavaScript; browsers without it
+   just don't get the lock -- the panel still covers the screen either way,
+   so nothing breaks, the page behind can just be scrolled by whoever's under
+   the (invisible) fold. */
+@supports selector(:has(*)){
+  body:has(details[name="board-popup"][open]){ overflow:hidden; }
 }
 
 .note{
@@ -1454,10 +1509,15 @@ figcaption .credit{ color:var(--red); }
 }
 
 /* Board rows alternate their entry direction, so the list has a rhythm rather
-   than ten identical slides from the same side. */
+   than ten identical slides from the same side. :nth-child(even) counts
+   .boards's DIRECT children -- normally .board itself, but a popup-enabled
+   row wraps .board one level deeper inside a <details>, so the direct child
+   at that position is the <details>, not .board. Both selectors are needed:
+   the first for a plain row, the second for a wrapped one. */
 @media (prefers-reduced-motion:no-preference){
   @supports (animation-timeline:view()){
-    .boards .board:nth-child(even){ animation-name:slide-right; }
+    .boards > .board:nth-child(even),
+    .boards > :nth-child(even) .board{ animation-name:slide-right; }
   }
 }
 @keyframes slide-right{ from{ transform:translateX(22px); } to{ transform:none; } }

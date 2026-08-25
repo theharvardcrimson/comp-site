@@ -10,13 +10,36 @@
 
   The hover colour-flip is decoration: every row states its board and
   description in text, so nothing depends on hover.
+
+  PROTOTYPE: a board with `popup: true` in its front matter (News, for now)
+  renders as a native <details name="board-popup"> instead of a plain link --
+  clicking it fills the screen with that board's full content rather than
+  navigating away. name="board-popup" is shared across every popup-enabled
+  row so browsers keep at most one open at a time, the same way radio inputs
+  with a shared name do. The rest still link to their standalone page until
+  this is approved and rolled out to all ten.
 {% endcomment %}
 <div class="boards">
   {% assign boards = site.boards | sort: 'name' %}
   {% for b in boards %}
-    <a class="board" href="{{ b.url }}">
-      <span class="board-name">{{ b.name }}</span>
-      <span class="board-desc">{{ b.hook }}</span>
-    </a>
+    {% if b.popup %}
+      <details class="board-row" name="board-popup">
+        <summary class="board">
+          <span class="board-row-main">
+            <span class="board-name">{{ b.name }}</span>
+            <span class="board-desc">{{ b.hook }}</span>
+          </span>
+          <span class="board-row-close" aria-hidden="true">&#10005; Close</span>
+        </summary>
+        <div class="board-panel">
+          {% include board-panel.html board=b %}
+        </div>
+      </details>
+    {% else %}
+      <a class="board" href="{{ b.url }}">
+        <span class="board-name">{{ b.name }}</span>
+        <span class="board-desc">{{ b.hook }}</span>
+      </a>
+    {% endif %}
   {% endfor %}
 </div>

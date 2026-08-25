@@ -1,16 +1,23 @@
 ---
 name: News
-hook: breaks high-impact stories, holding power to account & informing millions of readers
+hook: Break high-impact stories, hold power to account, and inform millions of readers
 photo: ""
 photo_caption: ""
 photo_credit: ""
 
+# PROTOTYPE: renders as a fullscreen popup from the homepage board list
+# instead of linking to this page, while the other nine boards still link out
+# normally. Set on the other nine once the owner approves this one.
+popup: true
+
+first_meeting: Sunday 9/13, 3:30 - 4:30 pm, Science Center Hall D
+
 requirements:
-  - Attend weekly comp seminars.
-  - Publish up to six daily articles — and an optional long-form feature — with plenty of guidance.
-  - Make friends and get integrated into the news board's social life with a number of fun, casual comp events like trivia night and happy hours.
-  - Participate in ongoing discussions about how to continue to make The Crimson a more diverse and inclusive space.
-  - Join the ranks of The Crimson's most prestigious board, which has produced the likes of American presidents and Pulitzer Prize winners.
+  - Attend weekly comp seminars
+  - Learn the fundamentals of reporting, interviewing, and writing
+  - Publish six daily articles, plus an optional long-form feature
+  - Work directly with senior editors on your stories
+  - Get to know the board through trivia nights, happy hours, and other fun socials
 
 # Showcased work. Delete any entry, or the whole list, freely.
 showcase:
@@ -36,31 +43,10 @@ showcase:
     blurb: Harvard faculty voted to eliminate shopping week in favor of a previous-term course registration system on Tuesday, ending a decades-old scheduling quirk that allowed students to sample courses before enrolling during the first week of each semester.
 ---
 
-They don't call it a **news**paper for nothing…
+They don't call it a newspaper for nothing. News is the heart and soul of
+The Crimson — a home for anyone who wants to ask questions, dig for answers,
+and make a real impact.
 
-The News Board is the heart and soul of The Crimson. We scooped that [Claudine Gay would be resigning](https://www.thecrimson.com/article/2024/1/3/claudine-gay-resign-harvard/),
-beating national outlets to the story. We scooped them before, too, when we
-announced that Harvard's top board [would support her](https://www.thecrimson.com/article/2023/12/12/gay-stays-in-office-corporation-support/)
-a few weeks earlier. From covering [student government scandals](https://www.thecrimson.com/article/2024/3/28/fox-club-expels-cooke/)
-to [hard-hitting metro coverage](https://www.thecrimson.com/article/2024/12/6/allston-brighton-overcrowding-brazilian-immigrants/)
-and exclusive interviews with [Harvard's top administrators](https://www.thecrimson.com/article/2023/12/8/gay-apology-congressional-remarks/),
-our board pulls back the curtain on institutional structures across the
-University and the city of Cambridge. Staff writers see their bylines run in our
-weekly newspaper and on our award-winning website, which receives more than
-[1.75 million page views](https://www.thecrimson.com/article/2023/10/10/psc-statement-backlash/).
-We are a hardworking, close-knit community that extends from our undergraduate
-days to long past graduation.
-
-News is a home not just for aspiring journalists, but for anyone who wants to
-speak truth to power, amplify marginalized voices, and make a difference on
-campus. Our stories garner campus-wide — and even nationwide — attention, often
-pushing the administration to make impactful changes.
-
-Our writers learn how to ask the [right questions and get answers](https://www.thecrimson.com/article/2024/2/23/institutional-neutrality-feature/).
-They learn how to [investigate and organize facts into writing](https://www.thecrimson.com/article/2019/5/10/winthrop-climate/).
-**No previous experience in journalism is necessary**: the comp process is
-designed to provide students with all the skills necessary for becoming a
-reporter. **We cannot emphasize this enough: no previous experience required!**
-
-We further encourage anyone who wants to hone their writing skills, explore the
-inner workings of Harvard, or forge incredible friendships to comp the News Board!
+From student government scandals to hard-hitting metro coverage to exclusive
+interviews with Harvard's top administrators, we pull back the curtain on
+institutional structures across the University and the city of Cambridge.

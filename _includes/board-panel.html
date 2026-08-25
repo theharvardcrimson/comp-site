@@ -1,0 +1,84 @@
+{% comment %}
+  One board's full content, for the fullscreen popup on the homepage board
+  list. Deliberately mirrors _layouts/board.html's own sections (hero,
+  prose, requirements, showcase, first meeting, contact) -- this is the same
+  board page design, repackaged into an overlay instead of a standalone URL,
+  not a new design. Takes `board`, a doc from site.boards.
+{% endcomment %}
+{% assign b = include.board %}
+{% assign slug = b.path | split: '/' | last | split: '.' | first %}
+{% assign people = site.data.directors[slug] %}
+
+<section class="field board-hero{% if b.photo and b.photo != '' %} has-photo{% endif %}"
+  {%- if b.photo and b.photo != '' %} style="--hero-img:url('/images/{{ b.photo }}')"{% endif %}>
+  <p class="eyebrow">{{ site.data.semester.season }} Comp {{ site.data.semester.year }}</p>
+  <h1 class="poster">{{ b.display_name | default: b.name }}</h1>
+  <p class="lede">{{ b.hook }}</p>
+  <p class="actions on-red">
+    <a class="btn btn-ghost" href="{{ site.data.semester.signup_url }}">{{ site.data.semester.signup_label }}</a>
+  </p>
+  {% if b.photo and b.photo != '' and b.photo_credit and b.photo_credit != '' %}
+    <p class="hero-credit">
+      {%- if b.photo_caption and b.photo_caption != '' %}{{ b.photo_caption }} &middot; {% endif -%}
+      By {{ b.photo_credit }}
+    </p>
+  {% endif %}
+</section>
+
+<div class="prose reveal">
+  {{ b.content }}
+</div>
+
+{% if b.requirements and b.requirements.size > 0 %}
+<div class="panel reveal">
+  <h2>What the comp involves</h2>
+  <ul class="reqs">
+    {% for r in b.requirements %}<li>{{ r }}</li>{% endfor %}
+  </ul>
+</div>
+{% endif %}
+
+{% if b.showcase and b.showcase.size > 0 %}
+<div class="panel reveal">
+  <h2>Our work</h2>
+  <ul class="works">
+    {% for w in b.showcase %}
+      <li>
+        <a href="{{ w.url }}">{{ w.title }}</a>
+        {% if w.byline %}<div class="by">{{ w.byline }}</div>{% endif %}
+        {% if w.blurb %}<div class="blurb">{{ w.blurb }}</div>{% endif %}
+      </li>
+    {% endfor %}
+  </ul>
+</div>
+{% endif %}
+
+{% if b.first_meeting and b.first_meeting != '' %}
+<div class="panel reveal">
+  <h2>First meeting</h2>
+  <p>{{ b.first_meeting }}</p>
+</div>
+{% endif %}
+
+<div class="panel reveal">
+  <h2>Who to ask</h2>
+  {% if people %}
+    <div class="who">
+      {% for p in people %}
+        <div>
+          <div class="nm">{{ p.name }}</div>
+          <a href="mailto:{{ p.email }}">{{ p.email }}</a>
+        </div>
+      {% endfor %}
+    </div>
+    {% if b.contact_note and b.contact_note != '' %}
+      <p style="margin-top:22px;max-width:60ch;">Write to them {{ b.contact_note }}</p>
+    {% endif %}
+  {% else %}
+    <p>Write to {{ site.data.semester.contact_title }} {{ site.data.semester.contact_name }} at
+      <a href="mailto:{{ site.data.semester.contact_email }}">{{ site.data.semester.contact_email }}</a>.</p>
+  {% endif %}
+  {% if b.extra_link_url and b.extra_link_url != '' %}
+    <p style="margin-top:20px;"><a href="{{ b.extra_link_url }}">{{ b.extra_link_text }} &rarr;</a></p>
+  {% endif %}
+</div>
