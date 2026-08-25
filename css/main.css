@@ -803,7 +803,7 @@ details[name="board-popup"][open] > summary:focus-visible{
    over Vollkorn once the owner saw it doesn't match .intro-lead exactly. */
 .events-head{
   font-family:var(--serif); font-style:italic; font-weight:400; text-transform:none;
-  font-size:clamp(24px,3vw,38px); line-height:1.15; margin:0 0 clamp(18px,2vw,26px);
+  font-size:clamp(24px,3vw,38px); line-height:1.15; margin:0 0 clamp(32px,4.5vw,56px);
 }
 .events ul{ list-style:none; margin:0; padding:0; }
 /* Each row gets its own top rule, like ruled lines on a planner page, plus a
@@ -860,10 +860,12 @@ details[name="board-popup"][open] > summary:focus-visible{
    column's width computed out to a taller box than the dates list even
    after shrinking. Starting from 0 makes flex-grow the only thing deciding
    the height, so it fills exactly what's left after the caption, matching
-   the list regardless of whatever photo is dropped in here. */
+   the list regardless of whatever photo is dropped in here. No margin-bottom
+   any more -- the caption that used to sit below it is cut, so the photo is
+   .events-widget's only child and can claim the full stretched height. */
 .events-widget-photo{
   position:relative; display:block; flex:1 1 0%; min-height:180px;
-  overflow:hidden; margin-bottom:14px; color:inherit;
+  overflow:hidden; color:inherit;
   border:1px solid var(--red);
 }
 .events-widget-photo img{
@@ -887,10 +889,6 @@ details[name="board-popup"][open] > summary:focus-visible{
   position:absolute; right:10px; bottom:10px; z-index:1;
   width:34px; height:34px; display:flex; align-items:center; justify-content:center;
   background:var(--red); color:var(--paper); font-size:17px; line-height:1;
-}
-.events-widget-caption{
-  font-family:var(--text); font-size:clamp(15px,1.4vw,17px); line-height:1.5;
-  margin:0;
 }
 
 /* ---------- homepage prose sections + FAQ ---------- */

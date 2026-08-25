@@ -194,25 +194,25 @@ video_title: Keep the Old Sheet Flying
 #   when:    free text, e.g. "Sat. Sept. 6, 4-6 p.m."
 #   teaser:  one line on what the event actually is / why to come
 #
-# Listed chronologically again, not in the order given (Business's cocktail
-# is Sept. 7, a day before the Open House) -- same call as before, reads
-# better as a planner would. Rooftop Mixer's date also moved, Sept. 12 -> 11,
-# per the owner's latest message.
+# NOT chronological, on purpose, per the owner: Open House stays before the
+# Business cocktail even though the cocktail's date (Sept. 7) is a day
+# earlier than the Open House (Sept. 8). Two earlier rounds on this same list
+# had sorted it chronologically instead -- overridden now, explicitly.
 
 events:
-  - name: Business Board Intro Cocktail
-    when: "Monday, September 7, 2 - 4 p.m."
-    teaser: Learn all about our Business Board and its comp, and meet board members over light refreshments
   - name: Comp Open House
     when: "Tuesday, September 8, 4 - 7 p.m."
     teaser: Drop by to hear from all 10 of our boards about what they do and what comp looks like
+  - name: Business Board Intro Cocktail
+    when: "Monday, September 7, 2 - 4 p.m."
+    teaser: Learn all about our Business Board and its comp, and meet board members over light refreshments
   - name: Rooftop Mixer
     when: "Friday, September 11, 5 - 7 p.m."
     teaser: Meet fellow compers and current Crimson editors before comp kicks off
 
 # Shown once below the list -- replaces the old per-event `where`, and covers
 # the "why come to any of these" framing the owner gave alongside the location.
-events_note: Every event will take place at The Crimson's historic, newly renovated building at 14 Plympton St. All are non-evaluative ways for you to meet Crimson members and leadership and learn more about the organization!
+events_note: Each event will take place at The Crimson's historic, newly renovated building at 14 Plympton St. All are non-evaluative ways for you to meet Crimson members and leadership and learn more about the organization!
 
 # ---- 14 Plympton St widget, beside the events list ----
 # A filler slot shows (same convention as show_photo_placeholders above) when
