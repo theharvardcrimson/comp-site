@@ -87,7 +87,7 @@ layout: site
     </div>
   {% endif %}
   {% if vid and vid != '' %}
-    <aside class="intro-video slide-from-right">
+    <aside class="intro-video rise-photo">
       {%- comment -%}
         Click-to-load, and it plays in place. <details> is the same native
         disclosure the nav drawer uses, so this still ships no JavaScript.
@@ -175,7 +175,7 @@ layout: site
         <p class="events-note reveal">{{ site.data.semester.events_note }}</p>
       {% endif %}
     </div>
-    <div class="events-widget slide-from-right">
+    <div class="events-widget rise-photo">
       {% comment %}
         The photo itself is the link now, not a separate text line below it --
         a hover/focus scrim darkens it and a corner arrow marks it as a link,

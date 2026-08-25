@@ -829,7 +829,7 @@ details[name="board-popup"][open] > summary:focus-visible{
    border-top is simplest for that: it always matches the element's own
    width, full row edge to edge, with no separate sizing to keep in sync. */
 .events li{
-  display:grid; grid-template-columns:auto 1fr; gap:4px 16px;
+  display:grid; grid-template-columns:auto 1fr; gap:4px 26px;
   padding:var(--ev-gap) 0; border-top:1px solid var(--hair);
 }
 .events li:first-child{ border-top:none; padding-top:0; }
@@ -1567,34 +1567,39 @@ figcaption .credit{ color:var(--red); }
     .reveal{ animation:rise linear both; animation-timeline:view(); animation-range:entry 4% cover 30%; }
     .boards .board{ animation:slide linear both; animation-timeline:view(); animation-range:entry 2% cover 24%; }
 
-    /* Standalone "arrives from the right" -- .intro-video and .events-widget,
-       the two places on the page where a single element sits opposite a block
-       of text rather than being one of a repeated row. Same range as .reveal
-       so a text/aside pair like .intro-text + .intro-video settles at the
-       same time instead of one visibly trailing the other. */
-    .slide-from-right{ animation:slide-right linear both; animation-timeline:view(); animation-range:entry 4% cover 30%; }
+    /* Three motion languages, one per kind of content, not one animation
+       applied everywhere regardless of what it's moving. Tried alternating
+       slide on all of it first; too much of the page moved the same way
+       and the owner singled out four specific spots as the problem. Sorted
+       by what each thing actually IS, not by where it sits:
 
-    /* Alternating pairs/rows, the same technique .boards uses, applied
-       everywhere else on the page a group of similar items sits in a row or
-       list -- added because the boards list was the only thing with any
-       rhythm to it; everything above just rose in place, uniformly, or not
-       at all. Base direction is left (.slide); even-positioned items switch
-       to .slide-right. .hl-col only ever has two children, so :last-child
-       does the same job :nth-child(even) does for the others. */
+       -- Repeated rows/pairs of roughly-equal weight (the events list, the
+          two highlight boxes) keep the alternating slide/slide-right that
+          worked -- .boards' own technique, unchanged, still here.
+       -- Photographic content (the photo band, the video thumbnail, the map
+          widget) shares one calm .rise-photo instead -- three images, one
+          consistent settle, no direction to alternate since they don't read
+          as a sequence the way rows do.
+       -- The stat numbers get their own .pop -- scaling in reads as the
+          numbers arriving/counting up, which suits big standalone figures
+          in a way sliding sideways didn't. */
     .stats > div,
-    .band-item,
     .hl-col,
     .events li{
       animation:slide linear both; animation-timeline:view(); animation-range:entry 4% cover 30%;
     }
-    .stats > div:nth-child(even),
-    .band-item:nth-child(even),
     .hl-col:last-child,
     .events li:nth-child(even){ animation-name:slide-right; }
+
+    .rise-photo,
+    .band-item{ animation:rise linear both; animation-timeline:view(); animation-range:entry 4% cover 30%; }
+
+    .stats > div{ animation-name:pop; }
   }
 }
 @keyframes rise{ from{ transform:translateY(26px); } to{ transform:none; } }
 @keyframes slide{ from{ transform:translateX(-22px); } to{ transform:none; } }
+@keyframes pop{ from{ transform:scale(.86); } to{ transform:scale(1); } }
 
 
 /* ---------- marquee ----------
@@ -1703,6 +1708,18 @@ figcaption .credit{ color:var(--red); }
    equality with the gap above the figures. Only applies when .band follows the
    stats; the band keeps its full padding anywhere else. */
 .stats + .band{ padding-top:0; }
+/* Same fix, .events -> .head#boards: .events' own --stat-gap bottom padding
+   was stacking with .head's top padding, making this one gap on the page
+   noticeably bigger than every other back-to-back section transition.
+
+   display:flow-root as well: with padding-top at 0, .head has nothing left
+   to stop its own h2's margin-top (.12em, the cap-line correction) from
+   collapsing THROUGH it -- normally masked by .head's usual nonzero
+   padding-top, which blocks collapse-through on its own. Without flow-root
+   that .12em was adding itself back on top of the zeroed padding as if this
+   rule had never been written -- ~12px of the exact gap it was meant to
+   remove, right back again from a different mechanism. */
+.events + .head{ padding-top:0; display:flow-root; }
 .band-item{ margin:0; }
 /* 5/4, and the direction reversed once on the way here. It began at 4/5
    portrait, which against these 3/2 landscape originals kept the full height
