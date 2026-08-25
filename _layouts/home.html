@@ -171,6 +171,9 @@ layout: site
           </li>
         {% endfor %}
       </ul>
+      {% if site.data.semester.events_note and site.data.semester.events_note != '' %}
+        <p class="events-note reveal">{{ site.data.semester.events_note }}</p>
+      {% endif %}
     </div>
     <div class="events-widget slide-from-right">
       {% comment %}
@@ -194,10 +197,6 @@ layout: site
       </a>
     </div>
   </div>
-  {% if site.data.semester.events_note and site.data.semester.events_note != '' %}
-    {% comment %} Full section width, not just the list column's -- deliberately outside .events-inner's grid. {% endcomment %}
-    <p class="events-note reveal">{{ site.data.semester.events_note }}</p>
-  {% endif %}
 </section>
 {% endif %}
 

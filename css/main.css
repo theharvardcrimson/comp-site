@@ -814,20 +814,15 @@ details[name="board-popup"][open] > summary:focus-visible{
   font-size:clamp(24px,3vw,38px); line-height:1.15; margin:0 0 clamp(32px,4.5vw,56px);
 }
 .events ul{ list-style:none; margin:0; padding:0; }
-/* Each row gets a short rule, not a full-width one -- a `::before` at a fixed
-   width rather than a border-top, which would otherwise span the whole grid
-   row edge to edge. Positioned absolutely so it doesn't take a grid cell of
-   its own; the row's own padding-top still provides the clearance below it. */
+/* Each row's rule spans the row's own width -- tried a short fixed-width
+   stub first, the owner wanted it running the length of the text instead.
+   border-top is simplest for that: it always matches the element's own
+   width, full row edge to edge, with no separate sizing to keep in sync. */
 .events li{
-  position:relative;
   display:grid; grid-template-columns:auto 1fr; gap:4px 16px;
-  padding:20px 0;
+  padding:20px 0; border-top:1px solid var(--hair);
 }
-.events li:first-child{ padding-top:0; }
-.events li:not(:first-child)::before{
-  content:""; position:absolute; top:0; left:0; width:70px; height:1px;
-  background:var(--hair);
-}
+.events li:first-child{ border-top:none; padding-top:0; }
 /* Wider and looser than the first two passes -- "MONDAY, SEPTEMBER 7, 2 - 4
    P.M." at 13ch was still wrapping tight to four short lines. 16ch plus a
    taller line-height gives the wrapped date room to breathe without reading
@@ -851,10 +846,10 @@ details[name="board-popup"][open] > summary:focus-visible{
   max-width:46ch; margin-top:4px;
 }
 /* The shared closing note, now that location and the "why these exist" framing
-   live once below the list instead of repeated per row. */
-/* No max-width: now that this sits below .events-inner instead of inside the
-   list column, it spans the section's full width -- the owner's own call,
-   over staying capped at the narrower column measure. */
+   live once below the list instead of repeated per row. Stays inside
+   .events-list (the left column) -- tried spanning the section's full width
+   at one point, but the owner wanted it kept to the list column, just
+   without the max-width that had it wrapping narrower than the column itself. */
 .events-note{
   font-family:var(--text); font-size:clamp(15px,1.4vw,17px); line-height:1.55;
   color:var(--grey); margin:clamp(24px,3vw,36px) 0 0;
