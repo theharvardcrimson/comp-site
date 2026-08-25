@@ -191,17 +191,31 @@ video_title: Keep the Old Sheet Flying
 #
 #   when:  free text, e.g. "Sat. Sept. 6, 4-6 p.m."
 #   where: free text, e.g. "14 Plympton St"
+#
+# Owner-supplied, Aug 2026. Listed chronologically rather than in the order
+# given (Business's cocktail is Sept. 7, a day before the Open House) --
+# reads better as a planner would. "September" and "Comp Open House" both had
+# a keystroke typo in the source message; corrected as plain data, not prose.
 
 events:
   - name: Harvard College Club Fair
-    when: ""
-    where: ""
-  - name: Comp Open House / Kickoff
-    when: ""
-    where: ""
-  - name: Comp Mixer
-    when: ""
-    where: ""
+    when: "Friday, Sept. 4, 3-5 p.m."
+    where: Harvard Yard
+  - name: Business Board Intro Cocktail
+    when: "Monday, Sept. 7, 2-4 p.m."
+    where: 14 Plympton St.
+  - name: Comp Open House
+    when: "Tuesday, Sept. 8, 4-7 p.m."
+    where: 14 Plympton St.
+  - name: Crimson Comp Mixer
+    when: "Friday, Sept. 12, 5-7 p.m."
+    where: 14 Plympton St.
+
+# ---- 14 Plympton St widget, beside the events list ----
+# A filler slot shows (same convention as show_photo_placeholders above) until
+# a photo is dropped in here. The Google Maps link ships live regardless --
+# it doesn't depend on this photo existing.
+office_photo: ""
 
 
 # ---- The three numbers in the stat strip. ----

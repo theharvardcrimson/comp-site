@@ -604,22 +604,59 @@ a:hover{ text-decoration:underline; }
 }
 .note .eyebrow{ display:block; color:var(--red); margin-bottom:12px; }
 
-/* ---------- comp events: compact, three lines ---------- */
-.events{ padding:clamp(28px,4vw,52px) var(--gut); border-top:1px solid var(--hair); }
-.events .eyebrow{ display:block; color:var(--red); margin-bottom:14px; }
-.events ul{ list-style:none; margin:0; padding:0; }
-.events li{
-  display:flex; flex-wrap:wrap; gap:4px 18px; align-items:baseline;
-  padding:11px 0; border-top:1px solid var(--hair);
+/* ---------- comp events + the 14 Plympton St widget ----------
+   No border-top: this used to be its own bordered block directly under the
+   highlight boxes, which read as a second divider right on top of the one the
+   owner had just asked off .hl. Padding follows the same no-divider rhythm as
+   .hl and .intro -- top:0, bottom:--stat-gap -- so the gap here matches every
+   other back-to-back section transition on the page instead of adding its own.
+
+   Two columns past 740px, same --pair-cols/--pair-gap grid .hl already uses for
+   its two boxes -- events list on the left, the building widget on the right. */
+.events{ padding:0 var(--gut) var(--stat-gap); }
+.events-inner{
+  display:grid; grid-template-columns:1fr; gap:clamp(30px,3.6vw,56px);
 }
-.events li:first-child{ border-top:none; }
+@media (min-width:740px){
+  .events-inner{ grid-template-columns:var(--pair-cols); gap:var(--pair-gap); }
+}
+.events-head{
+  font-family:var(--display); text-transform:uppercase; font-weight:400;
+  font-size:clamp(26px,3.4vw,44px); line-height:1.05; margin:0 0 clamp(18px,2vw,26px);
+}
+.events ul{ list-style:none; margin:0; padding:0; }
+/* Each row gets its own top rule, like ruled lines on a planner page, plus a
+   short crimson tick in front of the date -- calendar-themed without literally
+   drawing a calendar grid. */
+.events li{
+  display:grid; grid-template-columns:auto 1fr; gap:4px 16px;
+  padding:14px 0; border-top:1px solid var(--hair);
+}
+.events li:first-child{ border-top:none; padding-top:0; }
+.ev-when{
+  grid-row:1 / 3;
+  font-family:var(--display); text-transform:uppercase; letter-spacing:.04em;
+  font-size:clamp(13px,1.3vw,15px); line-height:1.3; color:var(--red);
+  border-left:3px solid var(--red); padding-left:10px; max-width:11ch;
+}
 .ev-name{
   font-family:var(--display); text-transform:uppercase;
-  font-size:clamp(22px,3vw,38px); line-height:1.05; letter-spacing:.02em;
+  font-size:clamp(21px,2.6vw,32px); line-height:1.05; letter-spacing:.02em;
 }
-.ev-when{
-  font-family:var(--display); text-transform:uppercase; letter-spacing:.16em;
-  font-size:clamp(13px,1.2vw,15px); color:var(--grey);
+.ev-where{ font-family:var(--text); font-size:clamp(14px,1.3vw,16px); color:var(--grey); }
+
+/* The widget: a filler slot (or the real photo once one exists), the address
+   line the owner asked for, and a live link out. Matching the homepage video's
+   own precedent -- link out, don't embed -- so this doesn't load Google's
+   script and cookies on every visit just to show one static pin. */
+.events-widget .slot{ margin-bottom:16px; }
+.events-widget-caption{
+  font-family:var(--text); font-size:clamp(15px,1.4vw,17px); line-height:1.5;
+  max-width:36ch; margin:0 0 10px;
+}
+.events-widget-link{
+  font-family:var(--display); text-transform:uppercase; letter-spacing:.1em;
+  font-size:clamp(13px,1.2vw,15px);
 }
 
 /* ---------- homepage prose sections + FAQ ---------- */
@@ -1024,15 +1061,14 @@ a:hover{ text-decoration:underline; }
   line-height:1.5; color:var(--on-red-muted);
 }
 /* "Questions?" is a literal <strong> in the note string in highlights.yml.
-   font-size:var(--hl-teaser-size) makes it EXACTLY the teaser's size, not a
-   multiple of the note's own -- the owner asked for it to match the teaser,
-   and 1.3em of the note's old 14px base landed nowhere near the teaser's 19-24px
-   regardless of how that multiplier was tuned. Paper, so it is the loudest
-   thing in the box after the section title. */
-.hl-note strong{
-  display:block; font-weight:700; color:var(--paper);
-  font-size:var(--hl-teaser-size); margin-bottom:.2em;
-}
+   Inline now, not display:block -- the owner wants "Questions? Contact...
+   president@thecrimson.com" to read and wrap as one continuous sentence, not
+   force a break after the lead word. Same reasoning kills the separate
+   font-size: it used to match the teaser's size, larger than the note's own
+   body text, which only worked as a look while it sat alone on its own line.
+   Paper, not on-red-muted, is still what marks it as the loudest word in the
+   sentence -- weight and colour carry that now that size no longer can. */
+.hl-note strong{ font-weight:700; color:var(--paper); }
 /* Paper, not crimson: --red text on a --red background is invisible. The
    underline is what marks it as a link now that colour cannot. */
 .hl-note a{

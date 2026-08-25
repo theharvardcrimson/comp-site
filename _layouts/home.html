@@ -151,31 +151,51 @@ layout: site
   time-sensitive thing on the page, so a returning visitor finds them fast
   without the boards being pushed far down. An event with no date still
   renders -- knowing it exists is useful before the date is set.
+
+  Two columns past 740px: the events list, and a widget for 14 Plympton St
+  beside it. The widget's photo is a filler slot until one exists -- see
+  office_photo in semester.yml -- but the Google Maps link is real now,
+  since it doesn't depend on that photo.
 {% endcomment %}
 {% if site.data.semester.events and site.data.semester.events.size > 0 %}
 <section class="events reveal">
-  <p class="eyebrow">Join us at</p>
-  <ul>
-    {% for e in site.data.semester.events %}
-      <li>
-        <span class="ev-name">{{ e.name }}</span>
-        <span class="ev-when">
-          {% if e.when and e.when != '' %}{{ e.when }}{% else %}Date to come{% endif %}
-          {% if e.where and e.where != '' %} &middot; {{ e.where }}{% endif %}
-        </span>
-      </li>
-    {% endfor %}
-  </ul>
+  <div class="events-inner">
+    <div class="events-list">
+      <h2 class="events-head">Join us at our upcoming comp events!</h2>
+      <ul>
+        {% for e in site.data.semester.events %}
+          <li>
+            <span class="ev-when">{% if e.when and e.when != '' %}{{ e.when }}{% else %}Date to come{% endif %}</span>
+            <span class="ev-name">{{ e.name }}</span>
+            {% if e.where and e.where != '' %}<span class="ev-where">{{ e.where }}</span>{% endif %}
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+    <div class="events-widget">
+      {% if site.data.semester.office_photo and site.data.semester.office_photo != '' %}
+        <img src="/images/{{ site.data.semester.office_photo }}" alt="The Crimson's building at 14 Plympton St"
+             loading="lazy" decoding="async" style="width:100%;aspect-ratio:5/4;object-fit:cover;display:block;margin-bottom:16px;">
+      {% elsif site.data.semester.show_photo_placeholders %}
+        <div class="slot">
+          <span class="slot-tag">Photo</span>
+          <span class="slot-label">14 Plympton St</span>
+        </div>
+      {% endif %}
+      <p class="events-widget-caption">The Crimson's historic, newly renovated building is located at 14 Plympton St.</p>
+      <a class="events-widget-link" href="https://www.google.com/maps/search/?api=1&query=14+Plympton+St%2C+Cambridge%2C+MA">Open in Google Maps &#8599;</a>
+    </div>
+  </div>
 </section>
 {% endif %}
 
 {% comment %}
   id="boards" is the target of the intro's jump link. scroll-margin-top in the
   stylesheet keeps the sticky header from covering this heading on arrival.
+  No eyebrow, no standfirst -- just the heading, at the owner's request.
 {% endcomment %}
 <div class="head" id="boards">
-  <p class="eyebrow">Where you'd go</p>
-  <h2>The ten boards</h2>
+  <h2>The boards</h2>
 </div>
 
 {% if site.data.semester.before_you_choose != '' %}
