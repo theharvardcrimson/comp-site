@@ -535,19 +535,28 @@ email: hamza.lateef@thecrimson.com
 This is the only outstanding item in this section. The trailing space in
 "Salma O. Siddiqui" is fixed, and `technology` is now `tech` everywhere.
 
-## 6. Needs your rewrite (I won't touch prose)
+## 6. Needs your rewrite (I won't touch prose) — RESOLVED for the popup
 
-**`_boards/blog.md`** names last semester's directors in the body copy:
+**`_boards/blog.md`** used to name last semester's directors in its body copy:
 
 > "We (Wyatt + Ava) are super stoked to be working with our compers..."
 
-`_data/directors.yml` lists Cristian D. Dominguez and Grace E. St Laurent. The
-sentence is first-person and warm, so swapping names mechanically would put
-words in the new directors' mouths. Your call, or theirs.
+That whole passage is gone now, not edited -- the board popup rollout replaced
+Blog's body with your own standardized description, which doesn't mention
+names at all. So the stale reference is resolved as a side effect, not because
+anyone rewrote that sentence.
 
-While you're in there — anything else out of date across the ten board pages?
-Named people, specific events, "this year we're doing X" claims. That staleness
-is invisible to me; I can't tell a current fact from a 2024 one.
+Caveat: this only fixes what the POPUP shows. The old detailed prose (this
+line included) still exists in git history and, more to the point, is still
+what `/blog/` — the standalone page — renders, since that page's own layout
+was never touched. If the standalone pages get retired once the popup is
+approved, this stops mattering; until then, `/blog/` itself still has the
+stale names live.
+
+Same open question as before, restated: anything ELSE out of date across the
+ten board pages' standalone content? Named people, specific events, "this year
+we're doing X" claims. That staleness is invisible to me; I can't tell a
+current fact from a 2024 one.
 
 ## 7. Typefaces — SETTLED
 
