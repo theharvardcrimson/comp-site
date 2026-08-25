@@ -658,11 +658,11 @@ details[name="board-popup"][open] > summary:focus-visible{
 }
 
 /* One flat scroll, no accordion -- the owner tried the collapsed +/- sections
-   and preferred everything just listed in order. Sections are plain divs,
-   each with a top rule, same rhythm as .panel elsewhere but sized for a
-   760px-wide card rather than a full-width page. */
-.board-card-section{ padding:22px var(--gut); border-top:1px solid var(--hair); }
-.board-card-section:first-of-type{ border-top:none; }
+   and preferred everything just listed in order. No dividers between
+   sections either -- tried a top rule on each, and the owner wanted them
+   gone; whitespace alone now marks where one section ends and the next
+   starts. Sized for a 760px-wide card rather than a full-width page. */
+.board-card-section{ padding:18px var(--gut); }
 /* One label style for every section heading in the card -- "during the comp",
    "featured work", "first meeting", the contact line -- so they read as the
    same kind of thing instead of four different sizes. Option B from the
@@ -672,6 +672,10 @@ details[name="board-popup"][open] > summary:focus-visible{
   font-family:var(--serif); text-transform:none; font-weight:700;
   font-size:21px; letter-spacing:0; line-height:1.25; margin:0 0 14px;
 }
+/* "Questions?" only, red against the label's usual ink -- the rest of that
+   line ("Contact your News comp directors") stays the same colour and weight
+   as every other label. */
+.q-red{ color:var(--red); }
 /* Fixed sizes, not vw-scaled: vw was tuned for full-width page sections, and
    inside a card capped at 760px it kept growing with the BROWSER window long
    after the card itself had stopped growing, which is what read as
@@ -689,17 +693,25 @@ details[name="board-popup"][open] > summary:focus-visible{
    longer than "News". Paper, not crimson -- the card is small enough that a
    full-bleed colour field read as a stripe rather than a hero. No eyebrow --
    the owner asked to cut everything at the top except the name and the
-   tagline, straight into the description. */
+   tagline, straight into the description. The Interest form button used to
+   sit here too; it now lives at the foot of the card instead (.board-card-cta
+   below), so nothing but name and tagline delays the description. */
 .board-card-head{ padding:clamp(20px,4vw,32px) var(--gut) 0; }
 .board-card-head h1{
   font-family:var(--display); text-transform:uppercase; font-weight:400;
   font-size:clamp(38px,7vw,56px); line-height:.9; margin:0 0 10px;
 }
+/* Italic, at the owner's request -- tried plain first (matching the body
+   text below it), italic reads more like a pulled-quote tagline and less
+   like the start of the description proper. */
 .board-card-hook{
-  font-family:var(--text); font-size:17px; line-height:1.45;
+  font-family:var(--text); font-style:italic; font-size:17px; line-height:1.45;
   color:var(--grey); max-width:52ch; margin:0 0 16px;
 }
-.board-card-prose{ padding-top:0; }
+/* padding-bottom cut hard, not just the divider removed -- the owner called
+   out the description-to-bullets gap specifically as too much air, separate
+   from the general "no dividers" ask. */
+.board-card-prose{ padding-top:0; padding-bottom:6px; }
 .board-card-prose p{ font-size:17px; }
 
 /* Featured work: a thumbnail grid instead of a list of links, so a piece
@@ -746,14 +758,21 @@ details[name="board-popup"][open] > summary:focus-visible{
 }
 @media (max-width:520px){ .work-grid{ grid-template-columns:1fr 1fr; gap:12px; } }
 
-/* First meeting: boxed and centered, at the owner's request for something
-   nicer than another paragraph in the flow -- reads like a printed detail
-   card (a ticket stub, a save-the-date) rather than body copy. */
-.first-meeting-box{
-  text-align:center; border:1px solid var(--hair); padding:20px;
-  max-width:46ch; margin:0 auto;
+/* First meeting: styled like a date in the comp-events calendar section
+   (.ev-when) -- crimson, uppercase, a left tick -- rather than the boxed,
+   centered card tried first. Not .ev-when itself: that rule carries
+   grid-row/max-width specific to the events list's two-column layout, which
+   don't apply to a single full-width line here. */
+.board-card-meeting{
+  font-family:var(--display); text-transform:uppercase; letter-spacing:.04em;
+  font-size:16px; color:var(--red); border-left:3px solid var(--red);
+  padding-left:12px; margin:0;
 }
-.first-meeting-box p{ margin:0; font-size:17px; }
+
+/* The Interest form button, moved here from the top of the card at the
+   owner's request -- centered, at the foot of the scroll, after everything
+   else has been read rather than before any of it. */
+.board-card-cta{ text-align:center; padding:10px var(--gut) 30px; }
 
 .note{
   padding:clamp(26px,4vw,52px) var(--gut);

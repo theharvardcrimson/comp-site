@@ -13,7 +13,6 @@
 <div class="board-card-head">
   <h1>{{ b.display_name | default: b.name }}</h1>
   <p class="board-card-hook">{{ b.hook }}</p>
-  <a class="btn" href="{{ site.data.semester.signup_url }}">{{ site.data.semester.signup_label }}</a>
 </div>
 
 <div class="prose board-card-prose">
@@ -40,7 +39,7 @@
 <div class="board-card-section">
   <p class="board-card-label">Featured work</p>
   <ul class="work-grid">
-    {% for w in b.showcase %}
+    {% for w in b.showcase limit: 4 %}
       <li>
         <a class="work-card" href="{{ w.url }}">
           {% if w.photo and w.photo != '' %}
@@ -59,12 +58,12 @@
 {% if b.first_meeting and b.first_meeting != '' %}
 <div class="board-card-section">
   <p class="board-card-label">First meeting</p>
-  <div class="first-meeting-box"><p>{{ b.first_meeting }}</p></div>
+  <p class="board-card-meeting">{{ b.first_meeting }}</p>
 </div>
 {% endif %}
 
 <div class="board-card-section">
-  <p class="board-card-label">Questions? Contact your {{ b.name }} {{ b.director_title | default: 'comp directors' }}</p>
+  <p class="board-card-label"><span class="q-red">Questions?</span> Contact your {{ b.name }} {{ b.director_title | default: 'comp directors' }}</p>
   {% if people %}
     <div class="who">
       {% for p in people %}
@@ -84,4 +83,8 @@
   {% if b.extra_link_url and b.extra_link_url != '' %}
     <p style="margin-top:20px;"><a href="{{ b.extra_link_url }}">{{ b.extra_link_text }} &rarr;</a></p>
   {% endif %}
+</div>
+
+<div class="board-card-cta">
+  <a class="btn" href="{{ site.data.semester.signup_url }}">{{ site.data.semester.signup_label }}</a>
 </div>
