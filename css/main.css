@@ -847,9 +847,13 @@ a:hover{ text-decoration:underline; }
    answers the crimson bullet a few characters to its left, so the two read as a
    pair rather than as one stray spot of colour.
 
-   Set to weight 400 and crimson explicitly, because it inherits from the bold
-   ink lead otherwise -- a bold dot is a blob. Crimson on paper is 6.64:1, though
-   nothing depends on reading this mark.
+   Weight stays 400, not bold, on purpose -- a bold middot is the one thing this
+   mark cannot be. It is already a filled circle at full weight; asking the
+   glyph for MORE weight just grows it into a blob with no dot left inside it.
+   Size is the lever that actually reads as "bigger and bolder" for a shape this
+   simple, so that is what moved: 1.7em, up from being sized like the
+   surrounding text. Crimson stays explicit, because it inherits from the bold
+   ink lead otherwise.
 
    Rejected, so it does not get relitigated: a colon (correct but ordinary), an
    em dash (reads as an aside, and competes with the em dash in the teaser just
@@ -859,6 +863,9 @@ a:hover{ text-decoration:underline; }
 .intro-text strong::after{
   content:" \00B7";
   font-weight:400;
+  font-size:1.7em;
+  line-height:1;
+  vertical-align:-0.1em;
   color:var(--red);
 }
 .intro-text em{ font-style:italic; }
