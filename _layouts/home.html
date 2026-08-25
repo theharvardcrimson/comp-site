@@ -167,10 +167,13 @@ layout: site
           <li>
             <span class="ev-when">{% if e.when and e.when != '' %}{{ e.when }}{% else %}Date to come{% endif %}</span>
             <span class="ev-name">{{ e.name }}</span>
-            {% if e.where and e.where != '' %}<span class="ev-where">{{ e.where }}</span>{% endif %}
+            {% if e.teaser and e.teaser != '' %}<span class="ev-teaser">{{ e.teaser }}</span>{% endif %}
           </li>
         {% endfor %}
       </ul>
+      {% if site.data.semester.events_note and site.data.semester.events_note != '' %}
+        <p class="events-note">{{ site.data.semester.events_note }}</p>
+      {% endif %}
     </div>
     <div class="events-widget">
       {% comment %}

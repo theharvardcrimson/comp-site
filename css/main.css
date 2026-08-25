@@ -798,30 +798,48 @@ details[name="board-popup"][open] > summary:focus-visible{
 @media (min-width:740px){
   .events-inner{ grid-template-columns:var(--pair-cols); gap:var(--pair-gap); }
 }
+/* Option D from the rendered comparison: Crimson serif, italic -- picked
+   over the site's usual all-caps CompDisplay treatment, and picked again
+   over Vollkorn once the owner saw it doesn't match .intro-lead exactly. */
 .events-head{
-  font-family:var(--display); text-transform:uppercase; font-weight:400;
-  font-size:clamp(26px,3.4vw,44px); line-height:1.05; margin:0 0 clamp(18px,2vw,26px);
+  font-family:var(--serif); font-style:italic; font-weight:400; text-transform:none;
+  font-size:clamp(24px,3vw,38px); line-height:1.15; margin:0 0 clamp(18px,2vw,26px);
 }
 .events ul{ list-style:none; margin:0; padding:0; }
 /* Each row gets its own top rule, like ruled lines on a planner page, plus a
    short crimson tick in front of the date -- calendar-themed without literally
-   drawing a calendar grid. */
+   drawing a calendar grid. No per-row location any more -- one shared address
+   note (.events-note) covers it now that every event is confirmed to be at
+   the same place, which is also what freed up room for the teaser. */
 .events li{
   display:grid; grid-template-columns:auto 1fr; gap:4px 16px;
-  padding:14px 0; border-top:1px solid var(--hair);
+  padding:16px 0; border-top:1px solid var(--hair);
 }
 .events li:first-child{ border-top:none; padding-top:0; }
 .ev-when{
   grid-row:1 / 3;
   font-family:var(--display); text-transform:uppercase; letter-spacing:.04em;
   font-size:clamp(13px,1.3vw,15px); line-height:1.3; color:var(--red);
-  border-left:3px solid var(--red); padding-left:10px; max-width:11ch;
+  border-left:3px solid var(--red); padding-left:10px; max-width:13ch;
 }
 .ev-name{
   font-family:var(--display); text-transform:uppercase;
   font-size:clamp(21px,2.6vw,32px); line-height:1.05; letter-spacing:.02em;
 }
-.ev-where{ font-family:var(--text); font-size:clamp(14px,1.3vw,16px); color:var(--grey); }
+/* Crimson serif italic, matching the section heading -- Format 4's own pick,
+   the only place on the page this teaser voice is serif-italic rather than
+   Vollkorn-italic (compare .intro-lead, .hl-teaser, .board-card-hook). */
+.ev-teaser{
+  font-family:var(--serif); font-style:italic; font-weight:400;
+  font-size:clamp(16px,1.7vw,19px); line-height:1.35; color:var(--ink);
+  max-width:46ch; margin-top:4px;
+}
+/* The shared closing note, now that location and the "why these exist" framing
+   live once below the list instead of repeated per row. */
+.events-note{
+  font-family:var(--text); font-size:clamp(15px,1.4vw,17px); line-height:1.55;
+  color:var(--grey); max-width:56ch; margin:clamp(20px,2.4vw,28px) 0 0;
+}
 
 /* The widget: a filler slot (or the real photo once one exists) and the
    address line the owner asked for. .events-inner's grid already stretches
