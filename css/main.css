@@ -860,37 +860,21 @@ a:hover{ text-decoration:underline; }
    above), an en dash (same but quieter), a pipe (reads as a table divider), and
    nothing at all (cleanest, but the two halves blur on a fast read). Swap the
    content value to try another. */
-/* No space characters in `content`, and the margins are clamp()ed PX, not em.
-   Two separate scaling bugs, worth keeping straight:
-
-   1. A space inside `content` is set in the pseudo-element's OWN font-size --
-      1.7em here -- so a leading space rendered at 39.1px while the ordinary
-      text-space after the dot (a real space character in index.md, at the 23px
-      body size) stayed 23px. Same nominal "one space" on each side, visibly
-      different gaps.
-   2. margin in em is ALSO relative to the element's own font-size, so replacing
-      the content-string space with an em margin does not escape the first bug --
-      it just moves it. Measured 14.6px before the dot against 16.3px after with
-      em margins still in place.
-
-   Fixed by using clamp() in px for both margins, which is not relative to
-   anything the dot's own size changes. Measured equal afterward: see the commit
-   for this change. */
+/* Back to a colon, after trying a middot. No asymmetric-margin correction
+   needed this time: a colon sits tight against the word it follows -- the
+   normal convention is "word:" with no space before it -- so there is only one
+   gap to get right, not two to balance against each other. Weight and colour
+   are NOT set here, deliberately, so the mark inherits straight from the bold
+   lead it closes: same weight, same colour, reads as part of the word rather
+   than as a separate inserted symbol. */
+/* margin-right is close to ONE normal word-space at this size (measured ~4.6px
+   at 23px/700), not the ~9px this started at. 9px was nearly double a real
+   space -- "word:" plus a normal gap, not "word:" plus a gap and a half -- and
+   it read as loose in the render, confirmed by comparing against
+   canvas.measureText(' ') at the same font/size/weight. */
 .intro-text strong::after{
-  content:"\00B7";
-  font-weight:400;
-  font-size:1.7em;
-  line-height:1;
-  vertical-align:-0.1em;
-  color:var(--red);
-  /* Asymmetric on purpose, and this is an OPTICAL correction, not a mistake to
-     round off. Even with equal margins on both sides, the rendered gap measured
-     16.8px after the dot against 14.7px before it -- the glyph's own ink sits
-     left of centre in its advance box, so a margin that is nominally "the same"
-     on each side is not visually the same. The 2px gap between the two values
-     is what keeps it looking equal; shrink both by the same amount to tighten
-     the overall space without reopening that asymmetry. */
-  margin:0 clamp(6px,.65vw,8px) 0 clamp(8px,.85vw,10px);
+  content:":";
+  margin-right:clamp(4px,.45vw,6px);
 }
 .intro-text em{ font-style:italic; }
 
@@ -925,17 +909,26 @@ a:hover{ text-decoration:underline; }
    is nearly twice the length of alumni, so without this the shorter box had a
    hole under its last bullet. The note now sits on the floor of its box and the
    spare space collects above it, which reads as deliberate. */
+/* Crimson fill, not the pale wash. Revisited at the owner's request for
+   something punchier than the four mocked options gave the first time --
+   content-questions 1g has the earlier decision and the reasons the other two
+   (ink fill, one-of-each) lost then. Paper text throughout: 6.64:1 on --red,
+   AA. The wash token stays defined and unused elsewhere; nothing else read it. */
 .hl-col{
   min-width:0;
   display:flex; flex-direction:column;
-  background:var(--wash); color:var(--ink);
+  background:var(--red); color:var(--paper);
   padding:clamp(22px,2.6vw,38px);
 }
 /* margin-top:auto pushes the note to the floor of the box; padding-top is the
    MINIMUM separation for when it is already there. Without it the taller box --
    financial aid, whose content fills the height -- resolved auto to zero and the
    note butted straight against the last bullet. */
-.hl-col .hl-note{ margin-top:auto; padding-top:clamp(18px,2vw,28px); }
+/* padding-top down from 28px to 16px at the owner's call -- the gap to the
+   bullets above read as too much air. margin-top:auto still does the real work,
+   pushing the note to the floor of the taller box; this is only the minimum
+   for when it is already there. */
+.hl-col .hl-note{ margin-top:auto; padding-top:clamp(10px,1.2vw,16px); }
 /* ONE size for both section headings, at the owner's call. They were briefly
    split -- intro large, column labels small -- to keep a hierarchy of section
    title over column label. That is retired deliberately, so the headings on
@@ -955,7 +948,7 @@ a:hover{ text-decoration:underline; }
    to line a heading's INK up with the top of its section, which is right when
    the heading sits on bare paper. Inside a padded box the box edge is what
    aligns, and pulling the heading up would just eat 4px of the padding. */
-.hl-title{ margin-top:0; }   /* size comes from the shared rule above */
+.hl-title{ margin-top:0; color:var(--paper); }   /* size from the shared rule; colour overridden for the crimson fill */
 /* Only the space beneath differs -- this heading sits on bare paper rather than
    inside a padded box, so it needs more air under it. */
 .intro-title{ margin-bottom:clamp(14px,1.5vw,20px); }   /* space above the teaser */   /* ditto */
@@ -965,10 +958,15 @@ a:hover{ text-decoration:underline; }
    italic, grey, a step up from the bullets -- it introduces the list rather than
    being one of its facts. Kept in step with .intro-lead on purpose; if that
    changes, check this too. */
+/* Bigger than the first pass, at the owner's call, and on-red-muted rather
+   than --grey: plain grey text is what CLAUDE.md's contrast note warns against
+   using at reduced opacity, and on a crimson fill --grey itself would not even
+   register as the intended colour -- on-red-muted is the token built for
+   exactly this surface, 5.31:1 on --red, AA. */
 .hl-teaser{
-  font-style:italic; color:var(--grey); max-width:52ch;
-  font-size:clamp(16px,1.75vw,19px); line-height:1.5;
-  margin:0 0 clamp(16px,1.8vw,22px);
+  font-style:italic; color:var(--on-red-muted); max-width:54ch;
+  font-size:clamp(19px,2.1vw,24px); line-height:1.45;
+  margin:0 0 clamp(18px,2vw,24px);
 }
 .hl-list{
   margin:0; padding-left:1.15em; max-width:52ch;
@@ -976,13 +974,36 @@ a:hover{ text-decoration:underline; }
 }
 .hl-list li{ margin:0 0 .72em; }
 .hl-list li:last-child{ margin-bottom:0; }
-.hl-list li::marker{ color:var(--red); }
+.hl-list li::marker{ color:var(--paper); }   /* red-on-red would vanish */
+/* Selected phrases inside the bullets are bold -- literal <strong> in the YAML
+   items, the same pattern as the note's lead below, chosen for what a skimming
+   reader should catch first: the numbers and the category words. Real weight
+   (Vollkorn-Bold, already loaded), not colour, since everything in this box is
+   already paper -- weight is the only signal left to spend. */
+.hl-list strong{ font-weight:700; color:var(--paper); }
+/* on-red-muted, not --grey, for the same reason as the teaser above. Size
+   left where it was -- this is the fine print, deliberately quieter than
+   everything above it. */
 .hl-note{
   margin:clamp(16px,1.8vw,24px) 0 0; max-width:52ch;
   font-family:var(--text); font-size:clamp(14px,1.3vw,16px);
-  line-height:1.5; color:var(--grey);
+  line-height:1.5; color:var(--on-red-muted);
 }
-.hl-note a{ color:var(--red); }   /* 5.75:1 on --wash */
+/* "Questions?" is a literal <strong> in the note string in highlights.yml, made
+   bigger and paper -- the owner asked for it to stand out the way the teaser
+   does, and against the quiet on-red-muted body this is the loudest thing in
+   the box after the numbers. */
+.hl-note strong{
+  display:block; font-weight:700; color:var(--paper);
+  font-size:1.3em; margin-bottom:.2em;
+}
+/* Paper, not crimson: --red text on a --red background is invisible. The
+   underline is what marks it as a link now that colour cannot. */
+.hl-note a{
+  color:var(--paper); text-decoration:none;
+  border-bottom:1px solid currentColor;
+}
+.hl-note a:hover,.hl-note a:focus-visible{ color:var(--on-red-muted); }
 
 /* ---------- video: click to load, plays in place ----------
    Built on native <details>, like the nav drawer, so no JavaScript is
