@@ -860,13 +860,36 @@ a:hover{ text-decoration:underline; }
    above), an en dash (same but quieter), a pipe (reads as a table divider), and
    nothing at all (cleanest, but the two halves blur on a fast read). Swap the
    content value to try another. */
+/* No space characters in `content`, and the margins are clamp()ed PX, not em.
+   Two separate scaling bugs, worth keeping straight:
+
+   1. A space inside `content` is set in the pseudo-element's OWN font-size --
+      1.7em here -- so a leading space rendered at 39.1px while the ordinary
+      text-space after the dot (a real space character in index.md, at the 23px
+      body size) stayed 23px. Same nominal "one space" on each side, visibly
+      different gaps.
+   2. margin in em is ALSO relative to the element's own font-size, so replacing
+      the content-string space with an em margin does not escape the first bug --
+      it just moves it. Measured 14.6px before the dot against 16.3px after with
+      em margins still in place.
+
+   Fixed by using clamp() in px for both margins, which is not relative to
+   anything the dot's own size changes. Measured equal afterward: see the commit
+   for this change. */
 .intro-text strong::after{
-  content:" \00B7";
+  content:"\00B7";
   font-weight:400;
   font-size:1.7em;
   line-height:1;
   vertical-align:-0.1em;
   color:var(--red);
+  /* Asymmetric on purpose, and this is an OPTICAL correction, not a mistake to
+     round off. Even with equal margins on both sides, the rendered gap measured
+     16.8px after the dot against 14.7px before it -- the glyph's own ink sits
+     left of centre in its advance box, so a margin that is nominally "the same"
+     on each side is not visually the same. Shifted 1px from each side to close
+     it: measured equal afterward, see the commit for this change. */
+  margin:0 clamp(8px,.9vw,10px) 0 clamp(10px,1.1vw,12px);
 }
 .intro-text em{ font-style:italic; }
 

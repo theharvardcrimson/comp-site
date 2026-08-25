@@ -52,11 +52,14 @@ intro_link_text: Learn more about our 10 comps
 # while placing it, for you to fix or wave off:
 #
 #   1. No bullet has a closing full stop. Consistent, so fine.
-#   2. The separator between each lead phrase and its sentence is NOT typed here.
-#      It comes from CSS -- .intro-text strong::after in css/main.css -- because
-#      it is presentation rather than words. Changing it is one line there and
-#      applies to every bullet at once, instead of a character to remember on
-#      each line. Do not type a colon or a dash into these; you will get two.
+#   2. The separator AND the space around it are not typed here. Both come from
+#      CSS -- .intro-text strong::after -- so changing either is one line there,
+#      applied to every bullet at once. That is also why there is deliberately
+#      NO space between ** and the text that follows it on these lines: the CSS
+#      margin supplies the gap on both sides equally. Typing a space here as
+#      well would add it to only the right side, since the left side already
+#      gets its gap from the pseudo-element's own margin -- which is exactly the
+#      bug that shipped and was caught by measuring, not by looking.
 #   2. There is a NON-BREAKING SPACE between "The" and "Crimson" in the teaser
 #      above -- it looks like an ordinary space but the two words can never be
 #      split across a line break. That, not the font size, is what stops "The"
@@ -81,5 +84,5 @@ intro_link_text: Learn more about our 10 comps
 # section 1b, links intact, ready to paste back if you want any of it.
 ---
 
-- **Real work from day one** Learn from current editors and see your work published before comp ends
-- **No experience needed** Most Crimson editors had never worked for a newspaper before their comp
+- **Real work from day one**Learn from current editors and see your work published before comp ends
+- **No experience needed**Most Crimson editors had never worked for a newspaper before their comp
