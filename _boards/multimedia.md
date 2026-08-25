@@ -1,14 +1,23 @@
 ---
 name: Multimedia
-hook: captures & produces all of The Crimson's photo, video, & podcast content
+
+# PROTOTYPE: renders as a fullscreen popup from the homepage board list
+# instead of linking to this page. Set once News' popup design was approved.
+popup: true
+
+hook: Capture and produce all of our photo, video, and podcast content
 photo: ""
 photo_caption: ""
 photo_credit: ""
 
+first_meeting: To be announced
+
 requirements:
-  - How to manually use a camera for taking both photographs and video footage, as well as using more complex video cameras and equipment. Owning a DSLR camera is not at all a requirement for the Multi Comp.
-  - How to use Adobe programs such as Photoshop, Lightroom, Premiere, and Audition.
-  - How to pitch and produce long-form multimedia projects including photo essays, videos, and podcasts.
+  - Attend weekly comp seminars and hands-on workshops
+  - Learn how to shoot photo and video manually, using The Crimson's cameras
+  - Get trained in Adobe Photoshop, Lightroom, Premiere, and Audition
+  - Pick up photo pitches and shoot real assignments across campus
+  - Pitch and produce a long-form photo essay, video, or podcast project of your choosing
 
 showcase:
   - title: "In Photos: Protesters Clash at Boston Men's March"
@@ -37,34 +46,11 @@ showcase:
     byline: By Elyse C. Goncalves
 ---
 
-A picture is worth a thousand words. We at Multimedia are committed to bringing
-The Crimson to life with our photo, video, and podcast content. The 1,000+ photos
-we publish each year fill the online and print pages of the News, Sports, Arts,
-and FM boards. Our videos air on YouTube and Instagram, where they received more
-than 1 million combined views last year, and they have been featured on other
-sources such as Time, Fox News, Business Insider, The Huffington Post, and Boston
-Magazine. Our award-winning flagship news podcast, *Newstalk*, publishes weekly to
-thousands of listeners across the country and world. As The Crimson moves towards
-a digital-first future, Multimedia journalism is the core of the operation, and we
-are continuing to expand our reach into new online and interactive content.
+A picture is worth a thousand words. As The Crimson embraces the
+digital-first future of journalism, Multimedia is crucial — bringing our
+written work to life through photo, video, and podcast content.
 
-Joining Multimedia will change your perspective of Harvard and the Cambridge
-community. Through Multimedia, you will have the access to photograph, video, and
-report on a wide range of events, from speeches by heads-of-state and student
-protests to sports games and cultural performances. Through Multimedia, you will
-have the ability to access and report on events including sports games, all campus
-theater and music productions, protests, speeches by heads-of-state, breaking news
-events, and more.
-
-We are excited to run Multimedia's expedited comp for its second semester. We will
-teach you all the basic skills you need in only six weeks so that you can start
-seeing your work published as soon as possible.
-
-Whether you're someone who has only ever used the camera on your iPhone, or you're
-an AFVS concentrator working on a film thesis, there is a place for you on The
-Crimson's Multimedia board.
-
-In addition to everything mentioned above, you will have the opportunity to
-contribute to the nation's oldest continuously published daily college newspaper
-with a fantastic group of people all while having a great time. We hope to see you
-soon!
+We fill The Crimson's pages with 1,000+ photos every year. Our videos drew
+more than 1 million views on YouTube and Instagram last year, and Newstalk,
+our award-winning flagship podcast, publishes regularly to thousands of
+listeners across the country.

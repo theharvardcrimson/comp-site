@@ -29,6 +29,13 @@
 </div>
 {% endif %}
 
+{% if b.video_url and b.video_url != '' %}
+<div class="board-card-section">
+  <p class="board-card-label">Watch</p>
+  <p><a href="{{ b.video_url | replace: '/embed/', '/watch?v=' }}">See what {{ b.name }} does &rarr;</a></p>
+</div>
+{% endif %}
+
 {% if b.showcase and b.showcase.size > 0 %}
 <div class="board-card-section">
   <p class="board-card-label">Featured work</p>
@@ -57,7 +64,7 @@
 {% endif %}
 
 <div class="board-card-section">
-  <p class="board-card-label">Questions? Contact your {{ b.name }} comp directors</p>
+  <p class="board-card-label">Questions? Contact your {{ b.name }} {{ b.director_title | default: 'comp directors' }}</p>
   {% if people %}
     <div class="who">
       {% for p in people %}
