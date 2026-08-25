@@ -809,9 +809,19 @@ details[name="board-popup"][open] > summary:focus-visible{
 /* Option D from the rendered comparison: Crimson serif, italic -- picked
    over the site's usual all-caps CompDisplay treatment, and picked again
    over Vollkorn once the owner saw it doesn't match .intro-lead exactly. */
+/* --ev-gap drives every vertical gap in the list -- heading-to-first-row,
+   row-to-row, and last-row-to-note -- as multiples of ONE value, so they're
+   tight and, more to the point, provably equal rather than three separately
+   tuned numbers that happened to look close. Heading margin and row padding
+   are both 2x (a row's gap to its neighbour is its own padding-top PLUS the
+   previous row's padding-bottom, so each side only needs 1x to add up to 2x
+   -- the heading, with nothing above it to share the load, needs the full
+   2x on its own). Note margin-top is 1x, since the last row already
+   contributes its own 1x padding-bottom to that gap. */
+.events-list{ --ev-gap:clamp(10px,1.3vw,14px); }
 .events-head{
   font-family:var(--serif); font-style:italic; font-weight:400; text-transform:none;
-  font-size:clamp(24px,3vw,38px); line-height:1.15; margin:0 0 clamp(32px,4.5vw,56px);
+  font-size:clamp(24px,3vw,38px); line-height:1.15; margin:0 0 calc(var(--ev-gap) * 2);
 }
 .events ul{ list-style:none; margin:0; padding:0; }
 /* Each row's rule spans the row's own width -- tried a short fixed-width
@@ -820,7 +830,7 @@ details[name="board-popup"][open] > summary:focus-visible{
    width, full row edge to edge, with no separate sizing to keep in sync. */
 .events li{
   display:grid; grid-template-columns:auto 1fr; gap:4px 16px;
-  padding:20px 0; border-top:1px solid var(--hair);
+  padding:var(--ev-gap) 0; border-top:1px solid var(--hair);
 }
 .events li:first-child{ border-top:none; padding-top:0; }
 /* Wider and looser than the first two passes -- "MONDAY, SEPTEMBER 7, 2 - 4
@@ -852,7 +862,7 @@ details[name="board-popup"][open] > summary:focus-visible{
    without the max-width that had it wrapping narrower than the column itself. */
 .events-note{
   font-family:var(--text); font-size:clamp(15px,1.4vw,17px); line-height:1.55;
-  color:var(--grey); margin:clamp(24px,3vw,36px) 0 0;
+  color:var(--grey); margin:var(--ev-gap) 0 0;
 }
 
 /* The widget: a filler slot (or the real photo once one exists) and the

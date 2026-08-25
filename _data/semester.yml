@@ -198,6 +198,12 @@ video_title: Keep the Old Sheet Flying
 # Business cocktail even though the cocktail's date (Sept. 7) is a day
 # earlier than the Open House (Sept. 8). Two earlier rounds on this same list
 # had sorted it chronologically instead -- overridden now, explicitly.
+#
+# Commas are back in `when` after a brief attempt to cut them: without one
+# between the date and the time, natural word-wrap at this column's width put
+# "SEPTEMBER 8" and "4" on the same line -- "SEPTEMBER 8 4" -- with the
+# time's dash orphaned alone on the line after. The comma isn't just
+# punctuation here, it's load-bearing for where the line breaks land.
 
 events:
   - name: Comp Open House
