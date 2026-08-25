@@ -524,16 +524,18 @@ unanswered "will I get in?" gets answered pessimistically by default.
 - **No experience required** — true for all ten, or are there exceptions?
   Several pages say it; worth stating once, authoritatively.
 
-## 5. Corrections needed
+## 5. Corrections needed — RESOLVED
 
-**Business, second director.** Still a mismatch in `_data/directors.yml` — which
-is right?
+**Business, second director.** Was flagged as a possible mismatch in
+`_data/directors.yml`:
 ```
 name:  Arman Lateef
 email: hamza.lateef@thecrimson.com
 ```
-This is the only outstanding item in this section. The trailing space in
-"Salma O. Siddiqui" is fixed, and `technology` is now `tech` everywhere.
+Owner confirmed this is correct as-is — just a first/middle-name difference,
+not an error. Nothing to change. The trailing space in "Salma O. Siddiqui" is
+also fixed, and `technology` is now `tech` everywhere, so this section has
+nothing outstanding.
 
 ## 6. Needs your rewrite (I won't touch prose) — RESOLVED for the popup
 

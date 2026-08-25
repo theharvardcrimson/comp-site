@@ -19,8 +19,9 @@ blog:
     email: grace.st.laurent@thecrimson.com
 
 business:
-  # NOTE: name/email mismatch carried over from _config.yml -- "Arman Lateef"
-  # with hamza.lateef@. Flagged in content-questions.md, awaiting confirmation.
+  # "Arman Lateef" / hamza.lateef@ looked like a mismatch carried over from
+  # _config.yml, but the owner confirmed it's just a first/middle-name
+  # difference -- correct as-is. Was flagged in content-questions.md.
   - name: McKinley Paltzik
     email: mckinley.paltzik@thecrimson.com
   - name: Arman Lateef
