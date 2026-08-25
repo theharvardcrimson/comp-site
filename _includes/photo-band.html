@@ -11,7 +11,7 @@
   <div class="band">
     {% for slot in band %}
       {% if slot.photo and slot.photo != '' %}
-        <figure class="band-item">
+        <figure class="band-item reveal">
           <img src="/images/{{ slot.photo }}" alt="{{ slot.label }}" loading="lazy">
           {% if slot.credit and slot.credit != '' %}
             <figcaption>{{ slot.label }} <span class="credit">By {{ slot.credit }}</span></figcaption>

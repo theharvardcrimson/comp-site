@@ -33,6 +33,9 @@
   --red-deep:#7f1d24;
   --paper:#fbfaf6;
   --ink:#15130f;          /* 17.76:1 on paper, AAA */
+  --ink-hover:#241f18;    /* not currently used -- see the note on .hl-col's
+                              cut hover state. Paper stays 15.66:1 on it,
+                              on-ink-muted 9.92:1, both AAA, if it is used. */
   --grey:#615c54;         /* 6.35:1 on paper, AA */
   --hair:#ddd7ca;
 
@@ -911,15 +914,40 @@ a:hover{ text-decoration:underline; }
    spare space collects above it, which reads as deliberate. */
 /* Crimson fill, not the pale wash. Revisited at the owner's request for
    something punchier than the four mocked options gave the first time --
-   content-questions 1g has the earlier decision and the reasons the other two
-   (ink fill, one-of-each) lost then. Paper text throughout: 6.64:1 on --red,
-   AA. The wash token stays defined and unused elsewhere; nothing else read it. */
+   content-questions 1g has the earlier decision. Paper text throughout: 6.64:1
+   on --red, AA. The wash token stays defined and unused elsewhere. */
 .hl-col{
   min-width:0;
   display:flex; flex-direction:column;
   background:var(--red); color:var(--paper);
   padding:clamp(22px,2.6vw,38px);
+  /* Declared here, not on .hl-teaser, because a custom property only reaches
+     DESCENDANTS of where it is set -- .hl-note is .hl-teaser's sibling, both
+     children of this element, so setting it on .hl-teaser left .hl-note's bold
+     lead unable to see it. It measured 23px against the teaser's 24px, silently
+     one clamp step behind, until checked. .hl-col is the nearest ancestor both
+     actually share. */
+  --hl-teaser-size:clamp(19px,2.1vw,24px);
 }
+/* SECOND TEST: financial aid as ink, alumni staying crimson, tried at the
+   owner's request for more contrast between the two boxes. This is exactly
+   the "one of each" option from the original four-way mock, which lost that
+   round on the grounds that two colours implied a distinction between the
+   columns that does not exist -- content-questions 1g. Revisiting it anyway
+   because contrast, not meaning, is now the explicit ask. :last-child, so if
+   a third column is ever added this rule needs revisiting; it currently
+   assumes exactly two. */
+.hl-col:last-child{ background:var(--ink); }
+.hl-col:last-child .hl-teaser,
+.hl-col:last-child .hl-note{ color:var(--on-ink-muted); }
+.hl-col:last-child .hl-note a{ color:var(--paper); }
+.hl-col:last-child .hl-note a:hover,
+.hl-col:last-child .hl-note a:focus-visible{ color:var(--on-ink-muted); }
+/* Tried and cut: a hover colour shift on the whole box, like .board's. .board
+   is a real link -- the colour change previews a click that goes somewhere.
+   These boxes click to nothing, so the same treatment here would be an
+   affordance with no action behind it. Left the tokens defined below in case
+   a real control (the mailto link, say) wants this kind of feedback later. */
 /* margin-top:auto pushes the note to the floor of the box; padding-top is the
    MINIMUM separation for when it is already there. Without it the taller box --
    financial aid, whose content fills the height -- resolved auto to zero and the
@@ -962,10 +990,14 @@ a:hover{ text-decoration:underline; }
    than --grey: plain grey text is what CLAUDE.md's contrast note warns against
    using at reduced opacity, and on a crimson fill --grey itself would not even
    register as the intended colour -- on-red-muted is the token built for
-   exactly this surface, 5.31:1 on --red, AA. */
+   exactly this surface, 5.31:1 on --red, AA.
+
+   font-size lives in a custom property, --hl-teaser-size, so .hl-note's bold
+   lead ("Questions?") can be set to EXACTLY this value rather than a fraction
+   of its own paragraph's size -- see the note below. */
 .hl-teaser{
   font-style:italic; color:var(--on-red-muted); max-width:54ch;
-  font-size:clamp(19px,2.1vw,24px); line-height:1.45;
+  font-size:var(--hl-teaser-size); line-height:1.45;
   margin:0 0 clamp(18px,2vw,24px);
 }
 .hl-list{
@@ -981,21 +1013,25 @@ a:hover{ text-decoration:underline; }
    (Vollkorn-Bold, already loaded), not colour, since everything in this box is
    already paper -- weight is the only signal left to spend. */
 .hl-list strong{ font-weight:700; color:var(--paper); }
-/* on-red-muted, not --grey, for the same reason as the teaser above. Size
-   left where it was -- this is the fine print, deliberately quieter than
-   everything above it. */
+/* on-red-muted, not --grey, for the same reason as the teaser above. Bigger
+   than the first pass -- matching the bullets' own size (clamp(17,1.9vw,23))
+   rather than sitting noticeably smaller as "fine print". At the small box
+   width this was leaving a stretch of empty room under two short sentences,
+   which read as awkward rather than restrained. */
 .hl-note{
   margin:clamp(16px,1.8vw,24px) 0 0; max-width:52ch;
-  font-family:var(--text); font-size:clamp(14px,1.3vw,16px);
+  font-family:var(--text); font-size:clamp(17px,1.9vw,23px);
   line-height:1.5; color:var(--on-red-muted);
 }
-/* "Questions?" is a literal <strong> in the note string in highlights.yml, made
-   bigger and paper -- the owner asked for it to stand out the way the teaser
-   does, and against the quiet on-red-muted body this is the loudest thing in
-   the box after the numbers. */
+/* "Questions?" is a literal <strong> in the note string in highlights.yml.
+   font-size:var(--hl-teaser-size) makes it EXACTLY the teaser's size, not a
+   multiple of the note's own -- the owner asked for it to match the teaser,
+   and 1.3em of the note's old 14px base landed nowhere near the teaser's 19-24px
+   regardless of how that multiplier was tuned. Paper, so it is the loudest
+   thing in the box after the section title. */
 .hl-note strong{
   display:block; font-weight:700; color:var(--paper);
-  font-size:1.3em; margin-bottom:.2em;
+  font-size:var(--hl-teaser-size); margin-bottom:.2em;
 }
 /* Paper, not crimson: --red text on a --red background is invisible. The
    underline is what marks it as a link now that colour cannot. */
@@ -1232,6 +1268,11 @@ figcaption .credit{ color:var(--red); }
 }
 @keyframes rise{ from{ transform:translateY(26px); } to{ transform:none; } }
 @keyframes slide{ from{ transform:translateX(-22px); } to{ transform:none; } }
+/* .reveal is also on .band-item (the three-up photo band) and .hl-col (the two
+   highlight boxes), added when the top of the page was otherwise the least
+   animated stretch of it -- the hero and the board rows moved, the stats
+   revealed individually, but the photos and the highlight boxes just appeared.
+   Same mechanism, no new rule needed. */
 
 
 /* ---------- marquee ----------
