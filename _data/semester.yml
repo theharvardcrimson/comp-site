@@ -232,7 +232,7 @@ events:
 # Shown once below the list -- replaces the old per-event `where`. Shortened
 # to one sentence at the owner's request; the "non-evaluative" framing
 # sentence that used to follow it is cut, not just hidden.
-events_note: All events will be held at The Crimson's historic building at 14 Plympton St.
+events_note: All events will be held in The Crimson's historic building at 14 Plympton St.
 
 # office_photo (was: filename in images/, shown beside the events list) is
 # retired -- that widget is a live embedded Google Map now, not a photo. The
