@@ -1,6 +1,6 @@
 ---
 name: Magazine
-order: 6
+order: 7
 display_name: Magazine (FM)
 
 # PROTOTYPE: renders as a fullscreen popup from the homepage board list
