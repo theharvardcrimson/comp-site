@@ -598,58 +598,63 @@ a:hover{ text-decoration:underline; }
 .board-name{
   font-family:var(--display); text-transform:uppercase;
   font-size:clamp(42px,9.4vw,132px); line-height:.86; color:var(--red);
-  transition:color .18s ease;
+  transition:color .18s ease; flex:none;
 }
 .board:hover .board-name,.board:focus-visible .board-name{ color:var(--paper); }
-/* display:block: .board-name and .board-desc are both spans, inline by
-   default, and .board-name's own huge type doesn't reliably fill an entire
-   line by itself -- short names (Arts, Blog, News, Tech) left enough room
-   on that same line for the tagline to start flowing right after them
-   instead of dropping to its own line below. Below 900px, .board has no
-   grid to place things into, so this is what makes the tagline sit under
-   the name rather than beside it. */
+/* The leader (a plain hairline, table-of-contents style) and the tail (tagline
+   + arrow) are both hidden on mobile -- see the 900px+ block below for what
+   they actually look like. Here, below 900px, .board-tail alone carries the
+   "stack under the name" job .board-desc used to do on its own: .board-name
+   and .board-tail are both spans, inline by default, and the name's own huge
+   type doesn't reliably fill an entire line by itself -- short names (Arts,
+   Blog, News, Tech) left enough room on that line for the tagline to start
+   flowing right after them instead of dropping below. display:block forces
+   the break regardless of name length; .board-desc inside it stays a plain
+   inline span so the arrow can sit right after the text mid-sentence. */
+.board-leader{ display:none; }
+.board-tail{ display:block; margin-top:8px; }
 .board-desc{
-  display:block;
   font-family:var(--text); font-size:clamp(16px,1.5vw,21px);
-  line-height:1.45; max-width:46ch; margin-top:8px;
+  line-height:1.45; max-width:46ch;
 }
+.board-arrow{ color:var(--red); margin-left:.35em; }
 @media (min-width:900px){
-  /* 0.72fr, not 1.25fr, and a tighter gap. The name column was far wider than
-     any name needs: at 1440 it measured 697px while the widest board name,
-     Multimedia, is 445px of actual ink -- so the description sat 309px clear of
-     the longest name and much further from the short ones. That gulf is what
-     read as dead space, and it was the grid, not the padding.
-
-     0.72fr leaves the widest name 89px of headroom at 1440 and 33px at 900,
-     which is enough because the ten names are fixed. If a board is ever renamed
-     to something longer than Multimedia, re-measure -- the ink widths are in the
-     commit message for this change. */
-  .board{ display:grid; grid-template-columns:0.72fr 1fr; gap:clamp(20px,2.6vw,44px); align-items:end; }
-  /* Right-aligned and pinned to the column's own right edge (margin-left:auto),
-     not just text-align on its own -- max-width already stops the box short of
-     the column's full width, so without the margin push it would still sit
-     flush left, just with ragged-right lines inside a left-anchored box. This
-     turns the empty space into a deliberate gutter between two anchored
-     edges (name pinned left, tagline pinned right) instead of dead air
-     trailing off to the right of left-aligned text.
-
-     One line, always, at the owner's explicit call after the two didn't fit
-     together: Sports' tagline needs 896px at the old 21px size, and even the
-     absolute best-case column width (the name column shrunk to zero safety
-     buffer) only ever reaches 741px at 1440 wide -- there was no honest
-     column-widening path to "one line AND today's size" for the genuinely
-     long taglines (Arts, Sports, Tech). white-space:nowrap plus a smaller,
-     still-responsive clamp is what actually guarantees it -- max-width:none
-     because nowrap makes that constraint moot for wrapping but it would still
-     visually truncate the box otherwise. Checked against Sports' tagline
-     specifically (896px at 21px is the long pole) at every width from 900 to
-     1920 -- see the commit message for the per-width numbers this clamp was
-     fit to. */
+  /* Flex, not the grid this used to be: a fixed-width name column and a
+     fixed-width tagline column don't leave anything for a leader rule to
+     fill in between. The leader itself (flex:1) is what pushes the tail to
+     the row's right edge now, doing the job margin-left:auto used to do
+     directly on the tagline. align-items:center is the owner's own request --
+     the whole row (name, leader, tail) centers on the row's vertical middle
+     instead of sitting flush with the name's own baseline. */
+  .board{ display:flex; align-items:center; }
+  /* min-width, not just flex:1, so the line can't be squeezed to nothing when
+     a two-line tagline runs wide -- there's always at least a visible rule
+     between name and tagline, even in the tightest case. */
+  .board-leader{
+    display:block; flex:1 1 40px; min-width:40px; align-self:center;
+    height:0; border-bottom:1px solid var(--hair);
+    margin:0 clamp(18px,2.2vw,32px);
+  }
+  .board-tail{
+    display:flex; align-items:center; gap:clamp(8px,1vw,14px);
+    flex:0 1 auto; margin-top:0;
+  }
+  /* Bigger than the row's very first version (clamp topped out at 21px) --
+     the owner tried forcing one line at a smaller size and asked to go back:
+     readability over fitting on one line, two lines is fine now that the
+     leader gives the row somewhere for a second line to sit without the
+     whole composition feeling cramped. Text-align:right so a wrapped second
+     line stays flush with the arrow instead of ragging further left. */
   .board-desc{
-    margin-top:0; margin-left:auto; padding-bottom:.5em; text-align:right;
-    white-space:nowrap; max-width:none; font-size:clamp(9.5px,1.15vw,16.5px);
+    max-width:min(70vw,37ch); margin-top:0; text-align:right;
+    font-size:clamp(19px,2vw,27px); line-height:1.3;
+  }
+  .board-arrow{
+    flex:none; margin-left:0; font-size:clamp(19px,2vw,27px);
+    transition:color .18s ease;
   }
 }
+.board:hover .board-arrow,.board:focus-visible .board-arrow{ color:var(--paper); }
 
 /* ---------- board popup (PROTOTYPE, News only) ----------
    display:contents so .board-name/.board-desc sit directly in .board's own

@@ -27,7 +27,11 @@
         <summary class="board">
           <span class="board-row-main">
             <span class="board-name">{{ b.name }}</span>
-            <span class="board-desc">{{ b.hook }}</span>
+            <span class="board-leader" aria-hidden="true"></span>
+            <span class="board-tail">
+              <span class="board-desc">{{ b.hook }}</span>
+              <span class="board-arrow" aria-hidden="true">&rarr;</span>
+            </span>
           </span>
           <span class="board-row-close" aria-hidden="true">&#10005; Close</span>
         </summary>
@@ -38,7 +42,11 @@
     {% else %}
       <a class="board" href="{{ b.url }}">
         <span class="board-name">{{ b.name }}</span>
-        <span class="board-desc">{{ b.hook }}</span>
+        <span class="board-leader" aria-hidden="true"></span>
+        <span class="board-tail">
+          <span class="board-desc">{{ b.hook }}</span>
+          <span class="board-arrow" aria-hidden="true">&rarr;</span>
+        </span>
       </a>
     {% endif %}
   {% endfor %}
