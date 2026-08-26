@@ -38,7 +38,7 @@ intro_title: The comp
 # IS a real sentence -- subject and verb -- so the stop was not an error the way
 # the hero's comma was; it comes off for consistency, because no display line on
 # this page carries one now. Put one back and it needs putting back everywhere.
-intro_note: From journalism to business or tech — regardless of your passion, The Crimson has a comp for you
+intro_note: From journalism to business or tech — regardless of your passion, The Crimson has a comp for you
 intro_note_position: above
 
 # Its own line under the bullets, not a bullet itself -- it points somewhere

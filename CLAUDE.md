@@ -1,8 +1,11 @@
 # comp.thecrimson.com
 
 Jekyll static site for The Harvard Crimson's semesterly comp (recruitment).
-11 pages: a homepage plus 10 board pages. Live production site for a student
-newspaper. Deployed via **classic GitHub Pages from `master`**.
+**One page.** The ten boards used to each have their own URL; the owner cut
+those standalone pages entirely, so every board now lives only as a popup
+card off the homepage board list (`_includes/board-panel.html`, opened from
+`_includes/board-list.html`). Live production site for a student newspaper.
+Deployed via **classic GitHub Pages from `master`**.
 
 ## Commands
 
@@ -35,18 +38,20 @@ never put HTML or Liquid in a content file.
 | Path | What it is |
 |---|---|
 | `index.md` | Homepage. Front matter for the headline; body is the intro prose. |
-| `_boards/*.md` | **One file per board.** Front matter (`hook`, `photo`, `requirements`, `showcase`) + prose body. |
+| `_boards/*.md` | **One file per board**, `output: false` -- data only, no page of its own. Front matter (`hook`, `photo`, `requirements`, `showcase`) + prose body. |
 | `_sections/*.md` | Homepage prose blocks, ordered by `order`. `output: false`, so no URLs. |
-| `_data/semester.yml` | Season, year, signup link, contact, stats, tagline, events, hero photo, logo. Edited every cycle. |
+| `_data/semester.yml` | Season, year, signup link, contact, newsletter/Instagram/X links, stats, tagline, events, hero photo, logo. Edited every cycle. |
 | `_data/directors.yml` | All 19 directors, a plain list per board. Edited every cycle. |
 | `_data/faq.yml` | Q&A pairs. **Only entries with a non-empty answer render.** |
-| `_layouts/site.html` | The one shell: head, header, colophon, footer. |
-| `_layouts/home.html` | Homepage. `_layouts/board.html` renders all ten boards. |
-| `_includes/board-list.html` | The ten typographic bands. `_includes/drawer.html` is the nav panel. |
+| `_layouts/site.html` | The one shell: head, header, closing "Comp The Crimson" line, footer. |
+| `_layouts/home.html` | The only page layout there is now -- everything renders on the homepage. |
+| `_includes/board-list.html` | The ten typographic bands on the homepage; each is a `<details>` popup. |
+| `_includes/board-panel.html` | One board's full content, rendered inside that popup -- description, requirements, Featured content, contacts. This is what used to be the standalone board page. |
+| `_includes/drawer.html` | The nav panel (hamburger menu). Links jump to `/#slug` on the homepage, not to separate pages. |
 | `css/main.css` | Everything. Design tokens at the top. |
 | `_config.yml` | **Configuration only, no content.** Collections, kramdown, exclude list. |
 | `CNAME` | **Never modify or delete.** Custom domain binding. |
-| `_mockups/`, `_baseline/` | Design references. Underscore-prefixed, so never published. |
+| `_mockups/`, `_baseline/` | Design references from early in the redesign. Underscore-prefixed, so never published. |
 
 Blank means hidden, never "empty slot": no `photo` renders no figure, no
 `hero_photo` leaves the hero flat crimson, an empty `faq.yml` removes the whole
@@ -110,3 +115,10 @@ redesign and each one looked fine by eye.
   enters its animation range stays invisible; animate transform only.
 - Guess when uncertain — ask instead.
 - Claim something renders correctly without having actually looked at it.
+- Trust that a later, "more specific-looking" single-class override rule
+  actually wins. `main.css` has one long cascade; two single-class selectors
+  targeting the same property are equally specific regardless of which name
+  sounds more targeted, so the one that's LOWER IN THE FILE silently wins —
+  this has shipped real bugs twice. When overriding a shared class's
+  property, write a compound selector (`.prose.board-card-prose`, not
+  `.board-card-prose` alone) so the win doesn't depend on file order.

@@ -13,44 +13,41 @@
   The hover colour-flip is decoration: every row states its board and
   description in text, so nothing depends on hover.
 
-  All ten boards render as popups now (rolled out from the News-only
-  prototype): `popup: true` in front matter renders a native
-  <details name="board-popup"> instead of a plain link -- clicking it fills
-  the screen with that board's full content rather than navigating away.
-  name="board-popup" is shared across every row so browsers keep at most one
-  open at a time, the same way radio inputs with a shared name do. The
-  plain-<a> branch below is dead code today (nothing sets popup: false) but
-  stays in place as the fallback if a board ever needs to opt back out.
+  Every board renders as a popup: `<details name="board-popup">`, no plain
+  link and no standalone page any more -- the owner cut the ten individual
+  board pages entirely, so this list plus its popups is the only place a
+  board's content lives. name="board-popup" is shared across every row so
+  browsers keep at most one open at a time, the same way radio inputs with a
+  shared name do.
+
+  The id that makes /#arts work sits on .board-panel, the content INSIDE the
+  <details>, not on the <details> itself. That distinction matters: the
+  "opening a fragment link auto-expands the <details> hiding it" behaviour
+  (standard, JS-free, every major browser since ~2020) only fires when the
+  target element is itself hidden by a closed <details> ancestor. The
+  <details> element is never hidden -- only its content is -- so an id placed
+  on the <details> is already reachable while closed and never triggers the
+  auto-open. Tested both ways empirically before settling here.
 {% endcomment %}
 <div class="boards">
   {% assign boards = site.boards | sort: 'order' %}
   {% for b in boards %}
-    {% if b.popup %}
-      <details class="board-row" name="board-popup">
-        <summary class="board">
-          <span class="board-row-main">
-            <span class="board-name">{{ b.name }}</span>
-            <span class="board-leader" aria-hidden="true"></span>
-            <span class="board-tail">
-              <span class="board-desc">{{ b.hook }}</span>
-              <span class="board-arrow" aria-hidden="true">&rarr;</span>
-            </span>
+    {% assign slug = b.path | split: '/' | last | split: '.' | first %}
+    <details class="board-row" name="board-popup">
+      <summary class="board">
+        <span class="board-row-main">
+          <span class="board-name">{{ b.name }}</span>
+          <span class="board-leader" aria-hidden="true"></span>
+          <span class="board-tail">
+            <span class="board-desc">{{ b.hook }}</span>
+            <span class="board-arrow" aria-hidden="true">&rarr;</span>
           </span>
-          <span class="board-row-close" aria-hidden="true">&#10005; Close</span>
-        </summary>
-        <div class="board-panel">
-          {% include board-panel.html board=b %}
-        </div>
-      </details>
-    {% else %}
-      <a class="board" href="{{ b.url }}">
-        <span class="board-name">{{ b.name }}</span>
-        <span class="board-leader" aria-hidden="true"></span>
-        <span class="board-tail">
-          <span class="board-desc">{{ b.hook }}</span>
-          <span class="board-arrow" aria-hidden="true">&rarr;</span>
         </span>
-      </a>
-    {% endif %}
+        <span class="board-row-close" aria-hidden="true">&#10005; Close</span>
+      </summary>
+      <div class="board-panel" id="{{ slug }}">
+        {% include board-panel.html board=b %}
+      </div>
+    </details>
   {% endfor %}
 </div>

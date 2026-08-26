@@ -5,8 +5,8 @@
   Both are pure decoration -- no links, no interaction, aria-hidden. That is
   what keeps them clear of WCAG 2.2.2: they convey no information that isn't
   already a static list further down the page, and nothing here is reachable
-  only through moving content. Every board is a real row in the index below, in
-  the drawer, and at the foot of every board page.
+  only through moving content. Every board is a real row in the index below
+  and in the drawer.
 
   Each band prints its list twice so translateX wraps with no visible gap.
   prefers-reduced-motion stops both outright.
@@ -35,7 +35,7 @@
   the height and the ratio supplies the width before the image loads.
 
   Board names use `name`, not `display_name`: no "(Flyby)" or "(FM)" here.
-  Those stay on each board's own page heading.
+  Those stay on the popup card's own heading (board-panel.html).
 {% endcomment %}
 {% assign tick = site.boards | sort: 'name' %}
 {% assign strip = site.data.semester.press_strip %}

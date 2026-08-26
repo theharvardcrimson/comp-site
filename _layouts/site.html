@@ -28,6 +28,23 @@
   <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
 </head>
 <body>
+  {% comment %}
+    The "#top" target for the "Fall Comp 2026" links in the header and footer.
+
+    It is this empty span and NOT the <header> below, which is where the id
+    used to live -- and that silently did nothing. .bar is position:sticky, so
+    once the page is scrolled the header is stuck to the top of the viewport
+    and reports a bounding rect of top:0 no matter how far down you are. A
+    fragment jump asks the browser to bring the target into view, the browser
+    sees it is already there, and nothing moves. Verified: scrolled 4855px
+    down, the header's rect.top was still 0.
+
+    A zero-height span in normal flow at the very start of the document has no
+    such problem -- its real position is y=0, so jumping to it scrolls to the
+    top. aria-hidden and empty: it is a scroll target, not content.
+  {% endcomment %}
+  <span id="top" aria-hidden="true"></span>
+
   <a class="skip" href="#main">Skip to content</a>
 
   {% comment %}
@@ -42,16 +59,28 @@
       background and it reads as a pink smudge, so the words are set in type
       and the seal is decorative. alt="" + aria-hidden because the adjacent
       text already says "The Harvard Crimson" -- no point announcing it twice.
+
+      TWO links, not one wrapping the whole wordmark: the name goes to the
+      paper, the season line to the top of this page -- matching the footer's
+      brand block exactly (see .foot-brand). It used to be a single <a> around
+      everything pointing at the paper. The seal rides with the name, since
+      that is the half that means "The Harvard Crimson".
     {% endcomment %}
-    <a class="wordmark" href="/">
+    <span class="wordmark">
+      {% comment %}
+        The seal sits OUTSIDE both links now. It is alt="" + aria-hidden
+        decoration, and HTML cannot nest one link inside another -- so with
+        the name and the season line pointing at two different places, the
+        seal cannot ride inside either without either duplicating a link
+        target or breaking the two-row alignment. It spans both text rows via
+        grid instead; see .bar .wordmark in css/main.css.
+      {% endcomment %}
       {% if site.data.semester.logo and site.data.semester.logo != '' %}
         <img class="mark" src="/images/{{ site.data.semester.logo }}" alt="" aria-hidden="true">
       {% endif %}
-      <span class="wordmark-txt">
-        <span class="wordmark-type">The Harvard Crimson</span>
-        <span class="wordmark-sub">{{ site.data.semester.season }} Comp {{ site.data.semester.year }}</span>
-      </span>
-    </a>
+      <a class="wordmark-type" href="{{ site.data.semester.paper_url }}">The Harvard Crimson</a>
+      <a class="wordmark-sub" href="#top">{{ site.data.semester.season }} Comp {{ site.data.semester.year }}</a>
+    </span>
 
     {% comment %}
       The signup button sits outermost so the solid crimson block anchors the
@@ -77,49 +106,84 @@
   </main>
 
   {% comment %}
-    The seal, at a size where its line work actually reads -- 1873, the shield,
-    the lettering. It sits on the paper rather than in the dark footer for a
-    hard technical reason: the artwork is a JPEG with no alpha channel, so it
-    only works over a light background, where `multiply` blends the white away
-    to nothing. On the near-black footer, `multiply` would erase the crimson
-    too and `screen` renders the white as a bright box. A transparent SVG or
-    PNG would remove that constraint.
+    Closing line after the boards, before the footer -- the owner's call to
+    end on this instead of the seal. The seal itself is cut from the page
+    entirely now (it briefly lived in the footer on its own badge; the owner
+    then dropped it in favour of the wordmark set in type down there
+    instead -- see .foot-brand). Same destination as every other Sign up /
+    Interest form control on the page.
   {% endcomment %}
-  {% if site.data.semester.logo and site.data.semester.logo != '' %}
-    <div class="colophon">
-      <img class="seal" src="/images/{{ site.data.semester.logo }}" alt="" aria-hidden="true">
-    </div>
-  {% endif %}
+  {% comment %}
+    The link is the INNER element, sized to the text only -- not the outer
+    padded section. A first pass had the whole padded block as the <a>, so
+    hovering anywhere in that huge clamp(80-160px) top/bottom padding
+    triggered the colour change; the owner asked for it to only fire directly
+    over the words. The padding/border-top that give this section its
+    "substantial space above and below" stay on the plain wrapping div, which
+    has no hover state of its own.
+  {% endcomment %}
+  <div class="comp-cta">
+    <a class="cta-link" href="{{ site.data.semester.signup_url }}">
+      <p class="cta-line">Comp The Crimson</p>
+    </a>
+  </div>
 
   {% comment %}
     The footer deliberately does NOT list the ten boards. They already appear
-    on the homepage, at the foot of every board page, and in the drawer -- a
-    fourth copy was noise. It carries only things that aren't findable
-    elsewhere on the site.
+    on the homepage and in the drawer -- a third copy was noise. It carries
+    only things that aren't findable elsewhere on the site.
+
+    Four even columns, brand included -- modeled on thecrimson.com's own
+    footer at the owner's request (a screenshot of it), kept dark/black
+    rather than switched to their light one. No seal/badge any more: the
+    owner cut the logo image entirely here in favour of the wordmark set in
+    type, echoing the header instead of repeating the header's own art.
   {% endcomment %}
   <footer class="foot">
     <div class="foot-top">
-      <div>
-        <h2>{{ site.data.semester.footer_line }}</h2>
+      <div class="foot-brand">
+        {% comment %}
+          Two separate links, deliberately -- the name goes to the paper
+          itself (same destination as the header wordmark), the season line
+          goes to the top of THIS page (#top, set on <header class="bar">
+          above). Same two-line shape as the header's wordmark (serif name,
+          tracked caps sub-line) but --paper instead of --red: --red on this
+          dark background measures ~2.7:1, well under AA, the same reason
+          "Questions?" isn't coloured either. See the note there.
+        {% endcomment %}
+        <a class="foot-brand-link" href="{{ site.data.semester.paper_url }}"><span class="foot-brand-name">The Harvard Crimson</span></a>
+        <a class="foot-brand-link" href="#top"><span class="foot-brand-sub">{{ site.data.semester.season }} Comp {{ site.data.semester.year }}</span></a>
         <a class="btn btn-ghost" href="{{ site.data.semester.signup_url }}">{{ site.data.semester.signup_label }}</a>
       </div>
 
-      <div class="foot-cols">
-        <div>
-          <p class="foot-label">Read the paper</p>
-          <p><a href="{{ site.data.semester.paper_url }}">thecrimson.com</a></p>
-        </div>
-        <div>
-          <p class="foot-label">Questions</p>
-          <p>
-            {{ site.data.semester.contact_title }} {{ site.data.semester.contact_name }}<br>
-            <a href="mailto:{{ site.data.semester.contact_email }}">{{ site.data.semester.contact_email }}</a>
-          </p>
-        </div>
-        <div>
-          <p class="foot-label">Find us</p>
-          <p>{{ site.data.semester.address }}<br>Cambridge, MA</p>
-        </div>
+      <div>
+        <p class="foot-label">Questions?</p>
+        <p class="foot-line">{{ site.data.semester.contact_title }} {{ site.data.semester.contact_name }}</p>
+        <p class="foot-line"><a href="mailto:{{ site.data.semester.contact_email }}">{{ site.data.semester.contact_email }}</a></p>
+      </div>
+      <div>
+        <p class="foot-label">Keep in Touch</p>
+        <p class="foot-line"><a href="{{ site.data.semester.newsletter_url }}">Subscribe to our email newsletter</a></p>
+        <p class="foot-line">Follow our socials</p>
+        <p class="foot-social">
+          <a href="{{ site.data.semester.instagram_url }}" aria-label="The Crimson on Instagram">
+            <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true">
+              <rect x="3" y="3" width="18" height="18" rx="5"/>
+              <circle cx="12" cy="12" r="4.2"/>
+              <circle cx="17.4" cy="6.6" r="1.1" fill="currentColor" stroke="none"/>
+            </svg>
+          </a>
+          <a href="{{ site.data.semester.twitter_url }}" aria-label="The Crimson on X">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor" aria-hidden="true">
+              <path d="M18.9 3H22l-7.5 8.6L23 21h-6.9l-5.4-6.6L4.6 21H1.5l8-9.2L1 3h7l4.9 6 6-6zm-1.2 16.2h1.9L7.4 4.7H5.4l12.3 14.5z"/>
+            </svg>
+          </a>
+        </p>
+      </div>
+      <div>
+        <p class="foot-label">Find Us</p>
+        <p class="foot-line">{{ site.data.semester.address }}</p>
+        <p class="foot-line">Cambridge, MA</p>
       </div>
     </div>
   </footer>

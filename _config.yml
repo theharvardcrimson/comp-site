@@ -13,28 +13,20 @@ markdown: kramdown
 kramdown:
   input: kramdown
 
-# The ten board pages. One file per board in _boards/, each served at /<name>/
-# so every URL the old site published still resolves.
+# The ten boards. One file per board in _boards/. output:false -- the owner
+# cut the standalone /<name>/ pages entirely, so these exist only as data for
+# the homepage popup cards (_includes/board-panel.html) and are never written
+# out as pages of their own. Same shape as the `sections` collection below,
+# for the same reason.
 collections:
   boards:
-    output: true
-    permalink: /:name/
+    output: false
 
   # Prose blocks rendered into the homepage, one file per section, ordered by
   # the `order` field. output:false because these are not pages of their own --
   # they have no URL and exist only as blocks on the homepage.
   sections:
     output: false
-
-# Every file in _boards/ uses the same layout, so no board page can drift
-# structurally from the others. That drift is why the old ten pages ranged
-# from 1435 to 2729px tall with no shared shape.
-defaults:
-  - scope:
-      path: ""
-      type: boards
-    values:
-      layout: board
 
 # Files kept out of the built site. Jekyll's own defaults (Gemfile, vendor/,
 # node_modules) are repeated here on purpose: setting `exclude` REPLACES the
@@ -60,23 +52,17 @@ exclude:
   # Source artwork. .gitignore keeps these out of git but NOT out of the build
   # -- Jekyll copies anything it isn't told to skip, so the 18MB original was
   # being published until this line existed. Web versions live alongside as
-  # images/logo-mark.png.
+  # images/logo-mark.png. (Logo_vector (2).ai, new_hero.jpeg, and
+  # new_new_hero.jpg -- three earlier entries here -- have since been deleted
+  # from images/ entirely, so their exclude lines were removed along with
+  # them rather than left pointing at nothing.)
   - images/final_logo.jpeg
-  - images/Logo_vector (2).ai
-  - images/new_hero.jpeg      # 5.5MB earlier hero source
-  - images/new_new_hero.jpg   # 13.8MB source for hero.jpg
 
-  # Legacy assets from the pre-redesign site. Verified unreferenced by any
-  # template, stylesheet, data file or content file. They stay in the repo
-  # rather than being deleted -- excluding them keeps them out of the build
-  # without throwing anything away, and they can go properly later.
-  - images/crimson.jpg        # superseded by the optimised images/hero.jpg
-  - images/crimson-large.jpg  # source for hero.jpg; 724KB
-  - images/harvard.jpg
-  - images/header-logo.png
-  - images/logo.svg           # old splash screen
-  - images/external.png       # old navbar external-link icon
-  - images/logo.png           # was the 714KB favicon
+  # The seven pre-redesign legacy assets that used to be excluded here
+  # (crimson.jpg, crimson-large.jpg, harvard.jpg, header-logo.png, logo.svg,
+  # external.png, logo.png) were deleted outright rather than kept excluded --
+  # each was verified unreferenced by any template, stylesheet, data file, or
+  # content file, and the owner asked for exactly this cleanup.
 
   # Dead font formats. .eot is IE-only and SVG fonts are obsolete; every
   # browser since ~2012 takes .woff, which is what main.css asks for.

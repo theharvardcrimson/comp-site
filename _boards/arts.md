@@ -2,8 +2,8 @@
 name: Arts
 order: 9
 
-# PROTOTYPE: renders as a fullscreen popup from the homepage board list
-# instead of linking to this page. Set once News' popup design was approved.
+# Renders as a popup from the homepage board list -- every board does,
+# there is no standalone page for any of them any more.
 popup: true
 
 # The one-line tagline. Shown in the board list and at the top of this page,
@@ -23,8 +23,27 @@ requirements:
   - Attend weekly comp seminars
   - Learn everything you need to know about arts writing, from interviews to ledes
   - Pick up stories at our weekly Arts pitch meetings
-  - Write two reviews, a feature, a profile, and a think piece — one self-pitched, one metro-based, one Harvard-based
+  - Write two reviews, a feature, a profile, and a think piece — one self-pitched, one metro-based, one Harvard-based
   - Finish the comp with five published pieces to your name
+
+# Showcased work. Delete any entry, or the whole list, freely.
+showcase:
+  - title: "Raye Concert Review: A Healing Narrative With No Genre Constraints"
+    url: https://www.thecrimson.com/article/2026/5/17/raye-concert-review/
+    photo: showcase/arts-raye-concert-review.jpg
+    photo_credit: Jason Deng
+  - title: The Hasty Pudding Honors Barry Keoghan as 2024's Man of the Year
+    url: https://www.thecrimson.com/article/2024/2/22/barry-keoghan-man-of-year-hasty-pudding-theatricals-harvard-2024/
+    photo: showcase/arts-barry-keoghan-hasty-pudding.jpg
+    photo_credit: Briana Howard Pagán
+  - title: "Cambridge, Cannibalism, and the Canadian Wilderness: Margaret Atwood Talks 'Book of Lives: A Memoir of Sorts' at Harvard Book Store"
+    url: https://www.thecrimson.com/article/2026/2/12/margaret-atwood-event-harvard-bookstore/
+    photo: showcase/arts-margaret-atwood-event.jpg
+    photo_credit: Laura B. Martens
+  - title: "'Rent' Review: Viva La Vie Bohème"
+    url: https://www.thecrimson.com/article/2026/4/9/rent-harvard-adams-pool-house-theater-review/
+    photo: showcase/arts-rent-theater-review.jpg
+    photo_credit: Sophia I. Scalet
 ---
 
 Do you care deeply about what we see, watch, and hear? Interested in using art

@@ -63,8 +63,9 @@
      Two separate values drifted apart immediately (52px above against 72px
      below). Change this and every section gap that uses it moves together --
      bumped ~17% at the owner's request for more air between sections
-     generally, not just around the stats specifically. */
-  --stat-gap:clamp(56px,7.6vw,112px);
+     generally, not just around the stats specifically, then a further ~18%
+     for the same reason. */
+  --stat-gap:clamp(66px,9vw,132px);
 
   /* Surface for the highlight boxes. A pale crimson wash rather than the brand
      crimson: the page already carries a full-bleed crimson hero, three crimson
@@ -95,6 +96,13 @@
 
 *,*::before,*::after{ box-sizing:border-box; }
 html{ -webkit-text-size-adjust:100%; }
+
+/* Scroll snapping was built here and then cut at the owner's request -- the
+   "page settles on each section" effect. If it ever comes back: it is
+   `scroll-snap-type:y proximity` on html plus `scroll-snap-align:start` and
+   `scroll-margin-top:var(--bar-h)` on the top-level sections, no JavaScript.
+   Use proximity, never mandatory -- mandatory makes the middle of any section
+   taller than the viewport unreachable, and the board list is ~1390px. */
 body{
   margin:0; background:var(--paper); color:var(--ink);
   font-family:var(--text); font-size:clamp(17px,1.05rem + .2vw,19px);
@@ -138,13 +146,25 @@ a:hover{ text-decoration:underline; }
   background:var(--paper); border-bottom:1px solid var(--hair);
 }
 .bar-actions{ display:flex; align-items:center; gap:clamp(6px,1.2vw,16px); }
-.bar .wordmark{ display:flex; align-items:center; gap:clamp(8px,1.1vw,14px); line-height:1; }
-.bar .wordmark:hover{ text-decoration:none; }
-.wordmark-txt{ text-align:left; }
+/* Grid, not flex: the name and the season line are two SEPARATE links now
+   (name -> the paper, season -> top of this page, matching the footer), and
+   the decorative seal has to span both of those rows in its own column while
+   the two text rows stack in the next one. As a flex row that needed a
+   wrapping .wordmark-txt element around the text; as a grid the seal just
+   spans, and the season line still aligns under the name rather than under
+   the seal. */
+.bar .wordmark{
+  display:grid; grid-template-columns:auto 1fr;
+  column-gap:clamp(8px,1.1vw,14px); align-items:center; line-height:1;
+}
 .wordmark-type{
+  grid-column:2; grid-row:1;
   font-family:var(--serif); font-size:clamp(18px,2.3vw,25px);
   color:var(--red); letter-spacing:-.01em;
 }
+/* Both halves are links, so neither should pick up the site's default
+   underline-on-hover -- the wordmark is identity, not body copy. */
+.wordmark-type:hover,.wordmark-sub:hover{ text-decoration:none; }
 /* DELIBERATE INDENT: +0.417em, setting FALL COMP 2026 in from the wordmark's
    left edge. Owner's choice. Do not "correct" it to flush.
 
@@ -166,6 +186,7 @@ a:hover{ text-decoration:underline; }
    LEFT of the T, which is what it claimed to fix. If you change this value,
    render the comparison first -- do not judge it from a single screenshot. */
 .wordmark-sub{
+  grid-column:2; grid-row:2;
   margin-left:var(--sub-nudge, 0.417em);   /* +5px at 12px; see note above */
   display:block; font-family:var(--display); font-size:clamp(10px,1vw,12px);
   color:var(--grey); text-transform:uppercase; letter-spacing:.26em;
@@ -183,21 +204,59 @@ a:hover{ text-decoration:underline; }
 @media (min-width:460px){
   .wordmark .mark{
     display:block; height:clamp(40px,3.4vw,50px); width:clamp(40px,3.4vw,50px);
-    flex:none; mix-blend-mode:multiply;
+    mix-blend-mode:multiply;
+    /* Column 1, spanning both text rows -- see the grid note above. */
+    grid-column:1; grid-row:1 / span 2;
   }
 }
 
-/* Closing mark on the paper, before the dark footer. `multiply` is the only
-   blend that works for a white-backed JPEG: white multiplies to the background
-   and disappears, crimson stays crimson. */
-.colophon{
+/* Closing line, before the dark footer -- replaces the old seal-only
+   colophon (the seal moved down into the footer, on its own badge, so it
+   works against a dark background; see .foot-badge).
+
+   Deliberately bigger than .head h2's 104px ceiling -- the owner's own
+   words were "bigger than our normal headers" -- so this reads as the
+   loudest single line on the page after the hero itself, a real full stop
+   after the ten boards rather than another section heading.
+
+   White background, crimson type: three variants were mocked (full-bleed
+   crimson band was two of them) and the owner picked the plain one. */
+/* Plain div, not a link -- see the note in site.html for why the hover
+   target moved to the inner .cta-link. This carries the actual spacing:
+   the hairline and the "substantial space above and below" the owner asked
+   for. */
+.comp-cta{
+  text-align:center;
   border-top:1px solid var(--hair);
-  padding:clamp(34px,5vw,64px) var(--gut);
-  display:flex; justify-content:center;
+  padding:clamp(80px,13vw,160px) var(--gut);
 }
-.colophon .seal{
-  width:clamp(104px,12vw,150px); height:auto;
-  mix-blend-mode:multiply;
+/* inline-block, not the outer div's full width -- this is what makes the
+   hover/click area match the text's own bounds instead of the whole padded
+   section. */
+.cta-link{ display:inline-block; }
+.comp-cta .cta-line{
+  font-family:var(--display); text-transform:uppercase; font-weight:400;
+  color:var(--ink);
+  font-size:clamp(56px,12vw,168px); line-height:.86; letter-spacing:.005em;
+  margin:0;
+}
+/* Black at rest, crimson on hover -- reversed from the first version (was
+   crimson at rest, darker crimson on hover) at the owner's request.
+
+   text-decoration:none is repeated here at :hover specifically, not just at
+   rest, because the site's global `a:hover{text-decoration:underline}`
+   (css/main.css line ~106) is MORE specific on hover than a plain rest-state
+   `.cta-link{text-decoration:none}` would be -- one class (0,1,0) loses to
+   one class plus the element type (0,1,1). .cta-link:hover is two classes
+   worth of specificity (0,2,0), which wins regardless of file order. This
+   silently underlined the text on hover before it was added. */
+.cta-link:hover,
+.cta-link:focus-visible{
+  text-decoration:none;
+}
+.cta-link:hover .cta-line,
+.cta-link:focus-visible .cta-line{
+  color:var(--red);
 }
 
 /* ---------- board drawer ----------
@@ -262,14 +321,23 @@ a:hover{ text-decoration:underline; }
   font-size:clamp(21px,2.6vw,27px); line-height:1.1;
 }
 .drawer-panel li a:hover{ text-decoration:none; color:var(--on-ink-muted); }
-.drawer-panel li.here a{ color:var(--on-ink-muted); }
-.drawer-panel li.here a::after{ content:" \2022"; }
-.drawer-foot{
-  margin:22px 0; font-family:var(--text); font-size:16px;
-  border-top:1px solid rgba(251,250,246,.22); padding-top:18px;
-}
 .drawer-panel .btn{
   background:var(--red); border-color:var(--red); color:var(--paper);
+}
+/* Same hairline weight as every <li>'s own border-top, and the same 11px the
+   list already uses above each link -- one continuous rhythm from the last
+   board down to the button instead of a different gap size for this one
+   step. margin-top (not the <ul>'s own bottom padding) because ul has none
+   today and every other list here uses margin, not padding, for run gaps.
+
+   This is a plain div, not the button itself -- see the note in drawer.html
+   for why: putting the border and display:block on .btn directly stretched
+   the button to fill the drawer's width instead of staying its normal size.
+   The div can be block-level (full width, for the line) with no effect on
+   the .btn inside it, which keeps its own default inline-block sizing. */
+.drawer-cta-wrap{
+  margin-top:11px; padding-top:22px;
+  border-top:1px solid rgba(251,250,246,.22);
 }
 .drawer-panel .btn:hover{ background:var(--paper); border-color:var(--paper); color:var(--red); }
 
@@ -714,12 +782,16 @@ details[name="board-popup"][open] > summary:focus-visible{
    gone; whitespace alone now marks where one section ends and the next
    starts. Sized for a 760px-wide card rather than a full-width page. */
 .board-card-section{ padding:18px var(--gut); }
-/* Cuts the top padding specifically -- used on the section right after the
-   description (currently "During our semester-long comp") so it sits
-   directly under the prose with no extra air, per the owner's request. Only
-   the FIRST section after the prose needs this; every section after that
-   keeps the normal rhythm. */
-.board-card-section-tight{ padding-top:0; }
+/* Used on the section right after the description (currently "During our
+   semester-long comp") so it doesn't inherit the FULL 18px section padding on
+   top of the description's own trailing space -- but zero read as too
+   cramped, no space at all. 20px instead: the same --card-rhythm value as the
+   title and paragraph gaps above, so this reads as one more step in that
+   rhythm rather than a jump. Only the FIRST section after the prose needs
+   this; every section after that keeps the normal 18px .board-card-section
+   rhythm, which is deliberately roomier since those are separated by their
+   own bold labels rather than flowing prose. */
+.board-card-section-tight{ padding-top:20px; }
 /* One label style for every section heading in the card -- "during the comp",
    "featured work", "first meeting", the contact line -- so they read as the
    same kind of thing instead of four different sizes. Option B from the
@@ -729,10 +801,18 @@ details[name="board-popup"][open] > summary:focus-visible{
   font-family:var(--serif); text-transform:none; font-weight:700;
   font-size:21px; letter-spacing:0; line-height:1.25; margin:0 0 14px;
 }
-/* For the contact section's TRIAL layout -- names first, this label after --
-   margin flips to the top since it's no longer the first thing in the
-   section. */
-.board-card-label-after{ margin:18px 0 0; }
+/* Flanking hairlines on either side, filling the row -- the "Featured Work"
+   heading above every showcase grid. flex + ::before/::after rather than a
+   background gradient: the line's length is however much space is left
+   once the text takes what it needs, at any width, without measuring
+   anything by hand. */
+.board-card-label-center{
+  display:flex; align-items:center; gap:16px; text-align:center;
+}
+.board-card-label-center::before,
+.board-card-label-center::after{
+  content:""; flex:1 1 0; height:1px; background:var(--hair);
+}
 /* "Questions?" only, red against the label's usual ink -- the rest of that
    line ("Contact your News comp directors") stays the same colour and weight
    as every other label. */
@@ -749,22 +829,25 @@ details[name="board-popup"][open] > summary:focus-visible{
 }
 .board-card-section .reqs{ max-width:none; }
 
-/* Condensed stand-in for .board-hero inside the card: at 760px max-width, the
-   page hero's vw-scaled poster type (clamp up to 208px) would overflow a name
+/* Condensed stand-in for the page-level hero inside the card: at 760px
+   max-width, vw-scaled poster type (clamp up to 208px) would overflow a name
    longer than "News". Paper, not crimson -- the card is small enough that a
    full-bleed colour field read as a stripe rather than a hero. No eyebrow --
-   the owner asked to cut everything at the top except the name and the
-   tagline, straight into the description. The Interest form button used to
-   sit here too; it now lives at the foot of the card instead (.board-card-cta
-   below), so nothing but name and tagline delays the description. */
+   the owner asked to cut everything at the top except the name, straight
+   into the description. There used to be an Interest form button at the
+   foot of every card too; the owner cut it from here entirely later on
+   (still lives in the header, drawer, and footer). */
 .board-card-head{ padding:clamp(20px,4vw,32px) var(--gut) 0; }
-/* margin-bottom cut from 10px to 6px -- the tagline (.board-card-hook) that
-   used to sit here is gone entirely now (it's already visible on the
-   homepage row before you click; showing it twice was the owner's call to
-   cut), so this is the whole gap from the name straight to the description. */
+/* The tagline (.board-card-hook) that used to sit here is gone entirely now
+   (it's already visible on the homepage row before you click; showing it
+   twice was the owner's call to cut), so this is the whole gap from the name
+   straight to the description. margin-bottom matches --card-rhythm (see
+   .prose.board-card-prose p below) so title-to-description, paragraph-to-
+   paragraph, and description-to-next-section all read as the same gap --
+   they were 6px / 18.55px / 0px, which is what read as uneven. */
 .board-card-head h1{
   font-family:var(--display); text-transform:uppercase; font-weight:400;
-  font-size:clamp(38px,7vw,56px); line-height:.9; margin:0 0 6px;
+  font-size:clamp(38px,7vw,56px); line-height:.9; margin:0 0 20px;
 }
 /* padding-bottom cut hard, not just the divider removed -- the owner called
    out the description-to-bullets gap specifically as too much air, separate
@@ -779,12 +862,15 @@ details[name="board-popup"][open] > summary:focus-visible{
    properly instead of depending on rule order, which is fragile the moment
    either rule moves. */
 .prose.board-card-prose{ padding-top:0; padding-bottom:0; }
-.board-card-prose p{ font-size:17px; }
-/* .prose p carries its own 1.15em trailing margin on every paragraph,
-   including the last one -- fine on the standalone board page .prose is
-   also used on, but here it was the last bit of "extra space" between the
-   description and the section under it even after this element's own
-   padding-bottom was already zeroed. */
+/* Fixed 20px, not .prose's 1.15em -- em was relative to this element's OWN
+   font-size (17px here), which happened to land close to 20px already, but
+   writing it fixed makes it exactly equal to the title's margin-bottom and
+   the tight section's padding-top below, on purpose, so the whole top of the
+   card reads as one even rhythm instead of three slightly different gaps. */
+.prose.board-card-prose p{ font-size:17px; margin-bottom:20px; }
+/* .prose p's own trailing margin would otherwise also land on the LAST
+   paragraph -- fine on the standalone board page, but here it would double up
+   with .board-card-section-tight's padding-top right after it. */
 .board-card-prose > *:last-child{ margin-bottom:0; }
 
 /* Featured work: a thumbnail grid instead of a list of links, so a piece
@@ -801,9 +887,16 @@ details[name="board-popup"][open] > summary:focus-visible{
 }
 .work-card{ display:block; color:inherit; }
 .work-card:hover,.work-card:focus-visible{ text-decoration:none; }
+/* display:block matters, not decoration -- a bare <span> defaults to inline,
+   and an inline box ignores aspect-ratio entirely (only .slot below worked
+   before, because THAT variant already set display:flex). Without it every
+   real photo sized itself off its own natural aspect ratio instead of the
+   shared 4/3 box, so thumbnails in the same row landed at different heights.
+   position:relative is for .work-title-over below, the title-over-photo
+   trial -- harmless when that span isn't present (the .slot branch). */
 .work-thumb{
   aspect-ratio:4/3; overflow:hidden; margin-bottom:10px;
-  background:var(--paper);
+  background:var(--paper); display:block; position:relative;
 }
 .work-thumb img{
   width:100%; height:100%; object-fit:cover; display:block;
@@ -829,12 +922,78 @@ details[name="board-popup"][open] > summary:focus-visible{
 .work-card:hover .work-title,.work-card:focus-visible .work-title{
   text-decoration-color:currentColor;
 }
+/* Title set over the photo instead of below it, for a real photo only -- the
+   owner saw this as a trial and confirmed it. Absolutely positioned over the
+   bottom of the thumbnail, on a solid-to-transparent scrim. text-decoration
+   is dropped here (white-on-photo, not ink-on-paper, so the hover underline
+   reads differently) rather than reused from .work-title.
+
+   The scrim's darkest stop is solid black at 88%, matching the hero photo's
+   scrim strength for consistency -- checked separately though, since the
+   colours differ (black/white here, crimson/paper there): composited over a
+   pure-white photo, 88% black leaves roughly rgb(31,31,31), and white text on
+   that is ~16.5:1 -- comfortably past the 4.5:1 AA floor with room to spare.
+   The title sits inside that solid band, not the fade above it, so the ratio
+   holds regardless of what's in the photo. */
+.work-title-over{
+  position:absolute; left:0; right:0; bottom:0;
+  padding:34px 12px 10px;
+  background:linear-gradient(to top, rgba(0,0,0,.88) 55%, rgba(0,0,0,0) 100%);
+  color:#fff; text-decoration:none; margin:0;
+}
+.work-card:hover .work-title-over,.work-card:focus-visible .work-title-over{
+  font-weight:700;
+}
+/* Design's showcase (graphics that speak for themselves, per the owner) --
+   the title stays in the DOM as the card link's accessible name but is never
+   shown. Same visually-hidden technique .vlabel uses for the homepage
+   video's disclosure label: clipped to 1x1px, not display:none, so screen
+   readers still get it. */
+.work-title-hidden{
+  position:absolute; width:1px; height:1px; overflow:hidden;
+  clip-path:inset(50%); white-space:nowrap;
+}
 @media (max-width:520px){ .work-grid{ grid-template-columns:1fr 1fr; gap:12px; } }
 
-/* The Interest form button, moved here from the top of the card at the
-   owner's request -- centered, at the foot of the scroll, after everything
-   else has been read rather than before any of it. */
-.board-card-cta{ text-align:center; padding:10px var(--gut) 30px; }
+/* One board (Blog) has a YouTube video in its showcase. Click-to-load, the
+   same technique as the homepage's video (.vbox in _layouts/home.html) --
+   nothing is requested from YouTube until this is opened. A grid tile here
+   is 4:3, not the homepage video's 16:9, so this is its own set of rules
+   rather than reusing .vbox/.vframe directly. */
+.work-embed{ margin:0; }
+.work-embed:not([open]) .work-frame{ display:none; }
+.work-embed[open] .work-thumb{ display:none; }
+.work-embed-thumb{ display:block; cursor:pointer; list-style:none; }
+.work-embed-thumb::-webkit-details-marker{ display:none; }
+.work-embed-thumb:focus-visible{ outline:3px solid var(--red); outline-offset:3px; }
+.work-frame{
+  position:relative; aspect-ratio:4/3; overflow:hidden;
+  background:var(--ink); margin-bottom:10px;
+}
+.work-frame iframe{ position:absolute; inset:0; width:100%; height:100%; border:0; display:block; }
+/* Play triangle drawn with borders, same technique as .vplay -- no extra
+   image, no icon font. */
+.work-play{
+  position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+  width:clamp(42px,6vw,54px); aspect-ratio:1; border-radius:50%;
+  background:var(--red); display:grid; place-items:center;
+}
+.work-play::after{
+  content:""; width:0; height:0; margin-left:.18em;
+  border-left:clamp(11px,1.4vw,15px) solid var(--paper);
+  border-top:clamp(7px,1vw,10px) solid transparent;
+  border-bottom:clamp(7px,1vw,10px) solid transparent;
+}
+@media (prefers-reduced-motion:no-preference){
+  .work-play{ transition:transform .18s ease; }
+  /* Both the click-to-load embed (Blog's YouTube) and a plain link-out card
+     carrying play_badge (Multimedia's reels) -- the button should react the
+     same way on hover in either case, and the card's own photo is already
+     zooming underneath it via .work-card:hover .work-thumb img. */
+  .work-embed-thumb:hover .work-play,
+  .work-card:hover .work-play,
+  .work-card:focus-visible .work-play{ transform:translate(-50%,-50%) scale(1.06); }
+}
 
 .note{
   padding:clamp(26px,4vw,52px) var(--gut);
@@ -966,10 +1125,6 @@ details[name="board-popup"][open] > summary:focus-visible{
 }
 .faq dl > dt:first-child{ border-top:none; padding-top:0; }
 .faq dd{ margin:0 0 22px; font-family:var(--text); line-height:1.6; }
-
-/* ---------- board page ---------- */
-.board-hero .poster{ font-size:clamp(56px,15vw,208px); }
-.board-hero .lede{ max-width:40ch; font-style:normal; }
 
 .prose{ padding:clamp(36px,5vw,72px) var(--gut); max-width:68ch; }
 .prose > *:first-child{ margin-top:0; }
@@ -1529,17 +1684,10 @@ details[name="board-popup"][open] > summary:focus-visible{
   width:.85em; height:.85em; background:var(--red);
 }
 
-.works{ list-style:none; margin:0; padding:0; }
-.works li{ padding:0 0 1.05em; margin:0 0 1.05em; border-bottom:1px solid var(--hair); max-width:66ch; }
-.works li:last-child{ border-bottom:none; }
-.works a{ font-family:var(--serif); font-size:clamp(19px,2vw,25px); line-height:1.22; display:block; }
-.works .by{
-  font-family:var(--display); text-transform:uppercase; letter-spacing:.15em;
-  font-size:14px; color:var(--grey); margin-top:7px;
+.who{
+  display:grid; gap:clamp(14px,2vw,26px); grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+  margin-bottom:20px;
 }
-.works .blurb{ font-style:italic; color:var(--grey); margin-top:8px; }
-
-.who{ display:grid; gap:clamp(14px,2vw,26px); grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); }
 .who div{ border-top:2px solid var(--red); padding-top:12px; }
 .who .nm{ font-family:var(--serif); font-size:clamp(19px,1.9vw,24px); }
 .who a{ display:block; word-break:break-word; }
@@ -1550,37 +1698,141 @@ figcaption{
 }
 figcaption .credit{ color:var(--red); }
 
-/* ---------- footer ---------- */
-.foot{ background:var(--ink); color:var(--paper); padding:clamp(40px,6vw,80px) var(--gut); }
-.foot a{ color:var(--paper); }
-.foot h2{
-  font-family:var(--display); text-transform:uppercase; font-weight:400;
-  font-size:clamp(30px,4.6vw,64px); line-height:.9; margin:0 0 20px;
+/* ---------- footer ----------
+   Four even columns -- brand, Contact, Keep in Touch, Find Us -- modeled on
+   thecrimson.com's own footer (the owner sent a screenshot of it) but kept
+   dark rather than switched to their light one. Every column gets the same
+   .foot-label + .foot-line treatment, brand included, so nothing reads as
+   more "special" than anything else -- that flatness was the specific thing
+   being copied, not the paper's colours or typeface. */
+/* Top padding is deliberately SHORTER than the bottom (~70% of it), trimmed at
+   the owner's request. The section above is .comp-cta, which already carries a
+   very large clamp(80px,13vw,160px) of its own bottom padding, so the two were
+   stacking into more air above the first footer line than below the last one.
+   Cutting the top rather than the CTA's padding keeps the closing line's own
+   breathing room intact. */
+.foot{
+  background:var(--ink); color:var(--paper);
+  padding:clamp(28px,4.2vw,56px) var(--gut) clamp(40px,6vw,80px);
 }
-.foot-top{ display:grid; gap:clamp(32px,5vw,64px); }
-@media (min-width:860px){
-  /* Not 1fr 1fr: the right half holds three columns, and an even split left
-     them ~190px each -- just narrow enough that the email address broke
-     mid-word ("president@thecrimson.co / m"). */
-  .foot-top{ grid-template-columns:.82fr 1.18fr; align-items:start; }
+/* inline-block + padding so every footer link clears the 24x24 minimum in
+   WCAG 2.2 AA 2.5.8 (line-height alone gave 23px, one pixel short), and
+   overflow-wrap so an unbreakable string like the email address wraps
+   inside a narrow column instead of overflowing it. .btn and .foot-social a
+   below both override the padding/display for their own reasons -- both are
+   more specific (two classes) than this single-class rule, so they win
+   regardless of source order. */
+.foot a{
+  color:var(--paper); display:inline-block; padding:3px 0;
+  overflow-wrap:anywhere; max-width:100%;
 }
-/* Single column until there is room for two. auto-fit with minmax(150px) gave
-   165px columns at 390px, and "president@thecrimson.com" is an unbreakable
-   ~190px string, so it pushed the page 12px wider than the viewport. */
-.foot-cols{ display:grid; gap:clamp(20px,3vw,32px); grid-template-columns:1fr; }
-@media (min-width:560px){
-  .foot-cols{ grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); }
+/* Footer links underline on hover -- which is just the site-wide `a:hover`
+   default, so there is deliberately no rule here.
+
+   A bold-on-hover variant was built and then reverted at the owner's request.
+   Worth knowing why it was not a plain font-weight:700 if it ever comes back:
+   bold text is wider, so a link whose column width falls between its normal
+   and bold width rewraps onto an extra line on hover and shoves the rest of
+   the footer down. Measured on this exact copy, "The Harvard Crimson" is
+   238px at weight 400 and 262px at 700, so any brand column between those two
+   jumps ~46px -- and the columns are fluid, so no breakpoint dodges that
+   window everywhere. The workaround was text-shadow, which thickens without
+   changing metrics. */
+.foot-top{ display:grid; gap:clamp(32px,5vw,64px); grid-template-columns:1fr; }
+/* Two columns before four. Going straight from one to four at 860px left each
+   column about 166px, which is too narrow for the 28px serif brand name --
+   it wrapped to two lines there, and bolding it on hover pushed it to three,
+   jumping the whole footer down ~45px. Measured, not guessed. The two-column
+   step keeps columns wide enough that no footer link changes height when it
+   bolds, and it reads better besides: "Crimson President E. Matteo Diaz" was
+   wrapping to three lines in a 166px column. */
+@media (min-width:620px){
+  .foot-top{ grid-template-columns:1fr 1fr; align-items:start; }
+}
+@media (min-width:1060px){
+  /* Brand slightly narrower than the other three: it holds a button, which
+     already reads as heavier than a line of text, so giving it the same
+     1fr as the others left it looking wider than it needed to be. */
+  .foot-top{ grid-template-columns:.9fr 1fr 1fr 1fr; align-items:start; }
+}
+/* Echoes the header wordmark (.wordmark-type + .wordmark-sub: serif name,
+   tracked caps season line) rather than repeating its exact markup, since
+   the colours have to differ -- see the note by these two links in
+   site.html for why --red is wrong here specifically. */
+/* .foot a.foot-brand-link, not .foot-brand a or .foot-brand-link alone --
+   .foot a's own display:inline-block (below) is (0,1,1) specificity, and a
+   single-class .foot-brand-link is only (0,1,0), so it would lose that fight
+   and the two links would sit side by side as inline-boxes instead of
+   stacking. The compound selector is (0,2,1), which wins regardless of file
+   order -- same fix as .prose.board-card-prose and .btn.drawer-cta
+   elsewhere in this file. */
+.foot a.foot-brand-link{ display:block; padding:0; }
+/* margin-top:-5px is an optical correction, not a mistake -- measured with a
+   Range around each element's own text (not the CSS line-box, which still
+   includes leading above the glyphs). Contact/Keep in Touch/Find Us's 13px
+   labels sit in a much shorter line box than this 28px serif name, so even
+   with the grid's align-items:start putting every column's box at the same
+   top, the actual ink 5px lower here than in those labels. */
+/* margin-left:-2px is an OPTICAL correction and the one place in this block
+   where the numbers and the eye disagree. Measured with canvas
+   actualBoundingBoxLeft, this 28px serif "T" starts only 0.75px right of its
+   box and the 13px caps "F" 0.52px, so all three elements are flush to within
+   a quarter pixel -- yet the name still reads as inset, because the T's
+   top-left serif is a hairline and the eye finds the name's mass further in
+   than its first ink. The button's 2px border and the letterspaced caps are
+   both hard edges by comparison. -2px pulls the name onto that shared edge.
+   Judged at 3x zoom, not from metrics, because metrics say there is nothing
+   to fix.
+
+   margin-top:-5px is a separate correction: it aligns this line's ink with
+   the small labels heading the other footer columns, whose much shorter line
+   boxes carry less leading above the cap height. */
+.foot-brand-name{
+  font-family:var(--serif); font-size:28px; color:var(--paper);
+  letter-spacing:-.01em; display:block; margin:-5px 0 0 -2px;
+}
+/* padding on the SPAN, not the <a> -- it still counts toward the link's
+   clickable box (so the 13px line clears the 24x24 WCAG 2.2 AA 2.5.8
+   minimum: ~16px line + 8px padding) while the link itself carries none,
+   which is what lets the two brand lines sit close together. Tightened at
+   the owner's request; the gap was ~12px of stacked link padding before. */
+/* Flush left, NO --sub-nudge here -- deliberately unlike the header.
+   The header indents its season line by +0.417em and that works there because
+   the wordmark is only two lines of type. This block has a third element, the
+   Interest form button, whose 2px border is a hard vertical rule and becomes
+   the edge the eye actually measures from. Indenting the season line against
+   that gave three different left edges instead of two; tried it, looked worse.
+   The serif name gets a small optical pull instead -- see .foot-brand-name. */
+.foot-brand-sub{
+  font-family:var(--display); font-size:13px; color:var(--on-ink-muted);
+  text-transform:uppercase; letter-spacing:.26em; display:block;
+  margin:0 0 18px; padding:4px 0;
 }
 .foot-label{
   font-family:var(--display); text-transform:uppercase; letter-spacing:.2em;
   font-size:13px; color:var(--on-ink-muted); margin:0 0 8px;
 }
-.foot-cols p{ margin:0; font-family:var(--text); font-size:16px; line-height:1.6; }
-/* inline-block + padding so every footer link clears the 24x24 minimum in
-   WCAG 2.2 AA 2.5.8. Line-height alone gave 23px -- one pixel short. */
-/* Belt and braces alongside the single-column rule above: an email address has
-   no break opportunities, so allow one anywhere rather than let it overflow. */
-.foot-cols a{ display:inline-block; padding:3px 0; overflow-wrap:anywhere; max-width:100%; }
+.foot-line{ margin:0 0 6px; font-family:var(--text); font-size:16px; line-height:1.6; }
+/* .foot a's own padding (above) is a single-class rule at (0,1,1) specificity
+   -- one class plus the bare `a` element -- which actually OUTRANKS .btn's
+   bare (0,1,0), so without this the Interest form button here would lose its
+   real padding to the 3px/0 meant for plain text links. .foot .btn is two
+   classes, (0,2,0), which beats either regardless of file order. */
+.foot .btn{ padding:11px 20px 10px; }
+/* Instagram + X, after the newsletter link in "Keep in Touch", preceded by
+   "Follow our socials" -- the owner asked for both the lead-in text and
+   bigger icons than the first pass had. Inline SVGs, not an icon font or
+   external embed -- zero new dependencies, and stroke/fill:currentColor
+   means they inherit --paper and the same hover colour every other footer
+   link gets, no separate icon colour to maintain. 48x48 tap targets clear
+   WCAG 2.2 AA 2.5.8 (24x24 minimum) with room to spare. */
+.foot-social{ display:flex; gap:10px; margin:0; }
+.foot-social a{
+  display:flex; align-items:center; justify-content:center;
+  width:48px; height:48px; padding:0; border-radius:50%;
+  transition:background-color .18s ease;
+}
+.foot-social a:hover{ background:rgba(251,250,246,.14); }
 
 /* ---------- motion ----------
    Scroll-driven, CSS only, no JavaScript. Browsers without animation-timeline
@@ -1616,10 +1868,22 @@ figcaption .credit{ color:var(--red); }
     .events li:nth-child(even){ animation-name:slide-right; }
 
     .stats > div{ animation-name:pop; }
+
+    /* The closing "Comp The Crimson" line: starts noticeably smaller and
+       grows as the section scrolls through, rather than settling quickly
+       like .pop does -- the owner's own words were "breathe as you scroll".
+       A wide 0%-65% range spread across entry+cover is what makes it read as
+       continuous growth through the scroll instead of a quick snap; .pop's
+       narrow 4%-30% range is a settle, this is a scrub. */
+    .comp-cta .cta-line{
+      animation:grow-in linear both; animation-timeline:view();
+      animation-range:entry 0% cover 65%;
+    }
   }
 }
 @keyframes rise{ from{ transform:translateY(26px); } to{ transform:none; } }
 @keyframes slide{ from{ transform:translateX(-22px); } to{ transform:none; } }
+@keyframes grow-in{ from{ transform:scale(.5); } to{ transform:scale(1); } }
 @keyframes pop{ from{ transform:scale(.86); } to{ transform:scale(1); } }
 
 
@@ -1642,7 +1906,6 @@ figcaption .credit{ color:var(--red); }
   display:flex; align-items:center; gap:clamp(18px,2.4vw,34px);
   width:max-content; white-space:nowrap;
 }
-.ticker-dup{ display:flex; align-items:center; gap:clamp(18px,2.4vw,34px); }
 .ticker-item{
   font-family:var(--display); text-transform:uppercase; color:var(--paper);
   font-size:clamp(30px,5vw,74px); line-height:1; letter-spacing:.02em;

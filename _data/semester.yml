@@ -23,15 +23,23 @@ year: 2026
 signup_label: Interest form
 header_signup_label: Sign up
 
-signup_url: https://docs.google.com/forms/d/e/1FAIpQLScnz4wmdtXud61rA9Zlm6n5JMqopGssM4RDw2PDQoXOsNWyXg/viewform
+signup_url: https://docs.google.com/forms/d/e/1FAIpQLSdYQ3SDF-V8FuMz_3uDteTF4yX7KkY4jCsvjiXXx1WcIsVINw/viewform?usp=publish-editor
 
-# Who to email with questions. Shown in the footer and on every board page.
+# Who to email with questions. Shown in the footer and in every board's
+# popup card (when that board has no directors.yml entry of its own).
 contact_name: E. Matteo Diaz
 contact_title: Crimson President
 contact_email: president@thecrimson.com
 
 # Where we are.
 address: 14 Plympton St
+
+# The footer's "Keep in Touch" links. newsletter_url is the paper's own
+# subscribe page, not this site's -- there is no comp-specific newsletter.
+# instagram_url / twitter_url are the paper's accounts, not a board's.
+newsletter_url: https://www.thecrimson.com/subscribe/
+instagram_url: https://www.instagram.com/theharvardcrimson/
+twitter_url: https://x.com/thecrimson?lang=en
 
 # The line above the big headline. Set to "" to hide it.
 #
@@ -66,7 +74,9 @@ logo: logo-mark.png
 # line wraps oddly because it is set large.
 footer_line: Ten boards. One newsroom.
 
-# The paper itself, linked from the footer so readers can go read it.
+# The paper itself. Linked from the header wordmark and the footer's logo
+# badge -- the footer used to carry its own separate "Read the paper" link
+# too, cut once those two covered it.
 paper_url: https://www.thecrimson.com
 
 

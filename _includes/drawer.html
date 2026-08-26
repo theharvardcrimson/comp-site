@@ -21,19 +21,50 @@
 
   <div class="drawer-panel">
     <nav aria-label="Board pages">
-      <p class="drawer-head">The ten boards</p>
+      <p class="drawer-head">Our 10 boards</p>
       <ul>
-        {% assign drawer_boards = site.boards | sort: 'name' %}
+        {%- comment -%}
+          sort:'order', matching the board list on the page. This was
+          deliberately alphabetical for a while, on the reasoning that a menu
+          is for finding a known name while the page is a curated running
+          order -- the owner's call is that the two should agree instead.
+          `order` is set on all ten board files; Jekyll's sort silently
+          returns an empty list if any document lacks the property, which is
+          how the whole list once vanished, so renumber all ten if it changes.
+        {%- endcomment -%}
+        {% assign drawer_boards = site.boards | sort: 'order' %}
         {% for b in drawer_boards %}
-          <li{% if page.url == b.url %} class="here"{% endif %}>
-            <a href="{{ b.url }}">{{ b.name }}</a>
-          </li>
+          {% assign slug = b.path | split: '/' | last | split: '.' | first %}
+          {% comment %}
+            Each board is a popup on the homepage now, not its own page --
+            these link to /#slug, the same id board-list.html puts on that
+            board's <details>. Opening a fragment link that targets an id
+            inside a closed <details> is native browser behaviour (no JS): it
+            expands that row and scrolls to it. No more "here" state -- there
+            is no page left for the current URL to ever match.
+          {% endcomment %}
+          <li><a href="/#{{ slug }}">{{ b.name }}</a></li>
         {% endfor %}
       </ul>
-      <p class="drawer-foot">
-        <a href="/">About the comp</a>
-      </p>
-      <a class="btn" href="{{ site.data.semester.signup_url }}">{{ site.data.semester.signup_label }}</a>
+      {% comment %}
+        "About the comp" (a link back to "/") used to sit here -- cut at the
+        owner's request, just the Interest form button now. The hairline
+        above it stayed cut too when that text went, then came back at the
+        owner's request: a plain rule, same weight as every <li>'s own
+        border-top, so the button still reads as its own step after the
+        list rather than butting straight up against Tech.
+
+        The hairline lives on THIS wrapping div, not on the button -- a
+        first pass put border-top and display:block directly on the <a
+        class="btn">, which stretched the button to the full width of the
+        drawer to give the line somewhere to span, and the button ended up
+        much bigger than every other button on the site. The div can be
+        full width for the line; the button inside it stays .btn's normal
+        inline-block size, same as the Sign up button in the header bar.
+      {% endcomment %}
+      <div class="drawer-cta-wrap">
+        <a class="btn" href="{{ site.data.semester.signup_url }}">{{ site.data.semester.signup_label }}</a>
+      </div>
     </nav>
   </div>
 </details>
