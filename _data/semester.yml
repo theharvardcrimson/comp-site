@@ -278,12 +278,3 @@ stat_4_unit: M
 stat_4_label: annual revenue
 
 
-# ---- One-line note above the board list. ----
-# NOT CURRENTLY RENDERED. No template reads this any more -- the note above the
-# board list was dropped somewhere during the redesign. The copy is kept here
-# rather than deleted because it is the owner's own approved wording and it
-# carries a fact nothing else on the page says: that four boards comp together
-# at first, so you do not have to choose correctly up front. Put it back by
-# printing it above {% include board-list.html %} in _layouts/home.html, or
-# delete this if it is genuinely not wanted.
-before_you_choose: News, Magazine, Sports and Arts comp together for the first three weeks before splitting off. You don't have to decide yet.
