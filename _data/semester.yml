@@ -229,9 +229,10 @@ events:
       5 - 7 p.m.
     teaser: Meet fellow compers and current Crimson editors before comp kicks off
 
-# Shown once below the list -- replaces the old per-event `where`, and covers
-# the "why come to any of these" framing the owner gave alongside the location.
-events_note: Each event will take place at The Crimson's historic, newly renovated building at 14 Plympton St. All are non-evaluative ways for you to meet Crimson members and leadership and learn more about the organization!
+# Shown once below the list -- replaces the old per-event `where`. Shortened
+# to one sentence at the owner's request; the "non-evaluative" framing
+# sentence that used to follow it is cut, not just hidden.
+events_note: All events will be held at The Crimson's historic building at 14 Plympton St.
 
 # office_photo (was: filename in images/, shown beside the events list) is
 # retired -- that widget is a live embedded Google Map now, not a photo. The

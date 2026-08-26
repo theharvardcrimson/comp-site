@@ -1,26 +1,29 @@
 {% comment %}
-  The ten boards, alphabetical. Each row is one link -- the whole band is the
-  target, so no chevrons or "read more" needed.
+  The ten boards, in the owner's chosen running order (not alphabetical --
+  that was tried first and replaced at the owner's request). Each row is one
+  link -- the whole band is the target, so no chevrons or "read more" needed.
 
-  Sorted by 'name', NOT by an 'order' field. Jekyll's sort filter silently
-  yields an empty list when the property is missing from every document, which
-  is exactly what happened: the whole board list vanished from the page while
-  the footer list (sorted by name) rendered fine. If a deliberate running order
-  is ever wanted, add `order:` to all ten files -- all ten, or this breaks again.
+  Sorted by `order`, set on all ten files. This field is deliberately
+  required on every one of them: Jekyll's sort filter silently yields an
+  empty list if even one document is missing the sort property, which is
+  exactly what happened when this was tried once before with only some files
+  set -- the whole board list vanished from the page. If the order ever
+  changes, renumber all ten, not just the ones that moved.
 
   The hover colour-flip is decoration: every row states its board and
   description in text, so nothing depends on hover.
 
-  PROTOTYPE: a board with `popup: true` in its front matter (News, for now)
-  renders as a native <details name="board-popup"> instead of a plain link --
-  clicking it fills the screen with that board's full content rather than
-  navigating away. name="board-popup" is shared across every popup-enabled
-  row so browsers keep at most one open at a time, the same way radio inputs
-  with a shared name do. The rest still link to their standalone page until
-  this is approved and rolled out to all ten.
+  All ten boards render as popups now (rolled out from the News-only
+  prototype): `popup: true` in front matter renders a native
+  <details name="board-popup"> instead of a plain link -- clicking it fills
+  the screen with that board's full content rather than navigating away.
+  name="board-popup" is shared across every row so browsers keep at most one
+  open at a time, the same way radio inputs with a shared name do. The
+  plain-<a> branch below is dead code today (nothing sets popup: false) but
+  stays in place as the fallback if a board ever needs to opt back out.
 {% endcomment %}
 <div class="boards">
-  {% assign boards = site.boards | sort: 'name' %}
+  {% assign boards = site.boards | sort: 'order' %}
   {% for b in boards %}
     {% if b.popup %}
       <details class="board-row" name="board-popup">

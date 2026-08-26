@@ -1,5 +1,6 @@
 ---
 name: Blog
+order: 10
 display_name: Blog (Flyby)
 
 # PROTOTYPE: renders as a fullscreen popup from the homepage board list

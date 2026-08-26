@@ -1,5 +1,6 @@
 ---
 name: News
+order: 1
 hook: Break high-impact stories, hold power to account, and inform millions of readers
 photo: ""
 photo_caption: ""

@@ -1,5 +1,6 @@
 ---
 name: Business
+order: 2
 
 # PROTOTYPE: renders as a fullscreen popup from the homepage board list
 # instead of linking to this page. Set once News' popup design was approved.

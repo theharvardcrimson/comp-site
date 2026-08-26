@@ -864,9 +864,14 @@ details[name="board-popup"][open] > summary:focus-visible{
    2x on its own). Note margin-top is 1x, since the last row already
    contributes its own 1x padding-bottom to that gap. */
 .events-list{ --ev-gap:clamp(10px,1.3vw,14px); }
+/* Bottom margin is --ev-gap's usual 2x PLUS a bit more on top, at the owner's
+   request for extra room specifically under the heading -- the other two
+   gaps this token drives (row-to-row, last-row-to-note) are unchanged and
+   still share the plain 2x/1x math with each other. */
 .events-head{
   font-family:var(--serif); font-style:italic; font-weight:400; text-transform:none;
-  font-size:clamp(24px,3vw,38px); line-height:1.15; margin:0 0 calc(var(--ev-gap) * 2);
+  font-size:clamp(24px,3vw,38px); line-height:1.15;
+  margin:0 0 calc(var(--ev-gap) * 2 + 18px);
 }
 .events ul{ list-style:none; margin:0; padding:0; }
 /* Each row's rule spans the row's own width -- tried a short fixed-width
