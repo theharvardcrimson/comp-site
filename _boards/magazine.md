@@ -3,16 +3,7 @@ name: Magazine
 order: 7
 display_name: Magazine (FM)
 
-# Renders as a popup from the homepage board list -- every board does,
-# there is no standalone page for any of them any more.
-popup: true
-
 hook: Lead our longform coverage with incisive style and impactful investigations
-photo: ""
-photo_caption: ""
-photo_credit: ""
-
-first_meeting: Sunday 9/13, 3:30 - 4:30 pm, Science Center Hall D
 
 requirements:
   - Attend weekly comp seminars

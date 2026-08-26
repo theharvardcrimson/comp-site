@@ -2,16 +2,7 @@
 name: Design
 order: 6
 
-# Renders as a popup from the homepage board list -- every board does,
-# there is no standalone page for any of them any more.
-popup: true
-
 hook: Craft the stunning graphics and print products that showcase our stories
-photo: ""
-photo_caption: ""
-photo_credit: ""
-
-first_meeting: To be announced
 
 requirements:
   - Attend weekly comp seminars

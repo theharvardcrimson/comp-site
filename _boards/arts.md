@@ -2,21 +2,9 @@
 name: Arts
 order: 9
 
-# Renders as a popup from the homepage board list -- every board does,
-# there is no standalone page for any of them any more.
-popup: true
-
-# The one-line tagline. Shown in the board list and at the top of this page,
-# directly under the board's name.
+# The one-line tagline. Shown on this board's row in the homepage list,
+# beside the board name.
 hook: Write about the cultural phenomena taking over Harvard, Cambridge, and the world
-
-# Optional. Drop a file in images/ and put its name here, e.g. arts-01.jpg.
-# Leave "" and the page renders without a photo, by design.
-photo: ""
-photo_caption: ""
-photo_credit: ""
-
-first_meeting: Sunday 9/13, 3:30 - 4:30 pm, Science Center Hall D
 
 # Shown as a checklist. One plain sentence each. Add or delete freely.
 requirements:

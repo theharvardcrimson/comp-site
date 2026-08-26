@@ -2,17 +2,8 @@
 name: Business
 order: 2
 
-# Renders as a popup from the homepage board list -- every board does,
-# there is no standalone page for any of them any more.
-popup: true
-
 hook: Run the million-dollar business that supports our independent journalism
-photo: ""
-photo_caption: ""
-photo_credit: ""
 requirements: []
-
-first_meeting: Intro Cocktail, Monday 9/7, 2 - 4 pm
 
 # Business and Tech are the two competitive-comp boards, and their contacts'
 # actual title is Director of Staff Development, not Comp Director -- this

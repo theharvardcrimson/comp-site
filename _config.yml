@@ -39,7 +39,6 @@ exclude:
   - node_modules
   - CLAUDE.md            # internal notes for agents; not site content
   - README.md            # setup instructions for maintainers
-  - content-questions.md # working checklist, deleted once answered
 
   # PHOTO MASTERS. images/gallery/ holds the originals as supplied -- 6000x4000
   # frames and full-size cover scans, 60MB+ and growing. Without this line
@@ -73,10 +72,10 @@ exclude:
   # Weights and styles of the three chosen families that main.css never
   # declares an @font-face for. A browser therefore never requests them, so
   # this does not change page weight -- it keeps 231KB of dead bytes out of the
-  # deploy. Unblocked now that the typefaces are settled; see content-questions
-  # section 7. If you ever want real bold body copy instead of the synthetic
-  # bold <strong> currently gets, Vollkorn-Bold is the file to bring back, and
-  # it needs an @font-face rule as well as removing from this list.
+  # deploy. Unblocked now that the typefaces are settled. If you ever want real
+  # bold body copy instead of the synthetic bold <strong> currently gets,
+  # Vollkorn-Bold is the file to bring back, and it needs an @font-face rule as
+  # well as removing from this list.
   #
   # Vollkorn-Bold IS now back -- it has an @font-face and the intro's jump link
   # uses it. 28KB, and it means bold body text is a real weight rather than one

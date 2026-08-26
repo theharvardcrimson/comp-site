@@ -1401,7 +1401,7 @@ details[name="board-popup"][open] > summary:focus-visible{
    spare space collects above it, which reads as deliberate. */
 /* Crimson fill, not the pale wash. Revisited at the owner's request for
    something punchier than the four mocked options gave the first time --
-   content-questions 1g has the earlier decision. Paper text throughout: 6.64:1
+   An earlier pass settled this. Paper text throughout: 6.64:1
    on --red, AA. The wash token stays defined and unused elsewhere. */
 .hl-col{
   min-width:0;
@@ -1420,7 +1420,7 @@ details[name="board-popup"][open] > summary:focus-visible{
    owner's request for more contrast between the two boxes. This is exactly
    the "one of each" option from the original four-way mock, which lost that
    round on the grounds that two colours implied a distinction between the
-   columns that does not exist -- content-questions 1g. Revisiting it anyway
+   columns that does not exist. Revisiting it anyway
    because contrast, not meaning, is now the explicit ask. :last-child, so if
    a third column is ever added this rule needs revisiting; it currently
    assumes exactly two. */

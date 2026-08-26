@@ -2,15 +2,6 @@
 name: News
 order: 1
 hook: Break high-impact stories, hold power to account, and inform millions of readers
-photo: ""
-photo_caption: ""
-photo_credit: ""
-
-# Renders as a popup from the homepage board list -- every board does,
-# there is no standalone page for any of them any more.
-popup: true
-
-first_meeting: Sunday 9/13, 3:30 - 4:30 pm, Science Center Hall D
 
 requirements:
   - Attend weekly comp seminars

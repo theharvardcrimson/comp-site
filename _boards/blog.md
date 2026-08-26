@@ -3,16 +3,7 @@ name: Blog
 order: 10
 display_name: Blog (Flyby)
 
-# Renders as a popup from the homepage board list -- every board does,
-# there is no standalone page for any of them any more.
-popup: true
-
 hook: Provide witty and hilarious commentary on all things student life
-photo: ""
-photo_caption: ""
-photo_credit: ""
-
-first_meeting: To be announced
 
 requirements:
   - Attend weekly comp seminars and one office hours appointment each week

@@ -2,16 +2,7 @@
 name: Sports
 order: 4
 
-# Renders as a popup from the homepage board list -- every board does,
-# there is no standalone page for any of them any more.
-popup: true
-
 hook: Cover the collegiate athletic program leading the nation in varsity teams and Olympic gold medals
-photo: ""
-photo_caption: ""
-photo_credit: ""
-
-first_meeting: Sunday 9/13, 3:30 - 4:30 pm, Science Center Hall D
 
 requirements:
   - Attend weekly comp seminars

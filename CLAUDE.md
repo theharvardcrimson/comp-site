@@ -38,7 +38,7 @@ never put HTML or Liquid in a content file.
 | Path | What it is |
 |---|---|
 | `index.md` | Homepage. Front matter for the headline; body is the intro prose. |
-| `_boards/*.md` | **One file per board**, `output: false` -- data only, no page of its own. Front matter (`hook`, `photo`, `requirements`, `showcase`) + prose body. |
+| `_boards/*.md` | **One file per board**, `output: false` -- data only, no page of its own. Front matter (`name`, `order`, `hook`, `requirements`, `showcase`) + prose body. |
 | `_sections/*.md` | Homepage prose blocks, ordered by `order`. `output: false`, so no URLs. |
 | `_data/semester.yml` | Season, year, signup link, contact, newsletter/Instagram/X links, stats, tagline, events, hero photo, logo. Edited every cycle. |
 | `_data/directors.yml` | All 19 directors, a plain list per board. Edited every cycle. |
@@ -51,7 +51,7 @@ never put HTML or Liquid in a content file.
 | `css/main.css` | Everything. Design tokens at the top. |
 | `_config.yml` | **Configuration only, no content.** Collections, kramdown, exclude list. |
 | `CNAME` | **Never modify or delete.** Custom domain binding. |
-| `_mockups/`, `_baseline/` | Design references from early in the redesign. Underscore-prefixed, so never published. |
+| `_baseline/` | Pre-redesign reference screenshots, ~58MB. Gitignored, local-only. |
 
 Blank means hidden, never "empty slot": no `photo` renders no figure, no
 `hero_photo` leaves the hero flat crimson, an empty `faq.yml` removes the whole

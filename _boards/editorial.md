@@ -2,16 +2,7 @@
 name: Editorial
 order: 3
 
-# Renders as a popup from the homepage board list -- every board does,
-# there is no standalone page for any of them any more.
-popup: true
-
 hook: Lead opinion coverage on Harvard, shaping campus and national discourse
-photo: ""
-photo_caption: ""
-photo_credit: ""
-
-first_meeting: To be announced
 
 requirements:
   - Attend weekly comp seminars, including workshops and mock staff-ed meetings

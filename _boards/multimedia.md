@@ -2,16 +2,7 @@
 name: Multimedia
 order: 5
 
-# Renders as a popup from the homepage board list -- every board does,
-# there is no standalone page for any of them any more.
-popup: true
-
 hook: Capture and produce all of our photo, video, and podcast content
-photo: ""
-photo_caption: ""
-photo_credit: ""
-
-first_meeting: To be announced
 
 requirements:
   - Attend weekly comp seminars and hands-on workshops

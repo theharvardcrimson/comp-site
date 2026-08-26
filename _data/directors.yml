@@ -21,7 +21,7 @@ blog:
 business:
   # "Arman Lateef" / hamza.lateef@ looked like a mismatch carried over from
   # _config.yml, but the owner confirmed it's just a first/middle-name
-  # difference -- correct as-is. Was flagged in content-questions.md.
+  # difference -- correct as-is.
   - name: McKinley Paltzik
     email: mckinley.paltzik@thecrimson.com
   - name: Arman Lateef

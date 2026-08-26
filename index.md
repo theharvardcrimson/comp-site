@@ -26,18 +26,13 @@ intro_title: The comp
 # The teaser line that sets up the bullets. Positioned "above", it is styled as
 # a lead -- ink rather than grey, and the same size as the bullets -- because it
 # is doing the framing rather than qualifying afterwards. Positioned "below" it
-# reverts to the smaller grey qualifier.
+# reverts to the smaller grey qualifier. "above" is right for this wording,
+# which sets the bullets up rather than summing them up.
 #
-# THIS IS YOUR DRAFT, placed verbatim. See the note at the bottom of this file
-# for the specific things you said still need editing.
-#
-# Positioned "above" again: this wording sets the bullets up rather than summing
-# them up, so it belongs before them.
-#
-# No full stop, matching the hero line and every bullet. Worth knowing this one
-# IS a real sentence -- subject and verb -- so the stop was not an error the way
-# the hero's comma was; it comes off for consistency, because no display line on
-# this page carries one now. Put one back and it needs putting back everywhere.
+# No full stop, matching the hero line and every bullet. This one IS a full
+# sentence, so the stop is omitted for consistency rather than correctness --
+# no display line on this page carries one. Put one back and it wants putting
+# back everywhere.
 intro_note: From journalism to business or tech — regardless of your passion, The Crimson has a comp for you
 intro_note_position: above
 
@@ -47,41 +42,29 @@ intro_note_position: above
 # The target is the boards heading, id="boards".
 intro_link_text: Learn more about our 10 comps
 
-# The bullets below the --- are YOUR DRAFT, placed verbatim -- not tidied, not
-# rewritten. You said it still needs an editing pass, so here is what I noticed
-# while placing it, for you to fix or wave off:
+# The bullets below the --- are the intro list. Editing notes:
 #
-#   1. No bullet has a closing full stop. Consistent, so fine.
-#   2. The separator AND the space around it are not typed here. Both come from
-#      CSS -- .intro-text strong::after -- so changing either is one line there,
-#      applied to every bullet at once. That is also why there is deliberately
-#      NO space between ** and the text that follows it on these lines: the CSS
-#      margin supplies the gap on both sides equally. Typing a space here as
-#      well would add it to only the right side, since the left side already
-#      gets its gap from the pseudo-element's own margin -- which is exactly the
-#      bug that shipped and was caught by measuring, not by looking.
-#   2. There is a NON-BREAKING SPACE between "The" and "Crimson" in the teaser
-#      above -- it looks like an ordinary space but the two words can never be
-#      split across a line break. That, not the font size, is what stops "The"
-#      being orphaned at the end of a line. If you retype that phrase you will
-#      lose it; copy the line rather than retyping it.
+#   * The **bold** at the start of a bullet is a run-in lead: it sets in the
+#     display face, uppercase, so it reads as a tag introducing the sentence.
+#     Wrap any opening phrase in ** and it behaves the same way. Lead phrases
+#     are written in sentence case here; the run-in style uppercases them
+#     either way, so the source stays consistent for the next editor.
 #
-# Lead phrases are both sentence case now, so the source agrees with itself. It
-# makes no visible difference -- the run-in style uppercases them either way --
-# but it means the next person editing this does not have two patterns to copy.
-#   4. Still nowhere on the site: "Shape the journalism that shapes Harvard",
-#      which you called the line you most wanted to highlight, and the
-#      independence fact, which now survives only on the Business board's page.
+#   * Do NOT type a separator or a space after the closing **. Both come from
+#     CSS (.intro-text strong::after), applied to every bullet at once. The
+#     pseudo-element's own margin supplies the gap on BOTH sides, so typing a
+#     space here as well adds it to the right side only -- that asymmetry
+#     shipped once and was caught by measuring, not by eye.
 #
-# The **bold** at the start of a bullet is a run-in lead: it sets in the display
-# face, uppercase, so it reads as a tag introducing the sentence. Wrap any
-# opening phrase in ** and it behaves the same way.
+#   * There is a NON-BREAKING SPACE between "The" and "Crimson" in the teaser
+#     above. It looks like an ordinary space but the two words can never be
+#     split across a line break, which is what stops "The" being orphaned at
+#     the end of a line. Retyping that phrase loses it -- copy the line rather
+#     than retyping it.
 #
-# Apostrophes were curled to match the rest of the site. Nothing else changed.
-# Keep the leading "- " on each line and it stays a bullet.
+#   * No bullet takes a closing full stop, matching the rest of the page.
 #
-# The real copy that used to be here is parked in content-questions.md,
-# section 1b, links intact, ready to paste back if you want any of it.
+#   * Keep the leading "- " on each line and it stays a bullet.
 ---
 
 - **Real work from day one**Learn from current editors and see your work published before comp ends
