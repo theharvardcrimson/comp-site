@@ -714,6 +714,12 @@ details[name="board-popup"][open] > summary:focus-visible{
    gone; whitespace alone now marks where one section ends and the next
    starts. Sized for a 760px-wide card rather than a full-width page. */
 .board-card-section{ padding:18px var(--gut); }
+/* Cuts the top padding specifically -- used on the section right after the
+   description (currently "During our semester-long comp") so it sits
+   directly under the prose with no extra air, per the owner's request. Only
+   the FIRST section after the prose needs this; every section after that
+   keeps the normal rhythm. */
+.board-card-section-tight{ padding-top:0; }
 /* One label style for every section heading in the card -- "during the comp",
    "featured work", "first meeting", the contact line -- so they read as the
    same kind of thing instead of four different sizes. Option B from the
@@ -723,6 +729,10 @@ details[name="board-popup"][open] > summary:focus-visible{
   font-family:var(--serif); text-transform:none; font-weight:700;
   font-size:21px; letter-spacing:0; line-height:1.25; margin:0 0 14px;
 }
+/* For the contact section's TRIAL layout -- names first, this label after --
+   margin flips to the top since it's no longer the first thing in the
+   section. */
+.board-card-label-after{ margin:18px 0 0; }
 /* "Questions?" only, red against the label's usual ink -- the rest of that
    line ("Contact your News comp directors") stays the same colour and weight
    as every other label. */
@@ -748,22 +758,34 @@ details[name="board-popup"][open] > summary:focus-visible{
    sit here too; it now lives at the foot of the card instead (.board-card-cta
    below), so nothing but name and tagline delays the description. */
 .board-card-head{ padding:clamp(20px,4vw,32px) var(--gut) 0; }
+/* margin-bottom cut from 10px to 6px -- the tagline (.board-card-hook) that
+   used to sit here is gone entirely now (it's already visible on the
+   homepage row before you click; showing it twice was the owner's call to
+   cut), so this is the whole gap from the name straight to the description. */
 .board-card-head h1{
   font-family:var(--display); text-transform:uppercase; font-weight:400;
-  font-size:clamp(38px,7vw,56px); line-height:.9; margin:0 0 10px;
-}
-/* Italic, at the owner's request -- tried plain first (matching the body
-   text below it), italic reads more like a pulled-quote tagline and less
-   like the start of the description proper. */
-.board-card-hook{
-  font-family:var(--text); font-style:italic; font-size:17px; line-height:1.45;
-  color:var(--grey); max-width:52ch; margin:0 0 16px;
+  font-size:clamp(38px,7vw,56px); line-height:.9; margin:0 0 6px;
 }
 /* padding-bottom cut hard, not just the divider removed -- the owner called
    out the description-to-bullets gap specifically as too much air, separate
-   from the general "no dividers" ask. */
-.board-card-prose{ padding-top:0; padding-bottom:6px; }
+   from the general "no dividers" ask.
+
+   .prose.board-card-prose, not .board-card-prose alone: the element carries
+   BOTH classes, and .prose's own `padding` shorthand (further down this
+   file) was silently winning the padding-bottom fight -- same specificity
+   (one class each) and .prose's rule comes later in the file, so the
+   shorthand overwrote this longhand's padding-bottom back to .prose's 72px
+   regardless of what this rule said. The compound selector outranks it
+   properly instead of depending on rule order, which is fragile the moment
+   either rule moves. */
+.prose.board-card-prose{ padding-top:0; padding-bottom:0; }
 .board-card-prose p{ font-size:17px; }
+/* .prose p carries its own 1.15em trailing margin on every paragraph,
+   including the last one -- fine on the standalone board page .prose is
+   also used on, but here it was the last bit of "extra space" between the
+   description and the section under it even after this element's own
+   padding-bottom was already zeroed. */
+.board-card-prose > *:last-child{ margin-bottom:0; }
 
 /* Featured work: a thumbnail grid instead of a list of links, so a piece
    reads as a photo first, headline second -- closer to how the paper's own
@@ -808,17 +830,6 @@ details[name="board-popup"][open] > summary:focus-visible{
   text-decoration-color:currentColor;
 }
 @media (max-width:520px){ .work-grid{ grid-template-columns:1fr 1fr; gap:12px; } }
-
-/* First meeting: styled like a date in the comp-events calendar section
-   (.ev-when) -- crimson, uppercase, a left tick -- rather than the boxed,
-   centered card tried first. Not .ev-when itself: that rule carries
-   grid-row/max-width specific to the events list's two-column layout, which
-   don't apply to a single full-width line here. */
-.board-card-meeting{
-  font-family:var(--display); text-transform:uppercase; letter-spacing:.04em;
-  font-size:16px; color:var(--red); border-left:3px solid var(--red);
-  padding-left:12px; margin:0;
-}
 
 /* The Interest form button, moved here from the top of the card at the
    owner's request -- centered, at the foot of the scroll, after everything

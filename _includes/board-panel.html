@@ -12,7 +12,6 @@
 
 <div class="board-card-head">
   <h1>{{ b.display_name | default: b.name }}</h1>
-  <p class="board-card-hook">{{ b.hook }}</p>
 </div>
 
 <div class="prose board-card-prose">
@@ -20,7 +19,7 @@
 </div>
 
 {% if b.requirements and b.requirements.size > 0 %}
-<div class="board-card-section">
+<div class="board-card-section board-card-section-tight">
   <p class="board-card-label">During our semester-long comp, you will:</p>
   <ul class="reqs">
     {% for r in b.requirements %}<li>{{ r }}</li>{% endfor %}
@@ -55,15 +54,19 @@
 </div>
 {% endif %}
 
-{% if b.first_meeting and b.first_meeting != '' %}
-<div class="board-card-section">
-  <p class="board-card-label">First meeting</p>
-  <p class="board-card-meeting">{{ b.first_meeting }}</p>
-</div>
-{% endif %}
+{% comment %}
+  First meeting is cut -- the owner is axing that field for now. b.first_meeting
+  is left alone in the board files rather than stripped from ten of them; this
+  just stops rendering it.
 
+  TRIAL: contacts now come BEFORE the "Questions?" line instead of after it,
+  at the owner's request to see it the other way round -- names first, then
+  what they're for. Only the branch below that has real directors.yml people
+  changes; the fallback branch (a board with no entry there) keeps its
+  original order since that sentence doesn't stand on its own without
+  something above it.
+{% endcomment %}
 <div class="board-card-section">
-  <p class="board-card-label"><span class="q-red">Questions?</span> Contact your {{ b.name }} {{ b.director_title | default: 'comp directors' }}</p>
   {% if people %}
     <div class="who">
       {% for p in people %}
@@ -73,10 +76,12 @@
         </div>
       {% endfor %}
     </div>
+    <p class="board-card-label board-card-label-after"><span class="q-red">Questions?</span> Contact the {{ b.name }} {{ b.director_title | default: 'comp directors' }}.</p>
     {% if b.contact_note and b.contact_note != '' %}
       <p style="margin-top:22px;max-width:60ch;">Write to them {{ b.contact_note }}</p>
     {% endif %}
   {% else %}
+    <p class="board-card-label"><span class="q-red">Questions?</span> Contact the {{ b.name }} {{ b.director_title | default: 'comp directors' }}.</p>
     <p>Write to {{ site.data.semester.contact_title }} {{ site.data.semester.contact_name }} at
       <a href="mailto:{{ site.data.semester.contact_email }}">{{ site.data.semester.contact_email }}</a>.</p>
   {% endif %}
