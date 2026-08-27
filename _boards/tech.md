@@ -20,7 +20,7 @@ Tech board members build reader-facing features and the internal tools our
 editors use every day. On the frontend, this includes projects like data
 visualizations, interactives, and scrolls — interactive, long-form articles.
 On the backend, it includes speeding up site regeneration, improving deploy
-workflows, and purging Cloudflare cache.
+workflows, and optimizing database queries.
 
 Unlike most Crimson boards, Tech comp is competitive. Over the course of
 several weeks, compers will submit a deliverable and discuss their code in a
