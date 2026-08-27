@@ -501,6 +501,19 @@ a:hover{ text-decoration:underline; }
 /* Each half of the standfirst is a block so it stacks where the old <br> broke
    AND so it balances independently -- see the note in _layouts/home.html. */
 .lede-line{ display:block; }
+/* On a phone the forced break stops helping and starts hurting. Measured on
+   the live site at 390px: the first half balanced into two short lines (234px
+   and 241px) while the second half still fitted on one, running 371px to the
+   edge -- two stubby lines and then a long one. balance cannot even that out,
+   because each half is balanced separately and a single-line block has
+   nothing to balance.
+   Going inline below 640px lets the whole standfirst flow and balance as one
+   paragraph, so every line comes out roughly the same length. The desktop
+   break is preserved above that, where the halves each get their own line
+   anyway and the split is doing real work. */
+@media (max-width:640px){
+  .lede-line{ display:inline; }
+}
 /* margin-bottom:0 matters: this is a <p>, so it carried a default bottom
    margin that left ~19px of dead space between the button and the hero's
    bottom edge on top of the padding. */

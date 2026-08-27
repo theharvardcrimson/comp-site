@@ -19,13 +19,20 @@ layout: site
     <br>. That is what lets text-wrap:balance (on .lede) treat them as two
     separate blocks and balance EACH one's wrapping. With a <br> it balanced
     only the first half and left the second stranding "organization" alone on
-    a phone. Visually identical -- two blocks stack exactly where the <br>
-    broke.
+    a phone. On a wide screen two blocks stack exactly where the <br> broke.
+
+    The whitespace between the two spans is deliberate and must stay. While
+    they are blocks it collapses and renders as nothing, but below 640px
+    .lede-line becomes inline (see css/main.css) so the halves run together as
+    one balanced paragraph -- and then that whitespace is the only thing
+    keeping a space between "newspaper" and "and". Using Liquid's
+    whitespace-trimming hyphens on those tags eats it and silently produces
+    "newspaperand", so leave the tags untrimmed.
   {% endcomment %}
   {% if page.lede_line_1 and page.lede_line_1 != '' %}
     <p class="lede">
       <span class="lede-line">{{ page.lede_line_1 }}</span>
-      {%- if page.lede_line_2 and page.lede_line_2 != '' %}<span class="lede-line">{{ page.lede_line_2 }}</span>{% endif -%}
+      {% if page.lede_line_2 and page.lede_line_2 != '' %}<span class="lede-line">{{ page.lede_line_2 }}</span>{% endif %}
     </p>
   {% endif %}
   <p class="actions on-red">
