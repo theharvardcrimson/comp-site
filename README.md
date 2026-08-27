@@ -24,7 +24,35 @@
 
 * Any changes to CSS or HTML files will automatically trigger a rebuild, so no need to restart the server.
 
-* If you update the information in `_config.yml`, you _will_ need to restart the server.
+* If you update the information in `_config.yml` **or anything in `_data/`**, you _will_ need to restart the server. Livereload does not pick those up.
+
+### If `bundle exec jekyll serve` fails with a missing-gem error
+
+This project uses **Ruby 3.3.6 via rbenv** (see `.ruby-version`). macOS also ships
+its own Ruby 2.6, and if that one is first on your `PATH` you get an error that
+looks like a missing gem but isn't:
+
+```
+Could not find 'bundler' (2.3.5) required by your Gemfile.lock
+```
+
+Check which Ruby you're actually running:
+
+```bash
+ruby -v
+```
+
+If it says 2.6.x, rbenv's shims aren't ahead of the system Ruby. A common cause
+is Anaconda — if your prompt starts with `(base)`, it has put itself first. Fix
+it for the current shell with:
+
+```bash
+export PATH="$HOME/.rbenv/shims:$PATH"
+```
+
+`ruby -v` should now report 3.3.6 and the server will start. To make it stick,
+put that line in your `~/.zshrc` **after** any Anaconda or other version-manager
+setup, then open a new terminal.
 
 ## Deployment
 * Since this website is hosted with GitHub Pages, you simply need to commit and push your changes to the `master` branch. This will automatically start a build process (note: this is only because GitHub Pages has automatic support for Jekyll).
