@@ -6,28 +6,10 @@
 # to leave a single-column section; empty this file and the section disappears
 # from the page.
 #
-# <strong>...</strong> WORKS INSIDE items AND note. This file is data, not
-# markdown -- Liquid prints it as-is, unescaped -- so literal HTML tags render.
-# ** does NOT work here the way it does in index.md; that file is different
-# because kramdown processes it.
-#
-# TRIED AND REVERTED: bolding whole clauses inside the bullets ("70+ Pulitzer
-# prize-winners", "Titans of business, media, and technology"). It was hard to
-# read once the boxes went crimson -- bold paper-coloured serif on a saturated
-# crimson field halates, and the effect gets worse the longer the bold span
-# runs. A single bold word or two might hold up where a bolded clause did not;
-# untested. The note's "Questions?" survives because it is short and sits alone
-# on its own line, not embedded mid-sentence.
-#
-# This is the owner's second draft, replacing the first cut of the old comp
-# site's paragraphs. Placed verbatim.
-#
 # The financial-aid note below reads "Contact Crimson President E. Matteo Diaz
 # at president@thecrimson.com" in the owner's draft, and show_contact is still
-# what appends the name and mailto link -- checked against semester.yml, whose
-# contact_name and contact_email already match those exact values, so nothing
-# had to change there. If either ever needs to differ from what is written
-# here, edit semester.yml, not this file.
+# what appends the name and mailto link. If either ever needs to differ from what
+# is written here, edit semester.yml, not this file.
 
 columns:
   - title: Our alumni
