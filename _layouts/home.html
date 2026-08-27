@@ -236,18 +236,9 @@ layout: site
 {% endfor %}
 
 {% comment %}
-  FAQ. Only entries with BOTH a question and an answer render, so the list can
-  be filled in one at a time without half-finished questions appearing.
+  A FAQ section used to render here from _data/faq.yml, showing only entries
+  that had an answer filled in. All seven questions were still unanswered, so
+  it never appeared on the page, and the owner cut it rather than carry the
+  scaffolding. Removed with it: _data/faq.yml and the .faq rules in
+  css/main.css. Bringing it back is a <dl> over a data file plus a size check.
 {% endcomment %}
-{% assign answered = site.data.faq | where_exp: "f", "f.answer != ''" %}
-{% if answered.size > 0 %}
-<div class="panel reveal faq">
-  <h2>Questions, answered</h2>
-  <dl>
-    {% for f in answered %}
-      <dt>{{ f.question }}</dt>
-      <dd>{{ f.answer }}</dd>
-    {% endfor %}
-  </dl>
-</div>
-{% endif %}

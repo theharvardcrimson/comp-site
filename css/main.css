@@ -1139,16 +1139,6 @@ details[name="board-popup"][open] > summary:focus-visible{
   font-size:clamp(17px,1.8vw,21px); max-width:52ch; margin:-6px 0 18px;
 }
 
-.faq dl{ margin:0; max-width:70ch; }
-.faq dt{
-  font-family:var(--display); text-transform:uppercase;
-  font-size:clamp(18px,2.1vw,26px); letter-spacing:.05em; line-height:1.15;
-  color:var(--red); margin:0 0 8px; padding-top:16px;
-  border-top:1px solid var(--hair);
-}
-.faq dl > dt:first-child{ border-top:none; padding-top:0; }
-.faq dd{ margin:0 0 22px; font-family:var(--text); line-height:1.6; }
-
 .prose{ padding:clamp(36px,5vw,72px) var(--gut); max-width:68ch; }
 .prose > *:first-child{ margin-top:0; }
 .prose p{ margin:0 0 1.15em; }
