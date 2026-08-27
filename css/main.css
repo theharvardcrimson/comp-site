@@ -490,7 +490,17 @@ a:hover{ text-decoration:underline; }
      BEFORE it, the shorthand reset it back to 0 and the correction silently
      did nothing. -0.08em is Vollkorn italic's "T" bearing. */
   max-width:62ch; margin:clamp(18px,2.2vw,28px) 0 0 -0.08em;
+  /* Both halves of the standfirst are forced onto their own line by a <br>,
+     and on a phone each half then wrapped again and stranded its last words:
+     "college newspaper" alone under one line, "organization" alone under the
+     other. balance splits each half into even lines instead of filling the
+     first and orphaning the remainder. It only engages on short blocks, which
+     is exactly this, and browsers without it just wrap as before. */
+  text-wrap:balance;
 }
+/* Each half of the standfirst is a block so it stacks where the old <br> broke
+   AND so it balances independently -- see the note in _layouts/home.html. */
+.lede-line{ display:block; }
 /* margin-bottom:0 matters: this is a <p>, so it carried a default bottom
    margin that left ~19px of dead space between the button and the hero's
    bottom edge on top of the padding. */

@@ -38,10 +38,19 @@
         <span class="board-row-main">
           <span class="board-name">{{ b.name }}</span>
           <span class="board-leader" aria-hidden="true"></span>
-          <span class="board-tail">
-            <span class="board-desc">{{ b.hook }}</span>
-            <span class="board-arrow" aria-hidden="true">&rarr;</span>
-          </span>
+          {%- comment -%}
+            .board-desc and .board-arrow are deliberately written with NO
+            whitespace between them. On mobile the tail is one flowing run of
+            inline text, and the newline that used to sit between these two
+            spans collapsed to a space -- which is a line-break opportunity, so
+            the arrow could wrap onto a line by itself under the tagline.
+            Adjacent inline boxes with no whitespace give the browser nowhere
+            to break, so the arrow now always travels with the last word. The
+            gap between them is .board-arrow's margin-left, and a margin is not
+            a break opportunity. Above 900px .board-tail is flex and this does
+            not apply, but it costs nothing there.
+          {%- endcomment -%}
+          <span class="board-tail"><span class="board-desc">{{ b.hook }}</span><span class="board-arrow" aria-hidden="true">&rarr;</span></span>
         </span>
         <span class="board-row-close" aria-hidden="true">&#10005; Close</span>
       </summary>

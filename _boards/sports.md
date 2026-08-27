@@ -2,7 +2,14 @@
 name: Sports
 order: 4
 
-hook: Cover the collegiate athletic program leading the nation in varsity teams and Olympic gold medals
+# Shortened from "Cover the collegiate athletic program leading the nation in
+# varsity teams and Olympic gold medals" at the owner's request. At phone width
+# a tagline line holds 314px, so two lines plus the arrow allow about 85
+# characters; the original was 97 and ran to a third line. Dropping "collegiate
+# athletic" keeps both concrete facts and loses only what the context already
+# implies. Sports was the only board over budget -- the next longest is 83.
+# Keep any replacement under ~85 characters or it will wrap to three lines.
+hook: Cover the program leading the nation in varsity teams and Olympic gold medals
 
 requirements:
   - Attend weekly comp seminars

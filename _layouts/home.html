@@ -11,9 +11,22 @@ layout: site
     Leave poster_line_2 blank for a single-line headline -- no stray <br>.
   {% endcomment %}
   <h1 class="poster">{{ page.poster_line_1 }}{% if page.poster_line_2 and page.poster_line_2 != '' %}<br>{{ page.poster_line_2 }}{% endif %}</h1>
-  {% comment %} Two fields so the line break is chosen, not left to the browser. {% endcomment %}
+  {% comment %}
+    Two fields so the line break between the halves is chosen, not left to the
+    browser.
+
+    Each half is its own block span rather than the two being separated by a
+    <br>. That is what lets text-wrap:balance (on .lede) treat them as two
+    separate blocks and balance EACH one's wrapping. With a <br> it balanced
+    only the first half and left the second stranding "organization" alone on
+    a phone. Visually identical -- two blocks stack exactly where the <br>
+    broke.
+  {% endcomment %}
   {% if page.lede_line_1 and page.lede_line_1 != '' %}
-    <p class="lede">{{ page.lede_line_1 }}{% if page.lede_line_2 and page.lede_line_2 != '' %}<br>{{ page.lede_line_2 }}{% endif %}</p>
+    <p class="lede">
+      <span class="lede-line">{{ page.lede_line_1 }}</span>
+      {%- if page.lede_line_2 and page.lede_line_2 != '' %}<span class="lede-line">{{ page.lede_line_2 }}</span>{% endif -%}
+    </p>
   {% endif %}
   <p class="actions on-red">
     <a class="btn btn-ghost" href="{{ site.data.semester.signup_url }}">{{ site.data.semester.signup_label }}</a>
